@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Componente Input WhatsApp</title>
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <style>
+    .whatsapp-input-bar {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      padding: 8px 12px;
+      gap: 8px;
+      border: 1px solid #E2E5F0;
+      max-width: 600px;
+    }
+    .whatsapp-input-bar input[type="text"] {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: transparent;
+    }
+    .whatsapp-input-bar button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    .whatsapp-input-bar button:focus {
+      background: #f0f4ff;
+      outline: 2px solid #0027BD;
+    }
+    .whatsapp-input-bar .clip-icon svg,
+    .whatsapp-input-bar .send-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #0027BD;
+    }
+    .whatsapp-input-bar .send-icon[disabled] svg {
+      fill: #ccc;
+    }
+  </style>
+</head>
+<body style="background: #f6f8fa; padding: 32px;">
+  <form class="whatsapp-input-bar" autocomplete="off" onsubmit="return false;" aria-label="Enviar mensagem no WhatsApp">
+    <button type="button" class="clip-icon" aria-label="Anexar arquivo">
+      <svg viewBox="0 0 24 24"><path d="M17.657 11.657l-6.364 6.364a4 4 0 01-5.657-5.657l9.192-9.192a2 2 0 112.828 2.828l-9.193 9.192a.5.5 0 01-.707-.707l9.193-9.192a1 1 0 10-1.414-1.414l-9.192 9.192a3 3 0 104.243 4.243l6.364-6.364a.5.5 0 01.707.707z"></path></svg>
+      <input type="file" style="display:none" aria-label="Selecionar arquivo" accept="image/*,application/pdf" onchange="handleFileChange(event)">
+    </button>
+    <input type="text" class="elementor-field-textual" placeholder="Digite uma mensagem" aria-label="Mensagem" maxlength="1000" required />
+    <button type="submit" class="send-icon" aria-label="Enviar mensagem" disabled>
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+    </button>
+  </form>
+  <script>
+    // Referências
+    const form = document.querySelector('.whatsapp-input-bar');
+    const input = form.querySelector('input[type="text"]');
+    const sendBtn = form.querySelector('.send-icon');
+    const clipBtn = form.querySelector('.clip-icon');
+    const fileInput = clipBtn.querySelector('input[type="file"]');
+
+    // Habilita botão de envio se há texto ou arquivo
+    function updateSendBtn() {
+      sendBtn.disabled = !(input.value.trim().length > 0 || fileInput.files.length > 0);
+    }
+    input.addEventListener('input', updateSendBtn);
+    fileInput.addEventListener('change', updateSendBtn);
+
+    // Clique no clipe abre file input
+    clipBtn.addEventListener('click', () => fileInput.click());
+
+    // Validação básica e simulação de envio
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (sendBtn.disabled) return;
+      let msg = input.value.trim();
+      if (msg.length === 0 && fileInput.files.length === 0) return;
+      alert('Mensagem enviada!\nTexto: ' + msg + (fileInput.files.length ? '\nArquivo: ' + fileInput.files[0].name : ''));
+      input.value = '';
+      fileInput.value = '';
+      updateSendBtn();
+    });
+    // Acessibilidade: limpa file input ao enviar
+    function handleFileChange(e) {
+      updateSendBtn();
+    }
+  </script>
+</body>
+</html>

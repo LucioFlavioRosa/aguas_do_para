@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Documentação de Testes - MVP Parceiro Águas do Pará</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <style>
+    body { background: #f4f6fa; font-family: 'Segoe UI', Arial, sans-serif; }
+    .main-container { max-width: 900px; margin: 32px auto; background: #fff; border-radius: 14px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); padding: 32px; }
+    h1 { color: #0027bd; margin-bottom: 18px; }
+    h2 { color: #075e54; margin-top: 32px; }
+    ul, ol { margin-bottom: 18px; }
+    .bug { background: #fffbe7; border-left: 4px solid #ff9800; padding: 8px 14px; border-radius: 6px; margin-bottom: 10px; }
+    .ok { background: #e8f5e9; border-left: 4px solid #388e3c; padding: 8px 14px; border-radius: 6px; margin-bottom: 10px; }
+    .flow-link { color: #0027bd; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <h1>Documentação de Testes - Fluxo Completo MVP Parceiro Águas do Pará</h1>
+    <p>Este documento registra a execução dos testes dos fluxos principais:</p>
+    <ol>
+      <li><a href="whatsapp-cadastro.html" class="flow-link">Cadastro de parceiro via WhatsApp</a></li>
+      <li><a href="webapp-operador.html" class="flow-link">Criação e disparo de demanda (operador web)</a></li>
+      <li><a href="whatsapp-execucao.html" class="flow-link">Execução do serviço e auditoria via WhatsApp</a></li>
+    </ol>
+    <h2>Testes Realizados</h2>
+    <ul>
+      <li class="ok">Fluxo de cadastro: todos os passos do onboarding foram simulados corretamente, incluindo checklist, upload de documentos e aceite de termos.</li>
+      <li class="ok">Fluxo de disparo de demanda: seleção de prestadores, visualização de detalhes do serviço e disparo multicanal funcionaram conforme esperado.</li>
+      <li class="ok">Execução do serviço: envio de fotos, localização, auditoria, aprovação e reprocesso de justificativa foram simulados com sucesso.</li>
+    </ul>
+    <h2>Bugs e Inconsistências Encontradas</h2>
+    <ul>
+      <li class="bug">(Simulação) Não foi possível testar integração real com API do WhatsApp/Twilio, envio de fotos e localização é apenas ilustrativo.</li>
+      <li class="bug">(Simulação) Não há validação real de localização das fotos nem integração com sistemas de pagamento.</li>
+      <li class="bug">(Simulação) O aceite do termo é apenas visual, não há assinatura digital real.</li>
+    </ul>
+    <h2>Conclusão</h2>
+    <p>O fluxo completo do MVP foi simulado com fidelidade ao layout e regras do projeto. Recomenda-se testes com integração real para validação de APIs e automação de notificações.</p>
+  </div>
+</body>
+</html>

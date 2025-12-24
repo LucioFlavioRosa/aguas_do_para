@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>WhatsApp - Cadastro Parceiro Águas do Pará</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <style>
+    body { background: #ece5dd; font-family: 'Segoe UI', Arial, sans-serif; }
+    .wa-container { max-width: 420px; margin: 32px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); overflow: hidden; }
+    .wa-header { background: #075e54; color: #fff; padding: 16px; display: flex; align-items: center; }
+    .wa-header img { width: 40px; height: 40px; border-radius: 50%; margin-right: 12px; }
+    .wa-header .wa-title { font-weight: 600; font-size: 1.1rem; }
+    .wa-chat { background: #ece5dd; padding: 16px; min-height: 540px; display: flex; flex-direction: column; }
+    .wa-msg { max-width: 80%; margin-bottom: 12px; padding: 10px 14px; border-radius: 8px; font-size: 1rem; line-height: 1.4; }
+    .wa-msg.bot { background: #fff; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+    .wa-msg.user { background: #dcf8c6; align-self: flex-end; }
+    .wa-msg.checklist { background: #fff; border: 1px solid #b2b2b2; }
+    .wa-msg img { max-width: 180px; border-radius: 8px; margin-top: 6px; }
+    .wa-msg .wa-video { display: block; margin-top: 8px; max-width: 220px; border-radius: 8px; }
+    .wa-msg .wa-checklist-list { list-style: none; padding: 0; margin: 0; }
+    .wa-msg .wa-checklist-list li { margin-bottom: 6px; }
+    .wa-msg .wa-check { color: #34b7f1; margin-right: 6px; font-weight: bold; }
+    .wa-input-bar { display: flex; align-items: center; background: #f7f7f7; padding: 10px 12px; border-top: 1px solid #e0e0e0; }
+    .wa-input-bar input { flex: 1; border: none; background: #fff; border-radius: 18px; padding: 8px 14px; font-size: 1rem; margin-right: 8px; }
+    .wa-input-bar button { background: #075e54; color: #fff; border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .wa-timestamp { font-size: 0.8rem; color: #b2b2b2; margin-top: 2px; }
+    .wa-msg.termo { font-size: 0.95rem; background: #f9f9f9; border-left: 4px solid #075e54; }
+    .wa-msg.upload { background: #fffbe7; border: 1px dashed #b2b2b2; }
+    .wa-msg .wa-pix { background: #e0f7fa; padding: 4px 8px; border-radius: 6px; display: inline-block; margin-top: 4px; }
+    .wa-msg .wa-selfie { display: flex; align-items: center; gap: 8px; }
+    .wa-msg .wa-selfie img { width: 48px; height: 48px; border-radius: 50%; }
+    .wa-msg .wa-cnh { width: 100px; border-radius: 6px; }
+    @media (max-width: 500px) { .wa-container { max-width: 100vw; border-radius: 0; } }
+  </style>
+</head>
+<body>
+  <div class="wa-container">
+    <div class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea Bot">
+      <div>
+        <div class="wa-title">Aegea Parceiros</div>
+        <div style="font-size:0.85rem;opacity:0.7;">online agora</div>
+      </div>
+    </div>
+    <div class="wa-chat">
+      <div class="wa-msg bot">Olá! 👋<br>Bem-vindo ao programa Parceiro Águas do Pará.<br><span class="wa-timestamp">08:00</span></div>
+      <div class="wa-msg bot">Agradecemos seu interesse em prestar serviços conosco.<br>Para começar, por favor, informe o <strong>CNPJ</strong> da sua empresa para verificação jurídica.<br><span class="wa-timestamp">08:00</span></div>
+      <div class="wa-msg user">12.345.678/0001-99<br><span class="wa-timestamp">08:01</span></div>
+      <div class="wa-msg bot">Recebido! Vamos fazer uma verificação rápida do seu CNPJ.<br><span class="wa-timestamp">08:01</span></div>
+      <div class="wa-msg bot">
+        Enquanto isso, assista ao vídeo explicativo sobre como funciona o programa:
+        <video class="wa-video" controls poster="https://www.aegea.com.br/wp-content/uploads/2025/06/contato.webp">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Seu navegador não suporta vídeo.
+        </video>
+        <span class="wa-timestamp">08:01</span>
+      </div>
+      <div class="wa-msg bot">Tudo certo com sua situação jurídica!<br>Você possui um celular com WhatsApp, câmera e GPS funcionando?<br><span class="wa-timestamp">08:02</span></div>
+      <div class="wa-msg user">Sim, tenho!<br><span class="wa-timestamp">08:02</span></div>
+      <div class="wa-msg bot">Ótimo! Agora precisamos de alguns dados básicos:<br>• Nome completo<br>• Endereço<br>• E-mail<br>• Raio de atuação (em km ou bairros/cidades)<br><span class="wa-timestamp">08:02</span></div>
+      <div class="wa-msg user">João Silva<br>Rua das Águas, 123, Belém/PA<br>joao@email.com<br>Raio: até 10km<br><span class="wa-timestamp">08:03</span></div>
+      <div class="wa-msg bot checklist">
+        Agora, marque os serviços que você pode realizar:<br>
+        <ul class="wa-checklist-list">
+          <li><span class="wa-check">☑</span> Reparo de vazamentos de água</li>
+          <li><span class="wa-check">☑</span> Instalação/Troca de hidrômetros</li>
+          <li><span class="wa-check">☐</span> Desobstrução de esgoto</li>
+          <li><span class="wa-check">☑</span> Pequenos reparos (alvenaria/calçada)</li>
+          <li><span class="wa-check">☐</span> Outros</li>
+        </ul>
+        <span class="wa-timestamp">08:04</span>
+      </div>
+      <div class="wa-msg bot checklist">
+        Agora, marque os recursos e disponibilidade:<br>
+        <ul class="wa-checklist-list">
+          <li><span class="wa-check">☑</span> Veículo (Moto/Carro)</li>
+          <li><span class="wa-check">☑</span> Ferramentas básicas</li>
+          <li><span class="wa-check">☑</span> Manhã</li>
+          <li><span class="wa-check">☑</span> Tarde</li>
+          <li><span class="wa-check">☐</span> Noite</li>
+          <li><span class="wa-check">☑</span> Fim de semana</li>
+          <li><span class="wa-check">☐</span> Feriado</li>
+        </ul>
+        <span class="wa-timestamp">08:05</span>
+      </div>
+      <div class="wa-msg bot upload">
+        Por favor, envie uma foto da sua <strong>CNH</strong> e uma <strong>selfie</strong> segurando a CNH.<br>
+        <div class="wa-selfie">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Selfie CNH">
+          <img class="wa-cnh" src="https://www.detran.sp.gov.br/wps/wcm/connect/9e0e2c804e2b8d7fa7b6ab8b7d2b7e3e/cnh-exemplo.jpg?MOD=AJPERES" alt="CNH">
+        </div>
+        <span class="wa-timestamp">08:06</span>
+      </div>
+      <div class="wa-msg bot upload">
+        Informe sua <strong>chave PIX</strong> para pagamentos.<br>
+        <span class="wa-pix">joao@email.com</span>
+        <span class="wa-timestamp">08:06</span>
+      </div>
+      <div class="wa-msg bot termo">
+        Para finalizar, leia e aceite os <a href="https://www.aegea.com.br/termos-gerais-de-uso-de-sites-e-aplicativos-da-aegea/" target="_blank">Termos de Uso</a> e <a href="https://www.aegea.com.br/politica-de-privacidade-e-protecao-de-dados-da-aegea/" target="_blank">Política de Privacidade</a>.<br>
+        <br>
+        <input type="checkbox" checked disabled> Eu aceito os termos.<br>
+        <span class="wa-timestamp">08:07</span>
+      </div>
+      <div class="wa-msg bot">Cadastro concluído! 🎉<br>Você agora faz parte da base de parceiros ativos da Águas do Pará.<br>Em breve, você poderá receber demandas de serviço por aqui.<br><span class="wa-timestamp">08:07</span></div>
+    </div>
+  </div>
+</body>
+</html>
