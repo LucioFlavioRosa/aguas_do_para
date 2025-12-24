@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp - Reconsideração</title>
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    body {
+      background: #ece5dd;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .wa-container {
+      max-width: 420px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+      overflow: hidden;
+      border: 1px solid #d1d7db;
+      display: flex;
+      flex-direction: column;
+      height: 650px;
+    }
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 16px 16px 12px 16px;
+      display: flex;
+      align-items: center;
+    }
+    .wa-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 12px;
+      background: #fff;
+      border: 2px solid #25d366;
+    }
+    .wa-header .wa-title {
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+    .wa-chat {
+      flex: 1;
+      padding: 24px 12px 12px 12px;
+      background: url('https://i.imgur.com/7vQbF2B.png') repeat;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .wa-msg {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 8px 8px 8px 0;
+      background: #fff;
+      align-self: flex-start;
+      font-size: 1.04em;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      border: 1px solid #e1e1e1;
+      color: #222;
+      position: relative;
+    }
+    .wa-form {
+      background: #f7f7f7;
+      border-radius: 10px;
+      padding: 20px 16px 16px 16px;
+      margin: 0 8px 12px 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      border: 1px solid #e1e1e1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .wa-form label {
+      font-size: 0.98em;
+      margin-bottom: 4px;
+      font-weight: 500;
+      color: #075e54;
+    }
+    .wa-form input[type="file"] {
+      margin-bottom: 4px;
+    }
+    .wa-form textarea {
+      width: 100%;
+      min-height: 48px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 8px;
+      font-size: 1em;
+      resize: vertical;
+    }
+    .wa-form button {
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 24px;
+      font-size: 1.08em;
+      font-weight: 600;
+      cursor: pointer;
+      align-self: flex-end;
+      transition: background .2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .wa-form button:hover {
+      background: #128c7e;
+    }
+    .wa-form .wa-upload-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .wa-form .wa-upload-label {
+      font-size: 0.97em;
+      color: #333;
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wa-container" role="main">
+    <div class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" aria-label="Logo da Aegea">
+      <div>
+        <div class="wa-title">Aegea Parceiros</div>
+        <div style="font-size:0.95em;opacity:0.8;">online</div>
+      </div>
+    </div>
+    <div class="wa-chat" aria-live="polite">
+      <div class="wa-msg wa-bot">
+        Por favor, envie novas fotos e uma justificativa para reconsideração da sua prestação de serviço.
+      </div>
+      <form class="wa-form" autocomplete="off" aria-label="Formulário de Reconsideração">
+        <div class="wa-upload-group">
+          <label class="wa-upload-label" for="foto-antes">Foto 'Antes' (com localização):</label>
+          <input type="file" id="foto-antes" name="foto-antes" accept="image/*" aria-label="Foto Antes">
+        </div>
+        <div class="wa-upload-group">
+          <label class="wa-upload-label" for="foto-depois">Foto 'Depois' (com localização):</label>
+          <input type="file" id="foto-depois" name="foto-depois" accept="image/*" aria-label="Foto Depois">
+        </div>
+        <div>
+          <label for="justificativa">Justificativa adicional:</label>
+          <textarea id="justificativa" name="justificativa" placeholder="Descreva o que ocorreu..." aria-label="Justificativa"></textarea>
+        </div>
+        <button type="submit" aria-label="Solicitar Reconsideração">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 4v16m8-8H4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          Solicitar Reconsideração
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
