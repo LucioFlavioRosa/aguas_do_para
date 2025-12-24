@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp - Execução (Conclusão)</title>
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <style>
+    body {
+      background: #ece5dd;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .wa-container {
+      max-width: 400px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
+      border: 1px solid #d1d7db;
+    }
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+    }
+    .wa-header img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin-right: 12px;
+      border: 2px solid #fff;
+      background: #fff;
+    }
+    .wa-header .wa-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .wa-messages {
+      background: #ece5dd;
+      padding: 24px 16px 16px 16px;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .wa-msg {
+      background: #fff;
+      border-radius: 8px 8px 8px 2px;
+      padding: 12px 14px;
+      max-width: 90%;
+      font-size: 1rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      color: #222;
+    }
+    .wa-msg.received {
+      align-self: flex-start;
+      background: #fff;
+    }
+    .wa-msg.sent {
+      align-self: flex-end;
+      background: #dcf8c6;
+    }
+    .wa-photo-preview {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .wa-photo-preview img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .wa-location {
+      font-size: 0.92rem;
+      color: #075e54;
+      margin-top: 6px;
+    }
+    .wa-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      justify-content: center;
+      padding: 18px 16px 20px 16px;
+      background: #f7f7f7;
+      border-top: 1px solid #e0e0e0;
+    }
+    .wa-btn {
+      padding: 12px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .wa-btn.photo {
+      background: #25d366;
+      color: #fff;
+    }
+    .wa-btn.photo:hover {
+      background: #20ba5a;
+    }
+    .wa-btn.send {
+      background: #075e54;
+      color: #fff;
+    }
+    .wa-btn.send:disabled {
+      background: #bdbdbd;
+      color: #fff;
+      cursor: not-allowed;
+    }
+    @media (max-width: 480px) {
+      .wa-container { max-width: 100vw; border-radius: 0; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wa-container" role="main">
+    <div class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" />
+      <span class="wa-title">Águas do Pará - Execução</span>
+    </div>
+    <div class="wa-messages">
+      <div class="wa-msg received">
+        Serviço executado!<br>
+        Agora, tire uma foto do local <b>depois</b> do serviço, com a localização ativada.
+      </div>
+      <div id="wa-photo-area" style="display:none;">
+        <div class="wa-photo-preview">
+          <img id="wa-photo-preview-img" src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Foto Depois" />
+          <div>
+            <div class="wa-location" id="wa-location-text">Localização: -1.455833, -48.503887</div>
+            <div style="font-size:0.85rem;color:#888;">(Simulação de captura GPS)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form class="wa-actions" onsubmit="return false;">
+      <button id="btn-tirar-foto" class="wa-btn photo" type="button" aria-label="Tirar Foto Depois" onclick="tirarFotoDepois()">Tirar Foto Depois</button>
+      <button id="btn-enviar" class="wa-btn send" type="button" aria-label="Enviar Foto e Finalizar Serviço" onclick="finalizarServico()" disabled>Enviar Foto e Finalizar Serviço</button>
+    </form>
+    <script>
+      function tirarFotoDepois() {
+        document.getElementById('wa-photo-area').style.display = 'block';
+        document.getElementById('btn-enviar').disabled = false;
+        document.getElementById('btn-tirar-foto').disabled = true;
+      }
+      function finalizarServico() {
+        alert('Serviço finalizado! Você será notificado sobre a aprovação.');
+        window.location.href = 'whatsapp-aceite-servico.html';
+      }
+    </script>
+  </div>
+</body>
+</html>
