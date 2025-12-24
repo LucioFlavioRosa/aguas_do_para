@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Execução do Serviço - WhatsApp | Parceiro Águas do Pará</title>
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    body {
+      background: #ece5dd;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .whatsapp-sim {
+      max-width: 420px;
+      margin: 32px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #dadada;
+    }
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wa-header img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+    .wa-header .wa-title {
+      font-weight: 600;
+      font-size: 1.1em;
+      line-height: 1.2;
+    }
+    .wa-chat {
+      flex: 1;
+      background: #ece5dd;
+      padding: 18px 8px 12px 8px;
+      overflow-y: auto;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+    }
+    .wa-msg {
+      max-width: 78%;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      border-radius: 8px 8px 8px 2px;
+      font-size: 1em;
+      line-height: 1.5;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      position: relative;
+      word-break: break-word;
+    }
+    .wa-msg.received {
+      background: #fff;
+      align-self: flex-start;
+      border-radius: 0 12px 12px 12px;
+      color: #222;
+    }
+    .wa-msg.sent {
+      background: #dcf8c6;
+      align-self: flex-end;
+      border-radius: 12px 0 12px 12px;
+      color: #222;
+    }
+    .wa-msg .wa-time {
+      font-size: 0.82em;
+      color: #888;
+      margin-left: 8px;
+      float: right;
+    }
+    .wa-upload {
+      margin: 10px 0 0 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .wa-upload label {
+      background: #25d366;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 500;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .wa-upload input[type="file"] {
+      display: none;
+    }
+    .wa-preview {
+      margin-left: 6px;
+      max-width: 80px;
+      max-height: 80px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      object-fit: cover;
+      background: #fafafa;
+    }
+    .wa-loading {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #888;
+      font-size: 1em;
+      margin: 8px 0;
+    }
+    .wa-loading .wa-spinner {
+      width: 18px;
+      height: 18px;
+      border: 3px solid #b2dfdb;
+      border-top: 3px solid #25d366;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .wa-actions {
+      padding: 12px 12px 10px 12px;
+      background: #f7f7f7;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .wa-actions .wa-btn {
+      background: #075e54;
+      color: #fff;
+      border: none;
+      padding: 10px 0;
+      border-radius: 6px;
+      font-size: 1em;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .wa-actions .wa-btn:disabled {
+      background: #b2dfdb;
+      cursor: not-allowed;
+    }
+    .wa-justify {
+      margin-top: 10px;
+      background: #fff3cd;
+      border: 1px solid #ffeeba;
+      border-radius: 8px;
+      padding: 10px 12px 14px 12px;
+    }
+    .wa-justify label {
+      font-weight: 500;
+      color: #8a6d3b;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .wa-justify textarea {
+      width: 100%;
+      min-height: 60px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      padding: 6px;
+      resize: vertical;
+      font-size: 1em;
+    }
+    .wa-justify .wa-upload {
+      margin-top: 6px;
+    }
+    .wa-link-historico {
+      display: inline-block;
+      margin-top: 10px;
+      color: #075e54;
+      text-decoration: underline;
+      font-size: 0.98em;
+      font-weight: 500;
+    }
+    @media (max-width: 500px) {
+      .whatsapp-sim {
+        max-width: 100vw;
+        border-radius: 0;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="whatsapp-sim" aria-label="Simulação de Conversa WhatsApp">
+    <header class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" width="44" height="44">
+      <div>
+        <div class="wa-title">Aegea Parceiros</div>
+        <div style="font-size:0.92em;opacity:0.8;">online</div>
+      </div>
+    </header>
+    <section class="wa-chat" id="wa-chat" aria-live="polite">
+      <div class="wa-msg received">
+        Olá! Obrigado por aceitar o serviço.<br>
+        Por favor, confirme sua chegada ao local enviando uma foto do local <b>antes do serviço</b>.<br>
+        <span class="wa-time">08:01</span>
+      </div>
+      <!-- Mensagens dinâmicas serão inseridas aqui via JS -->
+    </section>
+    <section class="wa-actions" id="wa-actions">
+      <form id="form-antes" autocomplete="off">
+        <div class="wa-upload">
+          <label for="foto-antes">
+            <svg width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 15.75h9a2.25 2.25 0 002.25-2.25v-6a2.25 2.25 0 00-2.25-2.25h-.75l-.75-1.5h-4.5l-.75 1.5H4.5A2.25 2.25 0 002.25 7.5v6A2.25 2.25 0 004.5 15.75z" stroke="#fff" stroke-width="1.5"/><circle cx="9" cy="11" r="2" stroke="#fff" stroke-width="1.5"/></svg>
+            Enviar foto 'Antes'
+          </label>
+          <input type="file" id="foto-antes" name="foto-antes" accept="image/*" aria-label="Foto antes do serviço" required>
+          <img id="preview-antes" class="wa-preview" style="display:none;" alt="Prévia da foto antes do serviço">
+        </div>
+        <button type="submit" class="wa-btn" id="btn-enviar-antes" disabled>Enviar foto 'Antes'</button>
+      </form>
+      <form id="form-depois" autocomplete="off" style="display:none;">
+        <div class="wa-upload">
+          <label for="foto-depois">
+            <svg width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 15.75h9a2.25 2.25 0 002.25-2.25v-6a2.25 2.25 0 00-2.25-2.25h-.75l-.75-1.5h-4.5l-.75 1.5H4.5A2.25 2.25 0 002.25 7.5v6A2.25 2.25 0 004.5 15.75z" stroke="#fff" stroke-width="1.5"/><circle cx="9" cy="11" r="2" stroke="#fff" stroke-width="1.5"/></svg>
+            Enviar foto 'Depois'
+          </label>
+          <input type="file" id="foto-depois" name="foto-depois" accept="image/*" aria-label="Foto depois do serviço" required>
+          <img id="preview-depois" class="wa-preview" style="display:none;" alt="Prévia da foto depois do serviço">
+        </div>
+        <button type="submit" class="wa-btn" id="btn-enviar-depois" disabled>Enviar foto 'Depois'</button>
+      </form>
+      <div id="wa-justify-box" style="display:none;">
+        <form id="form-justify" autocomplete="off">
+          <div class="wa-justify">
+            <label for="justify-text">Não conseguiu executar o serviço? Explique o motivo e anexe uma foto do local.</label>
+            <textarea id="justify-text" name="justify-text" placeholder="Descreva o motivo..." required></textarea>
+            <div class="wa-upload">
+              <label for="foto-justify">
+                <svg width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 15.75h9a2.25 2.25 0 002.25-2.25v-6a2.25 2.25 0 00-2.25-2.25h-.75l-.75-1.5h-4.5l-.75 1.5H4.5A2.25 2.25 0 002.25 7.5v6A2.25 2.25 0 004.5 15.75z" stroke="#fff" stroke-width="1.5"/><circle cx="9" cy="11" r="2" stroke="#fff" stroke-width="1.5"/></svg>
+                Anexar foto
+              </label>
+              <input type="file" id="foto-justify" name="foto-justify" accept="image/*" aria-label="Foto justificativa" required>
+              <img id="preview-justify" class="wa-preview" style="display:none;" alt="Prévia da foto justificativa">
+            </div>
+            <button type="submit" class="wa-btn" id="btn-enviar-justify">Enviar justificativa</button>
+          </div>
+        </form>
+      </div>
+      <button type="button" class="wa-btn" id="btn-abrir-justify" style="background:#ffb300;color:#222;">Não consegui executar o serviço</button>
+      <a href="bloco3-historico.html" class="wa-link-historico">Ver histórico de serviços</a>
+    </section>
+  </main>
+  <script>
+    // Utilidades para hora
+    function horaAgora() {
+      const d = new Date();
+      return d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    }
+    // Foto 'Antes'
+    const fotoAntes = document.getElementById('foto-antes');
+    const previewAntes = document.getElementById('preview-antes');
+    const btnEnviarAntes = document.getElementById('btn-enviar-antes');
+    let fotoAntesFile = null;
+    fotoAntes.addEventListener('change', function(e) {
+      if (this.files && this.files[0]) {
+        fotoAntesFile = this.files[0];
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          previewAntes.src = ev.target.result;
+          previewAntes.style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[0]);
+        btnEnviarAntes.disabled = false;
+      } else {
+        previewAntes.style.display = 'none';
+        btnEnviarAntes.disabled = true;
+      }
+    });
+    // Foto 'Depois'
+    const fotoDepois = document.getElementById('foto-depois');
+    const previewDepois = document.getElementById('preview-depois');
+    const btnEnviarDepois = document.getElementById('btn-enviar-depois');
+    let fotoDepoisFile = null;
+    fotoDepois.addEventListener('change', function(e) {
+      if (this.files && this.files[0]) {
+        fotoDepoisFile = this.files[0];
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          previewDepois.src = ev.target.result;
+          previewDepois.style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[0]);
+        btnEnviarDepois.disabled = false;
+      } else {
+        previewDepois.style.display = 'none';
+        btnEnviarDepois.disabled = true;
+      }
+    });
+    // Justificativa
+    const btnAbrirJustify = document.getElementById('btn-abrir-justify');
+    const waJustifyBox = document.getElementById('wa-justify-box');
+    btnAbrirJustify.addEventListener('click', function() {
+      waJustifyBox.style.display = 'block';
+      btnAbrirJustify.style.display = 'none';
+      document.getElementById('justify-text').focus();
+    });
+    // Preview justificativa
+    const fotoJustify = document.getElementById('foto-justify');
+    const previewJustify = document.getElementById('preview-justify');
+    fotoJustify.addEventListener('change', function(e) {
+      if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          previewJustify.src = ev.target.result;
+          previewJustify.style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[0]);
+      } else {
+        previewJustify.style.display = 'none';
+      }
+    });
+    // Envio da foto 'Antes'
+    document.getElementById('form-antes').addEventListener('submit', function(e) {
+      e.preventDefault();
+      btnEnviarAntes.disabled = true;
+      // Loading
+      addLoading('Enviando foto...');
+      setTimeout(function() {
+        removeLoading();
+        addMsgSent('Foto enviada com sucesso!');
+        addMsgReceived('Recebemos sua foto. Agora, realize o serviço e, ao finalizar, envie uma foto do local <b>depois do serviço</b>.');
+        document.getElementById('form-antes').style.display = 'none';
+        document.getElementById('form-depois').style.display = 'block';
+      }, 1800);
+    });
+    // Envio da foto 'Depois'
+    document.getElementById('form-depois').addEventListener('submit', function(e) {
+      e.preventDefault();
+      btnEnviarDepois.disabled = true;
+      addLoading('Enviando foto...');
+      setTimeout(function() {
+        removeLoading();
+        addMsgSent('Foto enviada com sucesso!');
+        addMsgReceived('Recebemos sua foto do serviço finalizado. Aguarde a validação da equipe Aegea.');
+        document.getElementById('form-depois').style.display = 'none';
+        // Navegação para tela de aguardando validação
+        setTimeout(function() {
+          window.location.href = 'bloco3-aguardando-validacao.html';
+        }, 1700);
+      }, 1800);
+    });
+    // Envio da justificativa
+    document.getElementById('form-justify').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('btn-enviar-justify').disabled = true;
+      addLoading('Enviando justificativa...');
+      setTimeout(function() {
+        removeLoading();
+        addMsgSent('Justificativa enviada. Nossa equipe irá analisar e retornará em breve.');
+        waJustifyBox.style.display = 'none';
+        btnAbrirJustify.style.display = 'block';
+        document.getElementById('btn-enviar-justify').disabled = false;
+      }, 1800);
+    });
+    // Helpers para chat
+    function addMsgSent(txt) {
+      const chat = document.getElementById('wa-chat');
+      const div = document.createElement('div');
+      div.className = 'wa-msg sent';
+      div.innerHTML = txt + '<span class="wa-time">' + horaAgora() + '</span>';
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
+    function addMsgReceived(txt) {
+      const chat = document.getElementById('wa-chat');
+      const div = document.createElement('div');
+      div.className = 'wa-msg received';
+      div.innerHTML = txt + '<span class="wa-time">' + horaAgora() + '</span>';
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
+    let loadingDiv = null;
+    function addLoading(txt) {
+      removeLoading();
+      const chat = document.getElementById('wa-chat');
+      loadingDiv = document.createElement('div');
+      loadingDiv.className = 'wa-loading';
+      loadingDiv.innerHTML = '<span class="wa-spinner"></span>' + txt;
+      chat.appendChild(loadingDiv);
+      chat.scrollTop = chat.scrollHeight;
+    }
+    function removeLoading() {
+      if (loadingDiv && loadingDiv.parentNode) {
+        loadingDiv.parentNode.removeChild(loadingDiv);
+        loadingDiv = null;
+      }
+    }
+  </script>
+</body>
+</html>
