@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmação de Disparo | Águas do Pará</title>
+  <link rel="stylesheet" id="wp-block-library-css" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" id="hello-elementor-css" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" id="hello-elementor-theme-style-css" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" id="hello-elementor-header-footer-css" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" id="elementor-frontend-css" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" id="elementor-post-26997-css" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008" media="all" />
+  <link rel="stylesheet" id="elementor-post-26397-css" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004" media="all" />
+  <link rel="stylesheet" id="elementor-post-26421-css" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004" media="all" />
+  <style>
+    body { background: #f7f9fb; }
+    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 32px 24px; }
+    h1 { font-size: 2rem; color: #0027BD; margin-bottom: 18px; }
+    .resumo-demanda { margin-bottom: 30px; background: #f2f6fa; border-radius: 12px; padding: 18px 20px; }
+    .resumo-demanda strong { color: #0027BD; }
+    .cards-prestadores { display: flex; flex-direction: column; gap: 18px; margin-bottom: 32px; }
+    .cardVeja.e-con-full { background: #f9fafc; border-radius: 14px; box-shadow: 0 1px 8px rgba(0,39,189,0.07); padding: 18px 20px; border: 1px solid #e2e5f0; display: flex; flex-direction: column; }
+    .cardVeja .nome { font-size: 1.1rem; font-weight: 600; color: #0027BD; }
+    .cardVeja .info { font-size: 0.98rem; color: #2c2c2c; margin-top: 3px; }
+    .botoes { display: flex; gap: 16px; justify-content: flex-end; }
+    .btn { border: none; border-radius: 8px; padding: 12px 28px; font-size: 1.05rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn-confirmar { background: #0027BD; color: #fff; }
+    .btn-voltar { background: #e2e5f0; color: #0027BD; }
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.32); align-items: center; justify-content: center; }
+    .modal .modal-content { background: #fff; border-radius: 14px; padding: 32px 38px; box-shadow: 0 2px 16px rgba(0,39,189,0.13); text-align: center; }
+    .modal .modal-content h2 { color: #00b36b; margin-bottom: 12px; }
+    .modal .modal-content button { margin-top: 18px; background: #0027BD; color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-size: 1rem; cursor: pointer; }
+    @media (max-width: 800px) {
+      .container { padding: 16px 4px; }
+      .cards-prestadores { gap: 10px; }
+      .cardVeja.e-con-full { padding: 10px 8px; }
+      .botoes { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container" aria-label="Confirmação de Disparo">
+    <h1>Confirmação de Disparo</h1>
+    <section class="resumo-demanda" id="resumo-demanda">
+      <!-- Resumo da demanda preenchido via JS -->
+    </section>
+    <section>
+      <h2 style="font-size:1.1rem; color:#0027BD; margin-bottom:10px;">Prestadores Selecionados</h2>
+      <div class="cards-prestadores" id="cards-prestadores">
+        <!-- Cards preenchidos via JS -->
+      </div>
+    </section>
+    <div class="botoes">
+      <button class="btn btn-voltar" id="btn-voltar">Voltar</button>
+      <button class="btn btn-confirmar" id="btn-confirmar">Confirmar Envio</button>
+    </div>
+  </main>
+  <div class="modal" id="modal-sucesso" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <h2 id="modal-title">Demanda disparada com sucesso!</h2>
+      <p>Os prestadores selecionados foram notificados.<br>O primeiro a aceitar ficará com o serviço.</p>
+      <button id="btn-fechar-modal">Fechar</button>
+    </div>
+  </div>
+  <script>
+    // Preencher resumo da demanda e cards dos prestadores
+    const demanda = JSON.parse(localStorage.getItem('demanda') || '{}');
+    const prestadores = JSON.parse(localStorage.getItem('prestadoresSelecionados') || '[]');
+    const resumoDiv = document.getElementById('resumo-demanda');
+    const cardsDiv = document.getElementById('cards-prestadores');
+    function renderResumo() {
+      resumoDiv.innerHTML = `
+        <div><strong>Tipo de Serviço:</strong> ${demanda.tipoServico || '-'}</div>
+        <div><strong>Localização:</strong> ${demanda.localizacao || '-'}</div>
+        <div><strong>Data/Hora:</strong> ${demanda.dataHora || '-'}</div>
+      `;
+    }
+    function renderCards() {
+      cardsDiv.innerHTML = '';
+      prestadores.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'cardVeja e-con-full';
+        card.innerHTML = `
+          <span class="nome">${p.nome}</span>
+          <span class="info">Endereço: ${p.endereco}</span>
+          <span class="info">Veículo: ${p.veiculo}</span>
+          <span class="info">Serviços Prestados: ${p.totalServicos}</span>
+        `;
+        cardsDiv.appendChild(card);
+      });
+    }
+    renderResumo();
+    renderCards();
+    // Botão Voltar
+    document.getElementById('btn-voltar').onclick = function() {
+      window.location.href = 'lista-prestadores.html';
+    };
+    // Botão Confirmar
+    document.getElementById('btn-confirmar').onclick = function() {
+      document.getElementById('modal-sucesso').style.display = 'flex';
+      // Limpar localStorage (simulação de envio)
+      localStorage.removeItem('demanda');
+      localStorage.removeItem('prestadoresSelecionados');
+    };
+    document.getElementById('btn-fechar-modal').onclick = function() {
+      document.getElementById('modal-sucesso').style.display = 'none';
+      window.location.href = 'lista-prestadores.html';
+    };
+  </script>
+</body>
+</html>
