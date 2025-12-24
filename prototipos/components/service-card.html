@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Card de Serviço</title>
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <style>
+    .cardVeja {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 1px solid #E2E5F0;
+      padding: 24px 20px 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 420px;
+      transition: border-color 0.2s;
+    }
+    .cardVeja .service-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #0027BD;
+      margin-bottom: 2px;
+    }
+    .cardVeja .service-address {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .cardVeja .service-status {
+      display: inline-block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 12px;
+      padding: 3px 14px;
+      margin-bottom: 8px;
+      background: #f0f4ff;
+      color: #0027BD;
+    }
+    .cardVeja.status-pendente .service-status {
+      background: #fff3cd;
+      color: #856404;
+    }
+    .cardVeja.status-execucao .service-status {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+    .cardVeja.status-concluido .service-status {
+      background: #d4edda;
+      color: #155724;
+    }
+    .cardVeja .service-action {
+      align-self: flex-end;
+      margin-top: 8px;
+    }
+    .cardVeja .service-action button {
+      background: #0027BD;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .cardVeja .service-action button:hover {
+      background: #0051ff;
+    }
+  </style>
+</head>
+<body style="background: #f6f8fa; padding: 32px;">
+  <!-- Card de Serviço: Status Pendente -->
+  <div class="cardVeja status-pendente" aria-label="Serviço pendente">
+    <div class="service-title">Reparo de Vazamento</div>
+    <div class="service-address">Av. Brasil, 1234 - Belém/PA</div>
+    <div class="service-status">Pendente</div>
+    <div class="service-action">
+      <button type="button" aria-label="Ver detalhes do serviço">Ver Detalhes</button>
+    </div>
+  </div>
+  <!-- Card de Serviço: Em Execução -->
+  <div class="cardVeja status-execucao" aria-label="Serviço em execução">
+    <div class="service-title">Instalação de Hidrômetro</div>
+    <div class="service-address">Rua das Flores, 87 - Ananindeua/PA</div>
+    <div class="service-status">Em Execução</div>
+    <div class="service-action">
+      <button type="button" aria-label="Auditar serviço">Auditar</button>
+    </div>
+  </div>
+  <!-- Card de Serviço: Concluído -->
+  <div class="cardVeja status-concluido" aria-label="Serviço concluído">
+    <div class="service-title">Desobstrução de Esgoto</div>
+    <div class="service-address">Trav. Tucumã, 45 - Marabá/PA</div>
+    <div class="service-status">Concluído</div>
+    <div class="service-action">
+      <button type="button" aria-label="Ver auditoria">Ver Auditoria</button>
+    </div>
+  </div>
+</body>
+</html>
