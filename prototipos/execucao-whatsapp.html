@@ -133,6 +133,47 @@
       font-size: 1rem;
       margin-bottom: 8px;
     }
+    .wa-upload .wa-upload-tip {
+      color: #d9534f;
+      background: #fff3cd;
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    /* Botões de escolha Sim/Não */
+    .wa-choice-container {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+    .wa-choice-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+      outline: none;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .wa-choice-btn.sim {
+      background: #25d366;
+      color: #fff;
+    }
+    .wa-choice-btn.sim:focus {
+      outline: 2px solid #0027BD;
+    }
+    .wa-choice-btn.nao {
+      background: #e0e0e0;
+      color: #222;
+    }
+    .wa-choice-btn.nao:focus {
+      outline: 2px solid #0027BD;
+    }
     /* Responsividade */
     @media (max-width: 600px) {
       .wa-sim-container {
@@ -149,6 +190,10 @@
       }
       .wa-input-bar {
         padding: 8px 8px 4px 8px;
+      }
+      .wa-choice-btn {
+        padding: 10px 16px;
+        font-size: 0.95rem;
       }
     }
     /* Acessibilidade: contraste e foco */
@@ -204,10 +249,48 @@
       chat.appendChild(msg);
       chat.scrollTop = chat.scrollHeight;
     }
+    function showChoice() {
+      const container = document.createElement('div');
+      container.className = 'wa-choice-container';
+      container.setAttribute('role', 'group');
+      // Botão SIM
+      const btnSim = document.createElement('button');
+      btnSim.className = 'wa-choice-btn sim';
+      btnSim.innerHTML = '✅ Sim, aceito';
+      btnSim.setAttribute('aria-label', 'Aceitar serviço');
+      btnSim.setAttribute('tabindex', '0');
+      btnSim.onclick = function() {
+        addMsg('✅ Sim, aceito', 'user');
+        step++;
+        setTimeout(nextStep, 600);
+        container.remove();
+      };
+      // Botão NÃO
+      const btnNao = document.createElement('button');
+      btnNao.className = 'wa-choice-btn nao';
+      btnNao.innerHTML = '❌ Não, obrigado';
+      btnNao.setAttribute('aria-label', 'Recusar serviço');
+      btnNao.setAttribute('tabindex', '0');
+      btnNao.onclick = function() {
+        addMsg('❌ Não, obrigado', 'user');
+        step = 999;
+        setTimeout(function(){
+          addMsg('Tudo bem! Obrigado pelo seu tempo. Até a próxima oportunidade! 👋', 'bot');
+          form.querySelector('input').disabled = true;
+          form.querySelector('button').disabled = true;
+        }, 600);
+        container.remove();
+      };
+      container.appendChild(btnSim);
+      container.appendChild(btnNao);
+      chat.appendChild(container);
+      container.querySelectorAll('button')[0].focus();
+      chat.scrollTop = chat.scrollHeight;
+    }
     function showUpload(tipo) {
       const div = document.createElement('div');
       div.className = 'wa-upload';
-      div.innerHTML = `<label for="${tipo}-file">Envie uma foto ${tipo} com localização:</label><input type="file" id="${tipo}-file" accept="image/*" aria-label="Upload de foto ${tipo}" tabindex="0"><input type="text" id="${tipo}-gps" placeholder="Latitude,Longitude" aria-label="Coordenada GPS" tabindex="0">`;
+      div.innerHTML = `<p class="wa-upload-tip">⚠️ Envie a foto como <strong>DOCUMENTO</strong> para preservar a localização GPS.</p><label for="${tipo}-file">Envie uma foto ${tipo} com localização:</label><input type="file" id="${tipo}-file" accept="image/*" aria-label="Upload de foto ${tipo}" tabindex="0"><input type="text" id="${tipo}-gps" placeholder="Latitude,Longitude" aria-label="Coordenada GPS" tabindex="0">`;
       const inputFile = div.querySelector('input[type=file]');
       const inputGps = div.querySelector('input[type=text]');
       inputFile.addEventListener('change', function(){
@@ -234,20 +317,34 @@
     function nextStep(userInput) {
       switch(step) {
         case 0:
-          addMsg('Olá, você foi selecionado para executar o serviço: Reparo de vazamento na Rua das Flores, 123, Belém-PA. Ao chegar no local, por favor, envie uma foto do local (antes do serviço) com a localização habilitada.', 'bot');
+          addMsg('Olá! 😊 Temos um serviço disponível para você:<br><strong>Reparo de vazamento</strong> na <strong>Rua das Flores, 123, Belém-PA</strong>.<br><br><span style="color:#d9534f">⚠️ <strong>Restrições:</strong></span> Execução entre <strong>8h-17h</strong>, necessário <strong>kit de ferramentas básico</strong>, evitar <strong>dias chuvosos</strong>.<br><br><strong>Você topa fazer este trabalho?</strong>', 'bot', true);
           step++;
+          setTimeout(showChoice, 900);
           break;
         case 1:
-          showUpload('antes');
+          // Step controlado por showChoice()
           break;
         case 2:
+          addMsg('📸 <strong>Lembre-se:</strong> Ative a localização do seu celular antes de tirar as fotos. Envie as fotos como <strong>DOCUMENTO</strong> no WhatsApp para preservar a qualidade e os metadados de GPS. Mantenha o kit de ferramentas básico em mãos e evite realizar o serviço em dias chuvosos. Boa sorte!', 'bot', true);
+          step++;
+          setTimeout(nextStep, 1200);
+          break;
+        case 3:
+          addMsg('Obrigado por aceitar! 🙏 Quando chegar ao local, siga as instruções e envie a primeira foto. Estamos aqui para ajudar. Até breve!', 'bot', true);
+          step++;
+          setTimeout(nextStep, 1200);
+          break;
+        case 4:
+          showUpload('antes');
+          break;
+        case 5:
           addMsg('Foto recebida! Agora, realize o serviço solicitado. Quando finalizar, envie uma foto do serviço pronto (depois) com a localização.', 'bot');
           step++;
           break;
-        case 3:
+        case 6:
           showUpload('depois');
           break;
-        case 4:
+        case 7:
           addMsg('Aguarde enquanto auditamos as informações enviadas...', 'bot');
           setTimeout(()=>{
             // Simula aprovação ou reprovação
@@ -260,8 +357,11 @@
           }, 1800);
           step++;
           break;
-        case 5:
+        case 8:
           // Fim
+          break;
+        case 999:
+          // Fluxo encerrado pelo usuário (não aceita)
           break;
       }
     }
@@ -269,6 +369,7 @@
     nextStep();
     form.addEventListener('submit', function(ev){
       ev.preventDefault();
+      if(step === 999) return;
       const val = input.value.trim();
       if(!val) return;
       addMsg(val, 'user');
