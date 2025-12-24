@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp - Notificação de Auditoria</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
+  <style>
+    body {
+      background: #ece5dd;
+      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .wa-container {
+      max-width: 420px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+      overflow: hidden;
+      border: 1px solid #d1d7db;
+    }
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wa-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+    .wa-header .wa-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .wa-chat {
+      background: #ece5dd;
+      min-height: 320px;
+      padding: 24px 16px 32px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .wa-msg {
+      max-width: 80%;
+      background: #dcf8c6;
+      border-radius: 8px 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 1rem;
+      color: #222;
+      align-self: flex-start;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      position: relative;
+    }
+    .wa-msg.wa-erro {
+      background: #fff3f3;
+      color: #cf2e2e;
+      border: 1px solid #f7bcbc;
+    }
+    .wa-btn {
+      display: inline-block;
+      margin-top: 12px;
+      background: #25d366;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 24px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .wa-btn:hover {
+      background: #128c7e;
+    }
+    @media (max-width: 480px) {
+      .wa-container { max-width: 100vw; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wa-container">
+    <div class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea Bot">
+      <div>
+        <div class="wa-title">Águas do Pará</div>
+        <div style="font-size:0.9em;opacity:0.8;">online</div>
+      </div>
+    </div>
+    <div class="wa-chat" id="wa-chat">
+      <!-- Mensagem será preenchida via JS -->
+    </div>
+  </div>
+  <script>
+    function getParam(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+    const status = getParam('status');
+    const chat = document.getElementById('wa-chat');
+    if (status === 'aprovado') {
+      const valor = getParam('valor') || '---';
+      const previsao = getParam('previsao') || '---';
+      chat.innerHTML = `
+        <div class="wa-msg">
+          <strong>Parabéns!</strong> Seu serviço foi <b>aprovado</b> na auditoria.<br><br>
+          Valor a receber: <b>R$ ${valor}</b><br>
+          Pagamento previsto para: <b>${previsao}</b>.<br><br>
+          Obrigado por sua parceria com a Águas do Pará! 🚀
+        </div>
+      `;
+    } else if (status === 'reprovado') {
+      const motivo = getParam('motivo') || 'Inconsistência detectada. Por favor, envie novas fotos.';
+      chat.innerHTML = `
+        <div class="wa-msg wa-erro">
+          <strong>Ops!</strong> Seu serviço foi <b>reprovado</b> na auditoria.<br><br>
+          Motivo: ${motivo}<br><br>
+          Para prosseguir, envie novas fotos conforme solicitado.
+          <br>
+          <a class="wa-btn" href="execucao-servico.html?reenvio=1">Enviar Novas Fotos</a>
+        </div>
+      `;
+    } else {
+      chat.innerHTML = `<div class="wa-msg">Status de notificação não reconhecido.</div>`;
+    }
+  </script>
+</body>
+</html>
