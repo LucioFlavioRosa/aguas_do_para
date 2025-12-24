@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+	<title>Detalhes do Serviço - Águas do Pará</title>
+	<link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+	<link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+	<link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+	<link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+	<link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+	<link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+	<link rel='stylesheet' id='elementor-post-26421-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004' media='all' />
+	<link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+	<link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
+	<link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" sizes="192x192" />
+	<link rel="apple-touch-icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" />
+	<meta name="msapplication-TileImage" content="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" />
+	<style>
+		body { background: #fff; font-family: 'Inter', Arial, sans-serif; }
+		.container-detalhes-servico {
+			max-width: 1200px;
+			margin: 0 auto 40px auto;
+			background: #fff;
+			border-radius: 20px;
+			box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+			padding: 2.5rem 2rem;
+		}
+		.titulo-servico { font-size: 2rem; font-weight: 700; color: #0027BD; margin-bottom: 1.5rem; }
+		.info-servico { margin-bottom: 2rem; }
+		.info-servico label { font-weight: 600; color: #0027BD; display: block; margin-bottom: 0.3rem; }
+		.info-servico .valor { color: #222; font-size: 1.1rem; margin-bottom: 1rem; }
+		#preco-servico { font-size: 1.4rem; font-weight: 700; color: #0027BD; }
+		.mapa-localizacao { width: 100%; height: 320px; border-radius: 14px; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+		.btn-voltar { display: inline-block; background: #0027BD; color: #fff; border: none; border-radius: 6px; padding: 0.7rem 1.7rem; font-size: 1rem; text-decoration: none; transition: background 0.2s; margin-top: 1.5rem; }
+		.btn-voltar:hover { background: #0050ff; }
+		@media (max-width: 600px) {
+			.container-detalhes-servico { padding: 1.2rem 0.6rem; }
+			.titulo-servico { font-size: 1.3rem; }
+			.mapa-localizacao { height: 200px; }
+		}
+	</style>
+</head>
+<body class="page-detalhes-servico">
+<main id="content" class="container-detalhes-servico" tabindex="-1">
+	<h1 class="titulo-servico">Detalhes do Serviço</h1>
+	<div class="info-servico">
+		<label for="tipo-servico">Tipo de Serviço</label>
+		<div class="valor" id="tipo-servico"></div>
+		<label for="endereco-servico">Endereço</label>
+		<div class="valor" id="endereco-servico"></div>
+		<label for="restricoes">Restrições de Data/Hora</label>
+		<div class="valor" id="restricoes"></div>
+		<label for="descricao">Descrição Detalhada</label>
+		<div class="valor" id="descricao"></div>
+		<label for="preco-servico">Valor do Serviço</label>
+		<div class="valor" id="preco-servico"></div>
+	</div>
+	<div class="mapa-localizacao" aria-label="Mapa de localização do serviço">
+		<iframe title="Mapa de localização do serviço" id="iframe-mapa" src="" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+	</div>
+	<a href="bloco2-gestao-demandas.html" class="btn-voltar" aria-label="Voltar para lista de serviços">&larr; Voltar</a>
+</main>
+<!-- FOOTER -->
+<footer data-elementor-type="footer" data-elementor-id="26421" class="elementor elementor-26421 elementor-location-footer" data-elementor-post-type="elementor_library" style="margin-top: 40px;">
+	<div class="elementor-element elementor-element-d5f6632 e-flex e-con-boxed e-con e-parent">
+		<div class="e-con-inner">
+			<div class="elementor-element elementor-element-fac3436 elementor-widget elementor-widget-heading">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default">Veja também</h3>
+				</div>
+			</div>
+			<div class="elementor-element elementor-element-3e871e8 elementor-widget elementor-widget-jet-listing-grid">
+				<div class="elementor-widget-container">
+					<div class="jet-listing-grid jet-listing">
+						<div class="jet-listing-grid__items grid-col-desk-1 grid-col-tablet-1 grid-col-mobile-1 jet-listing-grid--27263 grid-collapse-gap">
+							<div class="jet-listing-grid__item jet-listing-dynamic-post-27262">
+								<a href="https://www.canaldeetica.com.br/aegea/" target="_blank" class="cardVeja" style="display:block; padding:1rem; border-radius:12px; background:#f9f9f9; text-decoration:none; color:#0027BD; margin-bottom:10px;">
+									<strong>Canal de Ética</strong><br/>
+									<span style="font-size:0.95em; color:#222;">Comprometidos com a transparência, disponibilizamos o Canal de Ética para garantir integridade em todas as nossas operações.</span>
+								</a>
+							</div>
+							<div class="jet-listing-grid__item jet-listing-dynamic-post-27261">
+								<a href="https://www.aegea.com.br/carreiras/a-vida-na-aegea/" target="_blank" class="cardVeja" style="display:block; padding:1rem; border-radius:12px; background:#f9f9f9; text-decoration:none; color:#0027BD; margin-bottom:10px;">
+									<strong>A vida na Aegea</strong><br/>
+									<span style="font-size:0.95em; color:#222;">Descubra como é fazer parte da Aegea e como nossos colaboradores contribuem para movimentar vidas.</span>
+								</a>
+							</div>
+							<div class="jet-listing-grid__item jet-listing-dynamic-post-27260">
+								<a href="https://www.aegea.com.br/unidades/" target="_blank" class="cardVeja" style="display:block; padding:1rem; border-radius:12px; background:#f9f9f9; text-decoration:none; color:#0027BD; margin-bottom:10px;">
+									<strong>Unidades</strong><br/>
+									<span style="font-size:0.95em; color:#222;">Conheça nossas operações e o impacto positivo que geramos na vida das pessoas e do meio ambiente.</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="elementor-element elementor-element-c8210e9 e-con-full e-flex e-con e-child">
+				<div class="elementor-element elementor-element-2b76d581 elementor-widget elementor-widget-text-editor">
+					<div class="elementor-widget-container">
+						<p><strong>® 2025 AEGEA</strong>. Todos os direitos reservados.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- FIM FOOTER -->
+<script>
+// Mock de dados de serviços
+const servicosMock = {
+  '1': {
+    tipo: 'Reparo de vazamento de água',
+    endereco: 'Rua das Flores, 123 - Bairro Centro, Belém - PA, 66000-000',
+    restricoes: 'Somente em dias úteis, das 8h às 18h',
+    descricao: 'Água vazando em calçada, prioridade alta. Necessário reparo rápido e recomposição de calçada.',
+    mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9999999999995!2d-48.5044!3d-1.4558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48e6e0b000001%3A0x0000000000000000!2sRua%20das%20Flores%2C%20123%20-%20Centro%2C%20Bel%C3%A9m%20-%20PA!5e0!3m2!1spt-BR!2sbr!4v1710000000001',
+    preco: 'R$ 350,00'
+  },
+  '2': {
+    tipo: 'Troca de hidrômetro',
+    endereco: 'Av. Nazaré, 200 - Bairro Batista Campos, Belém - PA, 66055-260',
+    restricoes: 'Agendamento prévio, das 9h às 17h',
+    descricao: 'Solicitada troca de hidrômetro por defeito identificado na leitura.',
+    mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9999999999995!2d-48.4900!3d-1.4520!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48e6e0b000002%3A0x0000000000000000!2sAv.%20Nazar%C3%A9%2C%20200%20-%20Batista%20Campos%2C%20Bel%C3%A9m%20-%20PA!5e0!3m2!1spt-BR!2sbr!4v1710000000002',
+    preco: 'R$ 180,00'
+  },
+  '3': {
+    tipo: 'Desobstrução de esgoto',
+    endereco: 'Trav. Tucumã, 789 - Marituba/PA, 67200-000',
+    restricoes: 'Executar em horário comercial (8h às 17h)',
+    descricao: 'Esgoto retornando para dentro da residência. Possível obstrução na rede. Prioridade alta.',
+    mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9999999999995!2d-48.3400!3d-1.3600!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48e6e0b000003%3A0x0000000000000000!2sTrav.%20Tucum%C3%A3%2C%20789%20-%20Marituba%2C%20PA!5e0!3m2!1spt-BR!2sbr!4v1710000000003',
+    preco: 'R$ 420,00'
+  }
+};
+window.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id') || '1';
+  const servico = servicosMock[id] || servicosMock['1'];
+  document.getElementById('tipo-servico').textContent = servico.tipo;
+  document.getElementById('endereco-servico').textContent = servico.endereco;
+  document.getElementById('restricoes').textContent = servico.restricoes;
+  document.getElementById('descricao').textContent = servico.descricao;
+  document.getElementById('preco-servico').textContent = servico.preco;
+  document.getElementById('iframe-mapa').src = servico.mapa;
+});
+</script>
+</body>
+</html>
