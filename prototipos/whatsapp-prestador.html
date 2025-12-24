@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp - Prestador | Águas do Pará</title>
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <style>
+    body {
+      background: #ece5dd;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .wa-container {
+      max-width: 420px;
+      margin: 32px auto;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+      background: #fff;
+      overflow: hidden;
+      border: 1px solid #d1d7db;
+    }
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wa-header img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border: 2px solid #25d366;
+    }
+    .wa-header .wa-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .wa-chat {
+      background: #ece5dd;
+      padding: 16px 8px;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .wa-msg {
+      background: #fff;
+      border-radius: 8px 8px 8px 0;
+      padding: 12px 16px;
+      max-width: 80%;
+      font-size: 1rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      align-self: flex-start;
+      position: relative;
+    }
+    .wa-msg.recebida {
+      background: #dcf8c6;
+      align-self: flex-start;
+    }
+    .wa-msg.enviada {
+      background: #fff;
+      align-self: flex-end;
+      border-radius: 8px 8px 0 8px;
+    }
+    .wa-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin: 8px 0 0 0;
+    }
+    .wa-btn {
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .wa-btn.secondary {
+      background: #ece5dd;
+      color: #075e54;
+      border: 1px solid #bdbdbd;
+    }
+    .wa-btn:active {
+      background: #128c7e;
+    }
+    .wa-instructions {
+      margin-top: 20px;
+      background: #f7f7f7;
+      border-left: 4px solid #25d366;
+      padding: 16px;
+      border-radius: 8px;
+      color: #075e54;
+      font-size: 1.05rem;
+      display: none;
+    }
+    @media (max-width: 500px) {
+      .wa-container {
+        max-width: 100vw;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wa-container">
+    <div class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Águas do Pará" width="40" height="40">
+      <div>
+        <div class="wa-title">Águas do Pará</div>
+        <div style="font-size:0.92rem;opacity:0.8;">Conta verificada</div>
+      </div>
+    </div>
+    <div class="wa-chat">
+      <div class="wa-msg recebida">
+        <strong>Nova Demanda de Serviço</strong><br>
+        <b>Tipo:</b> Reparo de vazamento de água<br>
+        <b>Endereço:</b> Rua das Flores, 123, Bairro Centro, Belém/PA<br>
+        <b>Prazo:</b> Até 18h de hoje<br>
+        <br>
+        Você está disponível para executar este serviço?
+      </div>
+      <div class="wa-actions">
+        <button class="wa-btn" id="btn-aceitar">Aceitar Serviço</button>
+        <button class="wa-btn secondary" id="btn-recusar">Recusar</button>
+        <button class="wa-btn secondary" id="btn-detalhes">Ver Detalhes</button>
+      </div>
+      <div class="wa-instructions" id="wa-instructions">
+        <b>Instruções:</b><br>
+        Por favor, dirija-se ao endereço informado.<br>
+        <span style="color:#25d366;">Tire uma foto no local com o GPS do seu celular ativado.</span><br>
+        Após isso, siga para a execução do serviço.<br>
+        <br>
+        <a href="execucao-servico.html" class="wa-btn" style="text-decoration:none;display:inline-block;margin-top:10px;">Ir para Execução</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('btn-aceitar').onclick = function() {
+      document.getElementById('wa-instructions').style.display = 'block';
+      this.disabled = true;
+      this.textContent = 'Aceito';
+      document.getElementById('btn-recusar').disabled = true;
+      document.getElementById('btn-detalhes').disabled = true;
+    };
+    document.getElementById('btn-recusar').onclick = function() {
+      alert('Você recusou o serviço. Retornaremos com novas oportunidades em breve.');
+    };
+    document.getElementById('btn-detalhes').onclick = function() {
+      alert('Detalhes do serviço:\n\n- Tipo: Reparo de vazamento de água\n- Endereço: Rua das Flores, 123, Bairro Centro, Belém/PA\n- Prazo: Até 18h de hoje\n- Observações: Vazamento visível na calçada, cliente estará no local.');
+    };
+  </script>
+</body>
+</html>
