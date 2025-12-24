@@ -1,0 +1,65 @@
+{
+  "prestadores": [
+    {
+      "id": 1,
+      "nome": "João da Silva",
+      "endereco": "Rua das Flores, 123 - Belém/PA",
+      "veiculo": "Moto",
+      "servicos": ["Reparo de vazamentos de água", "Instalação/Troca de hidrômetros", "Desobstrução de esgoto"],
+      "qtd_servicos": 12
+    },
+    {
+      "id": 2,
+      "nome": "Maria Oliveira",
+      "endereco": "Av. Pará, 456 - Santarém/PA",
+      "veiculo": "Carro",
+      "servicos": ["Pequenos reparos (alvenaria/calçada)", "Desobstrução de esgoto"],
+      "qtd_servicos": 7
+    },
+    {
+      "id": 3,
+      "nome": "Carlos Souza",
+      "endereco": "Travessa Tucuruí, 789 - Marabá/PA",
+      "veiculo": "Moto",
+      "servicos": ["Instalação/Troca de hidrômetros", "Outros"],
+      "qtd_servicos": 5
+    },
+    {
+      "id": 4,
+      "nome": "Ana Paula Lima",
+      "endereco": "Rua Castanheira, 321 - Altamira/PA",
+      "veiculo": "Carro",
+      "servicos": ["Reparo de vazamentos de água", "Pequenos reparos (alvenaria/calçada)", "Outros"],
+      "qtd_servicos": 9
+    }
+  ],
+  "servicos_disponiveis": [
+    {
+      "id": 1,
+      "tipo": "Reparo de vazamentos de água"
+    },
+    {
+      "id": 2,
+      "tipo": "Instalação/Troca de hidrômetros"
+    },
+    {
+      "id": 3,
+      "tipo": "Desobstrução de esgoto"
+    },
+    {
+      "id": 4,
+      "tipo": "Pequenos reparos (alvenaria/calçada)"
+    },
+    {
+      "id": 5,
+      "tipo": "Outros"
+    }
+  ],
+  "tipos_servico": [
+    "Reparo de vazamentos de água",
+    "Instalação/Troca de hidrômetros",
+    "Desobstrução de esgoto",
+    "Pequenos reparos (alvenaria/calçada)",
+    "Outros"
+  ]
+}
