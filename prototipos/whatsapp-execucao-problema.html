@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp - Justificativa de Não Execução</title>
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    body { background: #ece5dd; }
+    .wa-container {
+      max-width: 420px;
+      margin: 32px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      overflow: hidden;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+    }
+    .wa-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 12px;
+    }
+    .wa-chat {
+      padding: 16px;
+      min-height: 260px;
+      background: #ece5dd;
+    }
+    .wa-message {
+      background: #dcf8c6;
+      border-radius: 8px 8px 0 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      max-width: 80%;
+      font-size: 1rem;
+      color: #222;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .wa-message.bot {
+      background: #fff;
+      border-radius: 8px 8px 8px 0;
+      color: #222;
+      align-self: flex-start;
+    }
+    .wa-form {
+      background: #f7f7f7;
+      padding: 16px;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .wa-form textarea {
+      resize: vertical;
+      min-height: 60px;
+      border-radius: 8px;
+      border: 1px solid #cfd8dc;
+      padding: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    .wa-form label {
+      font-weight: 500;
+      color: #075e54;
+    }
+    .wa-form input[type="file"] {
+      display: none;
+    }
+    .wa-btn {
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 0;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .wa-btn:hover {
+      background: #128c7e;
+    }
+    .wa-upload-label {
+      background: #075e54;
+      color: #fff;
+      border-radius: 8px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: inline-block;
+      margin-bottom: 0;
+      margin-top: 4px;
+    }
+    .wa-preview {
+      margin-top: 8px;
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid #cfd8dc;
+    }
+  </style>
+</head>
+<body>
+  <main class="wa-container" aria-label="Simulação de tela do WhatsApp">
+    <header class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" />
+      <div>
+        <div style="font-weight:600; font-size:1.1rem;">Aegea Atendimento</div>
+        <div style="font-size:0.9rem; color:#e0e0e0;">online</div>
+      </div>
+    </header>
+    <section class="wa-chat" aria-live="polite">
+      <div class="wa-message bot">
+        Olá, não foi possível executar o serviço? Por favor, explique o motivo e envie uma foto do problema encontrado para nossa equipe avaliar.
+      </div>
+    </section>
+    <form class="wa-form" autocomplete="off">
+      <label for="wa-justificativa">Justificativa</label>
+      <textarea id="wa-justificativa" name="justificativa" placeholder="Descreva o motivo pelo qual não foi possível executar o serviço..." required aria-required="true"></textarea>
+      <label for="wa-foto" class="wa-upload-label" tabindex="0">Tirar Foto do Problema</label>
+      <input type="file" id="wa-foto" name="foto" accept="image/*" capture="environment" aria-label="Tirar foto do problema" required aria-required="true">
+      <img id="wa-preview" class="wa-preview" alt="Pré-visualização da foto do problema" style="display:none;" />
+      <button type="submit" class="wa-btn">Enviar Justificativa e Foto</button>
+    </form>
+  </main>
+  <script>
+    const fotoInput = document.getElementById('wa-foto');
+    const preview = document.getElementById('wa-preview');
+    const label = document.querySelector('.wa-upload-label');
+    label.addEventListener('click', () => fotoInput.click());
+    fotoInput.addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+  </script>
+</body>
+</html>
