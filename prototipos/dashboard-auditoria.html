@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard de Auditoria - Águas do Pará</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008" media="all" />
+  <link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
+  <style>
+    body {
+      background: #f8f9fb;
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e2e5f0;
+      padding: 24px 0;
+      margin-bottom: 32px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #0027bd;
+      margin-bottom: 16px;
+    }
+    .grid-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .card-auditoria {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border: 1px solid #e2e5f0;
+    }
+    .fotos-comparacao {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .fotos-comparacao img {
+      width: 180px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #e2e5f0;
+    }
+    .info-servico {
+      font-size: 1rem;
+      color: #222;
+      margin-bottom: 8px;
+    }
+    .info-servico strong {
+      color: #0027bd;
+    }
+    .acoes {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-aprovar, .btn-reprovar {
+      padding: 10px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-aprovar {
+      background: #00d084;
+      color: #fff;
+    }
+    .btn-aprovar:disabled {
+      background: #b6e9d0;
+      cursor: not-allowed;
+    }
+    .btn-reprovar {
+      background: #cf2e2e;
+      color: #fff;
+    }
+    .btn-reprovar:disabled {
+      background: #f7bcbc;
+      cursor: not-allowed;
+    }
+    @media (max-width: 900px) {
+      .grid-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Águas do Pará" style="height:48px;vertical-align:middle;">
+    </div>
+  </header>
+  <main class="container">
+    <h1>Dashboard de Auditoria - Serviços Aguardando Análise</h1>
+    <div class="grid-cards" id="lista-servicos">
+      <!-- Cards de auditoria serão renderizados via JS -->
+    </div>
+  </main>
+  <script src="js/auditoria.js"></script>
+</body>
+</html>
