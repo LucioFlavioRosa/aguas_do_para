@@ -59,6 +59,27 @@
     .btn-despachar:focus {
       outline: 2px solid #00d084;
     }
+    /* NOVO BOTÃO DE DETALHES */
+    .btn-detalhes {
+      background: #00d084;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-left: 8px;
+      transition: background .2s;
+      box-shadow: 0 2px 8px rgba(0,208,130,0.08);
+      font-weight: 600;
+    }
+    .btn-detalhes:hover {
+      background: #009e6e;
+    }
+    .btn-detalhes:focus {
+      outline: 2px solid #0027BD;
+      background: #00c07c;
+    }
     .parceiros-table {
       width: 100%;
       border-collapse: collapse;
@@ -120,6 +141,10 @@
       .demand-table, .parceiros-table {
         font-size: 0.85rem;
       }
+      .btn-detalhes, .btn-despachar, .btn-enviar {
+        font-size: 0.95rem;
+        padding: 7px 12px;
+      }
     }
   </style>
 </head>
@@ -146,7 +171,10 @@
             <td>Rua das Flores, 123, Belém-PA</td>
             <td>12/07/2025 14:00</td>
             <td>Água vazando em calçada, prioridade alta</td>
-            <td><button class="btn-despachar" aria-label="Despachar pedido" tabindex="0" onclick="showParceiros()">Despachar</button></td>
+            <td>
+              <button class="btn-despachar" aria-label="Despachar pedido" tabindex="0" onclick="showParceiros()">Despachar</button>
+              <button class="btn-detalhes" aria-label="Ver detalhes do serviço" tabindex="0" onclick="verDetalhes(1)">Ver detalhes</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -233,6 +261,10 @@
           window.location.href = 'whatsapp-simulador.html';
         }, 2000);
       });
+    }
+    // NOVA FUNÇÃO PARA VER DETALHES
+    function verDetalhes(idServico) {
+      window.location.href = 'prototipos/bloco2-detalhes-servico.html?id=' + encodeURIComponent(idServico);
     }
   </script>
 </body>
