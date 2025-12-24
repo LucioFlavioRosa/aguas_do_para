@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>WhatsApp - Recursos e Disponibilidade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <style>
+    body {
+      background: #ece5dd;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .wa-container {
+      max-width: 420px;
+      margin: 32px auto;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      background: #fff;
+      overflow: hidden;
+      border: 1px solid #dadada;
+    }
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+    }
+    .wa-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 12px;
+    }
+    .wa-header .wa-title {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .wa-chat {
+      background: #ece5dd;
+      padding: 18px 12px 80px 12px;
+      min-height: 400px;
+      position: relative;
+    }
+    .wa-bubble {
+      background: #fff;
+      border-radius: 8px 8px 8px 0;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      max-width: 90%;
+      font-size: 1em;
+      color: #222;
+      position: relative;
+    }
+    .wa-bubble.bot {
+      background: #dcf8c6;
+      align-self: flex-start;
+      border-radius: 0 8px 8px 8px;
+      margin-left: 0;
+    }
+    .wa-bubble.user {
+      background: #fff;
+      align-self: flex-end;
+      border-radius: 8px 0 8px 8px;
+      margin-left: auto;
+      color: #222;
+    }
+    .wa-checklist {
+      margin: 12px 0 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .wa-checklist label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .wa-checklist input[type="checkbox"] {
+      accent-color: #075e54;
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+    }
+    .wa-footer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #f7f7f7;
+      padding: 10px 12px;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+    }
+    .wa-footer input {
+      flex: 1;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-size: 1em;
+      outline: none;
+      background: #fff;
+      margin-right: 8px;
+    }
+    .wa-footer button {
+      background: #25d366;
+      border: none;
+      color: #fff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .wa-footer button:hover {
+      background: #128c7e;
+    }
+  </style>
+</head>
+<body>
+  <div class="wa-container" role="main">
+    <div class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" />
+      <div>
+        <div class="wa-title">Aegea Parceiros</div>
+        <div style="font-size:0.9em;opacity:0.8;">online agora</div>
+      </div>
+    </div>
+    <div class="wa-chat" aria-label="Conversa WhatsApp">
+      <div class="wa-bubble bot">
+        Agora precisamos saber dos seus recursos e disponibilidade.<br>
+        Por favor, marque as opções que você possui e seus horários disponíveis:
+      </div>
+      <form>
+        <div class="wa-bubble user" style="background:#fff;">
+          <strong>Recursos:</strong>
+          <ul class="wa-checklist">
+            <li><label><input type="checkbox" name="veiculo_moto" />Veículo: Moto</label></li>
+            <li><label><input type="checkbox" name="veiculo_carro" />Veículo: Carro</label></li>
+            <li><label><input type="checkbox" name="ferramentas" />Ferramentas básicas</label></li>
+          </ul>
+          <strong style="display:block;margin-top:14px;">Disponibilidade de Horários:</strong>
+          <ul class="wa-checklist">
+            <li><label><input type="checkbox" name="manha" />Manhã</label></li>
+            <li><label><input type="checkbox" name="tarde" />Tarde</label></li>
+            <li><label><input type="checkbox" name="noite" />Noite</label></li>
+            <li><label><input type="checkbox" name="fim_semana" />Fim de semana</label></li>
+            <li><label><input type="checkbox" name="dias_semana" />Dias da semana</label></li>
+            <li><label><input type="checkbox" name="feriados" />Feriados</label></li>
+          </ul>
+        </div>
+        <div class="wa-bubble bot">
+          Após selecionar, clique em <strong>Enviar</strong> para continuar.
+        </div>
+      </form>
+      <div class="wa-footer">
+        <input type="text" placeholder="Digite uma mensagem" disabled aria-label="Campo de mensagem" />
+        <button type="button" aria-label="Enviar">
+          <svg width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 11L20 2L11 20L9 13L2 11Z" fill="#fff"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
