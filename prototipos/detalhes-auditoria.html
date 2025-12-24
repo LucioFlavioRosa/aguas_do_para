@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detalhes da Auditoria - Aegea</title>
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    body { background: #f4f6fa; }
+    .detalhes-container {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 24px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .detalhes-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .detalhes-header img {
+      width: 44px;
+      height: 44px;
+    }
+    .detalhes-header h1 {
+      font-size: 1.7rem;
+      color: #0027BD;
+      margin: 0;
+    }
+    .detalhes-grid {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .detalhes-fotos {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 220px;
+      flex: 1 1 220px;
+    }
+    .detalhes-fotos img {
+      width: 220px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #cfd8dc;
+      background: #f7fafc;
+    }
+    .detalhes-fotos label {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #888;
+    }
+    .detalhes-mapa {
+      flex: 2 1 320px;
+      min-width: 320px;
+      background: #f7fafc;
+      border-radius: 8px;
+      border: 1px solid #cfd8dc;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+    }
+    .detalhes-mapa h3 {
+      color: #075e54;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .detalhes-mapa img {
+      width: 100%;
+      max-width: 340px;
+      border-radius: 8px;
+      border: 1px solid #cfd8dc;
+    }
+    .detalhes-info {
+      font-size: 1rem;
+      color: #222;
+      margin-bottom: 18px;
+    }
+    .detalhes-info strong {
+      color: #0027BD;
+    }
+    .detalhes-comparacao {
+      background: #f7fafc;
+      border-radius: 8px;
+      border: 1px solid #e0e6f0;
+      padding: 14px;
+      margin-bottom: 18px;
+      font-size: 0.98rem;
+      color: #333;
+    }
+    .detalhes-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .btn-aprovar {
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-aprovar:hover { background: #128c7e; }
+    .btn-reprovar {
+      background: #cf2e2e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-reprovar:hover { background: #a71d1d; }
+    .btn-reconsiderar {
+      background: #075e54;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-reconsiderar:hover { background: #0027BD; }
+    @media (max-width: 900px) {
+      .detalhes-grid { flex-direction: column; gap: 18px; }
+      .detalhes-fotos img, .detalhes-mapa img { width: 100%; max-width: 100%; }
+      .detalhes-mapa { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="detalhes-container" aria-label="Detalhes da Auditoria">
+    <header class="detalhes-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea">
+      <h1>Detalhes do Serviço para Auditoria</h1>
+    </header>
+    <section class="detalhes-info">
+      <div><strong>Serviço:</strong> Reparo de Vazamento</div>
+      <div><strong>Prestador:</strong> João Silva (MEI)</div>
+      <div><strong>Localização do Serviço:</strong> Av. Brasil, 1234 - Belém/PA</div>
+      <div><strong>Data/Hora da Solicitação:</strong> 24/06/2025 13:50</div>
+    </section>
+    <div class="detalhes-grid">
+      <div class="detalhes-fotos">
+        <div>
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80" alt="Foto antes do serviço">
+          <label>Antes</label>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=300&q=80" alt="Foto depois do serviço">
+          <label>Depois</label>
+        </div>
+      </div>
+      <div class="detalhes-mapa">
+        <h3>Mapa: Local do Serviço vs. Local das Fotos</h3>
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=-1.455833,-48.504444&zoom=15&size=340x180&markers=color:blue%7C-1.455833,-48.504444&markers=color:green%7C-1.456000,-48.504000&key=AIzaSyDUMMYKEY" alt="Mapa de localização do serviço e fotos">
+        <div style="font-size:0.95rem; color:#888;">Azul: Local do serviço<br>Verde: Local das fotos</div>
+      </div>
+    </div>
+    <div class="detalhes-comparacao">
+      <div><strong>Horário da Foto Antes:</strong> 24/06/2025 14:10</div>
+      <div><strong>Horário da Foto Depois:</strong> 24/06/2025 14:32</div>
+      <div><strong>Distância entre local do serviço e fotos:</strong> 30m</div>
+    </div>
+    <div class="detalhes-actions">
+      <button class="btn-aprovar" aria-label="Aprovar serviço">Aprovar</button>
+      <button class="btn-reprovar" aria-label="Reprovar serviço">Reprovar</button>
+      <button class="btn-reconsiderar" aria-label="Solicitar reconsideração">Solicitar Reconsideração</button>
+    </div>
+    <div style="margin-top:24px;">
+      <a href="dashboard-auditoria.html" style="color:#075e54; text-decoration:underline; font-size:0.98rem;">&larr; Voltar para Dashboard</a>
+    </div>
+  </main>
+</body>
+</html>
