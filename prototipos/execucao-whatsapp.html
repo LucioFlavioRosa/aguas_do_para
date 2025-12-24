@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Execução de Serviço - Simulador WhatsApp</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <style>
+    body {
+      background: #e5ddd5;
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .wa-sim-container {
+      max-width: 420px;
+      margin: 24px auto;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      overflow: hidden;
+    }
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wa-header img {
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+    .wa-header .wa-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    .wa-chat {
+      flex: 1;
+      padding: 16px;
+      background: #ece5dd;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .wa-msg {
+      max-width: 75%;
+      padding: 10px 16px;
+      border-radius: 16px;
+      font-size: 1rem;
+      line-height: 1.4;
+      word-break: break-word;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .wa-msg.bot {
+      background: #fff;
+      align-self: flex-start;
+      color: #222;
+      border-bottom-left-radius: 2px;
+    }
+    .wa-msg.user {
+      background: #dcf8c6;
+      align-self: flex-end;
+      color: #222;
+      border-bottom-right-radius: 2px;
+    }
+    .wa-msg .wa-time {
+      font-size: 0.75rem;
+      color: #888;
+      margin-left: 8px;
+    }
+    .wa-input-bar {
+      background: #f7f7f7;
+      padding: 12px 12px 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-top: 1px solid #ddd;
+    }
+    .wa-input-bar input[type="text"] {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      outline: none;
+      background: #fff;
+    }
+    .wa-input-bar button {
+      background: #075e54;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .2s;
+      font-size: 1.2rem;
+    }
+    .wa-input-bar button:focus {
+      outline: 2px solid #0027BD;
+    }
+    .wa-upload {
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .wa-upload input[type="file"] {
+      display: block;
+    }
+    .wa-upload input[type="text"] {
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    /* Responsividade */
+    @media (max-width: 600px) {
+      .wa-sim-container {
+        max-width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+        margin: 0;
+      }
+      .wa-header {
+        padding: 10px;
+      }
+      .wa-chat {
+        padding: 8px;
+      }
+      .wa-input-bar {
+        padding: 8px 8px 4px 8px;
+      }
+    }
+    /* Acessibilidade: contraste e foco */
+    .wa-msg.bot, .wa-msg.user {
+      outline: none;
+    }
+    .wa-msg:focus {
+      box-shadow: 0 0 0 2px #0027BD;
+    }
+  </style>
+</head>
+<body>
+  <main class="wa-sim-container" role="main" aria-label="Execução de Serviço via WhatsApp">
+    <header class="wa-header" role="banner">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" width="44" height="44">
+      <div>
+        <div class="wa-title">Aegea OS</div>
+        <div style="font-size:0.9rem;">online</div>
+      </div>
+    </header>
+    <section class="wa-chat" id="wa-chat" aria-live="polite" tabindex="0">
+      <!-- Mensagens renderizadas por JS -->
+    </section>
+    <form class="wa-input-bar" id="wa-form" autocomplete="off" aria-label="Enviar mensagem">
+      <input type="text" id="wa-input" placeholder="Digite sua mensagem ou envie foto" aria-label="Digite sua mensagem" tabindex="0" required>
+      <button type="submit" aria-label="Enviar mensagem" tabindex="0">➤</button>
+    </form>
+  </main>
+  <script>
+    // Simulação do fluxo de execução do serviço (Bloco 3)
+    const chat = document.getElementById('wa-chat');
+    const form = document.getElementById('wa-form');
+    const input = document.getElementById('wa-input');
+    let step = 0;
+    let execData = {};
+    function horaAgora() {
+      const d = new Date();
+      return d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    }
+    function addMsg(text, sender = 'bot', html = false) {
+      const msg = document.createElement('div');
+      msg.className = `wa-msg ${sender}`;
+      msg.setAttribute('tabindex', '0');
+      msg.setAttribute('role', 'region');
+      if(html) msg.innerHTML = text + `<span class="wa-time">${horaAgora()}</span>`;
+      else msg.textContent = text;
+      if(!html) {
+        const time = document.createElement('span');
+        time.className = 'wa-time';
+        time.textContent = horaAgora();
+        msg.appendChild(time);
+      }
+      chat.appendChild(msg);
+      chat.scrollTop = chat.scrollHeight;
+    }
+    function showUpload(tipo) {
+      const div = document.createElement('div');
+      div.className = 'wa-upload';
+      div.innerHTML = `<label for="${tipo}-file">Envie uma foto ${tipo} com localização:</label><input type="file" id="${tipo}-file" accept="image/*" aria-label="Upload de foto ${tipo}" tabindex="0"><input type="text" id="${tipo}-gps" placeholder="Latitude,Longitude" aria-label="Coordenada GPS" tabindex="0">`;
+      const inputFile = div.querySelector('input[type=file]');
+      const inputGps = div.querySelector('input[type=text]');
+      inputFile.addEventListener('change', function(){
+        if(inputFile.files.length && inputGps.value) {
+          addMsg(`Foto ${tipo} enviada com localização: ${inputGps.value}`, 'user');
+          execData[tipo] = { foto: inputFile.files[0].name, gps: inputGps.value };
+          step++;
+          setTimeout(nextStep, 600);
+          div.remove();
+        }
+      });
+      inputGps.addEventListener('blur', function(){
+        if(inputFile.files.length && inputGps.value) {
+          addMsg(`Foto ${tipo} enviada com localização: ${inputGps.value}`, 'user');
+          execData[tipo] = { foto: inputFile.files[0].name, gps: inputGps.value };
+          step++;
+          setTimeout(nextStep, 600);
+          div.remove();
+        }
+      });
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
+    function nextStep(userInput) {
+      switch(step) {
+        case 0:
+          addMsg('Olá, você foi selecionado para executar o serviço: Reparo de vazamento na Rua das Flores, 123, Belém-PA. Ao chegar no local, por favor, envie uma foto do local (antes do serviço) com a localização habilitada.', 'bot');
+          step++;
+          break;
+        case 1:
+          showUpload('antes');
+          break;
+        case 2:
+          addMsg('Foto recebida! Agora, realize o serviço solicitado. Quando finalizar, envie uma foto do serviço pronto (depois) com a localização.', 'bot');
+          step++;
+          break;
+        case 3:
+          showUpload('depois');
+          break;
+        case 4:
+          addMsg('Aguarde enquanto auditamos as informações enviadas...', 'bot');
+          setTimeout(()=>{
+            // Simula aprovação ou reprovação
+            if(Math.random() < 0.85) {
+              addMsg('Serviço aprovado! O pagamento será processado. Obrigado pelo seu trabalho. 👍', 'bot');
+            } else {
+              addMsg('Inconsistência detectada na localização/hora das fotos. Por favor, envie novas fotos ou uma justificativa.', 'bot');
+              step--;
+            }
+          }, 1800);
+          step++;
+          break;
+        case 5:
+          // Fim
+          break;
+      }
+    }
+    // Inicialização
+    nextStep();
+    form.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      const val = input.value.trim();
+      if(!val) return;
+      addMsg(val, 'user');
+      setTimeout(()=>{
+        nextStep(val);
+      }, 600);
+      input.value = '';
+    });
+    chat.addEventListener('DOMNodeInserted', function(){
+      chat.scrollTop = chat.scrollHeight;
+    });
+  </script>
+</body>
+</html>
