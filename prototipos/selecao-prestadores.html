@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seleção de Prestadores - Parceiro Águas do Pará</title>
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
+  <style>
+    .container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 2rem; }
+    h1 { font-size: 2rem; color: #0027BD; margin-bottom: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+    th, td { padding: 0.8em 0.5em; text-align: left; border-bottom: 1px solid #e2e5f0; }
+    th { background: #e2e5f0; color: #0027BD; font-weight: 600; }
+    tr.selected { background: #e2e5f0; }
+    .btn-primary { background: #0027BD; color: #fff; border: none; border-radius: 8px; padding: 0.75em 2em; font-size: 1.1rem; cursor: pointer; transition: background 0.2s; display: inline-block; text-decoration: none; }
+    .btn-primary:disabled { background: #b3c6f7; cursor: not-allowed; }
+    .info { color: #888; font-size: 0.95em; margin-bottom: 1em; }
+    @media (max-width: 600px) { .container { padding: 1rem; } table, thead, tbody, th, td, tr { display: block; } th { position: absolute; left: -9999px; } td { border: none; position: relative; padding-left: 50%; } td:before { position: absolute; left: 0; top: 0; width: 45%; white-space: nowrap; font-weight: bold; color: #0027BD; } td:nth-of-type(1):before { content: "Selecionar"; } td:nth-of-type(2):before { content: "Nome"; } td:nth-of-type(3):before { content: "Endereço"; } td:nth-of-type(4):before { content: "Veículo"; } td:nth-of-type(5):before { content: "Qtd. Serviços"; } }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"][name="prestador"]');
+      const btn = document.getElementById('dispararBtn');
+      checkboxes.forEach(cb => {
+        cb.addEventListener('change', function() {
+          let checked = document.querySelectorAll('input[type="checkbox"][name="prestador"]:checked');
+          btn.disabled = checked.length === 0 || checked.length > 5;
+        });
+      });
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        let checked = document.querySelectorAll('input[type="checkbox"][name="prestador"]:checked');
+        if (checked.length === 0 || checked.length > 5) {
+          alert('Selecione até 5 prestadores.');
+          return;
+        }
+        window.location.href = 'confirmacao-disparo.html';
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Seleção de Prestadores</h1>
+    <div class="info">Selecione até 5 prestadores habilitados para disparar a demanda.</div>
+    <form>
+      <table aria-label="Tabela de prestadores habilitados">
+        <thead>
+          <tr>
+            <th>Selecionar</th>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Veículo</th>
+            <th>Qtd. Serviços</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox" name="prestador" value="1" aria-label="Selecionar João Silva"></td>
+            <td>João Silva</td>
+            <td>Rua das Flores, 45</td>
+            <td>Moto</td>
+            <td>23</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" name="prestador" value="2" aria-label="Selecionar Maria Souza"></td>
+            <td>Maria Souza</td>
+            <td>Av. Pará, 200</td>
+            <td>Carro</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" name="prestador" value="3" aria-label="Selecionar Carlos Oliveira"></td>
+            <td>Carlos Oliveira</td>
+            <td>Travessa Tucumã, 12</td>
+            <td>Moto</td>
+            <td>8</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" name="prestador" value="4" aria-label="Selecionar Ana Paula"></td>
+            <td>Ana Paula</td>
+            <td>Rua do Sol, 99</td>
+            <td>Carro</td>
+            <td>31</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" name="prestador" value="5" aria-label="Selecionar Pedro Lima"></td>
+            <td>Pedro Lima</td>
+            <td>Rua das Acácias, 10</td>
+            <td>Moto</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" name="prestador" value="6" aria-label="Selecionar Fernanda Costa"></td>
+            <td>Fernanda Costa</td>
+            <td>Av. Brasil, 300</td>
+            <td>Carro</td>
+            <td>5</td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="dispararBtn" class="btn-primary" type="submit" disabled>Disparar Demanda</button>
+    </form>
+  </div>
+</body>
+</html>
