@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp Checklist Serviços - Parceiro Águas do Pará</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5">
+  <style>
+    body {
+      background: #ece5dd;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .wa-container {
+      max-width: 420px;
+      margin: 24px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      min-height: 600px;
+    }
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wa-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      object-fit: cover;
+    }
+    .wa-header .wa-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .wa-chat {
+      flex: 1;
+      padding: 16px;
+      background: #ece5dd;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wa-bubble {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 18px;
+      font-size: 1rem;
+      line-height: 1.5;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+      word-break: break-word;
+    }
+    .wa-bubble.bot {
+      background: #fff;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      color: #222;
+    }
+    .wa-bubble.user {
+      background: #dcf8c6;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+      color: #222;
+    }
+    .wa-form {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px 12px 4px 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 90%;
+      align-self: flex-start;
+    }
+    .wa-form label {
+      font-size: 0.98em;
+      margin-bottom: 2px;
+      color: #075e54;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .wa-form input[type="checkbox"] {
+      accent-color: #075e54;
+      width: 18px;
+      height: 18px;
+      margin-right: 6px;
+    }
+    .wa-form .wa-btn {
+      background: #075e54;
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 8px;
+      align-self: flex-end;
+      transition: background .2s;
+    }
+    .wa-form .wa-btn:hover {
+      background: #128c7e;
+    }
+    @media (max-width: 500px) {
+      .wa-container { max-width: 100vw; min-height: 100vh; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wa-container" role="main">
+    <header class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" />
+      <div>
+        <div class="wa-title">Águas do Pará</div>
+        <div style="font-size:0.9em;opacity:0.8;">online</div>
+      </div>
+    </header>
+    <section class="wa-chat" aria-label="Chat WhatsApp">
+      <div class="wa-bubble bot" aria-label="Checklist de Serviços">
+        Agora, marque abaixo os tipos de serviços que você está apto a realizar:
+      </div>
+      <form class="wa-form" action="#" method="post" autocomplete="off" aria-label="Checklist de Serviços Técnicos">
+        <label><input type="checkbox" name="servicos[]" value="vazamentos"> Reparo de vazamentos de água</label>
+        <label><input type="checkbox" name="servicos[]" value="hidrometros"> Instalação/Troca de hidrômetros</label>
+        <label><input type="checkbox" name="servicos[]" value="esgoto"> Desobstrução de esgoto</label>
+        <label><input type="checkbox" name="servicos[]" value="reparos"> Pequenos reparos (alvenaria/calçada)</label>
+        <label><input type="checkbox" name="servicos[]" value="outros"> Outros</label>
+        <button class="wa-btn" type="submit" aria-label="Avançar">Avançar</button>
+      </form>
+    </section>
+  </div>
+</body>
+</html>
