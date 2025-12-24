@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>WhatsApp - Execução de Serviço</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <style>
+    body { background: #ece5dd; font-family: 'Segoe UI', Arial, sans-serif; }
+    .wa-container { max-width: 420px; margin: 32px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); overflow: hidden; }
+    .wa-header { background: #075e54; color: #fff; padding: 16px; display: flex; align-items: center; }
+    .wa-header img { width: 40px; height: 40px; border-radius: 50%; margin-right: 12px; }
+    .wa-header .wa-title { font-weight: 600; font-size: 1.1rem; }
+    .wa-chat { background: #ece5dd; padding: 16px; min-height: 540px; display: flex; flex-direction: column; }
+    .wa-msg { max-width: 80%; margin-bottom: 12px; padding: 10px 14px; border-radius: 8px; font-size: 1rem; line-height: 1.4; }
+    .wa-msg.bot { background: #fff; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+    .wa-msg.user { background: #dcf8c6; align-self: flex-end; }
+    .wa-msg img { max-width: 180px; border-radius: 8px; margin-top: 6px; }
+    .wa-msg .wa-location { color: #075e54; font-size: 0.95rem; display: block; margin-top: 4px; }
+    .wa-msg .wa-justificativa { background: #fffbe7; border-left: 4px solid #ff9800; padding: 8px; border-radius: 6px; margin-top: 6px; }
+    .wa-msg .wa-reprovado { background: #ffebee; border-left: 4px solid #d32f2f; padding: 8px; border-radius: 6px; margin-top: 6px; }
+    .wa-msg .wa-aprovado { background: #e8f5e9; border-left: 4px solid #388e3c; padding: 8px; border-radius: 6px; margin-top: 6px; }
+    .wa-msg .wa-btn { display: inline-block; background: #0027bd; color: #fff; border-radius: 6px; padding: 6px 14px; margin-top: 10px; text-decoration: none; font-size: 0.97rem; }
+    @media (max-width: 500px) { .wa-container { max-width: 100vw; border-radius: 0; } }
+  </style>
+</head>
+<body>
+  <div class="wa-container">
+    <div class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea Bot">
+      <div>
+        <div class="wa-title">Aegea OS</div>
+        <div style="font-size:0.85rem;opacity:0.7;">online agora</div>
+      </div>
+    </div>
+    <div class="wa-chat">
+      <div class="wa-msg bot">Olá João, você foi selecionado para executar o serviço:<br><strong>Reparo de vazamento</strong><br>Endereço: Rua das Flores, 100, Belém/PA<br>Horário: Manhã (08h-12h)<br><span class="wa-timestamp">09:00</span></div>
+      <div class="wa-msg user">Aceito o serviço!<br><span class="wa-timestamp">09:01</span></div>
+      <div class="wa-msg bot">Ótimo! Ao chegar no local, envie uma foto do local <strong>antes do serviço</strong> com a localização ativada.<br><span class="wa-timestamp">09:20</span></div>
+      <div class="wa-msg user">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Foto Antes">
+        <span class="wa-location">📍 -1.455833, -48.504444 (Belém/PA)</span>
+        <span class="wa-timestamp">09:22</span>
+      </div>
+      <div class="wa-msg bot">Foto recebida! Agora realize o serviço e, ao finalizar, envie uma foto do local <strong>depois do serviço</strong> com localização.<br><span class="wa-timestamp">09:40</span></div>
+      <div class="wa-msg user">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Foto Depois">
+        <span class="wa-location">📍 -1.455833, -48.504444 (Belém/PA)</span>
+        <span class="wa-timestamp">09:55</span>
+      </div>
+      <div class="wa-msg bot">Fotos recebidas! Aguarde enquanto auditamos as informações.<br><span class="wa-timestamp">09:56</span></div>
+      <div class="wa-msg bot wa-aprovado">
+        Serviço aprovado!<br>
+        Pagamento será processado em até 2 dias úteis.<br>
+        Obrigado por sua parceria.<br>
+        <span class="wa-timestamp">10:10</span>
+      </div>
+      <div class="wa-msg bot">Caso queira enviar novas fotos ou justificar algum problema, clique aqui:<br><a href="#" class="wa-btn">Enviar nova foto/justificativa</a><br><span class="wa-timestamp">10:11</span></div>
+      <div class="wa-msg bot wa-reprovado">
+        Auditoria identificou inconsistência na localização da foto.<br>
+        Por favor, envie uma nova foto correta ou uma justificativa.<br>
+        <span class="wa-timestamp">10:12</span>
+      </div>
+      <div class="wa-msg user">
+        <div class="wa-justificativa">O local estava sem acesso, segue foto do portão fechado.</div>
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Justificativa">
+        <span class="wa-location">📍 -1.455900, -48.504500 (Belém/PA)</span>
+        <span class="wa-timestamp">10:13</span>
+      </div>
+      <div class="wa-msg bot wa-aprovado">
+        Justificativa aceita.<br>
+        Pagamento será processado normalmente.<br>
+        <span class="wa-timestamp">10:15</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
