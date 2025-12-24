@@ -22,7 +22,7 @@
 		body { background: #fff; font-family: 'Inter', Arial, sans-serif; }
 		.container-detalhes-servico {
 			max-width: 1200px;
-			margin: 40px auto 40px auto;
+			margin: 0 auto 40px auto;
 			background: #fff;
 			border-radius: 20px;
 			box-shadow: 0 2px 16px rgba(0,0,0,0.07);
@@ -40,35 +40,10 @@
 			.titulo-servico { font-size: 1.3rem; }
 			.mapa-localizacao { height: 200px; }
 		}
+		.info-servico .valor#preco-servico { font-size: 1.4rem; font-weight: 700; color: #00d084; }
 	</style>
 </head>
 <body class="page-detalhes-servico">
-<!-- HEADER -->
-<header data-elementor-type="header" data-elementor-id="26397" class="elementor elementor-26397 elementor-location-header" data-elementor-post-type="elementor_library">
-	<div class="elementor-element elementor-element-6537c5b e-con-full e-flex e-con e-parent" id="header">
-		<div class="elementor-element elementor-element-3395f7bb e-con-full e-flex e-con e-child">
-			<div class="elementor-element elementor-element-3bb71253 e-con-full e-flex e-con e-child">
-				<a href="https://www.aegea.com.br">
-					<img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" title="aegea" alt="aegea" style="height:48px; margin:10px 0;" loading="lazy" />
-				</a>
-			</div>
-		</div>
-		<div class="elementor-element elementor-element-278b15dd e-con-full e-flex e-con e-child" id="menuHeader">
-			<nav aria-label="Menu principal" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-underline e--animation-fade">
-				<ul class="elementor-nav-menu">
-					<li><a href="https://www.aegea.com.br/quem-somos/" class="elementor-item">Quem Somos</a></li>
-					<li><a href="https://www.aegea.com.br/unidades/" class="elementor-item">Unidades</a></li>
-					<li><a href="https://www.aegea.com.br/estrategia-esg/" class="elementor-item">Estratégia ESG</a></li>
-					<li><a href="https://www.aegea.com.br/carreiras/" class="elementor-item">Carreiras</a></li>
-					<li><a href="https://www.aegea.com.br/noticias/" class="elementor-item">Mídia</a></li>
-					<li><a href="https://fornecedores.aegea.com.br" class="elementor-item">Fornecedores</a></li>
-					<li><a href="https://www.aegea.com.br/contato/" class="elementor-item">Contato</a></li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</header>
-<!-- FIM HEADER -->
 <main id="content" class="container-detalhes-servico" tabindex="-1">
 	<h1 class="titulo-servico">Detalhes do Serviço</h1>
 	<div class="info-servico">
@@ -80,11 +55,13 @@
 		<div class="valor" id="restricoes"></div>
 		<label for="descricao">Descrição Detalhada</label>
 		<div class="valor" id="descricao"></div>
+		<label for="preco-servico">Preço do Serviço</label>
+		<div class="valor" id="preco-servico"></div>
 	</div>
 	<div class="mapa-localizacao" aria-label="Mapa de localização do serviço">
 		<iframe title="Mapa de localização do serviço" id="iframe-mapa" src="" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 	</div>
-	<a href="bloco2-lista-servicos.html" class="btn-voltar" aria-label="Voltar para lista de serviços">&larr; Voltar</a>
+	<a href="bloco2-gestao-demandas.html" class="btn-voltar" aria-label="Voltar para lista de serviços">&larr; Voltar</a>
 </main>
 <!-- FOOTER -->
 <footer data-elementor-type="footer" data-elementor-id="26421" class="elementor elementor-26421 elementor-location-footer" data-elementor-post-type="elementor_library" style="margin-top: 40px;">
@@ -140,14 +117,24 @@ const servicosMock = {
     endereco: 'Rua das Flores, 123 - Bairro Centro, Belém - PA, 66000-000',
     restricoes: 'Somente em dias úteis, das 8h às 18h',
     descricao: 'Água vazando em calçada, prioridade alta. Necessário reparo rápido e recomposição de calçada.',
-    mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9999999999995!2d-48.5044!3d-1.4558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48e6e0b000001%3A0x0000000000000000!2sRua%20das%20Flores%2C%20123%20-%20Centro%2C%20Bel%C3%A9m%20-%20PA!5e0!3m2!1spt-BR!2sbr!4v1710000000001'
+    mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9999999999995!2d-48.5044!3d-1.4558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48e6e0b000001%3A0x0000000000000000!2sRua%20das%20Flores%2C%20123%20-%20Centro%2C%20Bel%C3%A9m%20-%20PA!5e0!3m2!1spt-BR!2sbr!4v1710000000001',
+    preco: 'R$ 350,00'
   },
   '2': {
     tipo: 'Troca de hidrômetro',
     endereco: 'Av. Nazaré, 200 - Bairro Batista Campos, Belém - PA, 66055-260',
     restricoes: 'Agendamento prévio, das 9h às 17h',
     descricao: 'Solicitada troca de hidrômetro por defeito identificado na leitura.',
-    mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9999999999995!2d-48.4900!3d-1.4520!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48e6e0b000002%3A0x0000000000000000!2sAv.%20Nazar%C3%A9%2C%20200%20-%20Batista%20Campos%2C%20Bel%C3%A9m%20-%20PA!5e0!3m2!1spt-BR!2sbr!4v1710000000002'
+    mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9999999999995!2d-48.4900!3d-1.4520!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48e6e0b000002%3A0x0000000000000000!2sAv.%20Nazar%C3%A9%2C%20200%20-%20Batista%20Campos%2C%20Bel%C3%A9m%20-%20PA!5e0!3m2!1spt-BR!2sbr!4v1710000000002',
+    preco: 'R$ 180,00'
+  },
+  '3': {
+    tipo: 'Desobstrução de esgoto',
+    endereco: 'Trav. Tucumã, 789 - Marituba/PA, 67200-000',
+    restricoes: 'Executar em horário comercial (8h às 17h)',
+    descricao: 'Esgoto retornando para dentro da residência. Possível obstrução na rede. Prioridade alta.',
+    mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9999999999995!2d-48.3400!3d-1.3600!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48e6e0b000003%3A0x0000000000000000!2sTrav.%20Tucum%C3%A3%2C%20789%20-%20Marituba%2C%20PA!5e0!3m2!1spt-BR!2sbr!4v1710000000003',
+    preco: 'R$ 220,00'
   }
 };
 window.addEventListener('DOMContentLoaded', function() {
@@ -159,6 +146,7 @@ window.addEventListener('DOMContentLoaded', function() {
   document.getElementById('restricoes').textContent = servico.restricoes;
   document.getElementById('descricao').textContent = servico.descricao;
   document.getElementById('iframe-mapa').src = servico.mapa;
+  document.getElementById('preco-servico').textContent = servico.preco;
 });
 </script>
 </body>
