@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Header WhatsApp</title>
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <style>
+    .wa-header {
+      display: flex;
+      align-items: center;
+      background: #075e54;
+      color: #fff;
+      padding: 12px 16px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+    .wa-header .wa-profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 12px;
+      border: 2px solid #25d366;
+    }
+    .wa-header .wa-contact-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .wa-header .wa-contact-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      line-height: 1.2;
+    }
+    .wa-header .wa-contact-status {
+      font-size: 0.85rem;
+      color: #d0ece7;
+    }
+    .wa-header .wa-actions {
+      display: flex;
+      gap: 16px;
+      margin-left: 12px;
+    }
+    .wa-header .wa-action-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+    .wa-header .wa-action-btn:focus {
+      outline: 2px solid #25d366;
+    }
+  </style>
+</head>
+<body style="margin:0;">
+  <header class="wa-header" aria-label="Cabeçalho do chat do WhatsApp">
+    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto do contato" class="wa-profile-img" />
+    <div class="wa-contact-info">
+      <span class="wa-contact-name">Parceiro Águas do Pará</span>
+      <span class="wa-contact-status">online</span>
+    </div>
+    <div class="wa-actions">
+      <button class="wa-action-btn" aria-label="Chamada de voz">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21 3 13.93 3 5.5a1 1 0 011-1H7.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z" fill="#fff"/></svg>
+      </button>
+      <button class="wa-action-btn" aria-label="Chamada de vídeo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 10.5V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-3.5l4 4v-11l-4 4z" fill="#fff"/></svg>
+      </button>
+    </div>
+  </header>
+</body>
+</html>
