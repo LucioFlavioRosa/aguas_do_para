@@ -1,0 +1,259 @@
+/*
+  style.css - Prototipação MVP Parceiro Águas do Pará
+  Baseado no template visual de Contato - Aegea.html
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Aegea+Move:wght@400;700&display=swap');
+
+:root {
+  --color-primary: #0027BD;
+  --color-success: #00D084;
+  --color-error: #CF2E2E;
+  --color-bg: #fff;
+  --color-text: #222;
+  --radius-main: 24px;
+  --font-title: 'Aegea Move', Sans-serif;
+  --font-body: 'Inter', Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  color: var(--color-primary);
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.e-con, .e-flex, .e-parent, .e-child {
+  box-sizing: border-box;
+  border-radius: var(--radius-main);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,39,189,0.05);
+}
+
+.elementor-heading-title {
+  font-family: var(--font-title);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.elementor-button, .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-main);
+  padding: 0.75em 2em;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+  gap: 0.5em;
+}
+
+.elementor-button:hover, .btn-primary:hover {
+  background: #001a7a;
+}
+
+.btn-success {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.btn-error {
+  background: var(--color-error);
+  color: #fff;
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: 1px solid #e2e5f0;
+  border-radius: var(--radius-main);
+  padding: 0.75em 1em;
+  margin-bottom: 1em;
+  width: 100%;
+  box-sizing: border-box;
+  background: #fafbfc;
+  transition: border 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.checkbox-list label {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.checkbox-list input[type="checkbox"] {
+  accent-color: var(--color-primary);
+  width: 1.25em;
+  height: 1.25em;
+  border-radius: 6px;
+}
+
+.card, .whatsapp-message {
+  border-radius: var(--radius-main);
+  box-shadow: 0 2px 8px rgba(0,39,189,0.05);
+  background: #fff;
+  padding: 1.25em 1.5em;
+  margin-bottom: 1em;
+}
+
+.whatsapp-chat {
+  background: #e5ddd5;
+  border-radius: 32px;
+  padding: 2em 0.5em 1em 0.5em;
+  max-width: 420px;
+  margin: 2em auto;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+.whatsapp-header {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 32px 32px 0 0;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.whatsapp-header img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.whatsapp-message {
+  display: flex;
+  align-items: flex-end;
+  max-width: 80%;
+  border-radius: 16px 16px 16px 4px;
+  background: #fff;
+  margin-bottom: 0.5em;
+  padding: 0.75em 1em;
+  font-size: 1rem;
+  line-height: 1.5;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  position: relative;
+}
+
+.whatsapp-message.user {
+  background: #dcf8c6;
+  align-self: flex-end;
+  border-radius: 16px 16px 4px 16px;
+}
+
+.whatsapp-message .message-time {
+  font-size: 0.8em;
+  color: #888;
+  margin-left: 0.75em;
+  align-self: flex-end;
+}
+
+.whatsapp-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  background: #fff;
+  border-radius: 24px;
+  padding: 0.5em 1em;
+  margin-top: 1em;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.whatsapp-input input[type="text"] {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  flex: 1;
+  outline: none;
+}
+
+.whatsapp-input button {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.whatsapp-input button:hover {
+  background: #001a7a;
+}
+
+/* Ícones SVG do template (exemplo de uso: .icon-location, .icon-camera, .icon-check) */
+.icon-location {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.25em;
+  height: 1.25em;
+  background: url('data:image/svg+xml;utf8,<svg fill="%230027BD" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C7.03 2 3 6.03 3 11c0 5.25 7.13 11.54 7.44 11.8.33.28.79.28 1.12 0C13.87 22.54 21 16.25 21 11c0-4.97-4.03-9-9-9zm0 17.88C9.14 17.07 5 13.19 5 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 2.19-4.14 6.07-7 8.88zM12 6.5A2.5 2.5 0 1 0 12 11.5 2.5 2.5 0 1 0 12 6.5z"/></svg>') no-repeat center/contain;
+}
+.icon-camera {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.25em;
+  height: 1.25em;
+  background: url('data:image/svg+xml;utf8,<svg fill="%230027BD" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 5h-3.17l-1.84-2.41A2 2 0 0 0 13.17 2h-2.34c-.45 0-.88.18-1.21.59L7.17 5H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 15H4V7h4.05l1.83-2.41c.09-.12.23-.19.37-.19h2.5c.14 0 .28.07.37.19L15.95 7H20v13zm-8-3a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0-8a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>') no-repeat center/contain;
+}
+.icon-check {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.25em;
+  height: 1.25em;
+  background: url('data:image/svg+xml;utf8,<svg fill="%2300D084" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5 1.4-1.4L9 13.4l7.1-7.1 1.4 1.4z"/></svg>') no-repeat center/contain;
+}
+.icon-error {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.25em;
+  height: 1.25em;
+  background: url('data:image/svg+xml;utf8,<svg fill="%23CF2E2E" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13l-1.41 1.41L12 13.41l-3.59 3.59L7 15l3.59-3.59L7 7.83 8.41 6.41 12 9.99l3.59-3.58L17 7.83l-3.59 3.58L17 15z"/></svg>') no-repeat center/contain;
+}
+
+/* Espaçamentos e responsividade */
+@media (max-width: 600px) {
+  .e-con, .card, .whatsapp-chat {
+    padding: 1em;
+  }
+  .whatsapp-header {
+    padding: 0.5em;
+  }
+}
