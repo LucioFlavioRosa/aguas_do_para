@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestão de Demandas – MVP Parceiro Águas do Pará</title>
+  <link rel='stylesheet' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <script src="js/main.js" defer></script>
+  <style>
+    body { background: #f7f9fc; }
+    .container { max-width: 900px; margin: 32px auto; background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); padding: 32px 24px; }
+    h2 { color: #0027BD; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+    th, td { padding: 12px 8px; border-bottom: 1px solid #e0e0e0; text-align: left; }
+    th { background: #f0f4fa; color: #0027BD; }
+    .btn { background: #0027BD; color: #fff; border: none; border-radius: 8px; padding: 10px 18px; font-size: 1em; cursor: pointer; margin: 0 6px 6px 0; }
+    .btn:hover { background: #0053ff; }
+    .os-card { border: 1px solid #e0e0e0; border-radius: 12px; padding: 18px; margin-bottom: 18px; background: #f9fbff; }
+    .os-title { font-weight: 600; color: #0027BD; }
+    .os-details { margin: 8px 0 12px 0; color: #333; }
+    @media (max-width: 1000px) { .container { max-width: 100%; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Gestão de Demandas – Operador</h2>
+    <div class="os-card">
+      <div class="os-title">Pedido #001 – Vazamento em ligação predial</div>
+      <div class="os-details">Localização: Rua das Flores, 123 – Cidade X<br>Tipo: Reparo de vazamento<br>Restrição: Manhã/Tarde<br>Solicitante: Cliente Público</div>
+      <strong>Parceiros habilitados:</strong>
+      <table>
+        <thead>
+          <tr><th>Nome</th><th>Endereço</th><th>Veículo</th><th>Serviços Prestados</th><th>Ação</th></tr>
+        </thead>
+        <tbody id="parceiros-table">
+          <!-- Populado via JS -->
+        </tbody>
+      </table>
+      <button class="btn" onclick="alert('Demanda disparada para 5 parceiros via WhatsApp, SMS e E-mail (simulado).')">Disparar para 5 parceiros</button>
+    </div>
+    <div class="os-card">
+      <div class="os-title">Pedido #002 – Instalação de hidrômetro</div>
+      <div class="os-details">Localização: Av. Central, 456 – Cidade Y<br>Tipo: Instalação de hidrômetro<br>Restrição: Tarde/Noite<br>Solicitante: Demanda Interna</div>
+      <strong>Parceiros habilitados:</strong>
+      <table>
+        <thead>
+          <tr><th>Nome</th><th>Endereço</th><th>Veículo</th><th>Serviços Prestados</th><th>Ação</th></tr>
+        </thead>
+        <tbody id="parceiros-table">
+          <!-- Populado via JS (mock) -->
+        </tbody>
+      </table>
+      <button class="btn" onclick="alert('Demanda disparada para 5 parceiros via WhatsApp, SMS e E-mail (simulado).')">Disparar para 5 parceiros</button>
+    </div>
+    <button class="btn" data-navigate="index.html">Voltar ao início</button>
+  </div>
+</body>
+</html>
