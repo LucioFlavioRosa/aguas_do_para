@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Execução do Serviço | Águas do Pará</title>
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <style>
+    body {
+      background: #f7f7f7;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .mobile-container {
+      max-width: 420px;
+      margin: 32px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+      padding: 0 0 16px 0;
+      border: 1px solid #d1d7db;
+    }
+    .mobile-header {
+      background: #0027bd;
+      color: #fff;
+      border-radius: 18px 18px 0 0;
+      padding: 18px 20px 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .mobile-header img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #fff;
+      object-fit: cover;
+    }
+    .mobile-header .title {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    .execucao-section {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .foto-bloco {
+      background: #f1f7fa;
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+    }
+    .foto-bloco label {
+      font-weight: 500;
+      margin-bottom: 4px;
+      display: block;
+      color: #0027bd;
+    }
+    .foto-upload {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+    .foto-preview {
+      width: 90px;
+      height: 90px;
+      border-radius: 8px;
+      background: #e0e0e0;
+      object-fit: cover;
+      display: none;
+    }
+    .gps-indicador {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.98rem;
+      color: #388e3c;
+      margin-top: 4px;
+    }
+    .gps-indicador .dot {
+      width: 12px;
+      height: 12px;
+      background: #25d366;
+      border-radius: 50%;
+      display: inline-block;
+      border: 2px solid #fff;
+      box-shadow: 0 0 2px #25d366;
+    }
+    .obs-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 56px;
+      border-radius: 6px;
+      border: 1px solid #d1d7db;
+      padding: 8px;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    .enviar-btn {
+      width: 100%;
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+      opacity: 0.7;
+    }
+    .enviar-btn.enabled {
+      opacity: 1;
+      cursor: pointer;
+    }
+    .loading {
+      display: none;
+      text-align: center;
+      margin-top: 18px;
+      color: #0027bd;
+      font-weight: 500;
+    }
+    @media (max-width: 500px) {
+      .mobile-container {
+        max-width: 100vw;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .execucao-section {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-container">
+    <div class="mobile-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Águas do Pará" width="36" height="36">
+      <div class="title">Execução do Serviço</div>
+    </div>
+    <form class="execucao-section" id="form-execucao" autocomplete="off">
+      <div class="foto-bloco">
+        <div class="foto-upload">
+          <label for="fotoAntes">Foto Antes</label>
+          <input type="file" accept="image/*" id="fotoAntes" aria-label="Upload Foto Antes" required>
+          <img id="previewAntes" class="foto-preview" alt="Prévia da Foto Antes" />
+          <div class="gps-indicador" id="gpsAntes-indicador" style="display:none;">
+            <span class="dot"></span> GPS Ativo
+          </div>
+        </div>
+      </div>
+      <div class="foto-bloco">
+        <div class="foto-upload">
+          <label for="fotoDepois">Foto Depois</label>
+          <input type="file" accept="image/*" id="fotoDepois" aria-label="Upload Foto Depois" required>
+          <img id="previewDepois" class="foto-preview" alt="Prévia da Foto Depois" />
+          <div class="gps-indicador" id="gpsDepois-indicador" style="display:none;">
+            <span class="dot"></span> GPS Ativo
+          </div>
+        </div>
+      </div>
+      <div class="obs-section">
+        <label for="observacoes">Observações (opcional)</label>
+        <textarea id="observacoes" name="observacoes" placeholder="Descreva detalhes relevantes do serviço..."></textarea>
+      </div>
+      <button type="submit" class="enviar-btn" id="btn-enviar" disabled>Enviar para Análise</button>
+      <div class="loading" id="loading-msg">Enviando dados para análise...</div>
+    </form>
+  </div>
+  <script src="js/execucao.js"></script>
+</body>
+</html>
