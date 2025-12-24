@@ -317,7 +317,7 @@
     function nextStep(userInput) {
       switch(step) {
         case 0:
-          addMsg('Olá! 😊 Temos um serviço disponível para você:<br><strong>Reparo de vazamento</strong> na <strong>Rua das Flores, 123, Belém-PA</strong>.<br><br><span style="color:#d9534f">⚠️ <strong>Restrições:</strong></span> Execução entre <strong>8h-17h</strong>, necessário <strong>kit de ferramentas básico</strong>, evitar <strong>dias chuvosos</strong>.<br><br><strong>Você topa fazer este trabalho?</strong>', 'bot', true);
+          addMsg('Olá! 😊 Temos um serviço disponível para você:<br><strong>Reparo de vazamento</strong> na <strong>Rua das Flores, 123, Belém-PA</strong>.<br><br><span style="color:#d9534f">⚠️ <strong>Restrições:</strong></span> Execução entre <strong>8h-17h</strong>, necessário <strong>kit de ferramentas básico</strong>, evitar <strong>dias chuvosos</strong>.<br><br><strong> Por esse trabalho você vai receber R$200.</strong><br><br><strong>Você topa fazer este trabalho?</strong>', 'bot', true);
           step++;
           setTimeout(showChoice, 900);
           break;
@@ -325,12 +325,21 @@
           // Step controlado por showChoice()
           break;
         case 2:
-          addMsg('📸 <strong>Lembre-se:</strong> Ative a localização do seu celular antes de tirar as fotos. Envie as fotos como <strong>DOCUMENTO</strong> no WhatsApp para preservar a qualidade e os metadados de GPS. Mantenha o kit de ferramentas básico em mãos e evite realizar o serviço em dias chuvosos. Boa sorte!', 'bot', true);
+          addMsg('Obrigado por aceitar! 🙏 Quando chegar ao local, siga as instruções para você receber mais rápido seu dindin. Estamos aqui para ajudar. Até breve!', 'bot', true);
           step++;
           setTimeout(nextStep, 1200);
           break;
         case 3:
-          addMsg('Obrigado por aceitar! 🙏 Quando chegar ao local, siga as instruções e envie a primeira foto. Estamos aqui para ajudar. Até breve!', 'bot', true);
+          addMsg(`
+            <strong>Tudo certo! Siga este passo a passo para garantir a validação do seu serviço:</strong><br><br>
+            ✅ <strong>Chegou no local?</strong> Ative o GPS do seu celular imediatamente.<br>
+            ✅ <strong>Configuração:</strong> Confirme se sua câmera está salvando as informações de localização nas fotos.<br>
+            ✅ <strong>Localização:</strong> Envie sua localização atual pelo WhatsApp antes de iniciar.<br>
+            ✅ <strong>Foto Inicial:</strong> Tire a foto antes de começar o trabalho, usando a câmera nativa do celular (Não tire a foto direto pelo WhatsApp).<br>
+            ✅ <strong>Envio Seguro:</strong> Envie a foto como <strong>DOCUMENTO</strong> para preservarmos o GPS e o horário.<br>
+            ✅ <strong>Finalização:</strong> Repita o processo de foto e envio ao concluir o trabalho.<br><br>
+            <strong>Pode começar! Bom trabalho.</strong>
+          `, 'bot', true);
           step++;
           setTimeout(nextStep, 1200);
           break;
