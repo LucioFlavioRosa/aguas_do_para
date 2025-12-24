@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp Onboarding - Parceiro Águas do Pará</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5">
+  <link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
+  <style>
+    body {
+      background: #ece5dd;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .wa-container {
+      width: 420px;
+      height: 680px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .wa-header {
+      background: #075E54;
+      color: #fff;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+    }
+    .wa-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 12px;
+    }
+    .wa-header .wa-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .wa-chat {
+      flex: 1;
+      background: #ece5dd;
+      padding: 24px 12px 12px 12px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .wa-msg {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 1rem;
+      line-height: 1.4;
+      word-break: break-word;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+      position: relative;
+      display: inline-block;
+    }
+    .wa-msg.bot {
+      background: #fff;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+    }
+    .wa-msg.user {
+      background: #DCF8C6;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+    }
+    .wa-msg .wa-time {
+      font-size: 0.75em;
+      color: #888;
+      position: absolute;
+      bottom: 4px;
+      right: 8px;
+    }
+    .wa-input-bar {
+      background: #f7f7f7;
+      padding: 10px 8px;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #ddd;
+    }
+    .wa-input {
+      flex: 1;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      outline: none;
+      background: #fff;
+      margin-right: 8px;
+    }
+    .wa-send-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      display: flex;
+      align-items: center;
+      padding: 0 6px;
+    }
+    .wa-send-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: #075E54;
+    }
+    @media (max-width: 480px) {
+      .wa-container {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wa-container" aria-label="Simulação do WhatsApp">
+    <header class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" />
+      <div>
+        <div class="wa-title">Aegea Parceiros</div>
+        <div style="font-size:0.9em; color:#cfd8dc;">online</div>
+      </div>
+    </header>
+    <section class="wa-chat" id="wa-chat" aria-live="polite" aria-atomic="false">
+      <!-- Mensagens são inseridas via JS -->
+    </section>
+    <form class="wa-input-bar" id="wa-form" autocomplete="off" aria-label="Enviar mensagem">
+      <input type="text" class="wa-input" id="wa-input" placeholder="Digite uma mensagem" aria-label="Digite sua resposta" autocomplete="off" />
+      <button class="wa-send-btn" type="submit" aria-label="Enviar">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </form>
+  </main>
+  <script src="js/whatsapp-flow.js"></script>
+</body>
+</html>
