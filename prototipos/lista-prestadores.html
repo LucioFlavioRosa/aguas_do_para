@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lista de Prestadores Habilitados | Águas do Pará</title>
+  <link rel="stylesheet" id="wp-block-library-css" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" id="hello-elementor-css" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" id="hello-elementor-theme-style-css" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" id="hello-elementor-header-footer-css" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" id="elementor-frontend-css" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" id="elementor-post-26997-css" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008" media="all" />
+  <link rel="stylesheet" id="elementor-post-26397-css" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004" media="all" />
+  <link rel="stylesheet" id="elementor-post-26421-css" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004" media="all" />
+  <style>
+    body { background: #f7f9fb; }
+    .container { max-width: 1100px; margin: 40px auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 32px 24px; }
+    h1 { font-size: 2rem; margin-bottom: 24px; color: #0027BD; }
+    .filtros { margin-bottom: 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .filtros label { font-weight: 500; margin-right: 8px; }
+    .filtros select { padding: 6px 12px; border-radius: 6px; border: 1px solid #e2e5f0; }
+    table.prestadores { width: 100%; border-collapse: separate; border-spacing: 0; background: #fff; margin-bottom: 32px; }
+    table.prestadores th, table.prestadores td { padding: 12px 10px; border-bottom: 1px solid #e2e5f0; text-align: left; }
+    table.prestadores th { background: #f2f6fa; color: #0027BD; font-size: 1rem; }
+    table.prestadores tr:hover { background: #f1f5fd; }
+    table.prestadores tr.selected { background: #e6f0ff; }
+    .btn-disparar {
+      background: #0027BD;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 16px;
+      display: inline-block;
+    }
+    .btn-disparar:disabled {
+      background: #b6c4e6;
+      cursor: not-allowed;
+    }
+    @media (max-width: 700px) {
+      .container { padding: 16px 4px; }
+      table.prestadores th, table.prestadores td { padding: 8px 4px; font-size: 0.97rem; }
+      .filtros { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container" aria-label="Lista de Prestadores Habilitados">
+    <h1>Prestadores Habilitados</h1>
+    <form class="filtros" id="filtro-servico" autocomplete="off">
+      <label for="tipo-servico">Filtrar por tipo de serviço:</label>
+      <select id="tipo-servico" name="tipo-servico" aria-label="Tipo de Serviço">
+        <option value="">Todos</option>
+        <option value="Reparo de vazamentos de água">Reparo de vazamentos de água</option>
+        <option value="Instalação/Troca de hidrômetros">Instalação/Troca de hidrômetros</option>
+        <option value="Desobstrução de esgoto">Desobstrução de esgoto</option>
+        <option value="Pequenos reparos">Pequenos reparos (alvenaria/calçada)</option>
+        <option value="Outros">Outros</option>
+      </select>
+    </form>
+    <form id="form-prestadores" autocomplete="off">
+      <table class="prestadores" aria-label="Tabela de Prestadores">
+        <thead>
+          <tr>
+            <th scope="col"><span class="screen-reader-text">Selecionar</span></th>
+            <th scope="col">Nome</th>
+            <th scope="col">Endereço</th>
+            <th scope="col">Veículo</th>
+            <th scope="col">Serviços Prestados</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-prestadores">
+          <!-- Conteúdo gerado por JS -->
+        </tbody>
+      </table>
+      <button type="submit" class="btn-disparar" id="btn-disparar" disabled>Disparar para Selecionados</button>
+    </form>
+  </main>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
