@@ -1,0 +1,18 @@
+INSTRUÇÕES DE INSTALAÇÃO DO MVP ÁGUAS DO PARÁ
+
+1. Descompacte o arquivo ZIP em uma pasta local.
+2. Abra o arquivo 'index.html' em seu navegador preferido (Chrome, Firefox, Edge, Safari).
+3. O protótipo funciona totalmente offline, sem dependências externas.
+4. Para simular o fluxo completo:
+   - Acesse a landing page (index.html)
+   - Clique em 'Quero ser parceiro' para iniciar o fluxo WhatsApp (whatsapp.html)
+   - Complete o cadastro no chat simulado
+   - Acesse o dashboard do operador (dashboard-operador.html) para criar uma demanda
+   - Selecione prestadores e dispare a solicitação
+   - Simule o aceite pelo prestador (painel-prestador.html)
+   - Execute o serviço e envie fotos
+   - Audite o serviço no dashboard
+   - Visualize a notificação de resultado
+5. Para melhor experiência, teste em diferentes tamanhos de tela: mobile (375px), tablet (768px), desktop (1440px).
+
+Dúvidas ou problemas? Consulte o vídeo de demonstração incluído no pacote.
