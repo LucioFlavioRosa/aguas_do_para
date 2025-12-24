@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp - Aceite de Serviço</title>
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <style>
+    body {
+      background: #ece5dd;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .wa-container {
+      max-width: 400px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
+      border: 1px solid #d1d7db;
+    }
+    .wa-header {
+      background: #075e54;
+      color: #fff;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+    }
+    .wa-header img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin-right: 12px;
+      border: 2px solid #fff;
+      background: #fff;
+    }
+    .wa-header .wa-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .wa-messages {
+      background: #ece5dd;
+      padding: 24px 16px 16px 16px;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .wa-msg {
+      background: #fff;
+      border-radius: 8px 8px 8px 2px;
+      padding: 12px 14px;
+      max-width: 90%;
+      font-size: 1rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      color: #222;
+    }
+    .wa-msg.received {
+      align-self: flex-start;
+      background: #fff;
+    }
+    .wa-msg.sent {
+      align-self: flex-end;
+      background: #dcf8c6;
+    }
+    .wa-detail {
+      font-size: 0.97rem;
+      margin: 0.5em 0 0 0;
+      color: #075e54;
+      font-weight: 500;
+    }
+    .wa-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      padding: 18px 16px 20px 16px;
+      background: #f7f7f7;
+      border-top: 1px solid #e0e0e0;
+    }
+    .wa-btn {
+      flex: 1 1 0;
+      padding: 12px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .wa-btn.accept {
+      background: #25d366;
+      color: #fff;
+    }
+    .wa-btn.accept:hover {
+      background: #20ba5a;
+    }
+    .wa-btn.decline {
+      background: #fff;
+      color: #d32f2f;
+      border: 1px solid #d32f2f;
+    }
+    .wa-btn.decline:hover {
+      background: #ffeaea;
+    }
+    @media (max-width: 480px) {
+      .wa-container { max-width: 100vw; border-radius: 0; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wa-container" role="main">
+    <div class="wa-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" />
+      <span class="wa-title">Águas do Pará - Serviços</span>
+    </div>
+    <div class="wa-messages">
+      <div class="wa-msg received">
+        Olá, você recebeu uma nova demanda de serviço!<br><br>
+        <span class="wa-detail">Tipo: Reparo de Vazamento de Água</span><br>
+        <span class="wa-detail">Localização: Rua das Palmeiras, 123 - Belém/PA</span><br>
+        <span class="wa-detail">Horário: 10/07/2025, entre 14h e 16h</span>
+      </div>
+      <div class="wa-msg received">
+        Para aceitar este serviço, clique em <b>Aceitar Serviço</b>.<br>Se não puder atender, clique em <b>Recusar</b>.
+      </div>
+    </div>
+    <form class="wa-actions" onsubmit="return false;">
+      <button class="wa-btn accept" type="button" aria-label="Aceitar Serviço" onclick="window.location.href='whatsapp-execucao-inicio.html'">Aceitar Serviço</button>
+      <button class="wa-btn decline" type="button" aria-label="Recusar Serviço" onclick="alert('Serviço recusado. Você será notificado de novas oportunidades.');">Recusar</button>
+    </form>
+  </div>
+</body>
+</html>
