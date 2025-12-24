@@ -80,49 +80,8 @@
               <th scope="col">Serviços Prestados</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><input type="checkbox" name="prestador" value="1" aria-label="Selecionar João Silva"></td>
-              <td>João Silva</td>
-              <td>Rua Pará, 101 - Belém</td>
-              <td>Moto</td>
-              <td>12</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" name="prestador" value="2" aria-label="Selecionar Maria Souza"></td>
-              <td>Maria Souza</td>
-              <td>Av. Amazonas, 202 - Ananindeua</td>
-              <td>Carro</td>
-              <td>8</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" name="prestador" value="3" aria-label="Selecionar Carlos Lima"></td>
-              <td>Carlos Lima</td>
-              <td>Trav. Tucumã, 303 - Marituba</td>
-              <td>Moto</td>
-              <td>15</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" name="prestador" value="4" aria-label="Selecionar Ana Paula"></td>
-              <td>Ana Paula</td>
-              <td>Rua das Acácias, 404 - Belém</td>
-              <td>Carro</td>
-              <td>6</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" name="prestador" value="5" aria-label="Selecionar Pedro Santos"></td>
-              <td>Pedro Santos</td>
-              <td>Av. Independência, 505 - Ananindeua</td>
-              <td>Moto</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" name="prestador" value="6" aria-label="Selecionar Luciana Alves"></td>
-              <td>Luciana Alves</td>
-              <td>Rua das Palmeiras, 606 - Belém</td>
-              <td>Carro</td>
-              <td>3</td>
-            </tr>
+          <tbody id="prestadores-tbody">
+            <!-- Conteúdo dinâmico via JS -->
           </tbody>
         </table>
         <button type="button" class="disparar-btn" id="dispararDemanda" disabled>Disparar Demanda</button>
@@ -158,6 +117,7 @@
         descricao: 'Vazamento visível na calçada, água jorrando. Solicitação feita por morador local. Prioridade alta.',
         restricoes: 'Executar até 12/07/2025 12:00',
         tipo: 'Reparo de vazamento',
+        prestadores: [1, 3, 5] // IDs dos prestadores habilitados
       },
       2: {
         titulo: 'Troca de hidrômetro',
@@ -166,6 +126,7 @@
         descricao: 'Hidrômetro antigo não está registrando consumo corretamente. Necessário troca.',
         restricoes: 'Agendar com morador. Preferência tarde.',
         tipo: 'Instalação/Troca de hidrômetro',
+        prestadores: [2, 4, 6]
       },
       3: {
         titulo: 'Desobstrução de esgoto',
@@ -174,13 +135,54 @@
         descricao: 'Esgoto retornando para dentro da residência. Possível obstrução na rede.',
         restricoes: 'Executar em horário comercial.',
         tipo: 'Desobstrução de esgoto',
+        prestadores: [1, 2, 3, 5]
       }
     };
 
-    // Modal Detalhes Serviço
+    // Dados dos prestadores
+    const todosPrestadores = {
+      1: { nome: 'João Silva', endereco: 'Rua Pará, 101 - Belém', veiculo: 'Moto', servicos: 12 },
+      2: { nome: 'Maria Souza', endereco: 'Av. Amazonas, 202 - Ananindeua', veiculo: 'Carro', servicos: 8 },
+      3: { nome: 'Carlos Lima', endereco: 'Trav. Tucumã, 303 - Marituba', veiculo: 'Moto', servicos: 15 },
+      4: { nome: 'Ana Paula', endereco: 'Rua das Acácias, 404 - Belém', veiculo: 'Carro', servicos: 6 },
+      5: { nome: 'Pedro Santos', endereco: 'Av. Independência, 505 - Ananindeua', veiculo: 'Moto', servicos: 10 },
+      6: { nome: 'Luciana Alves', endereco: 'Rua das Palmeiras, 606 - Belém', veiculo: 'Carro', servicos: 3 }
+    };
+
+    // Renderiza a tabela de prestadores habilitados para o serviço selecionado
+    function renderPrestadores(servicoId) {
+      const tbody = document.getElementById('prestadores-tbody');
+      tbody.innerHTML = '';
+      let ids = [];
+      if (servicoId && servicos[servicoId]) {
+        ids = servicos[servicoId].prestadores;
+      } else {
+        // Se nenhum serviço selecionado, mostra todos
+        ids = Object.keys(todosPrestadores).map(Number);
+      }
+      ids.forEach(id => {
+        const p = todosPrestadores[id];
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><input type="checkbox" name="prestador" value="${id}" aria-label="Selecionar ${p.nome}"></td>
+          <td>${p.nome}</td>
+          <td>${p.endereco}</td>
+          <td>${p.veiculo}</td>
+          <td>${p.servicos}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Inicializa com todos os prestadores
+    let servicoSelecionado = null;
+    renderPrestadores(null);
+
+    // Modal Detalhes Serviço e atualização de prestadores
     document.querySelectorAll('.cardVeja').forEach(card => {
       card.addEventListener('click', function() {
         const id = this.getAttribute('data-servico');
+        servicoSelecionado = id;
         const s = servicos[id];
         document.getElementById('modal-body').innerHTML = `
           <strong>Serviço:</strong> ${s.titulo}<br>
@@ -192,6 +194,11 @@
         `;
         document.getElementById('modalDetalhes').classList.add('active');
         document.getElementById('modalDetalhes').focus();
+        renderPrestadores(id);
+        setTimeout(() => {
+          // Reaplica listeners e atualiza checkboxes
+          applyCheckboxLogic();
+        }, 50);
       });
     });
     document.getElementById('closeModal').onclick = function() {
@@ -202,23 +209,28 @@
       if (e.target === this) this.classList.remove('active');
     });
 
-    // Seleção de até 5 prestadores
-    const checkboxes = document.querySelectorAll('input[type=checkbox][name=prestador]');
-    function updateCheckboxes() {
-      const checked = Array.from(checkboxes).filter(cb => cb.checked);
+    // Lógica dos checkboxes e botão disparar
+    function applyCheckboxLogic() {
+      const checkboxes = document.querySelectorAll('input[type=checkbox][name=prestador]');
+      function updateCheckboxes() {
+        const checked = Array.from(checkboxes).filter(cb => cb.checked);
+        checkboxes.forEach(cb => {
+          if (!cb.checked && checked.length >= 5) {
+            cb.disabled = true;
+          } else {
+            cb.disabled = false;
+          }
+          cb.closest('tr').classList.toggle('selected', cb.checked);
+        });
+        document.getElementById('dispararDemanda').disabled = checked.length === 0;
+      }
       checkboxes.forEach(cb => {
-        if (!cb.checked && checked.length >= 5) {
-          cb.disabled = true;
-        } else {
-          cb.disabled = false;
-        }
-        cb.closest('tr').classList.toggle('selected', cb.checked);
+        cb.addEventListener('change', updateCheckboxes);
       });
-      document.getElementById('dispararDemanda').disabled = checked.length === 0;
+      updateCheckboxes();
     }
-    checkboxes.forEach(cb => {
-      cb.addEventListener('change', updateCheckboxes);
-    });
+    // Inicializa lógica dos checkboxes
+    applyCheckboxLogic();
 
     // Disparar Demanda
     document.getElementById('dispararDemanda').onclick = function() {
@@ -231,15 +243,16 @@
     document.getElementById('btnVoltar').onclick = function() {
       document.getElementById('modalSucesso').classList.remove('active');
       // Simula atualização da lista (aqui apenas desmarca os checkboxes)
+      const checkboxes = document.querySelectorAll('input[type=checkbox][name=prestador]');
       checkboxes.forEach(cb => { cb.checked = false; });
-      updateCheckboxes();
+      checkboxes.forEach(cb => { cb.closest('tr').classList.remove('selected'); });
+      document.getElementById('dispararDemanda').disabled = true;
+      checkboxes.forEach(cb => { cb.disabled = false; });
     };
     // Fechar modal sucesso ao clicar fora
     document.getElementById('modalSucesso').addEventListener('click', function(e) {
       if (e.target === this) this.classList.remove('active');
     });
-    // Inicializa estado dos checkboxes
-    updateCheckboxes();
   </script>
 </body>
 </html>
