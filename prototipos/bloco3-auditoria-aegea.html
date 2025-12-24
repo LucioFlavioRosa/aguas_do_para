@@ -24,20 +24,29 @@
     .servico-mapa { width: 320px; height: 120px; border-radius: 8px; border: 1px solid #e2e5f0; margin-bottom: 8px; }
     .servico-timestamps { font-size: 14px; color: #666; margin-bottom: 8px; }
     .servico-acoes { display: flex; gap: 12px; margin-top: 16px; }
-    .btn-aprovar, .btn-reprovar, .btn-notificar { padding: 10px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 15px; }
+    .btn-aprovar, .btn-reprovar, .btn-notificar, .btn-detalhes { padding: 10px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 15px; }
     .btn-aprovar { background: #00d084; color: #fff; }
     .btn-reprovar { background: #cf2e2e; color: #fff; }
     .btn-notificar { background: #0693e3; color: #fff; }
+    .btn-detalhes { background: #0027bd; color: #fff; }
     .campo-justificativa { width: 100%; min-height: 38px; border-radius: 6px; border: 1px solid #e2e5f0; margin-top: 8px; padding: 8px; font-size: 15px; }
     .historico-comunicacao { background: #f0f4fa; border-radius: 8px; padding: 12px 16px; margin-top: 18px; font-size: 15px; }
     .historico-comunicacao strong { color: #0027bd; }
     .toast { position: fixed; top: 24px; right: 24px; background: #32373c; color: #fff; padding: 16px 28px; border-radius: 8px; font-size: 16px; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity .3s; }
     .toast.show { opacity: 1; pointer-events: all; }
+    .modal-detalhes { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,39,189,0.10); z-index: 99999; align-items: center; justify-content: center; }
+    .modal-conteudo { background: #fff; border-radius: 12px; max-width: 480px; width: 96vw; padding: 32px 24px 24px 24px; box-shadow: 0 2px 16px rgba(0,0,0,0.12); position: relative; }
+    .modal-conteudo h3 { margin-top: 0; margin-bottom: 18px; font-size: 22px; color: #0027bd; }
+    .modal-conteudo .fechar-modal { position: absolute; top: 12px; right: 18px; background: none; border: none; font-size: 22px; color: #888; cursor: pointer; }
+    .modal-conteudo .erro { color: #cf2e2e; font-weight: bold; margin-bottom: 12px; }
+    .modal-conteudo .ok { color: #00d084; font-weight: bold; margin-bottom: 12px; }
+    .modal-conteudo .label { font-weight: bold; color: #333; }
     @media (max-width: 900px) {
       .servico-card { flex-direction: column; }
       .servico-mapa { width: 100%; }
       .servico-fotos { flex-direction: column; }
       .dashboard-container { padding: 0 6px; }
+      .modal-conteudo { padding: 18px 8px 12px 8px; }
     }
   </style>
 </head>
@@ -68,16 +77,17 @@
             <button class="btn-aprovar" onclick="aprovarServico('1234')">Aprovar</button>
             <button class="btn-reprovar" onclick="mostrarJustificativa('1234')">Reprovar</button>
             <button class="btn-notificar" onclick="window.location.href='bloco3-whatsapp-resultado.html'" aria-label="Notificar Prestador via WhatsApp">Notificar Prestador</button>
+            <button class="btn-detalhes" onclick="mostrarDetalhes('1234')">Detalhes</button>
           </div>
           <textarea class="campo-justificativa" id="justificativa-1234" style="display:none;" placeholder="Informe o motivo da reprovação..."></textarea>
         </div>
         <div class="servico-fotos">
           <div>
-            <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/antes-exemplo.jpg" alt="Foto antes do serviço" aria-label="Foto antes do serviço">
+            <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/antes-exemplo.jpg" alt="Foto antes do serviço" aria-label="Foto antes do serviço" data-exif-completo="true">
             <div style="text-align:center; font-size:13px; margin-top:4px;">Antes</div>
           </div>
           <div>
-            <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/depois-exemplo.jpg" alt="Foto depois do serviço" aria-label="Foto depois do serviço">
+            <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/depois-exemplo.jpg" alt="Foto depois do serviço" aria-label="Foto depois do serviço" data-exif-completo="true">
             <div style="text-align:center; font-size:13px; margin-top:4px;">Depois</div>
           </div>
         </div>
@@ -114,16 +124,17 @@
             <button class="btn-aprovar" onclick="aprovarServico('1235')">Aprovar</button>
             <button class="btn-reprovar" onclick="mostrarJustificativa('1235')">Reprovar</button>
             <button class="btn-notificar" onclick="window.location.href='bloco3-whatsapp-resultado.html'" aria-label="Notificar Prestador via WhatsApp">Notificar Prestador</button>
+            <button class="btn-detalhes" onclick="mostrarDetalhes('1235')">Detalhes</button>
           </div>
           <textarea class="campo-justificativa" id="justificativa-1235" style="display:none;" placeholder="Informe o motivo da reprovação..."></textarea>
         </div>
         <div class="servico-fotos">
           <div>
-            <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/antes-exemplo2.jpg" alt="Foto antes do serviço" aria-label="Foto antes do serviço">
+            <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/antes-exemplo2.jpg" alt="Foto antes do serviço" aria-label="Foto antes do serviço" data-exif-completo="true">
             <div style="text-align:center; font-size:13px; margin-top:4px;">Antes</div>
           </div>
           <div>
-            <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/depois-exemplo2.jpg" alt="Foto depois do serviço" aria-label="Foto depois do serviço">
+            <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/depois-exemplo2.jpg" alt="Foto depois do serviço" aria-label="Foto depois do serviço" data-exif-completo="true">
             <div style="text-align:center; font-size:13px; margin-top:4px;">Depois</div>
           </div>
         </div>
@@ -135,15 +146,222 @@
         [10/07/2025 10:02] <strong>Aegea:</strong> Recebido, aguarde validação.<br>
       </div>
     </section>
+    <!-- Card de serviço #1236 (dados incompletos) -->
+    <section class="servicos-lista">
+      <div class="servico-card e-con-full" id="servico-1236">
+        <div class="servico-info">
+          <h2 style="margin:0 0 8px 0; font-size: 22px;">Ordem de Serviço #1236</h2>
+          <div style="margin-bottom: 8px;">
+            <strong>Prestador:</strong> Carlos Souza<br>
+            <strong>Serviço:</strong> Troca de registro<br>
+            <strong>Endereço:</strong> Av. Independência, 300, Marituba - PA<br>
+            <strong>Data Execução:</strong> 10/07/2025 16:45
+          </div>
+          <div class="servico-timestamps">
+            <span><strong>Foto 'Antes':</strong> Criada 10/07/2025 16:47 | Enviada 10/07/2025 16:48</span><br>
+            <span><strong>Foto 'Depois':</strong> Criada -- | Enviada 10/07/2025 17:30</span>
+          </div>
+          <div class="servico-mapa">
+            <iframe title="Mapa serviço" width="100%" height="100%" frameborder="0" style="border:0" aria-label="Mapa localização serviço"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-48.501, -1.455, -48.490, -1.445&amp;layer=mapnik&amp;marker=-1.452,-48.498" allowfullscreen></iframe>
+          </div>
+          <div style="font-size:13px; color:#888; margin-bottom:8px;">Localização do serviço e das fotos (GPS)</div>
+          <div class="servico-acoes">
+            <button class="btn-aprovar" onclick="aprovarServico('1236')">Aprovar</button>
+            <button class="btn-reprovar" onclick="mostrarJustificativa('1236')">Reprovar</button>
+            <button class="btn-notificar" onclick="window.location.href='bloco3-whatsapp-resultado.html'" aria-label="Notificar Prestador via WhatsApp">Notificar Prestador</button>
+            <button class="btn-detalhes" onclick="mostrarDetalhes('1236')">Detalhes</button>
+          </div>
+          <textarea class="campo-justificativa" id="justificativa-1236" style="display:none;" placeholder="Informe o motivo da reprovação..."></textarea>
+        </div>
+        <div class="servico-fotos">
+          <div>
+            <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/antes-exemplo3.jpg" alt="Foto antes do serviço" aria-label="Foto antes do serviço" data-exif-completo="true">
+            <div style="text-align:center; font-size:13px; margin-top:4px;">Antes</div>
+          </div>
+          <div>
+            <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/depois-exemplo3.jpg" alt="Foto depois do serviço" aria-label="Foto depois do serviço" data-exif-completo="false">
+            <div style="text-align:center; font-size:13px; margin-top:4px;">Depois</div>
+          </div>
+        </div>
+      </div>
+      <div class="historico-comunicacao">
+        <strong>Histórico WhatsApp:</strong><br>
+        [10/07/2025 16:48] <strong>Carlos:</strong> Foto inicial.<br>
+        [10/07/2025 17:30] <strong>Carlos:</strong> Registro trocado.<br>
+        [10/07/2025 17:32] <strong>Aegea:</strong> Recebido, aguarde validação.<br>
+      </div>
+    </section>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <!-- Modal de detalhes auditoria -->
+  <div id="modal-detalhes" class="modal-detalhes" tabindex="-1" aria-modal="true" style="display:none;">
+    <div class="modal-conteudo" id="modal-conteudo">
+      <!-- Conteúdo dinâmico -->
+    </div>
+  </div>
   <script>
+    // Metadados simulados dos serviços (EXIF e WhatsApp)
+    const metadadosServicos = {
+      '1234': {
+        fotoAntes: { timestamp: '2025-07-10T14:12:00', lat: -1.4505, lon: -48.4955 },
+        fotoDepois: { timestamp: '2025-07-10T15:02:00', lat: -1.4502, lon: -48.4950 },
+        timestampMensagemAntes: '2025-07-10T14:13:00',
+        timestampMensagemDepois: '2025-07-10T15:03:00',
+        coordenadasServico: { lat: -1.450, lon: -48.495 }
+      },
+      '1235': {
+        fotoAntes: { timestamp: '2025-07-10T09:32:00', lat: -1.4480, lon: -48.4920 },
+        fotoDepois: { timestamp: '2025-07-10T10:00:00', lat: -1.4400, lon: -48.4800 },
+        timestampMensagemAntes: '2025-07-10T12:02:00', // 2.5 horas depois
+        timestampMensagemDepois: '2025-07-10T10:01:00',
+        coordenadasServico: { lat: -1.448, lon: -48.492 }
+      },
+      '1236': {
+        fotoAntes: { timestamp: '2025-07-10T16:47:00', lat: -1.4520, lon: -48.4980 },
+        fotoDepois: null,
+        timestampMensagemAntes: '2025-07-10T16:48:00',
+        timestampMensagemDepois: '2025-07-10T17:30:00',
+        coordenadasServico: { lat: -1.452, lon: -48.498 }
+      }
+    };
+
+    // Função de formatação de coordenadas
+    function formatarCoordenadas(lat, lon) {
+      return lat.toFixed(6) + '°, ' + lon.toFixed(6) + '°';
+    }
+
+    // Função auxiliar: cálculo de distância Haversine
+    function calcularDistancia(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return (R * c).toFixed(2);
+    }
+
+    // Função para fechar modal
+    function fecharModal() {
+      document.getElementById('modal-detalhes').style.display = 'none';
+      document.getElementById('modal-conteudo').innerHTML = '';
+    }
+
+    // Fechar modal ao clicar fora do conteúdo
+    document.getElementById('modal-detalhes').addEventListener('click', function(e) {
+      if (e.target.id === 'modal-detalhes') fecharModal();
+    });
+
+    // Função principal de auditoria/detalhes
+    function mostrarDetalhes(id) {
+      console.log('Auditoria iniciada - Serviço #' + id + ' - ' + new Date().toISOString());
+      const dados = metadadosServicos[id];
+      let html = '<button class="fechar-modal" onclick="fecharModal()" aria-label="Fechar">&times;</button>';
+      html += '<h3>Auditoria de Serviço #' + id + '</h3>';
+      if (!dados) {
+        html += '<p style="color: #cf2e2e;">Erro: Dados do serviço #' + id + ' não encontrados.</p>';
+        document.getElementById('modal-conteudo').innerHTML = html;
+        document.getElementById('modal-detalhes').style.display = 'flex';
+        return;
+      }
+      // Verificação EXIF das imagens
+      const card = document.getElementById('servico-' + id);
+      let exifAntes = true, exifDepois = true;
+      if (card) {
+        const imgAntes = card.querySelector('.servico-fotos img[alt*="antes"]');
+        const imgDepois = card.querySelector('.servico-fotos img[alt*="depois"]');
+        if (imgAntes && imgAntes.getAttribute('data-exif-completo') === 'false') exifAntes = false;
+        if (imgDepois && imgDepois.getAttribute('data-exif-completo') === 'false') exifDepois = false;
+      }
+      // Auditoria Foto Antes
+      html += '<div style="margin-bottom:16px;">';
+      html += '<span class="label">Foto Antes:</span><br>';
+      if (!exifAntes) {
+        html += '<span class="erro">Metadados EXIF da foto "Antes" ausentes ou incompletos.</span>';
+      } else if (!dados.fotoAntes || !dados.fotoAntes.timestamp || !dados.fotoAntes.lat || !dados.fotoAntes.lon) {
+        html += '<span class="erro">Dados da foto "Antes" incompletos.</span>';
+      } else {
+        // Validação de integridade
+        let erro = false;
+        let ts1 = dados.fotoAntes.timestamp;
+        let ts2 = dados.timestampMensagemAntes;
+        let lat1 = dados.fotoAntes.lat, lon1 = dados.fotoAntes.lon;
+        let lat2 = dados.coordenadasServico.lat, lon2 = dados.coordenadasServico.lon;
+        if (!ts1 || isNaN(Date.parse(ts1)) || !ts2 || isNaN(Date.parse(ts2))) {
+          html += '<span class="erro">Timestamp inválido.</span>';
+          erro = true;
+        }
+        if (lat1 < -90 || lat1 > 90 || lon1 < -180 || lon1 > 180 || lat2 < -90 || lat2 > 90 || lon2 < -180 || lon2 > 180) {
+          html += '<span class="erro">Coordenadas inválidas.</span>';
+          erro = true;
+        }
+        if (!erro) {
+          // Diferença de tempo
+          const diffHoras = Math.abs((new Date(ts1) - new Date(ts2)) / 3600000);
+          const diffHorasFmt = diffHoras.toFixed(2);
+          const tempoColor = diffHoras > 1 ? '<span style="color: #cf2e2e; font-weight: bold;">' + diffHorasFmt + ' horas ⚠️</span>' : '<span style="color: #00d084;">' + diffHorasFmt + ' horas ✓</span>';
+          // Diferença de distância
+          const distKm = calcularDistancia(lat1, lon1, lat2, lon2);
+          const distColor = distKm > 2 ? '<span style="color: #cf2e2e; font-weight: bold;">' + distKm + ' km ⚠️</span>' : '<span style="color: #00d084;">' + distKm + ' km ✓</span>';
+          html += '<div style="margin-bottom:6px;">Timestamp EXIF: ' + new Date(ts1).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) + '</div>';
+          html += '<div style="margin-bottom:6px;">Timestamp WhatsApp: ' + new Date(ts2).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) + '</div>';
+          html += '<div style="margin-bottom:6px;">Diferença de horário: ' + tempoColor + '</div>';
+          html += '<div style="margin-bottom:6px;">Coordenadas EXIF: ' + formatarCoordenadas(lat1, lon1) + '</div>';
+          html += '<div style="margin-bottom:6px;">Coordenadas Serviço: ' + formatarCoordenadas(lat2, lon2) + '</div>';
+          html += '<div style="margin-bottom:6px;">Diferença de localização: ' + distColor + '</div>';
+        }
+      }
+      html += '</div>';
+      // Auditoria Foto Depois
+      html += '<div style="margin-bottom:16px;">';
+      html += '<span class="label">Foto Depois:</span><br>';
+      if (!exifDepois) {
+        html += '<span class="erro">Metadados EXIF da foto "Depois" ausentes ou incompletos.</span>';
+      } else if (!dados.fotoDepois || !dados.fotoDepois.timestamp || !dados.fotoDepois.lat || !dados.fotoDepois.lon) {
+        html += '<span class="erro">Dados da foto "Depois" incompletos.</span>';
+      } else {
+        // Validação de integridade
+        let erro = false;
+        let ts1 = dados.fotoDepois.timestamp;
+        let ts2 = dados.timestampMensagemDepois;
+        let lat1 = dados.fotoDepois.lat, lon1 = dados.fotoDepois.lon;
+        let lat2 = dados.coordenadasServico.lat, lon2 = dados.coordenadasServico.lon;
+        if (!ts1 || isNaN(Date.parse(ts1)) || !ts2 || isNaN(Date.parse(ts2))) {
+          html += '<span class="erro">Timestamp inválido.</span>';
+          erro = true;
+        }
+        if (lat1 < -90 || lat1 > 90 || lon1 < -180 || lon1 > 180 || lat2 < -90 || lat2 > 90 || lon2 < -180 || lon2 > 180) {
+          html += '<span class="erro">Coordenadas inválidas.</span>';
+          erro = true;
+        }
+        if (!erro) {
+          // Diferença de tempo
+          const diffHoras = Math.abs((new Date(ts1) - new Date(ts2)) / 3600000);
+          const diffHorasFmt = diffHoras.toFixed(2);
+          const tempoColor = diffHoras > 1 ? '<span style="color: #cf2e2e; font-weight: bold;">' + diffHorasFmt + ' horas ⚠️</span>' : '<span style="color: #00d084;">' + diffHorasFmt + ' horas ✓</span>';
+          // Diferença de distância
+          const distKm = calcularDistancia(lat1, lon1, lat2, lon2);
+          const distColor = distKm > 2 ? '<span style="color: #cf2e2e; font-weight: bold;">' + distKm + ' km ⚠️</span>' : '<span style="color: #00d084;">' + distKm + ' km ✓</span>';
+          html += '<div style="margin-bottom:6px;">Timestamp EXIF: ' + new Date(ts1).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) + '</div>';
+          html += '<div style="margin-bottom:6px;">Timestamp WhatsApp: ' + new Date(ts2).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) + '</div>';
+          html += '<div style="margin-bottom:6px;">Diferença de horário: ' + tempoColor + '</div>';
+          html += '<div style="margin-bottom:6px;">Coordenadas EXIF: ' + formatarCoordenadas(lat1, lon1) + '</div>';
+          html += '<div style="margin-bottom:6px;">Coordenadas Serviço: ' + formatarCoordenadas(lat2, lon2) + '</div>';
+          html += '<div style="margin-bottom:6px;">Diferença de localização: ' + distColor + '</div>';
+        }
+      }
+      html += '</div>';
+      document.getElementById('modal-conteudo').innerHTML = html;
+      document.getElementById('modal-detalhes').style.display = 'flex';
+    }
+
+    // Funções de aprovação/reprovação com log de auditoria
     function aprovarServico(id) {
       document.getElementById('toast').textContent = 'Serviço #' + id + ' aprovado com sucesso! Prestador será notificado via WhatsApp.';
       document.getElementById('toast').classList.add('show');
+      console.log('Ação: Aprovação - Serviço #' + id + ' - Auditor: [Usuário] - ' + new Date().toISOString());
       setTimeout(function() {
         document.getElementById('toast').classList.remove('show');
-        // Remove o card da lista para simular atualização
         var card = document.getElementById('servico-' + id);
         if(card) card.parentNode.removeChild(card);
       }, 1800);
@@ -165,9 +383,9 @@
     function reprovarServico(id, motivo) {
       document.getElementById('toast').textContent = 'Serviço #' + id + ' reprovado. Prestador será notificado.';
       document.getElementById('toast').classList.add('show');
+      console.log('Ação: Reprovação - Serviço #' + id + ' - Auditor: [Usuário] - ' + new Date().toISOString());
       setTimeout(function() {
         document.getElementById('toast').classList.remove('show');
-        // Remove o card da lista para simular atualização
         var card = document.getElementById('servico-' + id);
         if(card) card.parentNode.removeChild(card);
       }, 1800);
