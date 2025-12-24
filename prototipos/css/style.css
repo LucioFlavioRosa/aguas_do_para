@@ -1,0 +1,268 @@
+/* ====== BASE AEGEA (extraído e adaptado do template) ====== */
+:root {
+  --color-primary: #0027BD;
+  --color-accent: #00B4D8;
+  --color-bg: #ffffff;
+  --color-bg-alt: #f5f7fa;
+  --color-text: #222;
+  --color-muted: #abb8c3;
+  --color-success: #25d366;
+  --color-whatsapp-bg: #ece5dd;
+  --color-whatsapp-header: #075e54;
+  --color-whatsapp-send: #dcf8c6;
+  --color-whatsapp-receive: #fff;
+  --color-border: #e2e5f0;
+  --font-family: 'Segoe UI', 'Aegea Move', Arial, sans-serif;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
+  color: var(--color-primary);
+  margin-top: 0;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--color-accent);
+}
+
+button, .btn, .elementor-button {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7em 1.5em;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: var(--font-family);
+}
+button:hover, .btn:hover, .elementor-button:hover {
+  background: var(--color-accent);
+}
+
+input, textarea, select {
+  font-family: var(--font-family);
+  font-size: 1em;
+  padding: 0.5em 0.8em;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: #fff;
+  margin-bottom: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.container, .elementor-container, .e-con-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.header, header {
+  background: var(--color-bg-alt);
+  padding: 18px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+footer {
+  background: var(--color-bg-alt);
+  padding: 24px 0;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  text-align: center;
+  font-size: 0.95em;
+}
+
+.card, .elementor-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.elementor-button-text {
+  color: #fff;
+}
+
+/* ====== WHATSAPP SIMULAÇÃO ====== */
+.whatsapp-sim {
+  background: var(--color-whatsapp-bg);
+  max-width: 420px;
+  margin: 32px auto;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  border: 1px solid #dadada;
+  display: flex;
+  flex-direction: column;
+  height: 700px;
+  overflow: hidden;
+}
+.whatsapp-header {
+  background: var(--color-whatsapp-header);
+  color: #fff;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.whatsapp-header .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: cover;
+  margin-right: 12px;
+}
+.whatsapp-header .chat-title {
+  font-weight: 600;
+  font-size: 1.15em;
+}
+.whatsapp-messages {
+  flex: 1 1 auto;
+  padding: 24px 12px 16px 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.whatsapp-message {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+  font-size: 1em;
+  line-height: 1.5;
+}
+.whatsapp-message.sent {
+  align-self: flex-end;
+  background: var(--color-whatsapp-send);
+  border-radius: 12px 12px 2px 12px;
+  padding: 10px 14px;
+  color: #222;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.whatsapp-message.received {
+  align-self: flex-start;
+  background: var(--color-whatsapp-receive);
+  border-radius: 12px 12px 12px 2px;
+  padding: 10px 14px;
+  color: #222;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.whatsapp-message .timestamp {
+  font-size: 0.78em;
+  color: #888;
+  margin-top: 4px;
+  text-align: right;
+}
+.whatsapp-input-area {
+  background: #f7f7f7;
+  padding: 12px 10px;
+  border-top: 1px solid #e2e5f0;
+  display: flex;
+  gap: 8px;
+}
+.whatsapp-input-area input[type=text],
+.whatsapp-input-area textarea {
+  flex: 1 1 auto;
+  border-radius: 20px;
+  border: 1px solid #dadada;
+  padding: 8px 16px;
+  font-size: 1em;
+  background: #fff;
+  resize: none;
+  min-height: 38px;
+  max-height: 90px;
+}
+.whatsapp-input-area button {
+  background: var(--color-success);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.whatsapp-input-area button:hover {
+  background: #128c7e;
+}
+/* Checklist visual para WhatsApp */
+.whatsapp-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+.whatsapp-checklist label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1em;
+  cursor: pointer;
+}
+.whatsapp-checklist input[type=checkbox] {
+  accent-color: var(--color-success);
+  width: 18px;
+  height: 18px;
+}
+/* Upload de arquivos (fotos CNH/selfie) */
+.whatsapp-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+.whatsapp-upload label {
+  font-size: 0.98em;
+  color: #444;
+}
+.whatsapp-upload input[type=file] {
+  border: none;
+  background: none;
+  padding: 0;
+}
+/* Termo de aceite visual */
+.whatsapp-termo {
+  background: #f1f1f1;
+  border-radius: 8px;
+  padding: 14px 12px;
+  font-size: 0.97em;
+  color: #333;
+  margin-top: 10px;
+}
+.whatsapp-termo input[type=checkbox] {
+  accent-color: var(--color-primary);
+  margin-right: 8px;
+}
+/* ====== RESPONSIVO ====== */
+@media (max-width: 600px) {
+  .container, .elementor-container, .e-con-inner {
+    padding: 10px;
+  }
+  .whatsapp-sim {
+    max-width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
