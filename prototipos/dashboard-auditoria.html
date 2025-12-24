@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Auditoria - Aegea</title>
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    body { background: #f4f6fa; }
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 24px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .dashboard-header img {
+      width: 48px;
+      height: 48px;
+    }
+    .dashboard-header h1 {
+      font-size: 2rem;
+      color: #0027BD;
+      margin: 0;
+    }
+    .cards-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .card-servico {
+      background: #f7fafc;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border: 1px solid #e0e6f0;
+    }
+    .card-servico h2 {
+      font-size: 1.2rem;
+      color: #075e54;
+      margin: 0 0 6px 0;
+    }
+    .card-fotos {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .card-fotos img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #cfd8dc;
+    }
+    .card-info {
+      font-size: 0.98rem;
+      color: #222;
+    }
+    .card-info strong {
+      color: #0027BD;
+    }
+    .card-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .btn-aprovar {
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-aprovar:hover { background: #128c7e; }
+    .btn-reprovar {
+      background: #cf2e2e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-reprovar:hover { background: #a71d1d; }
+    @media (max-width: 600px) {
+      .dashboard-container { padding: 8px; }
+      .cards-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="dashboard-container" aria-label="Dashboard de Auditoria">
+    <header class="dashboard-header">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea">
+      <h1>Auditoria de Serviços - Águas do Pará</h1>
+    </header>
+    <section>
+      <h2 style="color:#075e54; font-size:1.1rem; margin-bottom:18px;">Serviços aguardando validação</h2>
+      <div class="cards-list">
+        <div class="card-servico">
+          <h2>Reparo de Vazamento</h2>
+          <div class="card-fotos">
+            <div>
+              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80" alt="Foto antes do serviço">
+              <div style="font-size:0.85rem; color:#888; text-align:center;">Antes</div>
+            </div>
+            <div>
+              <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=300&q=80" alt="Foto depois do serviço">
+              <div style="font-size:0.85rem; color:#888; text-align:center;">Depois</div>
+            </div>
+          </div>
+          <div class="card-info">
+            <div><strong>Localização:</strong> Av. Brasil, 1234 - Belém/PA</div>
+            <div><strong>Data/Hora:</strong> 24/06/2025 14:32</div>
+            <div><strong>Prestador:</strong> João Silva (MEI)</div>
+          </div>
+          <div class="card-actions">
+            <a href="detalhes-auditoria.html" class="btn-aprovar" aria-label="Ver detalhes da auditoria">Detalhes</a>
+            <button class="btn-aprovar" aria-label="Aprovar pagamento">Aprovar Pagamento</button>
+            <button class="btn-reprovar" aria-label="Reprovar serviço">Reprovar</button>
+          </div>
+        </div>
+        <div class="card-servico">
+          <h2>Instalação de Hidrômetro</h2>
+          <div class="card-fotos">
+            <div>
+              <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=300&q=80" alt="Foto antes do serviço">
+              <div style="font-size:0.85rem; color:#888; text-align:center;">Antes</div>
+            </div>
+            <div>
+              <img src="https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?auto=format&fit=crop&w=300&q=80" alt="Foto depois do serviço">
+              <div style="font-size:0.85rem; color:#888; text-align:center;">Depois</div>
+            </div>
+          </div>
+          <div class="card-info">
+            <div><strong>Localização:</strong> R. das Flores, 567 - Santarém/PA</div>
+            <div><strong>Data/Hora:</strong> 24/06/2025 09:18</div>
+            <div><strong>Prestador:</strong> Maria Souza (MEI)</div>
+          </div>
+          <div class="card-actions">
+            <a href="detalhes-auditoria.html" class="btn-aprovar" aria-label="Ver detalhes da auditoria">Detalhes</a>
+            <button class="btn-aprovar" aria-label="Aprovar pagamento">Aprovar Pagamento</button>
+            <button class="btn-reprovar" aria-label="Reprovar serviço">Reprovar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
