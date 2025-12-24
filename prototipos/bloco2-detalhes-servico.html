@@ -20,7 +20,14 @@
 	<meta name="msapplication-TileImage" content="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" />
 	<style>
 		body { background: #fff; font-family: 'Inter', Arial, sans-serif; }
-		.container-detalhes-servico { max-width: 800px; margin: 40px auto 40px auto; background: #fff; border-radius: 20px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); padding: 2.5rem 2rem; }
+		.container-detalhes-servico {
+			max-width: 1200px;
+			margin: 40px auto 40px auto;
+			background: #fff;
+			border-radius: 20px;
+			box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+			padding: 2.5rem 2rem;
+		}
 		.titulo-servico { font-size: 2rem; font-weight: 700; color: #0027BD; margin-bottom: 1.5rem; }
 		.info-servico { margin-bottom: 2rem; }
 		.info-servico label { font-weight: 600; color: #0027BD; display: block; margin-bottom: 0.3rem; }
@@ -66,16 +73,16 @@
 	<h1 class="titulo-servico">Detalhes do Serviço</h1>
 	<div class="info-servico">
 		<label for="tipo-servico">Tipo de Serviço</label>
-		<div class="valor" id="tipo-servico">Reparo de vazamento de água</div>
+		<div class="valor" id="tipo-servico"></div>
 		<label for="endereco-servico">Endereço</label>
-		<div class="valor" id="endereco-servico">Rua das Águas, 123 - Bairro Centro, Belém - PA, 66000-000</div>
+		<div class="valor" id="endereco-servico"></div>
 		<label for="restricoes">Restrições de Data/Hora</label>
-		<div class="valor" id="restricoes">Somente em dias úteis, das 8h às 18h</div>
+		<div class="valor" id="restricoes"></div>
 		<label for="descricao">Descrição Detalhada</label>
-		<div class="valor" id="descricao">Vazamento identificado próximo ao hidrômetro. Necessário reparo rápido e recomposição de calçada.</div>
+		<div class="valor" id="descricao"></div>
 	</div>
 	<div class="mapa-localizacao" aria-label="Mapa de localização do serviço">
-		<iframe title="Mapa de localização do serviço" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9999999999995!2d-48.5044!3d-1.4558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48e6e0b000001%3A0x0000000000000000!2sRua%20das%20%C3%81guas%2C%20123%20-%20Centro%2C%20Bel%C3%A9m%20-%20PA!5e0!3m2!1spt-BR!2sbr!4v1710000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+		<iframe title="Mapa de localização do serviço" id="iframe-mapa" src="" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 	</div>
 	<a href="bloco2-lista-servicos.html" class="btn-voltar" aria-label="Voltar para lista de serviços">&larr; Voltar</a>
 </main>
@@ -125,5 +132,34 @@
 	</div>
 </footer>
 <!-- FIM FOOTER -->
+<script>
+// Mock de dados de serviços
+const servicosMock = {
+  '1': {
+    tipo: 'Reparo de vazamento de água',
+    endereco: 'Rua das Flores, 123 - Bairro Centro, Belém - PA, 66000-000',
+    restricoes: 'Somente em dias úteis, das 8h às 18h',
+    descricao: 'Água vazando em calçada, prioridade alta. Necessário reparo rápido e recomposição de calçada.',
+    mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9999999999995!2d-48.5044!3d-1.4558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48e6e0b000001%3A0x0000000000000000!2sRua%20das%20Flores%2C%20123%20-%20Centro%2C%20Bel%C3%A9m%20-%20PA!5e0!3m2!1spt-BR!2sbr!4v1710000000001'
+  },
+  '2': {
+    tipo: 'Troca de hidrômetro',
+    endereco: 'Av. Nazaré, 200 - Bairro Batista Campos, Belém - PA, 66055-260',
+    restricoes: 'Agendamento prévio, das 9h às 17h',
+    descricao: 'Solicitada troca de hidrômetro por defeito identificado na leitura.',
+    mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9999999999995!2d-48.4900!3d-1.4520!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92a48e6e0b000002%3A0x0000000000000000!2sAv.%20Nazar%C3%A9%2C%20200%20-%20Batista%20Campos%2C%20Bel%C3%A9m%20-%20PA!5e0!3m2!1spt-BR!2sbr!4v1710000000002'
+  }
+};
+window.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id') || '1';
+  const servico = servicosMock[id] || servicosMock['1'];
+  document.getElementById('tipo-servico').textContent = servico.tipo;
+  document.getElementById('endereco-servico').textContent = servico.endereco;
+  document.getElementById('restricoes').textContent = servico.restricoes;
+  document.getElementById('descricao').textContent = servico.descricao;
+  document.getElementById('iframe-mapa').src = servico.mapa;
+});
+</script>
 </body>
 </html>
