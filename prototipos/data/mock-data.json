@@ -1,0 +1,105 @@
+{
+  "prestadores": [
+    {
+      "id": 1,
+      "nome": "João Silva MEI",
+      "endereco": "Rua das Flores, 123, Altamira - PA",
+      "veiculo": "Moto",
+      "servicos_prestados": 12,
+      "score": 4.8,
+      "raio_atuacao_km": 15,
+      "status": "Disponível"
+    },
+    {
+      "id": 2,
+      "nome": "Maria Souza Serviços",
+      "endereco": "Av. Pará, 456, Marabá - PA",
+      "veiculo": "Carro",
+      "servicos_prestados": 7,
+      "score": 4.5,
+      "raio_atuacao_km": 20,
+      "status": "Ocupado"
+    },
+    {
+      "id": 3,
+      "nome": "Carlos Lima MEI",
+      "endereco": "Travessa Brasil, 789, Santarém - PA",
+      "veiculo": "Moto",
+      "servicos_prestados": 20,
+      "score": 5.0,
+      "raio_atuacao_km": 10,
+      "status": "Disponível"
+    },
+    {
+      "id": 4,
+      "nome": "Ana Paula Serviços",
+      "endereco": "Rua Rio Amazonas, 321, Castanhal - PA",
+      "veiculo": "Carro",
+      "servicos_prestados": 5,
+      "score": 4.2,
+      "raio_atuacao_km": 25,
+      "status": "Disponível"
+    }
+  ],
+  "tipos_servico": [
+    {
+      "id": 1,
+      "nome": "Reparo de vazamentos de água",
+      "descricao": "Identificação e conserto de vazamentos em ramais ou cavaletes."
+    },
+    {
+      "id": 2,
+      "nome": "Instalação/Troca de hidrômetros",
+      "descricao": "Substituição ou instalação de hidrômetros padrão Águas do Pará."
+    },
+    {
+      "id": 3,
+      "nome": "Desobstrução de esgoto",
+      "descricao": "Desobstrução de ramais e redes de esgoto por demanda do cliente."
+    },
+    {
+      "id": 4,
+      "nome": "Pequenos reparos (alvenaria/calçada)",
+      "descricao": "Recomposição de calçadas e pequenos reparos civis após intervenção."
+    },
+    {
+      "id": 5,
+      "nome": "Outros",
+      "descricao": "Serviços diversos sob demanda."
+    }
+  ],
+  "demandas": [
+    {
+      "id": 1001,
+      "tipo_servico": 1,
+      "descricao": "Vazamento em ramal residencial",
+      "localizacao": "Rua das Acácias, 50, Altamira - PA",
+      "restricao_horario": "Manhã",
+      "status": "Pendente"
+    },
+    {
+      "id": 1002,
+      "tipo_servico": 2,
+      "descricao": "Troca de hidrômetro",
+      "localizacao": "Av. Pará, 100, Marabá - PA",
+      "restricao_horario": "Tarde",
+      "status": "Em seleção"
+    },
+    {
+      "id": 1003,
+      "tipo_servico": 3,
+      "descricao": "Desobstrução de esgoto comercial",
+      "localizacao": "Praça Central, 10, Santarém - PA",
+      "restricao_horario": "Qualquer",
+      "status": "Atribuída"
+    },
+    {
+      "id": 1004,
+      "tipo_servico": 4,
+      "descricao": "Reparo em calçada após obra",
+      "localizacao": "Rua Rio Amazonas, 321, Castanhal - PA",
+      "restricao_horario": "Finais de semana",
+      "status": "Pendente"
+    }
+  ]
+}
