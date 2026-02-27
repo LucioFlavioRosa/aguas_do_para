@@ -1,0 +1,18 @@
+<!-- Componente Card Métrica Reutilizável -->
+<div class="cardVeja card-metrica" tabindex="0" role="region" aria-label="Card de métrica">
+  <div class="card-metrica-icone" aria-hidden="true">
+    <!-- Ícone SVG ou imagem -->
+    {{icone}}
+  </div>
+  <div class="card-title">{{titulo}}</div>
+  <div class="card-metrica-valor">{{valor}}</div>
+  <div class="card-meta">{{meta}}</div>
+</div>
+<!--
+  Parâmetros de uso:
+    - {{icone}}: SVG ou <img> do ícone da métrica
+    - {{titulo}}: Título da métrica (ex: VPL, CAPEX)
+    - {{valor}}: Valor principal (ex: R$ 1.200.000)
+    - {{meta}}: Meta/descrição curta (opcional)
+  Exemplo de inclusão via JS ou template engine.
+-->
