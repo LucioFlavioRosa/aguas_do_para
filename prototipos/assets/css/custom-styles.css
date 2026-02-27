@@ -1,0 +1,94 @@
+/* Estilos customizados para o protótipo - NÃO sobrescreve o template base */
+
+/* Card Métrica (componente reutilizável) */
+.card-metrica {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 140px;
+  position: relative;
+  padding-top: 20px;
+}
+.card-metrica-icone {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+}
+.card-metrica-valor {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #0027BD;
+  margin-bottom: 6px;
+  margin-top: 4px;
+}
+
+/* Estilos para diagramas Mermaid.js */
+.mermaid {
+  background: #f3f6fb;
+  border-radius: 12px;
+  padding: 16px 8px;
+  margin: 20px 0;
+  overflow-x: auto;
+  box-shadow: 0 1px 8px rgba(0,39,189,0.07);
+}
+
+/* Tabela de resultados customizada */
+.tabela-resultados {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 32px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.tabela-resultados th, .tabela-resultados td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #e2e5f0;
+  font-size: 1rem;
+}
+.tabela-resultados th {
+  background: #eaf2ff;
+  color: #0027BD;
+  font-weight: 700;
+}
+
+/* Ajustes para visualização unifilar de cascatas */
+.cascata-unifilar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: flex-start;
+  margin: 24px 0;
+}
+.cascata-no {
+  background: #fff;
+  border: 2px solid #0027BD;
+  border-radius: 10px;
+  padding: 10px 18px;
+  color: #0027BD;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,39,189,0.08);
+  min-width: 110px;
+  text-align: center;
+  position: relative;
+}
+.cascata-linha {
+  width: 40px;
+  height: 2px;
+  background: #0027BD;
+  align-self: center;
+  margin: 0 2px;
+}
+
+/* Responsividade para diagramas e cards */
+@media (max-width: 700px) {
+  .card-metrica-valor { font-size: 1.3rem; }
+  .cascata-unifilar { gap: 12px; }
+  .cascata-no { min-width: 70px; padding: 7px 8px; font-size: 0.95rem; }
+}
