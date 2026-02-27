@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro de Sub-Bacias - Aegea</title>
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='widget-form-css' href='https://www.aegea.com.br/wp-content/plugins/elementor-pro/assets/css/widget-form.min.css?ver=3.32.3' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26421-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-27263-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-27263.css?ver=1766510004' media='all' />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+  <style>
+    body {
+      background: #fff;
+      font-family: inherit;
+      margin: 0;
+    }
+    .container-main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 24px;
+      background: #f8fafd;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,39,189,0.08);
+    }
+    .elementor-button {
+      background: #0027BD;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 8px 0;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .elementor-button:disabled {
+      background: #b3b9c9;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .elementor-button:hover:not(:disabled) {
+      background: #0050ff;
+    }
+    .table-wrapper {
+      overflow-x: auto;
+      margin-top: 24px;
+    }
+    table.aegea-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,39,189,0.04);
+    }
+    table.aegea-table th, table.aegea-table td {
+      border: 1px solid #e0e6f7;
+      padding: 10px 8px;
+      text-align: left;
+    }
+    table.aegea-table th {
+      background: #e0e6f7;
+      color: #0027BD;
+      font-weight: 600;
+    }
+    table.aegea-table tr:nth-child(even) {
+      background: #f4f7fb;
+    }
+    table.aegea-table tr:hover {
+      background: #dbeafe;
+      transition: background 0.2s;
+    }
+    .table-actions button {
+      margin-right: 6px;
+    }
+    .mermaid-container {
+      background: #fff;
+      border-radius: 8px;
+      margin: 32px 0 16px 0;
+      padding: 16px;
+      box-shadow: 0 1px 4px rgba(0,39,189,0.04);
+    }
+    @media (max-width: 800px) {
+      .container-main {
+        padding: 8px;
+      }
+      table.aegea-table th, table.aegea-table td {
+        font-size: 0.93rem;
+        padding: 7px 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="elementor elementor-26397 elementor-location-header">
+    <div class="elementor-element elementor-element-6537c5b e-con-full e-flex e-con e-parent" id="header">
+      <div class="elementor-element elementor-element-4e1bc227 e-con-full e-flex e-con e-child">
+        <a href="https://www.aegea.com.br">
+          <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" title="Aegea" alt="Logo da Aegea" style="height:48px; margin:10px 0;" />
+        </a>
+      </div>
+      <nav class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-underline e--animation-fade" aria-label="Menu principal">
+        <ul class="elementor-nav-menu">
+          <li><a href="https://www.aegea.com.br/quem-somos/" class="elementor-item">Quem Somos</a></li>
+          <li><a href="https://www.aegea.com.br/unidades/" class="elementor-item">Unidades</a></li>
+          <li><a href="https://www.aegea.com.br/estrategia-esg/" class="elementor-item">Estratégia ESG</a></li>
+          <li><a href="https://www.aegea.com.br/carreiras/" class="elementor-item">Carreiras</a></li>
+          <li><a href="https://www.aegea.com.br/noticias/" class="elementor-item">Mídia</a></li>
+          <li><a href="https://fornecedores.aegea.com.br" class="elementor-item">Fornecedores</a></li>
+          <li><a href="#" class="elementor-item elementor-item-active" aria-current="page">Cadastro de Sub-Bacias</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- /Header -->
+
+  <main class="container-main" id="content">
+    <h1 style="color:#0027BD; font-size:2.1rem; margin-bottom:16px;">Cadastro de Sub-Bacias</h1>
+    <section>
+      <!-- Upload Excel -->
+      <form id="upload-form" style="margin-bottom: 24px;">
+        <label for="excel-file" style="font-weight:600; color:#0027BD;">Carregar arquivo Excel (.xlsx):</label><br>
+        <input type="file" id="excel-file" accept=".xlsx,.xls" style="display:none;" />
+        <button type="button" class="elementor-button elementor-size-sm" id="btn-upload">Selecionar Arquivo</button>
+        <span id="file-name" style="margin-left:12px; color:#444;"></span>
+      </form>
+      <!-- /Upload Excel -->
+
+      <!-- Tabela de Dados -->
+      <div class="table-wrapper">
+        <table class="aegea-table" id="subbacias-table" aria-label="Tabela de Sub-Bacias">
+          <thead>
+            <tr>
+              <th>Sub-Bacia Origem</th>
+              <th>Sub-Bacia Destino</th>
+              <th>Cobertura Atual (%)</th>
+              <th>Vazão (L/s)</th>
+              <th>Capacidade ETE (L/s)</th>
+              <th>CAPEX Unitário Rede (R$/m)</th>
+              <th>CAPEX Unitário Ligação (R$/un)</th>
+              <th>OPEX Unitário (R$/mês)</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- Linhas dinâmicas -->
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="elementor-button elementor-size-sm" id="btn-add-row">Adicionar Linha</button>
+      <button type="button" class="elementor-button elementor-size-sm" id="btn-save" style="margin-left:8px;">Salvar Dados</button>
+    </section>
+
+    <!-- Visualização do Unifilar -->
+    <section>
+      <h2 style="color:#0027BD; margin-top:40px; font-size:1.2rem;">Visualização do Unifilar (Cascata)</h2>
+      <div class="mermaid-container">
+        <pre class="mermaid" id="mermaid-diagram">
+%% O diagrama será gerado dinamicamente
+        </pre>
+      </div>
+    </section>
+
+    <!-- Botão de navegação para Simulação -->
+    <div style="margin-top:32px;">
+      <button id="btn-simulacao" class="elementor-button" disabled>Ir para Simulação</button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="elementor elementor-26421 elementor-location-footer" style="margin-top:48px; background:#e0e6f7; padding:24px 0; text-align:center;">
+    <div>
+      <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/ae-verde.svg" alt="Aegea Verde" style="height:32px; vertical-align:middle; margin-right:8px;" />
+      <span style="color:#0027BD; font-weight:600;">Aegea</span> &copy; 2026
+    </div>
+  </footer>
+  <!-- /Footer -->
+
+  <script>
+    // Dados em memória
+    let subbacias = [];
+    let editIndex = null;
+    const tableBody = document.getElementById('table-body');
+    const btnSimulacao = document.getElementById('btn-simulacao');
+
+    // Upload Excel
+    document.getElementById('btn-upload').onclick = function(e) {
+      document.getElementById('excel-file').click();
+    };
+    document.getElementById('excel-file').onchange = function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      document.getElementById('file-name').textContent = file.name;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, {type: 'array'});
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(sheet, {defval: ''});
+        // Espera colunas com nomes exatos
+        subbacias = rows.map(row => ({
+          origem: row['Sub-Bacia Origem'] || '',
+          destino: row['Sub-Bacia Destino'] || '',
+          cobertura: row['Cobertura Atual (%)'] || '',
+          vazao: row['Vazão (L/s)'] || '',
+          capacidade: row['Capacidade ETE (L/s)'] || '',
+          capex_rede: row['CAPEX Unitário Rede (R$/m)'] || '',
+          capex_ligacao: row['CAPEX Unitário Ligação (R$/un)'] || '',
+          opex: row['OPEX Unitário (R$/mês)'] || ''
+        }));
+        renderTable();
+        renderMermaid();
+        validateSimulacao();
+      };
+      reader.readAsArrayBuffer(file);
+    };
+
+    // Renderização da tabela
+    function renderTable() {
+      tableBody.innerHTML = '';
+      subbacias.forEach((sb, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${sb.origem}</td>
+          <td>${sb.destino}</td>
+          <td>${sb.cobertura}</td>
+          <td>${sb.vazao}</td>
+          <td>${sb.capacidade}</td>
+          <td>${sb.capex_rede}</td>
+          <td>${sb.capex_ligacao}</td>
+          <td>${sb.opex}</td>
+          <td class="table-actions">
+            <button type="button" class="elementor-button elementor-size-sm" onclick="editRow(${idx})">Editar</button>
+            <button type="button" class="elementor-button elementor-size-sm" onclick="deleteRow(${idx})">Excluir</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+      renderMermaid();
+      validateSimulacao();
+    }
+
+    // Adicionar linha
+    document.getElementById('btn-add-row').onclick = function() {
+      editIndex = null;
+      openEditDialog();
+    };
+
+    // Salvar dados (simples: salva em memória)
+    document.getElementById('btn-save').onclick = function() {
+      alert('Dados salvos localmente (mock). Integração backend pendente.');
+      validateSimulacao();
+    };
+
+    // Editar linha
+    window.editRow = function(idx) {
+      editIndex = idx;
+      openEditDialog(subbacias[idx]);
+    };
+
+    // Excluir linha
+    window.deleteRow = function(idx) {
+      if (confirm('Deseja excluir esta linha?')) {
+        subbacias.splice(idx, 1);
+        renderTable();
+      }
+    };
+
+    // Diálogo de edição/adicionar
+    function openEditDialog(data = {}) {
+      const fields = [
+        {k:'origem', label:'Sub-Bacia Origem'},
+        {k:'destino', label:'Sub-Bacia Destino'},
+        {k:'cobertura', label:'Cobertura Atual (%)'},
+        {k:'vazao', label:'Vazão (L/s)'},
+        {k:'capacidade', label:'Capacidade ETE (L/s)'},
+        {k:'capex_rede', label:'CAPEX Unitário Rede (R$/m)'},
+        {k:'capex_ligacao', label:'CAPEX Unitário Ligação (R$/un)'},
+        {k:'opex', label:'OPEX Unitário (R$/mês)'}
+      ];
+      let html = `<form id='edit-form'>`;
+      fields.forEach(f => {
+        html += `<label style='display:block;margin-top:8px;'>${f.label}<br><input name='${f.k}' value='${data[f.k]||''}' style='width:98%;padding:6px;border:1px solid #e0e6f7;border-radius:4px;'></label>`;
+      });
+      html += `<div style='margin-top:16px;text-align:right;'><button type='submit' class='elementor-button elementor-size-sm'>Salvar</button> <button type='button' class='elementor-button elementor-size-sm' id='cancel-edit'>Cancelar</button></div></form>`;
+      const dlg = document.createElement('dialog');
+      dlg.innerHTML = html;
+      document.body.appendChild(dlg);
+      dlg.showModal();
+      dlg.querySelector('#edit-form').onsubmit = function(ev) {
+        ev.preventDefault();
+        const form = ev.target;
+        const obj = {};
+        fields.forEach(f => obj[f.k] = form[f.k].value);
+        if (editIndex !== null) subbacias[editIndex] = obj;
+        else subbacias.push(obj);
+        dlg.close();
+        dlg.remove();
+        renderTable();
+      };
+      dlg.querySelector('#cancel-edit').onclick = function() {
+        dlg.close();
+        dlg.remove();
+      };
+    }
+
+    // Mermaid.js renderização
+    function renderMermaid() {
+      if (!window.mermaid) return;
+      // Gera o diagrama Mermaid
+      let graph = 'graph TD\n';
+      // Agrupa por origem/destino
+      subbacias.forEach(sb => {
+        if (sb.origem && sb.destino) {
+          graph += `    ${sanitize(sb.origem)}-->${sanitize(sb.destino)}\n`;
+        }
+      });
+      if (graph === 'graph TD\n') graph += '    A[Exemplo Origem]-->B[Exemplo Destino]\n';
+      document.getElementById('mermaid-diagram').textContent = graph;
+      mermaid.initialize({startOnLoad:false, theme:'default'});
+      mermaid.run();
+    }
+    function sanitize(str) {
+      return str.replace(/[^a-zA-Z0-9_]/g,'_');
+    }
+
+    // Validação do botão de simulação
+    function validateSimulacao() {
+      btnSimulacao.disabled = !(subbacias && subbacias.length > 0);
+    }
+    btnSimulacao.onclick = function() {
+      if (!btnSimulacao.disabled) {
+        window.location.href = 'simulacao.html';
+      }
+    };
+  </script>
+</body>
+</html>
