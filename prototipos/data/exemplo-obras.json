@@ -1,0 +1,98 @@
+[
+  {
+    "id": "obra_001",
+    "nome": "Coleta Bairro Central",
+    "tipo": "coleta",
+    "custo_capex": 1200000,
+    "custo_opex": 25000,
+    "vpn_faturamento": 350000,
+    "vpn_arrecadacao": 320000,
+    "cobertura_adicional": 800,
+    "sub_bacia": "sb_01",
+    "dependencias": []
+  },
+  {
+    "id": "obra_002",
+    "nome": "Rede de Transporte Central",
+    "tipo": "transporte",
+    "custo_capex": 900000,
+    "custo_opex": 18000,
+    "vpn_faturamento": 270000,
+    "vpn_arrecadacao": 250000,
+    "cobertura_adicional": 0,
+    "sub_bacia": "sb_01",
+    "dependencias": []
+  },
+  {
+    "id": "obra_003",
+    "nome": "ETE Central",
+    "tipo": "ETE",
+    "custo_capex": 2500000,
+    "custo_opex": 40000,
+    "vpn_faturamento": 600000,
+    "vpn_arrecadacao": 580000,
+    "cobertura_adicional": 0,
+    "sub_bacia": "sb_01",
+    "dependencias": ["obra_002"]
+  },
+  {
+    "id": "obra_004",
+    "nome": "Coleta Bairro Sul",
+    "tipo": "coleta",
+    "custo_capex": 800000,
+    "custo_opex": 15000,
+    "vpn_faturamento": 200000,
+    "vpn_arrecadacao": 180000,
+    "cobertura_adicional": 500,
+    "sub_bacia": "sb_02",
+    "dependencias": ["obra_005"]
+  },
+  {
+    "id": "obra_005",
+    "nome": "Rede de Transporte Sul",
+    "tipo": "transporte",
+    "custo_capex": 600000,
+    "custo_opex": 12000,
+    "vpn_faturamento": 150000,
+    "vpn_arrecadacao": 140000,
+    "cobertura_adicional": 0,
+    "sub_bacia": "sb_02",
+    "dependencias": []
+  },
+  {
+    "id": "obra_006",
+    "nome": "Expansão ETE Central",
+    "tipo": "ETE",
+    "custo_capex": 1800000,
+    "custo_opex": 30000,
+    "vpn_faturamento": 400000,
+    "vpn_arrecadacao": 390000,
+    "cobertura_adicional": 0,
+    "sub_bacia": "sb_01",
+    "dependencias": ["obra_003"]
+  },
+  {
+    "id": "obra_007",
+    "nome": "Coleta Bairro Norte",
+    "tipo": "coleta",
+    "custo_capex": 950000,
+    "custo_opex": 20000,
+    "vpn_faturamento": 250000,
+    "vpn_arrecadacao": 230000,
+    "cobertura_adicional": 600,
+    "sub_bacia": "sb_03",
+    "dependencias": ["obra_008"]
+  },
+  {
+    "id": "obra_008",
+    "nome": "Rede de Transporte Norte",
+    "tipo": "transporte",
+    "custo_capex": 700000,
+    "custo_opex": 13000,
+    "vpn_faturamento": 170000,
+    "vpn_arrecadacao": 160000,
+    "cobertura_adicional": 0,
+    "sub_bacia": "sb_03",
+    "dependencias": []
+  }
+]
