@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulação de Investimentos - Aegea</title>
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <link rel="stylesheet" id="wp-block-library-css" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" id="hello-elementor-css" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" id="hello-elementor-theme-style-css" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" id="hello-elementor-header-footer-css" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" id="elementor-frontend-css" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" id="widget-form-css" href="https://www.aegea.com.br/wp-content/plugins/elementor-pro/assets/css/widget-form.min.css?ver=3.32.3" media="all" />
+  <link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
+  <link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" />
+  <meta name="msapplication-TileImage" content="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" />
+  <script src="https://www.aegea.com.br/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+  <script src="prototipos/simulacao.js"></script>
+  <style>
+    /* Ajustes rápidos para sidebar e responsividade */
+    .sidebar-simulacao {
+      min-width: 320px;
+      max-width: 360px;
+      background: #f5f7fa;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+      padding: 32px 24px;
+      margin-right: 32px;
+    }
+    @media (max-width: 900px) {
+      .e-flex {
+        flex-direction: column !important;
+      }
+      .sidebar-simulacao {
+        max-width: 100%;
+        margin-right: 0;
+        margin-bottom: 32px;
+      }
+    }
+    .calibracao-lista {
+      max-height: 180px;
+      overflow-y: auto;
+      border: 1px solid #e0e4ea;
+      border-radius: 8px;
+      background: #fff;
+      padding: 12px 8px;
+      margin-bottom: 16px;
+    }
+    .calibracao-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .calibracao-item:last-child { margin-bottom: 0; }
+    .calibracao-item label {
+      margin-left: 8px;
+      font-size: 15px;
+      color: #222;
+      cursor: pointer;
+    }
+    .resultados-area {
+      min-height: 220px;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #e0e4ea;
+      padding: 28px 24px;
+      margin-top: 16px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.02);
+    }
+    .voltar-link {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: #0027BD;
+      font-weight: 500;
+      text-decoration: underline;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body class="hello-elementor-default elementor-default">
+  <a class="skip-link screen-reader-text" href="#content">Ir para o conteúdo</a>
+  <header class="elementor elementor-26397 elementor-location-header">
+    <div class="elementor-element e-con-full e-flex e-con e-parent" id="header">
+      <div class="elementor-element e-con-full e-flex e-con e-child">
+        <a href="https://www.aegea.com.br">
+          <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" title="Aegea" alt="Aegea" style="height:40px;max-width:120px;" />
+        </a>
+      </div>
+      <nav class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-underline e--animation-fade" aria-label="Menu principal">
+        <ul class="elementor-nav-menu">
+          <li><a href="https://www.aegea.com.br/quem-somos/" class="elementor-item">Quem Somos</a></li>
+          <li><a href="https://www.aegea.com.br/unidades/" class="elementor-item">Unidades</a></li>
+          <li><a href="prototipos/simulacao-investimentos.html" class="elementor-item elementor-item-active" aria-current="page">Simulação</a></li>
+          <li><a href="https://www.aegea.com.br/contato/" class="elementor-item">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="content">
+    <div class="elementor-element e-con-full e-flex e-con e-parent" style="padding: 32px 0; min-height: 80vh;">
+      <div class="e-con-inner e-flex" style="width:100%;display:flex;align-items:flex-start;justify-content:center;">
+        <!-- Sidebar de Filtros -->
+        <aside class="sidebar-simulacao e-con-boxed">
+          <a href="prototipos/visualizacao-cascata.html" class="voltar-link">&larr; Voltar à Visualização</a>
+          <h2 style="margin-bottom:24px;font-size:1.4rem;color:#0027BD;">Simulação de Investimentos</h2>
+          <form id="formSimulacao" autocomplete="off" onsubmit="executarSimulacao(); return false;">
+            <div class="elementor-field-group" style="margin-bottom:18px;">
+              <label for="unidadeNegocio" style="font-weight:500;">Unidade de Negócio</label>
+              <select id="unidadeNegocio" name="unidadeNegocio" class="elementor-field elementor-field-textual elementor-size-sm" required>
+                <option value="">Selecione</option>
+                <option value="aguas-do-rio">Águas do Rio</option>
+                <option value="prolagos">Prolagos</option>
+                <option value="ambiental-ms">Ambiental MS</option>
+              </select>
+            </div>
+            <div class="elementor-field-group" style="margin-bottom:18px;">
+              <label for="municipio" style="font-weight:500;">Município</label>
+              <select id="municipio" name="municipio" class="elementor-field elementor-field-textual elementor-size-sm" required>
+                <option value="">Selecione</option>
+                <option value="rio-de-janeiro">Rio de Janeiro</option>
+                <option value="niteroi">Niterói</option>
+                <option value="cabo-frio">Cabo Frio</option>
+                <option value="campo-grande">Campo Grande</option>
+              </select>
+            </div>
+            <div class="elementor-field-group" style="margin-bottom:18px;">
+              <label for="capex" style="font-weight:500;">Limite de Orçamento (CAPEX) <span style="color:#888;font-size:0.95em;">(R$ milhões)</span></label>
+              <input type="number" min="0" step="0.01" id="capex" name="capex" class="elementor-field elementor-field-textual elementor-size-sm" placeholder="Ex: 100" required />
+            </div>
+            <div class="elementor-field-group" style="margin-bottom:22px;">
+              <label for="metaCobertura" style="font-weight:500;">Meta de Cobertura (%)</label>
+              <input type="number" min="0" max="100" step="0.1" id="metaCobertura" name="metaCobertura" class="elementor-field elementor-field-textual elementor-size-sm" placeholder="Ex: 85" required />
+            </div>
+            <div class="elementor-field-group" style="margin-bottom:18px;">
+              <label style="font-weight:500;">Calibração Manual</label>
+              <div class="calibracao-lista" aria-label="Lista de obras para priorização">
+                <div class="calibracao-item">
+                  <input type="checkbox" id="obra1" name="calibracao[]" value="ETE Jacarepaguá" />
+                  <label for="obra1">ETE Jacarepaguá (Expansão)</label>
+                </div>
+                <div class="calibracao-item">
+                  <input type="checkbox" id="obra2" name="calibracao[]" value="Rede Coleta - Bairro Realengo" />
+                  <label for="obra2">Rede Coleta - Bairro Realengo</label>
+                </div>
+                <div class="calibracao-item">
+                  <input type="checkbox" id="obra3" name="calibracao[]" value="Interligação Tronco Oeste" />
+                  <label for="obra3">Interligação Tronco Oeste</label>
+                </div>
+                <div class="calibracao-item">
+                  <input type="checkbox" id="obra4" name="calibracao[]" value="ETE Prolagos" />
+                  <label for="obra4">ETE Prolagos</label>
+                </div>
+                <div class="calibracao-item">
+                  <input type="checkbox" id="obra5" name="calibracao[]" value="Rede Coleta - Centro Niterói" />
+                  <label for="obra5">Rede Coleta - Centro Niterói</label>
+                </div>
+              </div>
+              <small style="color:#888;">Selecione obras para priorização forçada (ex: demandas políticas/planos municipais).</small>
+            </div>
+            <button type="submit" class="elementor-button elementor-size-sm" style="width:100%;margin-top:12px;">
+              <span class="elementor-button-content-wrapper">
+                <span class="elementor-button-text">Executar Simulação</span>
+              </span>
+            </button>
+          </form>
+        </aside>
+        <!-- Área de Resultados -->
+        <section style="flex:1;min-width:0;">
+          <div class="e-con-boxed">
+            <div class="e-con-inner">
+              <h2 style="font-size:1.2rem;color:#222;margin-bottom:18px;">Resultados da Simulação</h2>
+              <div id="resultadosSimulacao" class="resultados-area" aria-live="polite">
+                <p style="color:#888;">Os resultados da simulação aparecerão aqui após a execução.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="elementor elementor-26421 elementor-location-footer" style="background:#f5f7fa;padding:24px 0;margin-top:32px;">
+    <div class="elementor-element e-flex e-con-boxed e-con e-parent">
+      <div class="e-con-inner" style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:18px;">
+          <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/ae-verde.svg" alt="Aegea Verde" style="height:32px;" />
+          <span style="font-size:1.1rem;color:#0027BD;font-weight:600;">Aegea</span>
+        </div>
+        <nav aria-label="Rodapé">
+          <a href="https://www.aegea.com.br/quem-somos/" style="margin-right:16px;color:#222;">Quem Somos</a>
+          <a href="https://www.aegea.com.br/unidades/" style="margin-right:16px;color:#222;">Unidades</a>
+          <a href="https://www.aegea.com.br/contato/" style="color:#222;">Contato</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Validação dos campos e integração
+    function executarSimulacao() {
+      // Coleta dados do formulário
+      const unidade = document.getElementById('unidadeNegocio').value;
+      const municipio = document.getElementById('municipio').value;
+      const capex = parseFloat(document.getElementById('capex').value);
+      const meta = parseFloat(document.getElementById('metaCobertura').value);
+      const obras = Array.from(document.querySelectorAll('input[name="calibracao[]"]:checked')).map(e=>e.value);
+      // Validações
+      if (!unidade || !municipio || isNaN(capex) || isNaN(meta)) {
+        alert('Preencha todos os campos obrigatórios.');
+        return false;
+      }
+      if (capex < 0) {
+        alert('O orçamento CAPEX não pode ser negativo.');
+        return false;
+      }
+      if (meta < 0 || meta > 100) {
+        alert('A meta de cobertura deve estar entre 0 e 100%.');
+        return false;
+      }
+      // Simulação fake para protótipo
+      sessionStorage.setItem('simulacao', JSON.stringify({unidade, municipio, capex, meta, obras}));
+      window.location.href = 'prototipos/resultados-simulacao.html';
+      return false;
+    }
+    // Testes de usabilidade: feedback visual
+    document.addEventListener('DOMContentLoaded', function() {
+      // Exemplo: ao mudar unidade, filtra municípios (simulação)
+      document.getElementById('unidadeNegocio').addEventListener('change', function() {
+        const municipios = {
+          'aguas-do-rio': ['Rio de Janeiro', 'Niterói'],
+          'prolagos': ['Cabo Frio'],
+          'ambiental-ms': ['Campo Grande']
+        };
+        const select = document.getElementById('municipio');
+        const val = this.value;
+        select.innerHTML = '<option value="">Selecione</option>';
+        if (municipios[val]) {
+          municipios[val].forEach(m=>{
+            const v = m.toLowerCase().replace(/ /g,'-');
+            select.innerHTML += `<option value="${v}">${m}</option>`;
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
