@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resultados da Simulação - Aegea</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008" media="all" />
+  <style>
+    .tabs-container {
+      display: flex;
+      flex-direction: column;
+      margin: 32px auto 0 auto;
+      max-width: 1100px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      padding: 0;
+    }
+    .tabs-header {
+      display: flex;
+      border-bottom: 2px solid #ececec;
+      background: #f7f7f7;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 18px 0;
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #0027BD;
+      cursor: pointer;
+      border: none;
+      background: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .tab-btn.active {
+      background: #fff;
+      color: #0027BD;
+      border-bottom: 3px solid #0027BD;
+    }
+    .tab-content {
+      display: none;
+      padding: 32px 24px 24px 24px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .metrics-cards {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .card-metric {
+      flex: 1 1 220px;
+      background: #f4f8fb;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 200px;
+    }
+    .card-metric .elementor-heading-title {
+      font-size: 1.1rem;
+      color: #0027BD;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .card-metric .metric-value {
+      font-size: 2rem;
+      color: #222;
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+    .results-table th, .results-table td {
+      padding: 12px 10px;
+      border-bottom: 1px solid #e0e0e0;
+      text-align: left;
+    }
+    .results-table th {
+      background: #f7f7f7;
+      color: #0027BD;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .results-table tr:last-child td {
+      border-bottom: none;
+    }
+    .actions-bar {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: #0027BD;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      background: #001a80;
+    }
+    .btn-outline {
+      background: #fff;
+      color: #0027BD;
+      border: 2px solid #0027BD;
+      border-radius: 4px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-outline:hover {
+      background: #f0f3ff;
+      color: #001a80;
+    }
+    @media (max-width: 900px) {
+      .metrics-cards {
+        flex-direction: column;
+        gap: 16px;
+      }
+      .card-metric {
+        width: 100%;
+      }
+    }
+    @media (max-width: 600px) {
+      .tabs-container {
+        padding: 0;
+      }
+      .tab-content {
+        padding: 18px 4px 12px 4px;
+      }
+      .metrics-cards {
+        gap: 8px;
+      }
+      .actions-bar {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body style="background: #f4f8fb;">
+  <a class="skip-link screen-reader-text" href="#content">Ir para o conteúdo</a>
+  <header class="elementor elementor-26397 elementor-location-header" style="background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+    <div class="e-con-full e-flex e-con e-parent" id="header" style="align-items:center;gap:24px;padding:18px 32px;max-width:1200px;margin:0 auto;">
+      <a href="/" aria-label="Página Inicial">
+        <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea" style="height:48px;width:auto;">
+      </a>
+      <nav style="margin-left:auto;">
+        <a href="/" class="elementor-item" style="margin-right:24px;color:#0027BD;text-decoration:none;font-weight:600;">Início</a>
+        <a href="simulacao-investimentos.html" class="elementor-item" style="color:#0027BD;text-decoration:none;font-weight:600;">Simulação</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content">
+    <div class="tabs-container">
+      <div class="tabs-header">
+        <button class="tab-btn active" id="tab-btn-faturamento" aria-controls="tab-faturamento" aria-selected="true">Cenário: Faturamento</button>
+        <button class="tab-btn" id="tab-btn-arrecadacao" aria-controls="tab-arrecadacao" aria-selected="false">Cenário: Arrecadação</button>
+      </div>
+      <div class="tab-content active" id="tab-faturamento" role="tabpanel" aria-labelledby="tab-btn-faturamento">
+        <div class="metrics-cards">
+          <div class="card-metric e-con e-child">
+            <div class="elementor-heading-title">VPL Total</div>
+            <div class="metric-value" id="vpl-total-faturamento">R$ 12.500.000</div>
+          </div>
+          <div class="card-metric e-con e-child">
+            <div class="elementor-heading-title">Cobertura Alcançada</div>
+            <div class="metric-value" id="cobertura-faturamento">87%</div>
+          </div>
+          <div class="card-metric e-con e-child">
+            <div class="elementor-heading-title">Número de Obras</div>
+            <div class="metric-value" id="num-obras-faturamento">6</div>
+          </div>
+          <div class="card-metric e-con e-child">
+            <div class="elementor-heading-title">CAPEX Utilizado</div>
+            <div class="metric-value" id="capex-faturamento">R$ 9.800.000</div>
+          </div>
+        </div>
+        <table class="results-table" aria-label="Obras Priorizadas - Faturamento">
+          <thead>
+            <tr>
+              <th>Nome da Obra</th>
+              <th>Custo</th>
+              <th>VPL</th>
+              <th>Ano de Execução</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ETE Central</td>
+              <td>R$ 3.200.000</td>
+              <td>R$ 5.000.000</td>
+              <td>2025</td>
+            </tr>
+            <tr>
+              <td>Rede Coletora Sul</td>
+              <td>R$ 1.800.000</td>
+              <td>R$ 2.200.000</td>
+              <td>2025</td>
+            </tr>
+            <tr>
+              <td>Interligação Sub-bacia 3</td>
+              <td>R$ 1.200.000</td>
+              <td>R$ 1.600.000</td>
+              <td>2026</td>
+            </tr>
+            <tr>
+              <td>Ampliação ETE Central</td>
+              <td>R$ 2.500.000</td>
+              <td>R$ 2.100.000</td>
+              <td>2027</td>
+            </tr>
+            <tr>
+              <td>Rede Coletora Norte</td>
+              <td>R$ 900.000</td>
+              <td>R$ 1.200.000</td>
+              <td>2027</td>
+            </tr>
+            <tr>
+              <td>Elevatória Bairro Novo</td>
+              <td>R$ 200.000</td>
+              <td>R$ 600.000</td>
+              <td>2028</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="actions-bar">
+          <button class="btn-primary" id="btn-exportar-faturamento" aria-label="Exportar relatório do cenário Faturamento">Exportar Relatório (PDF)</button>
+          <a href="simulacao-investimentos.html" class="btn-outline" id="btn-nova-simulacao-faturamento" aria-label="Nova Simulação" onclick="sessionStorage.clear();">Nova Simulação</a>
+          <a href="index.html" class="btn-outline" id="btn-voltar-inicio-faturamento" aria-label="Voltar ao Início">Voltar ao Início</a>
+        </div>
+      </div>
+      <div class="tab-content" id="tab-arrecadacao" role="tabpanel" aria-labelledby="tab-btn-arrecadacao">
+        <div class="metrics-cards">
+          <div class="card-metric e-con e-child">
+            <div class="elementor-heading-title">VPL Total</div>
+            <div class="metric-value" id="vpl-total-arrecadacao">R$ 11.300.000</div>
+          </div>
+          <div class="card-metric e-con e-child">
+            <div class="elementor-heading-title">Cobertura Alcançada</div>
+            <div class="metric-value" id="cobertura-arrecadacao">82%</div>
+          </div>
+          <div class="card-metric e-con e-child">
+            <div class="elementor-heading-title">Número de Obras</div>
+            <div class="metric-value" id="num-obras-arrecadacao">5</div>
+          </div>
+          <div class="card-metric e-con e-child">
+            <div class="elementor-heading-title">CAPEX Utilizado</div>
+            <div class="metric-value" id="capex-arrecadacao">R$ 8.900.000</div>
+          </div>
+        </div>
+        <table class="results-table" aria-label="Obras Priorizadas - Arrecadação">
+          <thead>
+            <tr>
+              <th>Nome da Obra</th>
+              <th>Custo</th>
+              <th>VPL</th>
+              <th>Ano de Execução</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ETE Central</td>
+              <td>R$ 3.200.000</td>
+              <td>R$ 4.400.000</td>
+              <td>2025</td>
+            </tr>
+            <tr>
+              <td>Rede Coletora Sul</td>
+              <td>R$ 1.800.000</td>
+              <td>R$ 1.900.000</td>
+              <td>2025</td>
+            </tr>
+            <tr>
+              <td>Interligação Sub-bacia 3</td>
+              <td>R$ 1.200.000</td>
+              <td>R$ 1.400.000</td>
+              <td>2026</td>
+            </tr>
+            <tr>
+              <td>Ampliação ETE Central</td>
+              <td>R$ 2.500.000</td>
+              <td>R$ 2.000.000</td>
+              <td>2027</td>
+            </tr>
+            <tr>
+              <td>Rede Coletora Norte</td>
+              <td>R$ 900.000</td>
+              <td>R$ 1.600.000</td>
+              <td>2027</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="actions-bar">
+          <button class="btn-primary" id="btn-exportar-arrecadacao" aria-label="Exportar relatório do cenário Arrecadação">Exportar Relatório (PDF)</button>
+          <a href="simulacao-investimentos.html" class="btn-outline" id="btn-nova-simulacao-arrecadacao" aria-label="Nova Simulação" onclick="sessionStorage.clear();">Nova Simulação</a>
+          <a href="index.html" class="btn-outline" id="btn-voltar-inicio-arrecadacao" aria-label="Voltar ao Início">Voltar ao Início</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="elementor elementor-26421 elementor-location-footer" style="background:#fff;margin-top:40px;padding:32px 0 0 0;box-shadow:0 -2px 8px rgba(0,0,0,0.03);">
+    <div class="e-con-boxed e-con e-parent" style="max-width:1200px;margin:0 auto;">
+      <div class="e-con-inner" style="display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between;">
+        <div>
+          <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/ae-verde.svg" alt="Logo ESG" style="height:38px;width:auto;">
+        </div>
+        <div>
+          <span style="color:#0027BD;font-weight:600;">Aegea Saneamento &copy; 2025</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Alternância de abas
+    const tabBtnFaturamento = document.getElementById('tab-btn-faturamento');
+    const tabBtnArrecadacao = document.getElementById('tab-btn-arrecadacao');
+    const tabFaturamento = document.getElementById('tab-faturamento');
+    const tabArrecadacao = document.getElementById('tab-arrecadacao');
+    tabBtnFaturamento.addEventListener('click', function() {
+      tabBtnFaturamento.classList.add('active');
+      tabBtnArrecadacao.classList.remove('active');
+      tabFaturamento.classList.add('active');
+      tabArrecadacao.classList.remove('active');
+      tabBtnFaturamento.setAttribute('aria-selected', 'true');
+      tabBtnArrecadacao.setAttribute('aria-selected', 'false');
+    });
+    tabBtnArrecadacao.addEventListener('click', function() {
+      tabBtnFaturamento.classList.remove('active');
+      tabBtnArrecadacao.classList.add('active');
+      tabFaturamento.classList.remove('active');
+      tabArrecadacao.classList.add('active');
+      tabBtnFaturamento.setAttribute('aria-selected', 'false');
+      tabBtnArrecadacao.setAttribute('aria-selected', 'true');
+    });
+    // Exportar relatório (simulação)
+    function exportarRelatorio(cenario) {
+      alert('Relatório do cenário ' + cenario + ' exportado com sucesso! (Funcionalidade simulada)');
+    }
+    document.getElementById('btn-exportar-faturamento').addEventListener('click', function() {
+      exportarRelatorio('Faturamento');
+    });
+    document.getElementById('btn-exportar-arrecadacao').addEventListener('click', function() {
+      exportarRelatorio('Arrecadação');
+    });
+    // Botão Nova Simulação limpa sessionStorage (já feito via onclick)
+  </script>
+</body>
+</html>
