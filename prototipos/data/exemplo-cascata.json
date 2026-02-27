@@ -1,0 +1,20 @@
+[
+  {
+    "id_sub_bacia": "sb_01",
+    "nome": "Sub-bacia Central",
+    "proxima_sub_bacia": null,
+    "ete_destino": "ETE Central"
+  },
+  {
+    "id_sub_bacia": "sb_02",
+    "nome": "Sub-bacia Sul",
+    "proxima_sub_bacia": "sb_01",
+    "ete_destino": "ETE Central"
+  },
+  {
+    "id_sub_bacia": "sb_03",
+    "nome": "Sub-bacia Norte",
+    "proxima_sub_bacia": "sb_01",
+    "ete_destino": "ETE Central"
+  }
+]
