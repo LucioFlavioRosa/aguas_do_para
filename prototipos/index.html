@@ -1,189 +1,98 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-	<title>Seja Parceiro - Aegea</title>
-	<link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
-	<link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
-	<link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
-	<link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
-	<link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
-	<link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
-	<link rel='stylesheet' id='elementor-post-26421-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004' media='all' />
-	<link rel='stylesheet' id='elementor-post-27263-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-27263.css?ver=1766510004' media='all' />
-	<link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
-	<link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
-	<link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" sizes="192x192" />
-	<link rel="apple-touch-icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" />
-	<meta name="msapplication-TileImage" content="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard - Prioriza Investimentos SES</title>
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-25733-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-25733.css?ver=1766510003' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26421-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    body { background: #f7f8fa; }
+    .dashboard-container { max-width: 1200px; margin: 40px auto; padding: 24px; background: #fff; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+    .main-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+    .main-header img { height: 48px; }
+    nav.menu-principal { display: flex; gap: 18px; }
+    nav.menu-principal a { color: #0027BD; text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 8px; transition: background 0.2s; }
+    nav.menu-principal a:hover, nav.menu-principal a.active { background: #eaf2ff; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 40px; }
+    .cardVeja.kpi { cursor: default; border-left: 6px solid #0027BD; }
+    .cardVeja.kpi .kpi-title { font-size: 1.05rem; color: #666; margin-bottom: 8px; }
+    .cardVeja.kpi .kpi-value { font-size: 2.1rem; color: #0027BD; font-weight: 700; }
+    .acoes-rapidas { display: flex; gap: 24px; margin-bottom: 40px; }
+    .acoes-rapidas .disparar-btn { font-size: 1.15rem; padding: 20px 48px; border-radius: 12px; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 8px rgba(0,39,189,0.08); }
+    .acoes-rapidas .disparar-btn svg { width: 24px; height: 24px; }
+    .main-footer { text-align: center; color: #888; font-size: 1rem; margin-top: 48px; padding: 18px 0 0 0; border-top: 1px solid #e2e5f0; }
+    @media (max-width: 700px) { .dashboard-container { padding: 8px; } .acoes-rapidas { flex-direction: column; gap: 12px; } }
+  </style>
 </head>
-<body class="wp-singular page-template-default page wp-custom-logo wp-embed-responsive wp-theme-hello-elementor hello-elementor-default elementor-default elementor-kit-25733">
-<a class="skip-link screen-reader-text" href="#content">Ir para o conteúdo</a>
-<header data-elementor-type="header" data-elementor-id="26397" class="elementor elementor-26397 elementor-location-header" data-elementor-post-type="elementor_library">
-	<div class="elementor-element elementor-element-6537c5b e-con-full e-flex e-con e-parent" id="header">
-		<div class="elementor-element elementor-element-3395f7bb e-con-full e-flex e-con e-child">
-			<div class="elementor-element elementor-element-3bb71253 e-con-full e-flex e-con e-child">
-				<div class="elementor-element elementor-element-2268b034 btIcone elementor-hidden-mobile elementor-widget elementor-widget-button">
-					<div class="elementor-widget-container">
-						<div class="elementor-button-wrapper">
-							<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.aegea.com.br/unidades/">
-								<span class="elementor-button-content-wrapper">
-									<span class="elementor-button-text">UNIDADES</span>
-								</span>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="elementor-element elementor-element-2250cf6c btIcone elementor-hidden-mobile elementor-widget elementor-widget-button">
-					<div class="elementor-widget-container">
-						<div class="elementor-button-wrapper">
-							<a class="elementor-button elementor-button-link elementor-size-sm" href="https://institutoaegea.com.br/" target="_blank">
-								<span class="elementor-button-content-wrapper">
-									<span class="elementor-button-text">INSTITUTO AEGEA</span>
-								</span>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="elementor-element elementor-element-48c98011 btIcone elementor-widget elementor-widget-button">
-					<div class="elementor-widget-container">
-						<div class="elementor-button-wrapper">
-							<a class="elementor-button elementor-button-link elementor-size-sm" href="https://ri.aegea.com.br/" target="_blank">
-								<span class="elementor-button-content-wrapper">
-									<span class="elementor-button-text">INVESTIDORES</span>
-								</span>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="elementor-element elementor-element-f965af3 cpel-switcher--layout-horizontal elementor-widget elementor-widget-polylang-language-switcher">
-					<div class="elementor-widget-container">
-						<nav class="cpel-switcher__nav"><ul class="cpel-switcher__list"><li class="cpel-switcher__lang"><a lang="en-US" hreflang="en-US" href="https://www.aegea.com.br/en/contact/"><span class="cpel-switcher__flag cpel-switcher__flag--us"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAmVBMVEViZsViZMJiYrf9gnL8eWrlYkjgYkjZYkj8/PujwPybvPz4+PetraBEgfo+fvo3efkydfkqcvj8Y2T8UlL8Q0P8MzP9k4Hz8/Lu7u4DdPj9/VrKysI9fPoDc/EAZ7z7IiLHYkjp6ekCcOTk5OIASbfY/v21takAJrT5Dg6sYkjc3Nn94t2RkYD+y8KeYkjs/v7l5fz0dF22YkjWvcOLAAAAgElEQVR4AR2KNULFQBgGZ5J13KGGKvc/Cw1uPe62eb9+Jr1EUBFHSgxxjP2Eca6AfUSfVlUfBvm1Ui1bqafctqMndNkXpb01h5TLx4b6TIXgwOCHfjv+/Pz+5vPRw7txGWT2h6yO0/GaYltIp5PT1dEpLNPL/SdWjYjAAZtvRPgHJX4Xio+DSrkAAAAASUVORK5CYII=" alt="English" width="16" height="11" style="width: 16px; height: 11px;" /></span><span class="cpel-switcher__code">EN</span></a></li></ul></nav>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="elementor-element elementor-element-278b15dd e-con-full e-flex e-con e-child" id="menuHeader">
-			<div class="elementor-element elementor-element-4e1bc227 e-con-full e-flex e-con e-child">
-				<div class="elementor-element elementor-element-72d5a429 elementor-widget elementor-widget-theme-site-logo elementor-widget-image">
-					<div class="elementor-widget-container">
-						<a href="https://www.aegea.com.br">
-							<img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" title="aegea" alt="aegea" loading="lazy" />
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="elementor-element elementor-element-274b856 e-con-full e-flex e-con e-child">
-				<!-- Menu principal omitido para foco na landing -->
-			</div>
-		</div>
-	</div>
-</header>
-<main id="content" class="elementor elementor-landing">
-	<section class="elementor-element elementor-element-landing-hero e-con-full e-flex e-con e-parent" style="background: linear-gradient(135deg, #e3f0ff 0%, #f8fafd 100%); padding: 48px 0;">
-		<div class="elementor-element e-con-boxed e-con e-child" style="max-width: 900px; margin: 0 auto;">
-			<div class="e-con-inner" style="display: flex; flex-direction: column; align-items: center;">
-				<img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" style="width: 160px; margin-bottom: 32px;" />
-				<h1 class="elementor-heading-title elementor-size-default" style="font-size: 2.5rem; text-align: center; margin-bottom: 16px; color: #0027BD;">Seja Parceiro Águas do Pará</h1>
-				<p style="font-size: 1.25rem; text-align: center; max-width: 700px; margin-bottom: 32px; color: #222;">
-					Ganhe uma renda extra no seu tempo livre! Cadastre-se para prestar serviços sob demanda para a Aegea, no modelo Uber. Simples, rápido e 100% digital. Clique abaixo e inicie seu cadastro via WhatsApp.
-				</p>
-				<a href="bloco1-whatsapp-onboarding.html?utm_source=landing" class="elementor-button elementor-button-link elementor-size-lg" style="background: #0027BD; color: #fff; padding: 18px 48px; border-radius: 8px; font-size: 1.25rem; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 12px;">
-					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true" focusable="false"><circle cx="14" cy="14" r="14" fill="#25D366"/><path d="M21.5 20.5L19.5 18.5M10.5 15.5C12.5 17.5 15.5 17.5 17.5 15.5C19.5 13.5 19.5 10.5 17.5 8.5C15.5 6.5 12.5 6.5 10.5 8.5C8.5 10.5 8.5 13.5 10.5 15.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					Quero ser Parceiro
-				</a>
-				<p style="margin-top: 24px; color: #666; font-size: 1rem; text-align: center; max-width: 600px;">
-					Após clicar, você será direcionado para iniciar seu cadastro via WhatsApp. Todo o processo de cadastro e prestação de serviço ocorre pelo WhatsApp.
-				</p>
-			</div>
-		</div>
-	</section>
-</main>
-<footer data-elementor-type="footer" data-elementor-id="26421" class="elementor elementor-26421 elementor-location-footer" data-elementor-post-type="elementor_library">
-	<div class="elementor-element elementor-element-d5f6632 e-flex e-con-boxed e-con e-parent">
-		<div class="e-con-inner">
-			<div class="elementor-element elementor-element-fac3436 elementor-widget elementor-widget-heading">
-				<div class="elementor-widget-container">
-					<h3 class="elementor-heading-title elementor-size-default">Veja também</h3>
-				</div>
-			</div>
-			<div class="elementor-element elementor-element-3e871e8 elementor-widget elementor-widget-jet-listing-grid">
-				<div class="elementor-widget-container">
-					<!-- Omitido: grid de links para foco na landing -->
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="elementor-element elementor-element-5b9d0821 e-flex e-con-boxed e-con e-child">
-		<div class="e-con-inner">
-			<div class="elementor-element elementor-element-c8210e9 e-con-full e-flex e-con e-child">
-				<div class="elementor-element elementor-element-2b76d581 elementor-widget elementor-widget-text-editor">
-					<div class="elementor-widget-container">
-						<p><strong>® 2025 AEGEA</strong>. Todos os direitos reservados.</p>
-					</div>
-				</div>
-			</div>
-			<div class="elementor-element elementor-element-709730a3 e-con-full e-flex e-con e-child">
-				<div class="elementor-element elementor-element-3809e70d elementor-widget elementor-widget-button">
-					<div class="elementor-widget-container">
-						<div class="elementor-button-wrapper">
-							<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.aegea.com.br/termos-gerais-de-uso-de-sites-e-aplicativos-da-aegea/" target="_blank">
-								<span class="elementor-button-content-wrapper">
-									<span class="elementor-button-text">Termos Gerais de Uso de Sites e Aplicativos</span>
-								</span>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="elementor-element elementor-element-71d65429 elementor-widget elementor-widget-button">
-					<div class="elementor-widget-container">
-						<div class="elementor-button-wrapper">
-							<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.aegea.com.br/politica-de-privacidade-e-protecao-de-dados-da-aegea/" target="_blank">
-								<span class="elementor-button-content-wrapper">
-									<span class="elementor-button-text">Política de Privacidade e Proteção de Dados</span>
-								</span>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="elementor-element elementor-element-66197a21 e-con-full e-flex e-con e-child">
-				<div class="elementor-element elementor-element-610f0abf e-grid-align-left elementor-shape-rounded elementor-grid-0 elementor-widget elementor-widget-social-icons">
-					<div class="elementor-widget-container">
-						<div class="elementor-social-icons-wrapper elementor-grid" role="list">
-							<span class="elementor-grid-item" role="listitem">
-								<a class="elementor-icon elementor-social-icon elementor-social-icon-facebook elementor-repeater-item-51963ae" href="https://pt-br.facebook.com/aegeasaneamento/" target="_blank" aria-label="Facebook">
-									<span class="elementor-screen-only">Facebook</span>
-									<svg aria-hidden="true" class="e-font-icon-svg e-fab-facebook" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"></path></svg>
-								</a>
-							</span>
-							<span class="elementor-grid-item" role="listitem">
-								<a class="elementor-icon elementor-social-icon elementor-social-icon-youtube elementor-repeater-item-bacb281" href="https://www.youtube.com/@aegeasaneamento" target="_blank" aria-label="Youtube">
-									<span class="elementor-screen-only">Youtube</span>
-									<svg aria-hidden="true" class="e-font-icon-svg e-fab-youtube" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>
-								</a>
-							</span>
-							<span class="elementor-grid-item" role="listitem">
-								<a class="elementor-icon elementor-social-icon elementor-social-icon-linkedin elementor-repeater-item-73dd37f" href="https://www.linkedin.com/company/aegeasaneamento/?viewAsMember=true" target="_blank" aria-label="Linkedin">
-									<span class="elementor-screen-only">Linkedin</span>
-									<svg aria-hidden="true" class="e-font-icon-svg e-fab-linkedin" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
-								</a>
-							</span>
-							<span class="elementor-grid-item" role="listitem">
-								<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-49902dd" href="https://www.instagram.com/aegea.saneamento/" target="_blank" aria-label="Instagram">
-									<span class="elementor-screen-only">Instagram</span>
-									<svg aria-hidden="true" class="e-font-icon-svg e-fab-instagram" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>
-								</a>
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
+<body class="wp-singular">
+  <div class="dashboard-container">
+    <header class="main-header">
+      <div style="display:flex;align-items:center;gap:18px;">
+        <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea">
+        <h1 style="font-size:1.5rem;color:#0027BD;margin:0;">Prioriza Investimentos SES</h1>
+      </div>
+      <nav class="menu-principal" aria-label="Menu principal">
+        <a href="index.html" class="active">Dashboard</a>
+        <a href="bloco2-gestao-demandas.html">Cadastro de Sub-bacias</a>
+        <a href="cadastro-componentes.html">Cadastro de Componentes</a>
+        <a href="cadastro-sistemas.html">Cadastro de Sistemas</a>
+        <a href="visualizacao-unifilar.html">Visualização Unifilar</a>
+        <a href="simulacao.html">Simulação</a>
+        <a href="comparacao-cenarios.html">Comparação de Cenários</a>
+      </nav>
+    </header>
+    <main>
+      <section aria-label="Resumo Executivo" style="margin-bottom:32px;">
+        <h2 style="color:#222;font-size:1.2rem;margin-bottom:18px;">Resumo Executivo</h2>
+        <div class="kpi-grid">
+          <div class="cardVeja kpi" tabindex="0" aria-label="Total de Sub-bacias Cadastradas">
+            <div class="kpi-title">Total de Sub-bacias Cadastradas</div>
+            <div class="kpi-value" id="kpi-subbacias">38</div>
+          </div>
+          <div class="cardVeja kpi" tabindex="0" aria-label="Total de Sistemas">
+            <div class="kpi-title">Total de Sistemas</div>
+            <div class="kpi-value" id="kpi-sistemas">7</div>
+          </div>
+          <div class="cardVeja kpi" tabindex="0" aria-label="Última Simulação Executada">
+            <div class="kpi-title">Última Simulação Executada</div>
+            <div class="kpi-value" id="kpi-ultima-simulacao">13/02/2026</div>
+          </div>
+          <div class="cardVeja kpi" tabindex="0" aria-label="VPL Médio">
+            <div class="kpi-title">VPL Médio</div>
+            <div class="kpi-value" id="kpi-vpl">R$ 12.480.000</div>
+          </div>
+        </div>
+      </section>
+      <section aria-label="Ações Rápidas">
+        <h2 style="color:#222;font-size:1.2rem;margin-bottom:18px;">Ações Rápidas</h2>
+        <div class="acoes-rapidas">
+          <a href="simulacao.html" class="disparar-btn" aria-label="Nova Simulação">
+            <svg fill="none" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2"/><path d="M12 7v5l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Nova Simulação
+          </a>
+          <button type="button" class="disparar-btn" aria-label="Importar Dados" onclick="alert('Funcionalidade de importação em desenvolvimento.')">
+            <svg fill="none" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M8 12l4 4 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="18" width="16" height="2" rx="1" fill="#fff"/></svg>
+            Importar Dados
+          </button>
+        </div>
+      </section>
+    </main>
+    <footer class="main-footer">
+      <p>&copy; 2026 Aegea Saneamento. Protótipo Prioriza SES &mdash; v0.1 | Desenvolvido para Projeto Algoritmo de Priorização de Investimentos SES</p>
+    </footer>
+  </div>
+  <script>
+    // Futuro: scripts de dashboard podem ser incluídos aqui
+  </script>
 </body>
 </html>
