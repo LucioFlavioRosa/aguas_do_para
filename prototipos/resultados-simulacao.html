@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resultados da Simulação - Portfólio de Investimentos</title>
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-25733-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-25733.css?ver=1766510003' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26421-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    .metrics-cards { display: flex; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
+    .metric-card { background: #fff; border-radius: 16px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); padding: 24px 32px; min-width: 220px; flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
+    .metric-title { font-size: 1rem; color: #0027BD; font-weight: 700; margin-bottom: 6px; }
+    .metric-value { font-size: 1.6rem; color: #222; font-weight: 600; }
+    .result-table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+    .result-table th, .result-table td { padding: 12px 8px; border-bottom: 1px solid #e2e5f0; text-align: left; font-size: 1rem; }
+    .result-table th { background: #f3f6fb; color: #0027BD; font-weight: 700; }
+    .result-table tr.selected { background: #eaf2ff; }
+    .chart-container { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 32px; }
+    .chart-box { background: #fff; border-radius: 16px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); padding: 16px; flex: 1 1 320px; min-width: 320px; }
+    .actions-bar { display: flex; gap: 16px; margin-bottom: 24px; }
+    .btn-export { background: #0027BD; color: #fff; border: none; border-radius: 8px; padding: 12px 28px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn-export:disabled { background: #abb8c3; cursor: not-allowed; }
+    @media (max-width: 900px) { .metrics-cards { flex-direction: column; } .chart-container { flex-direction: column; } }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="wp-singular">
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Resultados da Simulação</h1>
+      <nav>
+        <a href="cadastro-sistemas.html">Cadastro de Sistemas</a> |
+        <a href="visualizacao-cascatas.html">Visualização de Cascatas</a>
+      </nav>
+    </div>
+    <div class="metrics-cards">
+      <div class="metric-card">
+        <div class="metric-title">VPL Faturamento</div>
+        <div class="metric-value" id="vpl-faturamento">R$ 12.500.000</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">VPL Arrecadação</div>
+        <div class="metric-value" id="vpl-arrecadacao">R$ 10.800.000</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">CAPEX Total</div>
+        <div class="metric-value" id="capex-total">R$ 6.200.000</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Cobertura Atingida</div>
+        <div class="metric-value" id="cobertura">87%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Extensão de Rede Total</div>
+        <div class="metric-value" id="extensao-rede">35 km</div>
+      </div>
+    </div>
+    <div class="actions-bar">
+      <button class="btn-export" onclick="exportarTabela('excel')" aria-label="Exportar para Excel">Exportar Excel</button>
+      <button class="btn-export" onclick="exportarTabela('pdf')" aria-label="Exportar para PDF">Exportar PDF</button>
+    </div>
+    <div class="chart-container">
+      <div class="chart-box">
+        <canvas id="graficoBarra" aria-label="Gráfico de Investimento por Sub-bacia" role="img"></canvas>
+      </div>
+      <div class="chart-box">
+        <canvas id="graficoPizza" aria-label="Distribuição de CAPEX por Componente" role="img"></canvas>
+      </div>
+    </div>
+    <section aria-label="Tabela Detalhada de Resultados">
+      <h2 style="color:#222;font-size:1.2rem;margin-bottom:12px;">Detalhamento por Sub-bacia / Componente</h2>
+      <table class="result-table" id="tabela-resultados">
+        <thead>
+          <tr>
+            <th>Ordem</th>
+            <th>Sub-bacia</th>
+            <th>Componente</th>
+            <th>Investimento (R$)</th>
+            <th>Receita Projetada (R$)</th>
+            <th>Cobertura (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>SB-05</td>
+            <td>Rede Coletora</td>
+            <td>1.200.000</td>
+            <td>2.000.000</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>SB-02</td>
+            <td>Elevatória</td>
+            <td>900.000</td>
+            <td>1.500.000</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>SB-01</td>
+            <td>ETE</td>
+            <td>2.500.000</td>
+            <td>3.000.000</td>
+            <td>20</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>SB-03</td>
+            <td>Linha de Recalque</td>
+            <td>800.000</td>
+            <td>1.200.000</td>
+            <td>8</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>SB-04</td>
+            <td>Coletor Tronco</td>
+            <td>800.000</td>
+            <td>1.100.000</td>
+            <td>7</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <script>
+    // Gráfico de barras: Investimento por Sub-bacia
+    const ctxBarra = document.getElementById('graficoBarra').getContext('2d');
+    new Chart(ctxBarra, {
+      type: 'bar',
+      data: {
+        labels: ['SB-05', 'SB-02', 'SB-01', 'SB-03', 'SB-04'],
+        datasets: [{
+          label: 'Investimento (R$)',
+          data: [1200000, 900000, 2500000, 800000, 800000],
+          backgroundColor: '#0027BD'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } }
+      }
+    });
+    // Gráfico de pizza: Distribuição CAPEX por componente
+    const ctxPizza = document.getElementById('graficoPizza').getContext('2d');
+    new Chart(ctxPizza, {
+      type: 'pie',
+      data: {
+        labels: ['Rede Coletora', 'Elevatória', 'ETE', 'Linha de Recalque', 'Coletor Tronco'],
+        datasets: [{
+          data: [1200000, 900000, 2500000, 800000, 800000],
+          backgroundColor: ['#0027BD', '#00d084', '#ff4d4d', '#f3b700', '#6666ff']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+    // Exportação (dummy)
+    function exportarTabela(tipo) {
+      alert('Funcionalidade de exportação para ' + tipo.toUpperCase() + ' em desenvolvimento.');
+    }
+  </script>
+</body>
+</html>
