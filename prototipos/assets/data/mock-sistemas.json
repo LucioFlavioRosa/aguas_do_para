@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nome_sistema": "Sistema Belém",
+    "ete": "ETE Central",
+    "vazao_operacao_ls": 110,
+    "capacidade_nominal_ls": 150,
+    "capex_expansao_ete": 3200000,
+    "subbacias_associadas": [1,2,5,6]
+  },
+  {
+    "id": 2,
+    "nome_sistema": "Sistema Ananindeua",
+    "ete": "ETE Central",
+    "vazao_operacao_ls": 75,
+    "capacidade_nominal_ls": 120,
+    "capex_expansao_ete": 2100000,
+    "subbacias_associadas": [3,4]
+  },
+  {
+    "id": 3,
+    "nome_sistema": "Sistema Marituba",
+    "ete": "ETE Leste",
+    "vazao_operacao_ls": 60,
+    "capacidade_nominal_ls": 90,
+    "capex_expansao_ete": 1800000,
+    "subbacias_associadas": [7,8]
+  },
+  {
+    "id": 4,
+    "nome_sistema": "Sistema Icoaraci",
+    "ete": "ETE Oeste",
+    "vazao_operacao_ls": 55,
+    "capacidade_nominal_ls": 80,
+    "capex_expansao_ete": 1500000,
+    "subbacias_associadas": [9,10]
+  }
+]
