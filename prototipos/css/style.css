@@ -1,0 +1,191 @@
+/*
+  style.css - Protótipo Aegea
+  Paleta principal: Azul #0027BD, Branco #FFFFFF
+  Fonte base: 'Arial', 'Helvetica Neue', Helvetica, sans-serif
+*/
+:root {
+  --azul-aegea: #0027bd;
+  --branco: #ffffff;
+  --cinza-claro: #f5f6fa;
+  --cinza-medio: #e5e7eb;
+  --cinza-escuro: #444;
+  --borda-radius: 8px;
+  --espacamento: 24px;
+  --fonte-base: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+body {
+  font-family: var(--fonte-base);
+  background: var(--cinza-claro);
+  color: var(--cinza-escuro);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--espacamento);
+}
+
+header, footer {
+  background: var(--azul-aegea);
+  color: var(--branco);
+  padding: 16px 0;
+}
+
+header a, footer a {
+  color: var(--branco);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--azul-aegea);
+  margin-top: 0;
+}
+
+.btn-primary, .elementor-button, button[type="submit"] {
+  background: var(--azul-aegea);
+  color: var(--branco) !important;
+  border: none;
+  border-radius: var(--borda-radius);
+  padding: 12px 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover, .elementor-button:hover, button[type="submit"]:hover {
+  background: #001a80;
+}
+
+.card, .elementor-widget-container, .table-card {
+  background: var(--branco);
+  border-radius: var(--borda-radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 24px;
+  margin-bottom: var(--espacamento);
+}
+
+.table-card {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  background: var(--branco);
+}
+thead {
+  background: var(--azul-aegea);
+  color: var(--branco);
+}
+th, td {
+  padding: 12px 8px;
+  border: 1px solid var(--cinza-medio);
+  text-align: left;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--cinza-medio);
+  border-radius: var(--borda-radius);
+  font-size: 1rem;
+  margin-bottom: 16px;
+  font-family: var(--fonte-base);
+  background: #fff;
+  box-sizing: border-box;
+}
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--azul-aegea);
+  border-color: var(--azul-aegea);
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--azul-aegea);
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+/* Cards de Unidades/Componentes */
+.card-unidade {
+  border-left: 6px solid var(--azul-aegea);
+  margin-bottom: var(--espacamento);
+  padding: 20px 24px;
+  background: var(--branco);
+  border-radius: var(--borda-radius);
+  transition: box-shadow 0.2s;
+}
+.card-unidade:hover {
+  box-shadow: 0 4px 16px rgba(0,39,189,0.08);
+}
+
+/* Tabela responsiva */
+@media (max-width: 800px) {
+  .container {
+    padding: 12px;
+  }
+  .card, .card-unidade {
+    padding: 14px;
+  }
+  th, td {
+    padding: 8px 4px;
+  }
+}
+
+/* Modais */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background: var(--branco);
+  margin: 10% auto;
+  padding: 32px;
+  border-radius: var(--borda-radius);
+  max-width: 500px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+}
+.close-modal {
+  float: right;
+  font-size: 1.5rem;
+  color: var(--azul-aegea);
+  cursor: pointer;
+}
+
+/* Acessibilidade */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 999;
+}
+.skip-link:focus {
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  background: var(--azul-aegea);
+  color: var(--branco);
+  padding: 8px 16px;
+  border-radius: var(--borda-radius);
+}
