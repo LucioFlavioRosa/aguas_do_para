@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visualização de Cascatas - Portfólio de Investimentos</title>
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-25733-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-25733.css?ver=1766510003' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26421-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.esm.min.mjs"></script>
+  <style>
+    .mermaid { background: #fff; border-radius: 16px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); padding: 24px; margin-bottom: 24px; }
+    .filtros-cascata { margin-bottom: 24px; }
+    .filtros-cascata label { font-weight: 600; color: #0027BD; margin-right: 12px; }
+    .legenda-cascata { background: #f3f6fb; border-radius: 8px; padding: 12px 18px; margin-bottom: 18px; display: inline-block; }
+  </style>
+</head>
+<body class="wp-singular">
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Visualização de Cascatas (Unifilar)</h1>
+      <nav>
+        <a href="resultados-simulacao.html">Resultados da Simulação</a> |
+        <a href="cadastro-sistemas.html">Cadastro de Sistemas</a>
+      </nav>
+    </div>
+    <form class="filtros-cascata" aria-label="Filtro de Sistema">
+      <label for="sistemaSelect">Sistema:</label>
+      <select id="sistemaSelect" onchange="trocaCascata()">
+        <option value="1">Sistema Belém</option>
+        <option value="2">Sistema Ananindeua</option>
+      </select>
+    </form>
+    <div class="legenda-cascata">
+      <strong>Legenda:</strong> <span style="color:#0027BD;">Sub-bacia</span>, <span style="color:#ff4d4d;">ETE</span>, <span style="color:#00d084;">Fluxo de Transporte</span>
+    </div>
+    <div id="mermaid-cascata" class="mermaid" aria-label="Diagrama de Cascata" tabindex="0">
+      %% Diagrama padrão (Sistema Belém)
+      graph TD
+        SB05[Sub-Bacia-05] --> SB02[Sub-Bacia-02]
+        SB06[Sub-Bacia-06] --> SB02
+        SB02 --> SB01[Sub-Bacia-01]
+        SB04[Sub-Bacia-04] --> SB03[Sub-Bacia-03]
+        SB03 --> ETE[ETE]
+        SB01 --> ETE
+    </div>
+  </div>
+  <script>
+    // Troca diagrama conforme sistema selecionado
+    function trocaCascata() {
+      const select = document.getElementById('sistemaSelect');
+      const mermaidDiv = document.getElementById('mermaid-cascata');
+      if (select.value === '1') {
+        mermaidDiv.textContent = `graph TD\n  SB05[Sub-Bacia-05] --> SB02[Sub-Bacia-02]\n  SB06[Sub-Bacia-06] --> SB02\n  SB02 --> SB01[Sub-Bacia-01]\n  SB04[Sub-Bacia-04] --> SB03[Sub-Bacia-03]\n  SB03 --> ETE[ETE]\n  SB01 --> ETE`;
+      } else {
+        mermaidDiv.textContent = `graph TD\n  SB10[Sub-Bacia-10] --> SB12[Sub-Bacia-12]\n  SB11[Sub-Bacia-11] --> SB12\n  SB12 --> ETE2[ETE Ananindeua]`;
+      }
+      window.mermaid?.run();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      window.mermaid?.run();
+    });
+  </script>
+</body>
+</html>
