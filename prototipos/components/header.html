@@ -1,169 +1,86 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
-  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
-  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
-  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
-  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
-  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/widget-nav-menu.min.css?ver=3.32.5" media="all" />
-  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/widget-button.min.css?ver=3.32.5" media="all" />
-  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/connect-polylang-elementor/assets/css/language-switcher.min.css?ver=2.5.3" media="all" />
-  <title>Header - Componente Reutilizável</title>
-  <style>
-    .header-nav .elementor-nav-menu {
-      display: flex;
-      gap: 32px;
-      align-items: center;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .header-nav .elementor-nav-menu li {
-      display: inline-block;
-    }
-    .header-nav .elementor-nav-menu a {
-      color: #0027BD;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      font-weight: 500;
-      transition: background 0.2s, color 0.2s;
-    }
-    .header-nav .elementor-nav-menu a.active,
-    .header-nav .elementor-nav-menu a:focus {
-      background: #e6ecfa;
-      color: #0027BD;
-      font-weight: bold;
-    }
-    .header-nav .elementor-nav-menu a[aria-disabled="true"] {
-      pointer-events: none;
-      opacity: 0.5;
-    }
-    .header-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
-      min-height: 72px;
-      background: #fff;
-      border-bottom: 1px solid #e5e5e5;
-    }
-    .header-logo img {
-      height: 48px;
-      width: auto;
-      vertical-align: middle;
-    }
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-    .header-search {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      display: flex;
-      align-items: center;
-    }
-    .header-lang-switcher {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .header-lang-switcher a {
-      color: #0027BD;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 2px 6px;
-      border-radius: 2px;
-      transition: background 0.2s;
-    }
-    .header-lang-switcher a.active {
-      background: #e6ecfa;
-    }
-    @media (max-width: 900px) {
-      .header-container {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 0 12px;
-      }
-      .header-nav {
-        margin-top: 8px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header class="header-container" role="banner">
-    <div class="header-logo">
-      <a href="index.html" aria-label="Página inicial">
-        <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea - Home">
-      </a>
+<!-- Header Reutilizável - Extraído do template Contato - Aegea.html -->
+<header data-elementor-type="header" data-elementor-id="26397" class="elementor elementor-26397 elementor-location-header" data-elementor-post-type="elementor_library">
+  <div class="elementor-element elementor-element-6537c5b e-con-full e-flex e-con e-parent" data-id="6537c5b" data-element_type="container" id="header">
+    <div class="elementor-element elementor-element-3395f7bb e-con-full e-flex e-con e-child" data-id="3395f7bb" data-element_type="container" data-settings='{"background_background":"classic"}'>
+      <div class="elementor-element elementor-element-3bb71253 e-con-full e-flex e-con e-child" data-id="3bb71253" data-element_type="container">
+        <div class="elementor-element elementor-element-2268b034 btIcone elementor-hidden-mobile elementor-widget elementor-widget-button" data-id="2268b034" data-element_type="widget" data-widget_type="button.default">
+          <div class="elementor-widget-container">
+            <div class="elementor-button-wrapper">
+              <a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.aegea.com.br/unidades/">
+                <span class="elementor-button-content-wrapper">
+                  <span class="elementor-button-text">UNIDADES</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="elementor-element elementor-element-2250cf6c btIcone elementor-hidden-mobile elementor-widget elementor-widget-button" data-id="2250cf6c" data-element_type="widget" data-widget_type="button.default">
+          <div class="elementor-widget-container">
+            <div class="elementor-button-wrapper">
+              <a class="elementor-button elementor-button-link elementor-size-sm" href="https://institutoaegea.com.br/" target="_blank">
+                <span class="elementor-button-content-wrapper">
+                  <span class="elementor-button-text">INSTITUTO AEGEA</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="elementor-element elementor-element-48c98011 btIcone elementor-widget elementor-widget-button" data-id="48c98011" data-element_type="widget" data-widget_type="button.default">
+          <div class="elementor-widget-container">
+            <div class="elementor-button-wrapper">
+              <a class="elementor-button elementor-button-link elementor-size-sm" href="https://ri.aegea.com.br/" target="_blank">
+                <span class="elementor-button-content-wrapper">
+                  <span class="elementor-button-text">INVESTIDORES</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="elementor-element elementor-element-f965af3 cpel-switcher--layout-horizontal elementor-widget elementor-widget-polylang-language-switcher" data-id="f965af3" data-element_type="widget" data-widget_type="polylang-language-switcher.default">
+          <div class="elementor-widget-container">
+            <nav class="cpel-switcher__nav" aria-label="Seleção de idioma">
+              <ul class="cpel-switcher__list">
+                <li class="cpel-switcher__lang">
+                  <a lang="en-US" hreflang="en-US" href="https://www.aegea.com.br/en/contact/">
+                    <span class="cpel-switcher__flag cpel-switcher__flag--us">
+                      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAMAAABBPP0LAAAAmVBMVEViZsViZMJiYrf9gnL8eWrlYkjgYkjZYkj8/PujwPybvPz4+PetraBEgfo+fvo3efkydfkqcvj8Y2T8UlL8Q0P8MzP9k4Hz8/Lu7u4DdPj9/VrKysI9fPoDc/EAZ7z7IiLHYkjp6ekIASbfY/v21takAJrT5Dg6sYkjc3Nn94t2RkYD+y8KeYkjs/v7l5fz0dF22YkjWvcOLAAAAgElEQVR4AR2KNULFQBgGZ5J13KGGKvc/Cw1uPe62eb9+Jr1EUBFHSgxxjP2Eca6AfUSfVlUfBvm1Ui1bqafctqMndNkXpb01h5TLx4b6TIXgwOCHfjv+/Pz+5vPRw7txGWT2h6yO0/GaYltIp5PT1dEpLNPL/SdWjYjAAZtvRPgHJX4Xio+DSrkAAAAASUVORK5CYII=" alt="English" width="16" height="11" style="width: 16px; height: 11px;" />
+                    </span>
+                    <span class="cpel-switcher__code">EN</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
-    <nav class="header-nav" aria-label="Menu principal">
-      <ul class="elementor-nav-menu">
-        <li><a href="index.html" id="nav-home">Home</a></li>
-        <li><a href="cadastro-subbacias.html" id="nav-cadastro">Cadastro de Sub-Bacias</a></li>
-        <li><a href="simulacao.html" id="nav-simulacao">Simulação</a></li>
-        <li><a href="resultados.html" id="nav-resultados">Resultados</a></li>
-      </ul>
-    </nav>
-    <div class="header-actions">
-      <button class="header-search" aria-label="Buscar">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-          <circle cx="10" cy="10" r="7" stroke="#0027BD" stroke-width="2" fill="none"/>
-          <line x1="16" y1="16" x2="21" y2="21" stroke="#0027BD" stroke-width="2"/>
-        </svg>
-      </button>
-      <nav class="header-lang-switcher" aria-label="Seleção de idioma">
-        <a href="#" id="lang-pt" class="active" lang="pt-BR" aria-label="Português">PT</a>
-        <span>|</span>
-        <a href="#" id="lang-en" lang="en-US" aria-label="English">EN</a>
-      </nav>
+    <div class="elementor-element elementor-element-278b15dd e-con-full e-flex e-con e-child" data-id="278b15dd" data-element_type="container" id="menuHeader" data-settings='{"background_background":"classic"}'>
+      <div class="elementor-element elementor-element-4e1bc227 e-con-full e-flex e-con e-child" data-id="4e1bc227" data-element_type="container">
+        <div class="elementor-element elementor-element-72d5a429 elementor-widget elementor-widget-theme-site-logo elementor-widget-image" data-id="72d5a429" data-element_type="widget" data-widget_type="theme-site-logo.default">
+          <div class="elementor-widget-container">
+            <a href="https://www.aegea.com.br">
+              <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" title="aegea" alt="Logo da Aegea" loading="lazy" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="elementor-element elementor-element-274b856 e-con-full e-flex e-con e-child" data-id="274b856" data-element_type="container">
+        <div class="elementor-element elementor-element-23de80de elementor-nav-menu--stretch elementor-nav-menu--dropdown-tablet elementor-nav-menu__text-align-aside elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="23de80de" data-element_type="widget" data-settings='{"full_width":"stretch","layout":"horizontal","submenu_icon":{"value":"<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-caret-down\" viewBox=\"0 0 320 512\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"><path d=\"M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z\"></path></svg>","library":"fa-solid"},"toggle":"burger"}' data-widget_type="nav-menu.default">
+          <div class="elementor-widget-container">
+            <nav aria-label="Menu principal" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-underline e--animation-fade">
+              <ul id="menu-1-23de80de" class="elementor-nav-menu">
+                <li class="menu-item"><a href="https://www.aegea.com.br/quem-somos/" class="elementor-item">Quem Somos</a></li>
+                <li class="menu-item"><a href="https://www.aegea.com.br/unidades/" class="elementor-item">Unidades</a></li>
+                <li class="menu-item"><a href="https://www.aegea.com.br/estrategia-esg/" class="elementor-item">Estratégia ESG</a></li>
+                <li class="menu-item"><a href="https://www.aegea.com.br/carreiras/" class="elementor-item">Carreiras</a></li>
+                <li class="menu-item"><a href="https://www.aegea.com.br/noticias/" class="elementor-item">Mídia</a></li>
+                <li class="menu-item"><a href="https://fornecedores.aegea.com.br" class="elementor-item">Fornecedores</a></li>
+                <li class="menu-item"><a href="https://www.aegea.com.br/contato/" class="elementor-item elementor-item-active" aria-current="page">Contato</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
-  </header>
-  <script>
-    // Destacar o link ativo do menu de navegação
-    (function() {
-      var path = window.location.pathname.split("/").pop();
-      if (!path) path = "index.html";
-      var navMap = {
-        "index.html": "nav-home",
-        "cadastro-subbacias.html": "nav-cadastro",
-        "simulacao.html": "nav-simulacao",
-        "resultados.html": "nav-resultados"
-      };
-      Object.keys(navMap).forEach(function(file) {
-        var el = document.getElementById(navMap[file]);
-        if (el) el.classList.remove("active");
-      });
-      if (navMap[path]) {
-        var activeEl = document.getElementById(navMap[path]);
-        if (activeEl) activeEl.classList.add("active");
-      }
-      // Desabilitar link de Resultados até existir simulação (exemplo: localStorage)
-      var resultLink = document.getElementById("nav-resultados");
-      if (resultLink && !window.localStorage.getItem("simulacao_executada")) {
-        resultLink.setAttribute("aria-disabled", "true");
-        resultLink.style.pointerEvents = "none";
-        resultLink.style.opacity = "0.5";
-      }
-      // Idioma (apenas visual, não funcional)
-      document.getElementById("lang-pt").addEventListener("click", function(e){
-        e.preventDefault();
-        this.classList.add("active");
-        document.getElementById("lang-en").classList.remove("active");
-      });
-      document.getElementById("lang-en").addEventListener("click", function(e){
-        e.preventDefault();
-        this.classList.add("active");
-        document.getElementById("lang-pt").classList.remove("active");
-      });
-    })();
-  </script>
-</body>
-</html>
+  </div>
+</header>
