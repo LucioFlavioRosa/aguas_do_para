@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visualização Unifilar da Cascata - Parceiro Águas do Pará</title>
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-25733-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-25733.css?ver=1766510003' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26421-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    .nav-links { display: flex; gap: 16px; margin-bottom: 24px; }
+    .nav-links a { color: #0027BD; text-decoration: none; font-weight: 600; padding: 6px 16px; border-radius: 8px; transition: background 0.2s; }
+    .nav-links a.active, .nav-links a:hover { background: #eaf2ff; }
+    .unifilar-container { max-width: 1200px; margin: 40px auto; padding: 24px; background: #fff; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+    .unifilar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+    .unifilar-header h1 { font-size: 2rem; color: #0027BD; margin: 0; }
+    .unifilar-diagram { display: flex; align-items: center; justify-content: flex-start; gap: 32px; overflow-x: auto; padding: 32px 0; }
+    .subbacia-block { min-width: 180px; background: #f3f6fb; border-radius: 12px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); padding: 18px 12px; text-align: center; position: relative; border: 2px solid #e2e5f0; }
+    .subbacia-block[data-status="Cadastrada"] { border-color: #abb8c3; }
+    .subbacia-block[data-status="Simulada"] { border-color: #00d084; }
+    .subbacia-block[data-status="Priorizada"] { border-color: #0027BD; }
+    .subbacia-nome { font-size: 1.1rem; font-weight: 600; color: #0027BD; margin-bottom: 6px; }
+    .subbacia-status { font-size: 0.95rem; color: #fff; border-radius: 8px; padding: 2px 10px; display: inline-block; }
+    .subbacia-block[data-status="Cadastrada"] .subbacia-status { background: #abb8c3; }
+    .subbacia-block[data-status="Simulada"] .subbacia-status { background: #00d084; }
+    .subbacia-block[data-status="Priorizada"] .subbacia-status { background: #0027BD; }
+    .arrow { font-size: 2.5rem; color: #0027BD; min-width: 40px; text-align: center; }
+    @media (max-width: 900px) { .unifilar-diagram { gap: 16px; } .subbacia-block { min-width: 140px; padding: 12px 6px; } }
+  </style>
+</head>
+<body class="wp-singular">
+  <div class="unifilar-container">
+    <div class="unifilar-header">
+      <h1>Visualização Unifilar da Cascata</h1>
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" style="height:48px;">
+    </div>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="gestao-demandas.html">Gestão de Demandas</a>
+      <a href="visualizacao-unifilar.html" class="active">Visualização Unifilar</a>
+      <a href="simulacao-priorizacao.html">Simulação & Priorização</a>
+    </nav>
+    <section aria-label="Seleção de Sistema" style="margin-bottom:24px;">
+      <label for="sistemaSelect" style="font-weight:600;color:#0027BD;">Sistema:</label>
+      <select id="sistemaSelect" style="margin-left:12px; padding:8px 12px; border-radius:8px; border:1px solid #e2e5f0;">
+        <option value="1">Sistema Belém Norte</option>
+        <option value="2">Sistema Ananindeua Sul</option>
+      </select>
+    </section>
+    <section aria-label="Diagrama Unifilar">
+      <div id="unifilarDiagram" class="unifilar-diagram" tabindex="0" aria-label="Diagrama do fluxo de sub-bacias"></div>
+    </section>
+  </div>
+  <footer class="main-footer" style="margin-top:40px;text-align:center;color:#888;">
+    <p>&copy; 2025 Nome da Empresa.</p>
+  </footer>
+  <script>
+    // Dados mockados dos sistemas e sub-bacias
+    const sistemas = {
+      '1': [
+        { nome: 'Sub-bacia A1', status: 'Cadastrada' },
+        { nome: 'Sub-bacia A2', status: 'Simulada' },
+        { nome: 'Sub-bacia A3', status: 'Priorizada' },
+        { nome: 'ETE Belém', status: 'Priorizada' }
+      ],
+      '2': [
+        { nome: 'Sub-bacia S1', status: 'Cadastrada' },
+        { nome: 'Sub-bacia S2', status: 'Simulada' },
+        { nome: 'Sub-bacia S3', status: 'Simulada' },
+        { nome: 'ETE Ananindeua', status: 'Priorizada' }
+      ]
+    };
+    function renderDiagram(sistemaId) {
+      const diagram = document.getElementById('unifilarDiagram');
+      diagram.innerHTML = '';
+      const blocos = sistemas[sistemaId];
+      blocos.forEach((b, idx) => {
+        const block = document.createElement('div');
+        block.className = 'subbacia-block';
+        block.setAttribute('data-status', b.status);
+        block.innerHTML = `<div class='subbacia-nome'>${b.nome}</div><span class='subbacia-status'>${b.status}</span>`;
+        diagram.appendChild(block);
+        if (idx < blocos.length - 1) {
+          const arrow = document.createElement('span');
+          arrow.className = 'arrow';
+          arrow.setAttribute('aria-hidden', 'true');
+          arrow.innerHTML = '&#8594;';
+          diagram.appendChild(arrow);
+        }
+      });
+    }
+    document.getElementById('sistemaSelect').addEventListener('change', function() {
+      renderDiagram(this.value);
+    });
+    renderDiagram(document.getElementById('sistemaSelect').value);
+  </script>
+</body>
+</html>
