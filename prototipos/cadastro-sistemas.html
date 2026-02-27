@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro de Sistemas - Portfólio de Investimentos</title>
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-25733-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-25733.css?ver=1766510003' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26421-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    .form-sistema { background: #fff; border-radius: 16px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); padding: 24px 32px; margin-bottom: 32px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { font-weight: 600; color: #0027BD; display: block; margin-bottom: 6px; }
+    .form-group input { width: 100%; padding: 10px; border: 1px solid #e2e5f0; border-radius: 8px; font-size: 1rem; }
+    .btn-primary { background: #0027BD; color: #fff; border: none; border-radius: 8px; padding: 12px 28px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn-primary:disabled { background: #abb8c3; cursor: not-allowed; }
+    .sistemas-table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+    .sistemas-table th, .sistemas-table td { padding: 12px 8px; border-bottom: 1px solid #e2e5f0; text-align: left; font-size: 1rem; }
+    .sistemas-table th { background: #f3f6fb; color: #0027BD; font-weight: 700; }
+    .sistemas-table tr.selected { background: #eaf2ff; }
+    @media (max-width: 700px) { .form-sistema { padding: 12px; } }
+  </style>
+</head>
+<body class="wp-singular">
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Cadastro de Sistemas</h1>
+      <nav>
+        <a href="resultados-simulacao.html">Resultados da Simulação</a> |
+        <a href="visualizacao-cascatas.html">Visualização de Cascatas</a>
+      </nav>
+    </div>
+    <form class="form-sistema" id="formSistema" autocomplete="off" aria-label="Cadastro de Sistema">
+      <div class="form-group">
+        <label for="nomeSistema">Nome do Sistema</label>
+        <input type="text" id="nomeSistema" name="nomeSistema" required>
+      </div>
+      <div class="form-group">
+        <label for="eteAssociada">ETE Associada</label>
+        <input type="text" id="eteAssociada" name="eteAssociada" required>
+      </div>
+      <div class="form-group">
+        <label for="vazaoOperacao">Vazão de Operação (L/s)</label>
+        <input type="number" id="vazaoOperacao" name="vazaoOperacao" min="0" required>
+      </div>
+      <div class="form-group">
+        <label for="capacidadeNominal">Capacidade Nominal da ETE (L/s)</label>
+        <input type="number" id="capacidadeNominal" name="capacidadeNominal" min="0" required>
+      </div>
+      <div class="form-group">
+        <label for="capexExpansao">CAPEX Expansão da ETE (R$)</label>
+        <input type="number" id="capexExpansao" name="capexExpansao" min="0" required>
+      </div>
+      <button type="submit" class="btn-primary">Adicionar Sistema</button>
+    </form>
+    <section aria-label="Sistemas Cadastrados">
+      <h2 style="color:#222;font-size:1.2rem;margin-bottom:12px;">Sistemas Cadastrados</h2>
+      <table class="sistemas-table" id="tabelaSistemas">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>ETE Associada</th>
+            <th>Vazão de Operação (L/s)</th>
+            <th>Capacidade Nominal (L/s)</th>
+            <th>CAPEX Expansão (R$)</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sistema Belém</td>
+            <td>ETE Belém</td>
+            <td>45</td>
+            <td>150</td>
+            <td>2.500.000</td>
+            <td><button type="button" class="btn-primary" onclick="editarSistema(this)">Editar</button></td>
+          </tr>
+          <tr>
+            <td>Sistema Ananindeua</td>
+            <td>ETE Ananindeua</td>
+            <td>38</td>
+            <td>120</td>
+            <td>2.000.000</td>
+            <td><button type="button" class="btn-primary" onclick="editarSistema(this)">Editar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <script>
+    // Simples manipulação de formulário (mock)
+    document.getElementById('formSistema').onsubmit = function(e) {
+      e.preventDefault();
+      alert('Funcionalidade de cadastro/edição em desenvolvimento.');
+    };
+    function editarSistema(btn) {
+      alert('Funcionalidade de edição em desenvolvimento.');
+    }
+  </script>
+</body>
+</html>
