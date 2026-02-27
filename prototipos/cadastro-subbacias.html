@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro de Sub-Bacias/Setores Hidráulicos</title>
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-25733-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-25733.css?ver=1766510003' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26421-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    .nav-main { display: flex; gap: 24px; align-items: center; margin-bottom: 32px; }
+    .nav-main a { color: #0027BD; font-weight: 600; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background .2s; }
+    .nav-main a.active, .nav-main a:hover { background: #eaf2ff; }
+    .upload-area { background: #f3f6fb; border: 2px dashed #0027BD; border-radius: 12px; padding: 32px; text-align: center; margin-bottom: 28px; }
+    .upload-area input[type=file] { display: none; }
+    .upload-label { color: #0027BD; font-size: 1.1rem; font-weight: 600; cursor: pointer; }
+    .edit-table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+    .edit-table th, .edit-table td { padding: 12px 8px; border-bottom: 1px solid #e2e5f0; text-align: left; font-size: 1rem; }
+    .edit-table th { background: #f3f6fb; color: #0027BD; font-weight: 700; }
+    .edit-table td input { width: 100%; border: 1px solid #e2e5f0; border-radius: 6px; padding: 6px; font-size: 1rem; }
+    .btn-primary { background: #0027BD; color: #fff; border: none; border-radius: 8px; padding: 12px 28px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn-primary:disabled { background: #abb8c3; cursor: not-allowed; }
+    .mermaid-area { background: #fff; border-radius: 12px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); padding: 16px 8px; margin-bottom: 32px; }
+    .table-actions { display: flex; gap: 8px; }
+    @media (max-width: 700px) { .upload-area { padding: 12px; } .edit-table th, .edit-table td { font-size: 0.92rem; } }
+  </style>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.esm.min.mjs';
+    window.mermaid = mermaid;
+  </script>
+</head>
+<body class="wp-singular">
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Cadastro de Sub-Bacias / Setores Hidráulicos</h1>
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" style="height:48px;">
+    </div>
+    <nav class="nav-main" aria-label="Navegação principal">
+      <a href="index.html">Dashboard</a>
+      <a href="cadastro-subbacias.html" class="active" aria-current="page">Cadastro de Sub-Bacias</a>
+      <a href="simulacao-investimentos.html">Simulação de Investimentos</a>
+    </nav>
+    <section aria-label="Upload de Dados">
+      <h2 style="color:#222;font-size:1.15rem;margin-bottom:10px;">Upload de Dados (Excel)</h2>
+      <form id="uploadForm">
+        <div class="upload-area">
+          <label class="upload-label" for="excelFile">Clique para selecionar o arquivo Excel (.xlsx) com os dados das sub-bacias</label>
+          <input type="file" id="excelFile" accept=".xlsx" aria-label="Selecionar arquivo Excel">
+          <div id="uploadStatus" style="margin-top:12px;color:#666;font-size:0.98rem;"></div>
+        </div>
+      </form>
+    </section>
+    <section aria-label="Tabela de Sub-Bacias">
+      <h2 style="color:#222;font-size:1.15rem;margin-bottom:10px;">Tabela de Sub-Bacias/Setores Hidráulicos</h2>
+      <table class="edit-table" id="subbaciasTable" aria-label="Tabela de Sub-Bacias">
+        <thead>
+          <tr>
+            <th>Origem</th>
+            <th>Destino</th>
+            <th>Componentes</th>
+            <th>CAPEX (R$)</th>
+            <th>OPEX (R$)</th>
+            <th>Cobertura (%)</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Linhas dinâmicas -->
+        </tbody>
+      </table>
+      <button type="button" class="btn-primary" id="addRow">Adicionar Linha</button>
+    </section>
+    <section aria-label="Visualização Unifilar das Cascatas">
+      <h2 style="color:#222;font-size:1.15rem;margin-bottom:10px;">Visualização Unifilar das Cascatas</h2>
+      <div class="mermaid-area">
+        <pre class="mermaid" id="mermaid-cascata">
+graph TD
+  SB05[Sub-Bacia-05] --> SB02[Sub-Bacia-02]
+  SB06[Sub-Bacia-06] --> SB02
+  SB02 --> SB01[Sub-Bacia-01]
+  SB04[Sub-Bacia-04] --> SB03[Sub-Bacia-03]
+  SB03 --> ETE[ETE]
+  SB01 --> ETE
+        </pre>
+      </div>
+    </section>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script>
+    // Tabela dinâmica
+    const tableBody = document.getElementById('tableBody');
+    const addRowBtn = document.getElementById('addRow');
+    function addRow(data = {}) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="text" value="${data.origem || ''}" aria-label="Origem"></td>
+        <td><input type="text" value="${data.destino || ''}" aria-label="Destino"></td>
+        <td><input type="text" value="${data.componentes || ''}" aria-label="Componentes"></td>
+        <td><input type="number" value="${data.capex || ''}" aria-label="CAPEX"></td>
+        <td><input type="number" value="${data.opex || ''}" aria-label="OPEX"></td>
+        <td><input type="number" value="${data.cobertura || ''}" aria-label="Cobertura"></td>
+        <td class="table-actions">
+          <button type="button" aria-label="Remover linha" onclick="this.closest('tr').remove()" style="background:#ff4d4d;color:#fff;border:none;border-radius:6px;padding:4px 12px;font-size:1rem;">Remover</button>
+        </td>
+      `;
+      tableBody.appendChild(tr);
+    }
+    addRowBtn.onclick = () => addRow();
+    // Upload Excel
+    document.getElementById('excelFile').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      document.getElementById('uploadStatus').textContent = 'Carregando arquivo...';
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const data = new Uint8Array(evt.target.result);
+        const workbook = XLSX.read(data, {type: 'array'});
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(sheet, {header:1, defval: ''});
+        tableBody.innerHTML = '';
+        for(let i=1;i<rows.length;i++){
+          const [origem, destino, componentes, capex, opex, cobertura] = rows[i];
+          addRow({origem, destino, componentes, capex, opex, cobertura});
+        }
+        document.getElementById('uploadStatus').textContent = 'Arquivo carregado com sucesso!';
+      };
+      reader.readAsArrayBuffer(file);
+    });
+    // Render Mermaid
+    document.addEventListener('DOMContentLoaded', function() {
+      if(window.mermaid) window.mermaid.run();
+    });
+  </script>
+</body>
+</html>
