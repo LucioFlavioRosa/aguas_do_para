@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/widget-nav-menu.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/widget-button.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/connect-polylang-elementor/assets/css/language-switcher.min.css?ver=2.5.3" media="all" />
+  <title>Header - Componente Reutilizável</title>
+  <style>
+    .header-nav .elementor-nav-menu {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .header-nav .elementor-nav-menu li {
+      display: inline-block;
+    }
+    .header-nav .elementor-nav-menu a {
+      color: #0027BD;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .header-nav .elementor-nav-menu a.active,
+    .header-nav .elementor-nav-menu a:focus {
+      background: #e6ecfa;
+      color: #0027BD;
+      font-weight: bold;
+    }
+    .header-nav .elementor-nav-menu a[aria-disabled="true"] {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      min-height: 72px;
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .header-logo img {
+      height: 48px;
+      width: auto;
+      vertical-align: middle;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .header-search {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+    .header-lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .header-lang-switcher a {
+      color: #0027BD;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 2px 6px;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .header-lang-switcher a.active {
+      background: #e6ecfa;
+    }
+    @media (max-width: 900px) {
+      .header-container {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 12px;
+      }
+      .header-nav {
+        margin-top: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header-container" role="banner">
+    <div class="header-logo">
+      <a href="index.html" aria-label="Página inicial">
+        <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea - Home">
+      </a>
+    </div>
+    <nav class="header-nav" aria-label="Menu principal">
+      <ul class="elementor-nav-menu">
+        <li><a href="index.html" id="nav-home">Home</a></li>
+        <li><a href="cadastro-subbacias.html" id="nav-cadastro">Cadastro de Sub-Bacias</a></li>
+        <li><a href="simulacao.html" id="nav-simulacao">Simulação</a></li>
+        <li><a href="resultados.html" id="nav-resultados">Resultados</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="header-search" aria-label="Buscar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="7" stroke="#0027BD" stroke-width="2" fill="none"/>
+          <line x1="16" y1="16" x2="21" y2="21" stroke="#0027BD" stroke-width="2"/>
+        </svg>
+      </button>
+      <nav class="header-lang-switcher" aria-label="Seleção de idioma">
+        <a href="#" id="lang-pt" class="active" lang="pt-BR" aria-label="Português">PT</a>
+        <span>|</span>
+        <a href="#" id="lang-en" lang="en-US" aria-label="English">EN</a>
+      </nav>
+    </div>
+  </header>
+  <script>
+    // Destacar o link ativo do menu de navegação
+    (function() {
+      var path = window.location.pathname.split("/").pop();
+      if (!path) path = "index.html";
+      var navMap = {
+        "index.html": "nav-home",
+        "cadastro-subbacias.html": "nav-cadastro",
+        "simulacao.html": "nav-simulacao",
+        "resultados.html": "nav-resultados"
+      };
+      Object.keys(navMap).forEach(function(file) {
+        var el = document.getElementById(navMap[file]);
+        if (el) el.classList.remove("active");
+      });
+      if (navMap[path]) {
+        var activeEl = document.getElementById(navMap[path]);
+        if (activeEl) activeEl.classList.add("active");
+      }
+      // Desabilitar link de Resultados até existir simulação (exemplo: localStorage)
+      var resultLink = document.getElementById("nav-resultados");
+      if (resultLink && !window.localStorage.getItem("simulacao_executada")) {
+        resultLink.setAttribute("aria-disabled", "true");
+        resultLink.style.pointerEvents = "none";
+        resultLink.style.opacity = "0.5";
+      }
+      // Idioma (apenas visual, não funcional)
+      document.getElementById("lang-pt").addEventListener("click", function(e){
+        e.preventDefault();
+        this.classList.add("active");
+        document.getElementById("lang-en").classList.remove("active");
+      });
+      document.getElementById("lang-en").addEventListener("click", function(e){
+        e.preventDefault();
+        this.classList.add("active");
+        document.getElementById("lang-pt").classList.remove("active");
+      });
+    })();
+  </script>
+</body>
+</html>
