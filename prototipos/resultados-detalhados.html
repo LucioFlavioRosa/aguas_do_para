@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultados Detalhados da Simulação - Prioridade de Investimentos SES</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor-pro/assets/css/widget-form.min.css?ver=3.32.3" media="all" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
+</head>
+<body class="elementor-default">
+  <!-- Header replicado -->
+  <header class="elementor elementor-26397 elementor-location-header">
+    <div class="elementor-element elementor-element-6537c5b e-con-full e-flex e-con e-parent" id="header">
+      <div class="elementor-element elementor-element-3bb71253 e-con-full e-flex e-con e-child">
+        <a href="https://www.aegea.com.br">
+          <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" style="height:48px;" />
+        </a>
+      </div>
+      <nav class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal">
+        <ul class="elementor-nav-menu">
+          <li><a href="/" class="elementor-item">Início</a></li>
+          <li><a href="/prototipos/simulacao.html" class="elementor-item">Simulação</a></li>
+          <li><a href="/prototipos/resultados-detalhados.html" class="elementor-item elementor-item-active" aria-current="page">Resultados</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="container" id="content" style="max-width:1200px;margin:40px auto;padding:24px;">
+    <h1 class="elementor-heading-title elementor-size-default">Resultados Detalhados da Simulação</h1>
+    <section aria-labelledby="resumo-geral">
+      <h2 id="resumo-geral">Resumo da Simulação</h2>
+      <div id="resumo-simulacao">
+        <!-- Populado via JS -->
+      </div>
+    </section>
+    <section aria-labelledby="tabela-subbacias" style="margin-top:32px;">
+      <h2 id="tabela-subbacias">Detalhamento por Sub-bacia</h2>
+      <div style="overflow-x:auto;">
+        <table id="tabela-detalhe-subbacia" class="elementor-table" style="width:100%;min-width:700px;border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th>Sub-bacia</th>
+              <th>Cobertura (%)</th>
+              <th>CapEx (R$ mil)</th>
+              <th>VPL (R$ mil)</th>
+              <th>Componentes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populado via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section aria-labelledby="tabela-componentes" style="margin-top:32px;">
+      <h2 id="tabela-componentes">Detalhamento por Componente</h2>
+      <div style="overflow-x:auto;">
+        <table id="tabela-detalhe-componentes" class="elementor-table" style="width:100%;min-width:700px;border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th>Componente</th>
+              <th>Quantidade</th>
+              <th>CapEx (R$ mil)</th>
+              <th>Opex (R$ mil/ano)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populado via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section aria-labelledby="graficos" style="margin-top:32px;">
+      <h2 id="graficos">Visualização Gráfica</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:32px;justify-content:flex-start;">
+        <div style="flex:1 1 350px;min-width:320px;max-width:480px;">
+          <h3 style="text-align:center;">CapEx por Sub-bacia</h3>
+          <canvas id="grafico-capex-subbacia" aria-label="Gráfico CapEx por Sub-bacia" height="220"></canvas>
+        </div>
+        <div style="flex:1 1 350px;min-width:320px;max-width:480px;">
+          <h3 style="text-align:center;">Composição do Investimento</h3>
+          <canvas id="grafico-componente-pizza" aria-label="Gráfico de Pizza dos Componentes" height="220"></canvas>
+        </div>
+      </div>
+    </section>
+    <div style="margin-top:48px;">
+      <a href="simulacao.html" class="elementor-button elementor-button-link elementor-size-sm">
+        <span class="elementor-button-content-wrapper">
+          <span class="elementor-button-text">Voltar para Simulação</span>
+        </span>
+      </a>
+    </div>
+  </main>
+  <!-- Footer replicado -->
+  <footer class="elementor elementor-26421 elementor-location-footer" style="margin-top:40px;">
+    <div class="elementor-element elementor-element-d5f6632 e-flex e-con-boxed e-con e-parent">
+      <div class="e-con-inner">
+        <div class="elementor-element elementor-element-fac3436 elementor-widget elementor-widget-heading">
+          <div class="elementor-widget-container">
+            <h3 class="elementor-heading-title elementor-size-default">Veja também</h3>
+          </div>
+        </div>
+        <div class="elementor-element elementor-element-3e871e8 elementor-widget elementor-widget-jet-listing-grid">
+          <div class="elementor-widget-container">
+            <a href="https://www.canaldeetica.com.br/aegea/" target="_blank" rel="noopener" class="elementor-button elementor-button-link elementor-size-sm">Canal de Ética</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="js/resultados-detalhados.js"></script>
+</body>
+</html>
