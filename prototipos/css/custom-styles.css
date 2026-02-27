@@ -1,0 +1,126 @@
+/* custom-styles.css - Estilos customizados para o protótipo de priorização de investimentos SES */
+
+/* Tabelas Editáveis */
+.editable-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  margin-bottom: 2rem;
+}
+.editable-table th, .editable-table td {
+  border: 1px solid #e0e0e0;
+  padding: 12px 8px;
+  text-align: left;
+}
+.editable-table th {
+  background: #f7f7fa;
+  font-weight: 600;
+  color: #0027BD;
+}
+.editable-table td[contenteditable="true"] {
+  background: #f0f6ff;
+  outline: 2px solid #0027BD;
+}
+.editable-table tr:hover {
+  background: #f3f8fd;
+}
+
+/* Cards de Resultados */
+.result-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,39,189,0.07);
+  border: 1px solid #e0e6f0;
+  padding: 1.5rem 1.25rem;
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.2s;
+}
+.result-card:hover {
+  box-shadow: 0 4px 24px rgba(0,39,189,0.13);
+  border-color: #0027BD;
+}
+.result-card .card-title {
+  font-size: 1.2rem;
+  color: #0027BD;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+.result-card .card-value {
+  font-size: 2rem;
+  color: #00d084;
+  font-weight: 600;
+}
+
+/* Diagrama Unifilar */
+.unifilar-diagram {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  overflow-x: auto;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+}
+.unifilar-node {
+  background: #f7f7fa;
+  border: 2px solid #0027BD;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #0027BD;
+  font-size: 1.1rem;
+  position: relative;
+}
+.unifilar-connector {
+  width: 40px;
+  height: 4px;
+  background: #0027BD;
+  border-radius: 2px;
+}
+
+/* Elementos Interativos (Cadastro e Simulação) */
+.btn-primary {
+  background: #0027BD;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75em 1.5em;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background: #0053f0;
+}
+.input-editable {
+  border: 1px solid #bfc9e3;
+  border-radius: 4px;
+  padding: 0.5em 0.75em;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+.input-editable:focus {
+  border-color: #0027BD;
+  outline: none;
+}
+
+/* Responsividade básica */
+@media (max-width: 700px) {
+  .unifilar-diagram {
+    gap: 16px;
+    padding: 1rem 0;
+  }
+  .result-card {
+    padding: 1rem 0.5rem;
+  }
+  .editable-table th, .editable-table td {
+    padding: 8px 4px;
+  }
+}
