@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulação e Priorização de Investimentos - Parceiro Águas do Pará</title>
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-25733-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-25733.css?ver=1766510003' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26421-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    .nav-links { display: flex; gap: 16px; margin-bottom: 24px; }
+    .nav-links a { color: #0027BD; text-decoration: none; font-weight: 600; padding: 6px 16px; border-radius: 8px; transition: background 0.2s; }
+    .nav-links a.active, .nav-links a:hover { background: #eaf2ff; }
+    .simulacao-container { max-width: 1200px; margin: 40px auto; padding: 24px; background: #fff; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+    .simulacao-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+    .simulacao-header h1 { font-size: 2rem; color: #0027BD; margin: 0; }
+    .form-section { margin-bottom: 32px; }
+    .form-section label { font-weight: 600; color: #0027BD; margin-bottom: 4px; display: block; }
+    .form-row { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 18px; }
+    .form-group { flex: 1 1 200px; min-width: 180px; }
+    .restricoes-table, .calibracao-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .restricoes-table th, .restricoes-table td, .calibracao-table th, .calibracao-table td { padding: 10px 8px; border-bottom: 1px solid #e2e5f0; text-align: left; font-size: 1rem; }
+    .restricoes-table th, .calibracao-table th { background: #f3f6fb; color: #0027BD; font-weight: 700; }
+    .disparar-btn { background: #0027BD; color: #fff; border: none; border-radius: 8px; padding: 14px 32px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 18px; }
+    .disparar-btn:disabled { background: #abb8c3; cursor: not-allowed; }
+    @media (max-width: 900px) { .form-row { flex-direction: column; gap: 10px; } }
+  </style>
+</head>
+<body class="wp-singular">
+  <div class="simulacao-container">
+    <div class="simulacao-header">
+      <h1>Simulação e Priorização de Investimentos</h1>
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" style="height:48px;">
+    </div>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="gestao-demandas.html">Gestão de Demandas</a>
+      <a href="visualizacao-unifilar.html">Visualização Unifilar</a>
+      <a href="simulacao-priorizacao.html" class="active">Simulação & Priorização</a>
+    </nav>
+    <form id="formSimulacao" autocomplete="off">
+      <section class="form-section" aria-label="Filtros">
+        <h2 style="font-size:1.2rem;color:#222;margin-bottom:10px;">Filtros</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="filtroUnidade">Unidade de Negócio</label>
+            <select id="filtroUnidade" required>
+              <option value="">Selecione</option>
+              <option>Águas do Rio</option>
+              <option>Águas do Pará</option>
+              <option>Corsan</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="filtroSistema">Sistema</label>
+            <select id="filtroSistema" required>
+              <option value="">Selecione</option>
+              <option>Sistema Belém Norte</option>
+              <option>Sistema Ananindeua Sul</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="filtroMunicipio">Município</label>
+            <select id="filtroMunicipio" required>
+              <option value="">Selecione</option>
+              <option>Belém</option>
+              <option>Ananindeua</option>
+              <option>Marituba</option>
+            </select>
+          </div>
+        </div>
+      </section>
+      <section class="form-section" aria-label="Restrições">
+        <h2 style="font-size:1.2rem;color:#222;margin-bottom:10px;">Restrições</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="capexMax">CAPEX Máximo (R$)</label>
+            <input type="number" id="capexMax" min="0" step="10000" placeholder="Ex: 1000000" required>
+          </div>
+          <div class="form-group">
+            <label for="metaCobMin">Meta de Cobertura Mínima (%)</label>
+            <input type="number" id="metaCobMin" min="0" max="100" step="1" placeholder="Ex: 30" required>
+          </div>
+          <div class="form-group">
+            <label for="metaCobMax">Meta de Cobertura Máxima (%)</label>
+            <input type="number" id="metaCobMax" min="0" max="100" step="1" placeholder="Ex: 50" required>
+          </div>
+          <div class="form-group">
+            <label for="extensaoRede">Extensão de Rede Máxima (m)</label>
+            <input type="number" id="extensaoRede" min="0" step="100" placeholder="Ex: 10000" required>
+          </div>
+          <div class="form-group">
+            <label for="horizonte">Horizonte de Simulação (anos)</label>
+            <select id="horizonte" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
+      </section>
+      <section class="form-section" aria-label="Função Objetivo">
+        <h2 style="font-size:1.2rem;color:#222;margin-bottom:10px;">Função Objetivo</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <input type="radio" id="objetivoFaturamento" name="objetivo" value="faturamento" checked>
+            <label for="objetivoFaturamento" style="display:inline;font-weight:400;">Maximizar VPL Faturamento</label>
+          </div>
+          <div class="form-group">
+            <input type="radio" id="objetivoArrecadacao" name="objetivo" value="arrecadacao">
+            <label for="objetivoArrecadacao" style="display:inline;font-weight:400;">Maximizar VPL Arrecadação</label>
+          </div>
+        </div>
+      </section>
+      <section class="form-section" aria-label="Calibração Manual">
+        <h2 style="font-size:1.2rem;color:#222;margin-bottom:10px;">Calibração Manual</h2>
+        <table class="calibracao-table" aria-label="Tabela de Calibração Manual">
+          <thead>
+            <tr>
+              <th scope="col">Priorizar</th>
+              <th scope="col">Sub-bacia</th>
+              <th scope="col">Componente</th>
+            </tr>
+          </thead>
+          <tbody id="calibracaoBody">
+            <!-- Linhas geradas dinamicamente -->
+          </tbody>
+        </table>
+      </section>
+      <button type="button" class="disparar-btn" id="btnSimular">Executar Simulação</button>
+    </form>
+  </div>
+  <footer class="main-footer" style="margin-top:40px;text-align:center;color:#888;">
+    <p>&copy; 2025 Nome da Empresa.</p>
+  </footer>
+  <script>
+    // Dados mockados para calibração
+    const subbacias = [
+      { nome: 'Sub-bacia A1', componente: 'Rede Coletora' },
+      { nome: 'Sub-bacia A2', componente: 'Elevatória' },
+      { nome: 'Sub-bacia A3', componente: 'Linha de Recalque' },
+      { nome: 'Sub-bacia A4', componente: 'ETE Belém' }
+    ];
+    function renderCalibracao() {
+      const tbody = document.getElementById('calibracaoBody');
+      tbody.innerHTML = '';
+      subbacias.forEach((s, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td><input type='checkbox' name='priorizar' value='${idx}' aria-label='Priorizar ${s.nome}'></td><td>${s.nome}</td><td>${s.componente}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+    renderCalibracao();
+    // Navegação para resultados (protótipo)
+    document.getElementById('btnSimular').onclick = function() {
+      window.location.href = 'resultados-simulacao.html';
+    };
+  </script>
+</body>
+</html>
