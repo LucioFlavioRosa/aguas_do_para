@@ -1,0 +1,238 @@
+/*
+ * style.css - Protótipo Aegea
+ * Consistência visual com o template de referência
+ * Inclui variáveis, fontes, responsividade e componentes customizados
+ */
+
+/* 1. Importação de fontes e variáveis do template */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@font-face {
+  font-family: 'Aegea Move';
+  src: url('https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+:root {
+  --color-primary: var(--e-global-color-primary, #0027BD);
+  --color-accent: var(--e-global-color-accent, #00d084);
+  --color-bg: var(--wp--preset--color--white, #fff);
+  --color-text: var(--wp--preset--color--black, #000);
+  --color-border: var(--e-global-color-d51423f, #e0e0e0);
+  --font-family-main: 'Roboto', Arial, Helvetica, sans-serif;
+  --font-family-aegea: 'Aegea Move', 'Roboto', Arial, Helvetica, sans-serif;
+  --border-radius: 8px;
+  --transition: 0.2s all ease;
+}
+
+body {
+  font-family: var(--font-family-main);
+  color: var(--color-text);
+  background: var(--color-bg);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-aegea);
+  color: var(--color-primary);
+  margin-top: 0;
+}
+
+/* 2. Botões padrão */
+.btn-primary, .elementor-button, button[type="submit"] {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.7em 2em;
+  font-family: var(--font-family-aegea);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(0,39,189,0.07);
+}
+.btn-primary:hover, .elementor-button:hover, button[type="submit"]:hover {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+/* 3. Tabelas editáveis */
+.table-editable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 1rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,39,189,0.05);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+.table-editable th, .table-editable td {
+  border: 1px solid var(--color-border);
+  padding: 0.75em 1em;
+  text-align: left;
+}
+.table-editable th {
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-family-aegea);
+}
+.table-editable tr:nth-child(even) {
+  background: #f7f8fa;
+}
+.table-editable td[contenteditable="true"] {
+  background: #fffbe7;
+  outline: 1px dashed var(--color-accent);
+  cursor: text;
+}
+
+/* 4. Diagrama de Cascata (simulação visual) */
+.cascata-diagrama {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2em;
+  margin: 2em 0;
+  overflow-x: auto;
+  padding-bottom: 1em;
+}
+.cascata-no {
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-aegea);
+  font-size: 1.2rem;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,39,189,0.1);
+}
+.cascata-no.selected {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+.cascata-arrow {
+  width: 40px;
+  height: 2px;
+  background: var(--color-primary);
+  align-self: center;
+  margin: 0 0.5em;
+}
+
+/* 5. Cards de Métricas */
+.metric-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0,39,189,0.05);
+  padding: 1.5em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 220px;
+  margin: 1em 0;
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+.metric-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 16px rgba(0,39,189,0.13);
+}
+.metric-card-title {
+  font-family: var(--font-family-aegea);
+  color: var(--color-primary);
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
+}
+.metric-card-value {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--color-accent);
+}
+
+/* 6. Responsividade */
+@media (max-width: 900px) {
+  .cascata-diagrama {
+    gap: 1em;
+  }
+  .metric-card {
+    padding: 1em;
+    min-width: 160px;
+  }
+}
+@media (max-width: 600px) {
+  h1, h2, h3, h4 {
+    font-size: 1.1em;
+  }
+  .cascata-no {
+    width: 40px;
+    height: 40px;
+    font-size: 1em;
+  }
+  .table-editable th, .table-editable td {
+    padding: 0.5em 0.5em;
+    font-size: 0.95em;
+  }
+}
+
+/* 7. Links de navegação entre páginas do protótipo */
+.nav-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+.nav-link:hover {
+  color: var(--color-accent);
+}
+
+/* 8. Ajustes para formulários do protótipo */
+input, select, textarea {
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: 0.5em 1em;
+  font-size: 1em;
+  font-family: var(--font-family-main);
+  margin-bottom: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+/* 9. Utilitários */
+.hide-mobile {
+  display: block;
+}
+@media (max-width: 600px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* 10. Acessibilidade básica */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  background: #fff;
+  color: var(--color-primary);
+  padding: 1em;
+  font-size: 1em;
+  outline: 2px solid var(--color-primary);
+}
