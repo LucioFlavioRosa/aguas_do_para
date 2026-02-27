@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "nome": "Sub-Bacia-01",
+    "origem": null,
+    "destino": "ETE Central",
+    "sistema": "Sistema Belém",
+    "componentes": {
+      "rede_coletora_km": 12.5,
+      "ligacoes": 8500,
+      "elevatorias": 2,
+      "linha_recalque_km": 3.2,
+      "coletor_tronco_km": 2.1
+    },
+    "capex_unitario": 1200000,
+    "opex_unitario": 90000,
+    "cobertura_atual": 0.65,
+    "extensao_rede_km": 17.8
+  },
+  {
+    "id": 2,
+    "nome": "Sub-Bacia-02",
+    "origem": "Sub-Bacia-05, Sub-Bacia-06",
+    "destino": "Sub-Bacia-01",
+    "sistema": "Sistema Belém",
+    "componentes": {
+      "rede_coletora_km": 8.7,
+      "ligacoes": 6200,
+      "elevatorias": 1,
+      "linha_recalque_km": 2.0,
+      "coletor_tronco_km": 1.5
+    },
+    "capex_unitario": 950000,
+    "opex_unitario": 70000,
+    "cobertura_atual": 0.52,
+    "extensao_rede_km": 11.2
+  },
+  {
+    "id": 3,
+    "nome": "Sub-Bacia-03",
+    "origem": "Sub-Bacia-04",
+    "destino": "ETE Central",
+    "sistema": "Sistema Ananindeua",
+    "componentes": {
+      "rede_coletora_km": 10.1,
+      "ligacoes": 7300,
+      "elevatorias": 1,
+      "linha_recalque_km": 2.7,
+      "coletor_tronco_km": 2.2
+    },
+    "capex_unitario": 1100000,
+    "opex_unitario": 80000,
+    "cobertura_atual": 0.60,
+    "extensao_rede_km": 13.5
+  },
+  {
+    "id": 4,
+    "nome": "Sub-Bacia-04",
+    "origem": null,
+    "destino": "Sub-Bacia-03",
+    "sistema": "Sistema Ananindeua",
+    "componentes": {
+      "rede_coletora_km": 6.9,
+      "ligacoes": 4100,
+      "elevatorias": 1,
+      "linha_recalque_km": 1.1,
+      "coletor_tronco_km": 0.9
+    },
+    "capex_unitario": 700000,
+    "opex_unitario": 55000,
+    "cobertura_atual": 0.45,
+    "extensao_rede_km": 8.5
+  },
+  {
+    "id": 5,
+    "nome": "Sub-Bacia-05",
+    "origem": null,
+    "destino": "Sub-Bacia-02",
+    "sistema": "Sistema Belém",
+    "componentes": {
+      "rede_coletora_km": 4.8,
+      "ligacoes": 3200,
+      "elevatorias": 1,
+      "linha_recalque_km": 0.8,
+      "coletor_tronco_km": 0.7
+    },
+    "capex_unitario": 480000,
+    "opex_unitario": 35000,
+    "cobertura_atual": 0.38,
+    "extensao_rede_km": 5.6
+  },
+  {
+    "id": 6,
+    "nome": "Sub-Bacia-06",
+    "origem": null,
+    "destino": "Sub-Bacia-02",
+    "sistema": "Sistema Belém",
+    "componentes": {
+      "rede_coletora_km": 5.5,
+      "ligacoes": 3700,
+      "elevatorias": 1,
+      "linha_recalque_km": 1.0,
+      "coletor_tronco_km": 0.8
+    },
+    "capex_unitario": 530000,
+    "opex_unitario": 37000,
+    "cobertura_atual": 0.40,
+    "extensao_rede_km": 6.2
+  },
+  {
+    "id": 7,
+    "nome": "Sub-Bacia-07",
+    "origem": null,
+    "destino": "ETE Leste",
+    "sistema": "Sistema Marituba",
+    "componentes": {
+      "rede_coletora_km": 7.2,
+      "ligacoes": 5100,
+      "elevatorias": 1,
+      "linha_recalque_km": 1.4,
+      "coletor_tronco_km": 1.0
+    },
+    "capex_unitario": 670000,
+    "opex_unitario": 48000,
+    "cobertura_atual": 0.50,
+    "extensao_rede_km": 9.0
+  },
+  {
+    "id": 8,
+    "nome": "Sub-Bacia-08",
+    "origem": null,
+    "destino": "ETE Leste",
+    "sistema": "Sistema Marituba",
+    "componentes": {
+      "rede_coletora_km": 3.6,
+      "ligacoes": 2100,
+      "elevatorias": 1,
+      "linha_recalque_km": 0.6,
+      "coletor_tronco_km": 0.5
+    },
+    "capex_unitario": 310000,
+    "opex_unitario": 22000,
+    "cobertura_atual": 0.28,
+    "extensao_rede_km": 4.2
+  },
+  {
+    "id": 9,
+    "nome": "Sub-Bacia-09",
+    "origem": null,
+    "destino": "ETE Oeste",
+    "sistema": "Sistema Icoaraci",
+    "componentes": {
+      "rede_coletora_km": 9.0,
+      "ligacoes": 6000,
+      "elevatorias": 2,
+      "linha_recalque_km": 2.5,
+      "coletor_tronco_km": 1.7
+    },
+    "capex_unitario": 950000,
+    "opex_unitario": 72000,
+    "cobertura_atual": 0.57,
+    "extensao_rede_km": 10.8
+  },
+  {
+    "id": 10,
+    "nome": "Sub-Bacia-10",
+    "origem": null,
+    "destino": "ETE Oeste",
+    "sistema": "Sistema Icoaraci",
+    "componentes": {
+      "rede_coletora_km": 2.7,
+      "ligacoes": 1500,
+      "elevatorias": 1,
+      "linha_recalque_km": 0.4,
+      "coletor_tronco_km": 0.3
+    },
+    "capex_unitario": 180000,
+    "opex_unitario": 12000,
+    "cobertura_atual": 0.19,
+    "extensao_rede_km": 3.1
+  }
+]
