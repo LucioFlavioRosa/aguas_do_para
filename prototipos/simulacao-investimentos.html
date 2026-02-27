@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulação de Investimentos</title>
+  <link rel="profile" href="https://gmpg.org/xfn/11">
+  <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+  <link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+  <link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+  <link rel='stylesheet' id='elementor-post-25733-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-25733.css?ver=1766510003' media='all' />
+  <link rel='stylesheet' id='elementor-post-26397-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26421-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26421.css?ver=1766510004' media='all' />
+  <link rel='stylesheet' id='elementor-post-26997-css' href='https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008' media='all' />
+  <style>
+    .nav-main { display: flex; gap: 24px; align-items: center; margin-bottom: 32px; }
+    .nav-main a { color: #0027BD; font-weight: 600; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background .2s; }
+    .nav-main a.active, .nav-main a:hover { background: #eaf2ff; }
+    .simulacao-form { background: #f3f6fb; border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+    .simulacao-form label { font-weight: 600; color: #0027BD; }
+    .simulacao-form input, .simulacao-form select, .simulacao-form textarea { width: 100%; padding: 8px; margin-top: 4px; margin-bottom: 16px; border: 1px solid #e2e5f0; border-radius: 8px; font-size: 1rem; }
+    .restricoes-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; }
+    .btn-primary { background: #0027BD; color: #fff; border: none; border-radius: 8px; padding: 12px 28px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn-primary:disabled { background: #abb8c3; cursor: not-allowed; }
+    .result-area { background: #fff; border-radius: 16px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); padding: 24px; margin-bottom: 32px; }
+    .result-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .result-table th, .result-table td { padding: 10px 8px; border-bottom: 1px solid #e2e5f0; text-align: left; font-size: 1rem; }
+    .result-table th { background: #f3f6fb; color: #0027BD; font-weight: 700; }
+    @media (max-width: 700px) { .restricoes-group { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="wp-singular">
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Simulação de Investimentos</h1>
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" style="height:48px;">
+    </div>
+    <nav class="nav-main" aria-label="Navegação principal">
+      <a href="index.html">Dashboard</a>
+      <a href="cadastro-subbacias.html">Cadastro de Sub-Bacias</a>
+      <a href="simulacao-investimentos.html" class="active" aria-current="page">Simulação de Investimentos</a>
+    </nav>
+    <form class="simulacao-form" aria-label="Formulário de Simulação de Investimentos" autocomplete="off" onsubmit="return false;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;">
+        <div>
+          <label for="unidade">Unidade</label>
+          <input type="text" id="unidade" name="unidade" placeholder="Ex: Águas do Rio">
+        </div>
+        <div>
+          <label for="bloco">Bloco</label>
+          <input type="text" id="bloco" name="bloco" placeholder="Ex: Bloco 1">
+        </div>
+        <div>
+          <label for="municipio">Município</label>
+          <input type="text" id="municipio" name="municipio" placeholder="Ex: Rio de Janeiro">
+        </div>
+        <div>
+          <label for="sistema">Sistema</label>
+          <input type="text" id="sistema" name="sistema" placeholder="Ex: Sistema Sul">
+        </div>
+      </div>
+      <div style="margin-top:18px;margin-bottom:8px;">
+        <strong style="color:#222;">Restrições</strong>
+      </div>
+      <div class="restricoes-group">
+        <div>
+          <label for="capex-min">CAPEX Mín (R$)</label>
+          <input type="number" id="capex-min" name="capex-min" min="0">
+        </div>
+        <div>
+          <label for="capex-max">CAPEX Máx (R$)</label>
+          <input type="number" id="capex-max" name="capex-max" min="0">
+        </div>
+        <div>
+          <label for="cobertura-min">Cobertura Mín (%)</label>
+          <input type="number" id="cobertura-min" name="cobertura-min" min="0" max="100">
+        </div>
+        <div>
+          <label for="cobertura-max">Cobertura Máx (%)</label>
+          <input type="number" id="cobertura-max" name="cobertura-max" min="0" max="100">
+        </div>
+        <div>
+          <label for="extensao-min">Extensão Rede Mín (km)</label>
+          <input type="number" id="extensao-min" name="extensao-min" min="0">
+        </div>
+        <div>
+          <label for="extensao-max">Extensão Rede Máx (km)</label>
+          <input type="number" id="extensao-max" name="extensao-max" min="0">
+        </div>
+      </div>
+      <div style="margin-top:18px;">
+        <label for="objetivo">Função Objetivo</label>
+        <select id="objetivo" name="objetivo">
+          <option value="vpl-faturamento">VPL Faturamento</option>
+          <option value="vpl-arrecadacao">VPL Arrecadação</option>
+        </select>
+      </div>
+      <div style="margin-top:18px;">
+        <label for="calibracao">Calibração/Prioridade Manual</label>
+        <textarea id="calibracao" name="calibracao" rows="2" placeholder="Ex: Priorizar Sub-Bacia 05 por requisito regulatório"></textarea>
+      </div>
+      <div style="margin-top:24px;">
+        <button type="submit" class="btn-primary" id="btnSimular">Executar Simulação</button>
+      </div>
+    </form>
+    <section aria-label="Resultados da Simulação">
+      <div class="result-area" id="resultados">
+        <h2 style="color:#0027BD;font-size:1.15rem;margin-bottom:10px;">Resultados da Simulação</h2>
+        <div id="resultadosConteudo" style="color:#666;">Nenhuma simulação executada.</div>
+      </div>
+    </section>
+  </div>
+  <script>
+    // Simulação fake para protótipo
+    document.getElementById('btnSimular').onclick = function() {
+      const unidade = document.getElementById('unidade').value || 'Águas do Rio';
+      const objetivo = document.getElementById('objetivo').value;
+      const objetivoLabel = objetivo === 'vpl-faturamento' ? 'VPL Faturamento' : 'VPL Arrecadação';
+      document.getElementById('resultadosConteudo').innerHTML = `
+        <strong>Unidade:</strong> ${unidade}<br>
+        <strong>Função Objetivo:</strong> ${objetivoLabel}<br>
+        <strong>Resultado:</strong>
+        <table class='result-table' aria-label='Tabela de Resultados'>
+          <thead>
+            <tr>
+              <th>Sub-Bacia</th>
+              <th>Investimento (R$)</th>
+              <th>Cobertura (%)</th>
+              <th>Extensão (km)</th>
+              <th>VPL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>SB05</td><td>R$ 12.000.000</td><td>18%</td><td>6</td><td>R$ 8.000.000</td></tr>
+            <tr><td>SB02</td><td>R$ 8.000.000</td><td>10%</td><td>4</td><td>R$ 5.500.000</td></tr>
+            <tr><td>SB01</td><td>R$ 6.000.000</td><td>6%</td><td>2</td><td>R$ 3.200.000</td></tr>
+          </tbody>
+        </table>
+        <div style='margin-top:14px;'>
+          <strong>VPL Total:</strong> R$ 16.700.000<br>
+          <strong>Cobertura Final:</strong> 34%<br>
+          <strong>Extensão Total:</strong> 12 km
+        </div>
+      `;
+      return false;
+    };
+  </script>
+</body>
+</html>
