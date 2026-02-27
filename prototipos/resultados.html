@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Resultados da Simulação - Priorização de Investimentos SES</title>
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<link rel='stylesheet' id='wp-block-library-css' href='https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3' media='all' />
+	<link rel='stylesheet' id='hello-elementor-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5' media='all' />
+	<link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5' media='all' />
+	<link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5' media='all' />
+	<link rel='stylesheet' id='elementor-frontend-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5' media='all' />
+	<link rel='stylesheet' id='widget-heading-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/widget-heading.min.css?ver=3.32.5' media='all' />
+	<link rel='stylesheet' id='widget-button-css' href='https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/widget-button.min.css?ver=3.32.5' media='all' />
+	<link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
+	<link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" sizes="192x192" />
+	<link rel="apple-touch-icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" />
+	<meta name="msapplication-TileImage" content="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-300x300.png" />
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<style>
+		body { background: #fff; font-family: 'Inter', Arial, sans-serif; }
+		.main-content { max-width: 1200px; margin: 0 auto; padding: 32px 16px; }
+		.cards-metricas { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 32px; }
+		.card-metrica {
+			flex: 1 1 220px;
+			background: #f4f7fa;
+			border-radius: 12px;
+			box-shadow: 0 2px 8px rgba(0,39,189,0.06);
+			padding: 24px 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			min-width: 200px;
+		}
+		.card-metrica h4 {
+			margin: 0 0 8px 0;
+			font-size: 1.05rem;
+			font-weight: 600;
+			color: #0027bd;
+		}
+		.card-metrica .valor {
+			font-size: 2rem;
+			font-weight: 700;
+			color: #222;
+		}
+		.tabela-resultados {
+			width: 100%;
+			overflow-x: auto;
+			margin-bottom: 32px;
+		}
+		.tabela-resultados table {
+			border-collapse: collapse;
+			width: 100%;
+			min-width: 1100px;
+			background: #fff;
+		}
+		.tabela-resultados th, .tabela-resultados td {
+			padding: 12px 10px;
+			text-align: left;
+		}
+		.tabela-resultados th {
+			background: #0027bd;
+			color: #fff;
+			font-weight: 600;
+		}
+		.tabela-resultados tr:nth-child(even) { background: #f4f7fa; }
+		.tabela-resultados tr:hover { background: #e0e6f7; }
+		.graficos-section {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 32px;
+			margin-bottom: 32px;
+		}
+		.grafico-card {
+			flex: 1 1 320px;
+			background: #fff;
+			border-radius: 12px;
+			box-shadow: 0 2px 8px rgba(0,39,189,0.06);
+			padding: 16px 12px 28px 12px;
+			min-width: 280px;
+		}
+		.botoes-navegacao {
+			display: flex;
+			justify-content: flex-end;
+			gap: 16px;
+			margin-bottom: 16px;
+		}
+		@media (max-width: 900px) {
+			.cards-metricas { flex-direction: column; gap: 16px; }
+			.graficos-section { flex-direction: column; gap: 20px; }
+		}
+	</style>
+</head>
+<body>
+<a class="skip-link screen-reader-text" href="#content">Ir para o conteúdo</a>
+<header data-elementor-type="header" data-elementor-id="26397" class="elementor elementor-26397 elementor-location-header" data-elementor-post-type="elementor_library">
+	<div class="elementor-element elementor-element-6537c5b e-con-full e-flex e-con e-parent" data-id="6537c5b" data-element_type="container" id="header">
+		<div class="elementor-element elementor-element-3395f7bb e-con-full e-flex e-con e-child" data-id="3395f7bb" data-element_type="container">
+			<div class="elementor-element elementor-element-3bb71253 e-con-full e-flex e-con e-child" data-id="3bb71253" data-element_type="container">
+				<a href="https://www.aegea.com.br">
+					<img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" title="aegea" alt="Aegea" style="height:48px; width:auto; margin:8px 0;" />
+				</a>
+			</div>
+		</div>
+	</div>
+</header>
+<main id="content" class="main-content" role="main">
+	<div class="botoes-navegacao">
+		<a href="simulacao.html" class="elementor-button elementor-button-link elementor-size-sm" aria-label="Nova Simulação">
+			<span class="elementor-button-content-wrapper">
+				<span class="elementor-button-text">Nova Simulação</span>
+			</span>
+		</a>
+		<a href="index.html" class="elementor-button elementor-button-link elementor-size-sm" aria-label="Voltar para Home">
+			<span class="elementor-button-content-wrapper">
+				<span class="elementor-button-text">Voltar para Home</span>
+			</span>
+		</a>
+	</div>
+	<h1 class="elementor-heading-title elementor-size-default" style="margin-bottom:24px;">Resultados da Simulação</h1>
+	<section aria-label="Métricas Totalizadoras" class="cards-metricas">
+		<div class="card-metrica">
+			<h4>VPL Total (Faturamento)</h4>
+			<span class="valor" id="vpl-faturamento">R$ 12.500.000</span>
+		</div>
+		<div class="card-metrica">
+			<h4>VPL Total (Arrecadação)</h4>
+			<span class="valor" id="vpl-arrecadacao">R$ 10.800.000</span>
+		</div>
+		<div class="card-metrica">
+			<h4>CAPEX Total Investido</h4>
+			<span class="valor" id="capex-total">R$ 8.200.000</span>
+		</div>
+		<div class="card-metrica">
+			<h4>Cobertura Alcançada</h4>
+			<span class="valor" id="cobertura">87%</span>
+		</div>
+		<div class="card-metrica">
+			<h4>Extensão de Rede Construída</h4>
+			<span class="valor" id="extensao">32.500 m</span>
+		</div>
+		<div class="card-metrica">
+			<h4>Nº de Ligações</h4>
+			<span class="valor" id="ligacoes">15.200</span>
+		</div>
+		<div class="card-metrica">
+			<h4>ETEs Expandidas</h4>
+			<span class="valor" id="etes">2</span>
+		</div>
+	</section>
+	<section aria-label="Resultados Detalhados" class="tabela-resultados">
+		<h2 class="elementor-heading-title elementor-size-default" style="margin-bottom:12px;">Detalhamento por Sub-Bacia</h2>
+		<div style="overflow-x:auto;">
+		<table aria-label="Tabela de Resultados Detalhados">
+			<thead>
+				<tr>
+					<th>Ordem</th>
+					<th>Sub-Bacia</th>
+					<th>CAPEX Alocado (R$)</th>
+					<th>Cobertura Incremental (%)</th>
+					<th>Extensão de Rede (m)</th>
+					<th>Componentes Construídos</th>
+					<th>VPL Parcial (R$)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>SB-05</td>
+					<td>R$ 2.300.000</td>
+					<td>18</td>
+					<td>6.500</td>
+					<td>Rede Coletora, 2 Elevatórias, 1 Linha de Recalque</td>
+					<td>R$ 3.200.000</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>SB-02</td>
+					<td>R$ 1.800.000</td>
+					<td>15</td>
+					<td>5.200</td>
+					<td>Rede Coletora, Ligações, 1 Elevatória</td>
+					<td>R$ 2.700.000</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>SB-01</td>
+					<td>R$ 1.500.000</td>
+					<td>12</td>
+					<td>4.300</td>
+					<td>Rede Coletora, Ligações</td>
+					<td>R$ 2.100.000</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>SB-03</td>
+					<td>R$ 1.300.000</td>
+					<td>10</td>
+					<td>3.800</td>
+					<td>Rede Coletora, 1 Elevatória, 1 Coletor Tronco</td>
+					<td>R$ 1.900.000</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>SB-06</td>
+					<td>R$ 1.300.000</td>
+					<td>8</td>
+					<td>2.700</td>
+					<td>Rede Coletora, Ligações</td>
+					<td>R$ 900.000</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</section>
+	<section aria-label="Gráficos Visuais" class="graficos-section">
+		<div class="grafico-card">
+			<h3 class="elementor-heading-title elementor-size-default" style="font-size:1.1rem; margin-bottom:8px;">CAPEX por Sub-Bacia</h3>
+			<canvas id="graficoBarraCapex" height="180" aria-label="Gráfico de barras CAPEX por Sub-Bacia"></canvas>
+		</div>
+		<div class="grafico-card">
+			<h3 class="elementor-heading-title elementor-size-default" style="font-size:1.1rem; margin-bottom:8px;">Distribuição de CAPEX por Componente</h3>
+			<canvas id="graficoPizzaComponentes" height="180" aria-label="Gráfico de pizza CAPEX por Componente"></canvas>
+		</div>
+		<div class="grafico-card">
+			<h3 class="elementor-heading-title elementor-size-default" style="font-size:1.1rem; margin-bottom:8px;">Evolução de Cobertura (%)</h3>
+			<canvas id="graficoLinhaCrescimento" height="180" aria-label="Gráfico de linha Evolução de Cobertura"></canvas>
+		</div>
+	</section>
+	<div style="display:flex; justify-content:flex-end; margin-bottom:24px;">
+		<button class="elementor-button elementor-size-sm" id="btn-exportar" aria-label="Exportar Resultados">
+			<span class="elementor-button-content-wrapper">
+				<span class="elementor-button-text">Exportar Resultados (Excel/PDF)</span>
+			</span>
+		</button>
+	</div>
+</main>
+<footer data-elementor-type="footer" data-elementor-id="26421" class="elementor elementor-26421 elementor-location-footer" data-elementor-post-type="elementor_library">
+	<div class="elementor-element elementor-element-d5f6632 e-flex e-con-boxed e-con e-parent" data-id="d5f6632" data-element_type="container" data-settings='{"background_background":"classic"}'>
+		<div class="e-con-inner">
+			<div class="elementor-element elementor-element-fac3436 elementor-widget elementor-widget-heading" data-id="fac3436" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h3 class="elementor-heading-title elementor-size-default">Aegea Saneamento - Plataforma de Priorização de Investimentos</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<script>
+// Gráfico de barras - CAPEX por Sub-Bacia
+new Chart(document.getElementById('graficoBarraCapex'), {
+	type: 'bar',
+	data: {
+		labels: ['SB-05', 'SB-02', 'SB-01', 'SB-03', 'SB-06'],
+		datasets: [{
+			label: 'CAPEX (R$)',
+			data: [2300000, 1800000, 1500000, 1300000, 1300000],
+			backgroundColor: '#0027bd',
+			borderRadius: 6
+		}]
+	},
+	options: {
+		responsive: true,
+		plugins: { legend: { display: false } },
+		scales: { y: { beginAtZero: true, ticks: { callback: v => 'R$ ' + (v/1000000).toLocaleString('pt-BR') + 'M' } } }
+	}
+});
+// Gráfico de pizza - Distribuição de CAPEX por Componente
+new Chart(document.getElementById('graficoPizzaComponentes'), {
+	type: 'pie',
+	data: {
+		labels: ['Rede Coletora', 'Ligações', 'Elevatórias', 'Linhas de Recalque', 'Coletores Tronco', 'ETE'],
+		datasets: [{
+			data: [40, 20, 15, 10, 10, 5],
+			backgroundColor: ['#0027bd', '#4f7cff', '#7faaff', '#b3c6ff', '#e0e6f7', '#ffb300']
+		}]
+	},
+	options: {
+		responsive: true,
+		plugins: { legend: { position: 'bottom' } }
+	}
+});
+// Gráfico de linha - Evolução de Cobertura
+new Chart(document.getElementById('graficoLinhaCrescimento'), {
+	type: 'line',
+	data: {
+		labels: ['2026', '2027', '2028', '2029', '2030'],
+		datasets: [{
+			label: 'Cobertura (%)',
+			data: [70, 75, 80, 85, 87],
+			borderColor: '#0027bd',
+			backgroundColor: 'rgba(0,39,189,0.1)',
+			tension: 0.3,
+			fill: true,
+			pointRadius: 4
+		}]
+	},
+	options: {
+		responsive: true,
+		plugins: { legend: { display: false } },
+		scales: { y: { beginAtZero: true, max: 100 } }
+	}
+});
+// Botão de exportação (apenas exemplo de stub)
+document.getElementById('btn-exportar').addEventListener('click', function() {
+	alert('Funcionalidade de exportação para Excel/PDF será implementada.');
+});
+</script>
+</body>
+</html>
