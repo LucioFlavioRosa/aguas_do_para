@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulação de Priorização de Investimentos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor-pro/assets/css/widget-form.min.css?ver=3.32.3">
+  <style>
+    body { background: #fff; font-family: 'Inter', Arial, sans-serif; }
+    .container-main { max-width: 1200px; margin: 40px auto 0 auto; padding: 0 24px; }
+    .section-box { background: #f9f9f9; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .section-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; color: #0027BD; }
+    .elementor-field { border-radius: 6px; border: 1px solid #ccc; padding: 10px 12px; font-size: 16px; width: 100%; margin-bottom: 12px; }
+    .form-row { display: flex; gap: 20px; }
+    .form-col { flex: 1; }
+    .radio-group, .checkbox-group { display: flex; gap: 32px; align-items: center; margin-bottom: 12px; }
+    .radio-group label, .checkbox-group label { display: flex; align-items: center; gap: 8px; font-size: 16px; }
+    input[type="radio"], input[type="checkbox"] { accent-color: #0027BD; width: 20px; height: 20px; border-radius: 4px; }
+    .elementor-button { background: var(--e-global-color-accent, #0027BD); color: #fff; font-size: 18px; padding: 15px 40px; border-radius: 8px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: background 0.2s; font-weight: 600; }
+    .elementor-button svg { width: 22px; height: 22px; fill: #fff; }
+    .elementor-button:active { background: #001a82; }
+    .results-area { opacity: 0; pointer-events: none; transition: opacity 0.6s; margin-top: 32px; }
+    .results-area.visible { opacity: 1; pointer-events: auto; }
+    .metrics-cards { display: flex; gap: 24px; margin-bottom: 28px; flex-wrap: wrap; }
+    .metric-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 24px 32px; flex: 1 1 220px; display: flex; flex-direction: column; align-items: flex-start; min-width: 180px; }
+    .metric-title { font-size: 15px; color: #666; margin-bottom: 8px; }
+    .metric-value { font-size: 2rem; font-weight: 700; color: #0027BD; }
+    .metrics-icon { margin-bottom: 8px; }
+    .table-responsive { overflow-x: auto; }
+    table.simul-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; background: #fff; border-radius: 8px; overflow: hidden; }
+    table.simul-table th, table.simul-table td { padding: 12px 16px; text-align: left; font-size: 15px; }
+    table.simul-table th { background: #f5f5f5; color: #0027BD; }
+    table.simul-table tr:nth-child(even) { background: #f9f9f9; }
+    .badge-ordem { background: var(--e-global-color-primary, #0027BD); color: #fff; border-radius: 50%; padding: 5px 12px; display: inline-block; font-weight: 700; font-size: 15px; }
+    .chart-container { background: #fff; border-radius: 8px; padding: 15px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .loading-spinner { display: inline-block; width: 30px; height: 30px; border: 4px solid #eee; border-top: 4px solid #0027BD; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px; vertical-align: middle; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @media (max-width: 900px) { .metrics-cards { flex-direction: column; } .form-row { flex-direction: column; } }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body class="hello-elementor-default">
+  <!-- Header (reutilizado) -->
+  <header class="elementor elementor-26397 elementor-location-header">
+    <div style="display:flex;align-items:center;gap:32px;padding:18px 32px;background:#fff;border-bottom:1px solid #eaeaea;">
+      <a href="dashboard.html"><img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea" style="height:40px;"></a>
+      <nav style="flex:1;">
+        <a href="dashboard.html" style="margin-right:24px;color:#0027BD;text-decoration:none;font-weight:500;">Dashboard</a>
+        <a href="simulacoes.html" style="margin-right:24px;color:#0027BD;text-decoration:underline;font-weight:700;">Simulações</a>
+        <a href="relatorios.html" style="color:#0027BD;text-decoration:none;font-weight:500;">Relatórios</a>
+      </nav>
+    </div>
+  </header>
+  <div class="container-main">
+    <h1 style="font-size:2rem;font-weight:700;color:#0027BD;margin-bottom:28px;">Simulação de Priorização de Investimentos</h1>
+    <form id="form-simulacao" autocomplete="off">
+      <div class="section-box">
+        <div class="section-title">Filtros</div>
+        <div class="form-row">
+          <div class="form-col">
+            <label for="unidade">Unidade de Negócio</label>
+            <select class="elementor-field" id="unidade" name="unidade" required>
+              <option value="">Selecione...</option>
+              <option>Águas do Rio</option>
+              <option>Águas do Pará</option>
+              <option>Corsan</option>
+            </select>
+          </div>
+          <div class="form-col">
+            <label for="bloco">Bloco</label>
+            <select class="elementor-field" id="bloco" name="bloco">
+              <option value="">Selecione...</option>
+              <option>Bloco Norte</option>
+              <option>Bloco Sul</option>
+            </select>
+          </div>
+          <div class="form-col">
+            <label for="municipio">Município</label>
+            <select class="elementor-field" id="municipio" name="municipio">
+              <option value="">Selecione...</option>
+              <option>Rio de Janeiro</option>
+              <option>Niterói</option>
+              <option>Belém</option>
+            </select>
+          </div>
+          <div class="form-col">
+            <label for="sistema">Sistema</label>
+            <select class="elementor-field" id="sistema" name="sistema">
+              <option value="">Selecione...</option>
+              <option>Sistema 1</option>
+              <option>Sistema 2</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="section-box">
+        <div class="section-title">Restrições</div>
+        <div class="form-row">
+          <div class="form-col">
+            <label for="capex">CapEx Máximo (R$)</label>
+            <input class="elementor-field" type="number" min="0" step="10000" id="capex" name="capex" placeholder="Ex: 1000000" required>
+          </div>
+          <div class="form-col">
+            <label for="cobertura">Incremento de Cobertura (%)</label>
+            <input class="elementor-field" type="number" min="0" max="100" step="0.1" id="cobertura" name="cobertura" placeholder="Ex: 10">
+          </div>
+          <div class="form-col">
+            <label for="extensao">Extensão de Rede (km)</label>
+            <input class="elementor-field" type="number" min="0" step="0.1" id="extensao" name="extensao" placeholder="Ex: 5">
+          </div>
+        </div>
+      </div>
+      <div class="section-box">
+        <div class="section-title">Calibração</div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="priorizar-bacia" name="priorizar-bacia">
+          <label for="priorizar-bacia">Priorizar Bacia Específica</label>
+          <select class="elementor-field" id="bacia" name="bacia" style="width:220px;display:none;">
+            <option value="">Selecione a Bacia...</option>
+            <option>Bacia A</option>
+            <option>Bacia B</option>
+            <option>Bacia C</option>
+          </select>
+        </div>
+      </div>
+      <div class="section-box">
+        <div class="section-title">Objetivo</div>
+        <div class="radio-group">
+          <label><input type="radio" name="objetivo" value="vpl_faturamento" checked> Maximizar VPL de Faturamento</label>
+          <label><input type="radio" name="objetivo" value="vpl_arrecadacao"> Maximizar VPL de Arrecadação</label>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <button type="submit" class="elementor-button" id="btn-simular">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+          Executar Simulação
+        </button>
+      </div>
+    </form>
+    <div class="results-area" id="results-area">
+      <div class="metrics-cards">
+        <div class="metric-card">
+          <div class="metrics-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#00d084" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L11 15v4.93zm6.9-2.54A7.978 7.978 0 0 0 20 12c0-.62-.08-1.21-.21-1.79L13 9v6l4.9 2.39z"></path></svg></div>
+          <div class="metric-title">VPL Total</div>
+          <div class="metric-value" id="vpl-total">R$ 8.200.000</div>
+        </div>
+        <div class="metric-card">
+          <div class="metrics-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#0027BD" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg></div>
+          <div class="metric-title">Cobertura Atingida</div>
+          <div class="metric-value" id="cobertura-atingida">14,2%</div>
+        </div>
+        <div class="metric-card">
+          <div class="metrics-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#fcb900" d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zm2.92-2.92l9.19-9.19 3.75 3.75-9.19 9.19-3.75-3.75z"></path></svg></div>
+          <div class="metric-title">CapEx Utilizado</div>
+          <div class="metric-value" id="capex-utilizado">R$ 980.000</div>
+        </div>
+        <div class="metric-card">
+          <div class="metrics-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#0693e3" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path></svg></div>
+          <div class="metric-title">Extensão de Rede Total</div>
+          <div class="metric-value" id="extensao-total">7,3 km</div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="simul-table">
+          <thead>
+            <tr>
+              <th>Ordem</th>
+              <th>Nome</th>
+              <th>Componentes Investidos</th>
+              <th>VPL Parcial</th>
+              <th>Prioridade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge-ordem">1</span></td>
+              <td>Bacia A</td>
+              <td>Rede coletora, Elevatória</td>
+              <td>R$ 3.500.000</td>
+              <td>Alta</td>
+            </tr>
+            <tr>
+              <td><span class="badge-ordem">2</span></td>
+              <td>Bacia C</td>
+              <td>Coletor tronco</td>
+              <td>R$ 2.800.000</td>
+              <td>Média</td>
+            </tr>
+            <tr>
+              <td><span class="badge-ordem">3</span></td>
+              <td>Bacia B</td>
+              <td>Rede coletora</td>
+              <td>R$ 1.900.000</td>
+              <td>Baixa</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="chart-container">
+        <canvas id="chart-investimento" height="220"></canvas>
+      </div>
+      <div style="text-align:right;">
+        <a href="#" class="elementor-button" id="btn-exportar">
+          <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6H8l4-4 4 4h-3v6z"></path></svg>
+          Exportar Resultados (Excel)
+        </a>
+      </div>
+    </div>
+  </div>
+  <footer style="margin-top:48px;padding:24px 0;text-align:center;color:#666;font-size:15px;background:#f5f5f5;">
+    &copy; 2026 Aegea. Plataforma de Priorização de Investimentos.
+  </footer>
+  <script>
+    document.getElementById('priorizar-bacia').addEventListener('change', function() {
+      document.getElementById('bacia').style.display = this.checked ? 'inline-block' : 'none';
+    });
+    document.getElementById('form-simulacao').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('btn-simular');
+      btn.disabled = true;
+      var results = document.getElementById('results-area');
+      results.classList.remove('visible');
+      btn.innerHTML = '<span class="loading-spinner"></span>Executando...';
+      setTimeout(function() {
+        results.classList.add('visible');
+        btn.disabled = false;
+        btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>Executar Simulação';
+        // Atualiza métricas com valores mockados (poderia ser dinâmico)
+        document.getElementById('vpl-total').textContent = 'R$ 8.200.000';
+        document.getElementById('cobertura-atingida').textContent = '14,2%';
+        document.getElementById('capex-utilizado').textContent = 'R$ 980.000';
+        document.getElementById('extensao-total').textContent = '7,3 km';
+        // Gráfico
+        var ctx = document.getElementById('chart-investimento').getContext('2d');
+        if(window.investChart) window.investChart.destroy();
+        window.investChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Bacia A', 'Bacia C', 'Bacia B'],
+            datasets: [{
+              label: 'Investimento (R$)',
+              data: [3500000, 2800000, 1900000],
+              backgroundColor: ['#00d084', '#0693e3', '#0027BD']
+            }]
+          },
+          options: {
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, ticks: { callback: v => 'R$ ' + (v/1000000)+'M' } } }
+          }
+        });
+      }, 2200);
+    });
+    document.getElementById('btn-exportar').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('Download iniciado: resultados-simulacao.xlsx');
+    });
+  </script>
+</body>
+</html>
