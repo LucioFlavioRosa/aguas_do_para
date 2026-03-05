@@ -1,0 +1,67 @@
+<header class="elementor-element-278b15dd e-con-full e-flex" id="menuHeader">
+  <div class="elementor-widget-theme-site-logo">
+    <a href="dashboard.html">
+      <img src="assets/aegea.svg" alt="Aegea Saneamento Logo" loading="lazy" style="height:48px;max-width:150px;">
+    </a>
+  </div>
+  <nav class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal" aria-label="Menu principal">
+    <ul class="elementor-nav-menu">
+      <li class="menu-item"><a href="dashboard.html" class="elementor-item elementor-item-active">Dashboard</a></li>
+      <li class="menu-item"><a href="cadastro-subbacias.html" class="elementor-item">Cadastros</a></li>
+      <li class="menu-item"><a href="simulacao.html" class="elementor-item">Simulações</a></li>
+      <li class="menu-item"><a href="relatorios.html" class="elementor-item">Relatórios</a></li>
+    </ul>
+  </nav>
+  <div class="elementor-menu-toggle" id="menuToggle" tabindex="0" aria-label="Abrir menu" aria-expanded="false">
+    <span class="elementor-menu-toggle__icon--open">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><rect y="6" width="32" height="3" rx="1.5" fill="#0027BD"/><rect y="14.5" width="32" height="3" rx="1.5" fill="#0027BD"/><rect y="23" width="32" height="3" rx="1.5" fill="#0027BD"/></svg>
+    </span>
+  </div>
+  <div class="elementor-widget-container user-dropdown" style="position:relative;">
+    <button id="userDropdownBtn" class="elementor-button" aria-haspopup="true" aria-expanded="false" aria-label="Abrir menu do usuário" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;">
+      <svg width="24" height="24" fill="none" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="#0027BD"/><path d="M4 20c0-2.21 3.582-4 8-4s8 1.79 8 4" fill="#0027BD"/></svg>
+      <span style="font-weight:500;">Usuário</span>
+      <svg width="16" height="16" fill="none" aria-hidden="true" focusable="false" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4" stroke="#0027BD" stroke-width="2" fill="none"/></svg>
+    </button>
+    <ul id="userDropdownMenu" class="dropdown-menu" style="display:none;position:absolute;right:0;top:100%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.08);border-radius:6px;padding:8px 0;min-width:160px;z-index:100;">
+      <li><a href="perfil.html" class="dropdown-item" style="display:block;padding:8px 20px;color:#0027BD;text-decoration:none;">Meu Perfil</a></li>
+      <li><a href="login.html" class="dropdown-item" onclick="return confirm('Deseja realmente sair?');" style="display:block;padding:8px 20px;color:#cf2e2e;text-decoration:none;">Sair</a></li>
+    </ul>
+  </div>
+  <script>
+    // Menu hambúrguer para mobile
+    document.getElementById('menuToggle').addEventListener('click', function() {
+      var nav = document.querySelector('.elementor-nav-menu--main');
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+    });
+    // Dropdown do usuário
+    document.getElementById('userDropdownBtn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      var menu = document.getElementById('userDropdownMenu');
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    });
+    // Fecha dropdown ao clicar fora
+    document.addEventListener('click', function(e) {
+      var menu = document.getElementById('userDropdownMenu');
+      if(menu) menu.style.display = 'none';
+      var btn = document.getElementById('userDropdownBtn');
+      if(btn) btn.setAttribute('aria-expanded', false);
+    });
+  </script>
+  <style>
+    @media (max-width: 900px) {
+      .elementor-nav-menu--main { display: none; }
+      .elementor-menu-toggle { display: block !important; margin-left: auto; }
+    }
+    @media (min-width: 901px) {
+      .elementor-nav-menu--main { display: flex !important; }
+      .elementor-menu-toggle { display: none !important; }
+    }
+    .dropdown-menu li a:hover { background: #f0f4ff; }
+    .user-dropdown .dropdown-menu { min-width: 160px; }
+  </style>
+</header>
