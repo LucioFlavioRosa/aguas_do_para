@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | Algoritmo de Priorização de Investimentos</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --sidebar-width: 250px;
+    }
+    body {
+      margin: 0;
+      background: #f6f8fa;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      width: 100%;
+      background: var(--e-global-color-primary, #0027BD);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 64px;
+      box-shadow: 0 2px 8px rgba(0,39,189,0.08);
+      z-index: 10;
+    }
+    .header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .header .logo img {
+      height: 38px;
+    }
+    .header .menu {
+      display: flex;
+      gap: 32px;
+    }
+    .header .menu a {
+      color: #fff;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: border 0.2s;
+    }
+    .header .menu a.active, .header .menu a:hover {
+      border-bottom: 2px solid var(--e-global-color-accent, #00d084);
+    }
+    .header .profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header .profile a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sidebar {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: var(--sidebar-width);
+      height: calc(100vh - 64px);
+      background: #f5f5f5;
+      border-right: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 0 0 0;
+      z-index: 9;
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #222;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 12px 32px;
+      border-left: 4px solid transparent;
+      border-radius: 0 16px 16px 0;
+      transition: background 0.15s, border 0.15s;
+      font-size: 1.05rem;
+    }
+    .sidebar a.active, .sidebar a:hover {
+      background: #eaf0fb;
+      border-left: 4px solid var(--e-global-color-primary, #0027BD);
+      color: var(--e-global-color-primary, #0027BD);
+    }
+    .main-content {
+      margin-left: var(--sidebar-width);
+      padding: 40px 36px 32px 36px;
+      min-height: calc(100vh - 64px - 60px);
+      background: #f6f8fa;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .cards-resumo {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      padding: 20px 32px 20px 24px;
+      min-width: 210px;
+      flex: 1 1 210px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 1.5px solid #f0f0f0;
+      transition: box-shadow 0.2s, border 0.2s;
+    }
+    .card .card-label {
+      font-size: 1.05rem;
+      color: #555;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .card .card-value {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--e-global-color-primary, #0027BD);
+    }
+    .card .card-trend {
+      font-size: 0.96rem;
+      color: var(--e-global-color-accent, #00d084);
+      margin-top: 2px;
+    }
+    .dashboard-section {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .dashboard-section .grafico-container {
+      background: #fff;
+      border-radius: 8px;
+      padding: 18px 20px 12px 20px;
+      box-shadow: 0 2px 8px rgba(0,39,189,0.04);
+      flex: 2 1 340px;
+      min-width: 320px;
+      margin-bottom: 24px;
+      border: 1px solid #e0e0e0;
+    }
+    .dashboard-section .ultimas-simulacoes {
+      background: #fff;
+      border-radius: 8px;
+      padding: 18px 20px 12px 20px;
+      box-shadow: 0 2px 8px rgba(0,39,189,0.04);
+      flex: 3 1 400px;
+      min-width: 340px;
+      border: 1px solid #e0e0e0;
+    }
+    .ultimas-simulacoes table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    .ultimas-simulacoes th, .ultimas-simulacoes td {
+      padding: 10px 8px;
+      text-align: left;
+      border: 1px solid #ddd;
+      font-size: 0.98rem;
+    }
+    .ultimas-simulacoes th {
+      background: var(--e-global-color-primary, #0027BD);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+    }
+    .ultimas-simulacoes tr:nth-child(even) {
+      background: #f7fafd;
+    }
+    .ultimas-simulacoes a {
+      color: var(--e-global-color-accent, #00d084);
+      text-decoration: underline;
+      font-weight: 500;
+      font-size: 0.97rem;
+    }
+    .ultimas-simulacoes a:hover {
+      color: var(--e-global-color-primary, #0027BD);
+    }
+    .footer {
+      width: 100%;
+      background: #f5f5f5;
+      color: #888;
+      text-align: center;
+      padding: 18px 0 16px 0;
+      font-size: 0.97rem;
+      margin-top: 24px;
+      border-top: 1px solid #e0e0e0;
+    }
+    @media (max-width: 900px) {
+      .main-content {
+        padding: 24px 4vw 16px 4vw;
+      }
+      .cards-resumo {
+        flex-direction: column;
+        gap: 18px;
+      }
+      .dashboard-section {
+        flex-direction: column;
+        gap: 18px;
+      }
+    }
+    @media (max-width: 700px) {
+      .sidebar {
+        display: none;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .header {
+        padding: 0 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="dashboard.html" class="logo" aria-label="Página inicial">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" />
+      <span style="font-weight:700;font-size:1.18rem;letter-spacing:-1px;">Priorização de Investimentos</span>
+    </a>
+    <nav class="menu" aria-label="Menu principal">
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="simulacoes.html">Simulações</a>
+      <a href="cadastro-bacias.html">Cadastro de Bacias</a>
+      <a href="relatorios.html">Relatórios</a>
+    </nav>
+    <div class="profile">
+      <a href="login.html" title="Sair" aria-label="Logout">
+        <svg width="22" height="22" fill="none" viewBox="0 0 22 22" aria-hidden="true"><path d="M13.5 15.25L17.25 11M17.25 11L13.5 6.75M17.25 11H7.333" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="9" stroke="#fff" stroke-width="2"/></svg>
+        Sair
+      </a>
+    </div>
+  </header>
+  <aside class="sidebar" aria-label="Navegação lateral">
+    <nav>
+      <a href="dashboard.html" class="active"> <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect x="3" y="3" width="6" height="6" rx="2" fill="#0027BD"/><rect x="11" y="3" width="6" height="6" rx="2" fill="#0027BD"/><rect x="3" y="11" width="6" height="6" rx="2" fill="#0027BD"/><rect x="11" y="11" width="6" height="6" rx="2" fill="#0027BD"/></svg> Dashboard</a>
+      <a href="simulacoes.html"><svg width="20" height="20" fill="none" viewBox="0 0 20 20"><path d="M3 17V7a2 2 0 012-2h10a2 2 0 012 2v10" stroke="#0027BD" stroke-width="2"/><path d="M7 13l3 3 3-3" stroke="#0027BD" stroke-width="2"/></svg> Simulações</a>
+      <a href="cadastro-bacias.html"><svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect x="3" y="7" width="14" height="10" rx="2" stroke="#0027BD" stroke-width="2"/><path d="M7 7V5a3 3 0 016 0v2" stroke="#0027BD" stroke-width="2"/></svg> Cadastro de Bacias</a>
+      <a href="relatorios.html"><svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#0027BD" stroke-width="2"/><path d="M7 13V7M10 13V10M13 13V9" stroke="#0027BD" stroke-width="2"/></svg> Relatórios</a>
+      <a href="#" style="opacity:.7;cursor:not-allowed;"><svg width="20" height="20" fill="none" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" stroke="#0027BD" stroke-width="2"/><path d="M10 14v-4M10 6h.01" stroke="#0027BD" stroke-width="2"/></svg> Configurações</a>
+    </nav>
+  </aside>
+  <main class="main-content">
+    <section class="cards-resumo">
+      <div class="card">
+        <div class="card-label">Total de Bacias Cadastradas</div>
+        <div class="card-value" id="totalBacias">32</div>
+        <div class="card-trend">+2 nesta semana</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Simulações Ativas</div>
+        <div class="card-value" id="simulacoesAtivas">7</div>
+        <div class="card-trend">+1 nova</div>
+      </div>
+      <div class="card">
+        <div class="card-label">VPL Médio</div>
+        <div class="card-value" id="vplMedio">R$ 2,15M</div>
+        <div class="card-trend">+5% este mês</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Cobertura Atual (%)</div>
+        <div class="card-value" id="coberturaAtual">48%</div>
+        <div class="card-trend">+0,7pp</div>
+      </div>
+    </section>
+    <section class="dashboard-section">
+      <div class="grafico-container">
+        <h3 style="font-size:1.1rem;font-weight:600;color:#222;margin-bottom:10px;">Evolução de Cobertura por Ano</h3>
+        <canvas id="graficoCobertura" height="120"></canvas>
+      </div>
+      <div class="ultimas-simulacoes">
+        <h3 style="font-size:1.1rem;font-weight:600;color:#222;margin-bottom:10px;">Últimas Simulações</h3>
+        <table aria-label="Últimas Simulações">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Data</th>
+              <th>VPL</th>
+              <th>Status</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody id="simulacoesTabela">
+            <tr>
+              <td>Simulação RJ-2026</td>
+              <td>13/02/2026</td>
+              <td>R$ 2,5M</td>
+              <td><span style="color:var(--e-global-color-accent,#00d084);font-weight:600;">Concluída</span></td>
+              <td><a href="detalhes-simulacao.html?id=1">Ver Detalhes</a></td>
+            </tr>
+            <tr>
+              <td>Expansão Sul-2026</td>
+              <td>10/02/2026</td>
+              <td>R$ 1,9M</td>
+              <td><span style="color:#f39c12;font-weight:600;">Em Análise</span></td>
+              <td><a href="detalhes-simulacao.html?id=2">Ver Detalhes</a></td>
+            </tr>
+            <tr>
+              <td>Prioridade Norte</td>
+              <td>05/02/2026</td>
+              <td>R$ 2,1M</td>
+              <td><span style="color:#e74c3c;font-weight:600;">Pendente</span></td>
+              <td><a href="detalhes-simulacao.html?id=3">Ver Detalhes</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    &copy; 2026 Aegea Saneamento. Plataforma de Priorização de Investimentos.
+  </footer>
+  <script>
+    // Simulação de gráfico de cobertura
+    const ctx = document.getElementById('graficoCobertura').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['2022', '2023', '2024', '2025', '2026'],
+        datasets: [{
+          label: 'Cobertura (%)',
+          data: [38, 41, 44, 47, 48],
+          fill: true,
+          backgroundColor: 'rgba(0,39,189,0.08)',
+          borderColor: 'rgba(0,39,189,1)',
+          borderWidth: 3,
+          pointBackgroundColor: 'rgba(0,39,189,1)',
+          tension: 0.4
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 60,
+            ticks: { stepSize: 5 }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

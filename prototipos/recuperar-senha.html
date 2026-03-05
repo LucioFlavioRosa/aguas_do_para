@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recuperar Senha - Aegea</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="recuperar-senha-page">
+  <header class="header-simples" style="text-align:center; padding:32px 0 16px 0;">
+    <a href="index.html" aria-label="Página inicial">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" class="logo" style="height:48px; border-radius:12px;">
+    </a>
+  </header>
+  <main class="main-content">
+    <section class="recuperar-form-container">
+      <h1 class="form-title">Recuperar Senha</h1>
+      <form class="recuperar-form" id="recuperarForm" autocomplete="off" aria-label="Formulário de recuperação de senha">
+        <label for="email" class="elementor-field-label">E-mail cadastrado</label>
+        <input type="email" id="email" name="email" class="elementor-field" placeholder="Digite seu e-mail" required autocomplete="username">
+        <button type="submit" class="elementor-button">Enviar Link de Recuperação</button>
+        <div id="mensagem-sucesso" class="mensagem-sucesso" style="display:none;">Um link de recuperação foi enviado para seu e-mail.</div>
+      </form>
+      <div class="voltar-login">
+        <a href="login.html" class="elementor-button-link">Voltar para Login</a>
+      </div>
+    </section>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script>
+    // Simulação de envio de link de recuperação
+    document.getElementById('recuperarForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var emailInput = document.getElementById('email');
+      var msg = document.getElementById('mensagem-sucesso');
+      if(emailInput.value) {
+        msg.style.display = 'block';
+        emailInput.setAttribute('disabled', 'disabled');
+        this.querySelector('button').setAttribute('disabled', 'disabled');
+      }
+    });
+    // Inclusão dinâmica do footer reutilizável
+    fetch('components/footer.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('footer-placeholder').innerHTML = html;
+      });
+  </script>
+</body>
+</html>

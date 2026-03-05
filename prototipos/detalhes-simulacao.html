@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalhes da Simulação</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor-pro/assets/css/widget-form.min.css?ver=3.32.3">
+  <style>
+    body { background: #fff; font-family: 'Inter', Arial, sans-serif; }
+    .container-main { max-width: 1200px; margin: 40px auto 0 auto; padding: 0 24px; }
+    .breadcrumb { font-size: 14px; color: #666; margin-bottom: 18px; }
+    .breadcrumb a { color: var(--e-global-color-primary, #0027BD); text-decoration: underline; }
+    .breadcrumb-sep { margin: 0 8px; color: #aaa; }
+    .section-box { background: #f0f0f0; border-left: 4px solid var(--e-global-color-primary, #0027BD); border-radius: 6px; padding: 15px; margin-bottom: 24px; }
+    .section-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; color: #0027BD; }
+    .metrics-cards { display: flex; gap: 24px; margin-bottom: 28px; flex-wrap: wrap; }
+    .metric-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 24px 32px; flex: 1 1 220px; display: flex; flex-direction: column; align-items: flex-start; min-width: 180px; }
+    .metric-title { font-size: 15px; color: #666; margin-bottom: 8px; }
+    .metric-value { font-size: 2rem; font-weight: 700; color: #0027BD; }
+    .metrics-icon { margin-bottom: 8px; }
+    .table-responsive { overflow-x: auto; }
+    table.simul-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; background: #fff; border-radius: 8px; overflow: hidden; }
+    table.simul-table th, table.simul-table td { padding: 12px 16px; text-align: left; font-size: 15px; }
+    table.simul-table th { background: #f5f5f5; color: #0027BD; }
+    table.simul-table tr:nth-child(even) { background: #f9f9f9; }
+    tfoot td { font-weight: bold; background: #f5f5f5; }
+    .chart-container { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .unifilar-svg { width: 100%; height: 180px; display: block; margin-bottom: 24px; }
+    .btn-group { display: flex; gap: 16px; justify-content: flex-end; margin-top: 24px; }
+    .elementor-button { background: var(--e-global-color-primary, #0027BD); color: #fff; font-size: 17px; padding: 13px 32px; border-radius: 8px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; }
+    .elementor-button svg { width: 20px; height: 20px; fill: #fff; }
+    .elementor-button:active { background: #001a82; }
+    @media (max-width: 900px) { .metrics-cards { flex-direction: column; } }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body class="hello-elementor-default">
+  <!-- Header (reutilizado) -->
+  <header class="elementor elementor-26397 elementor-location-header">
+    <div style="display:flex;align-items:center;gap:32px;padding:18px 32px;background:#fff;border-bottom:1px solid #eaeaea;">
+      <a href="dashboard.html"><img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea" style="height:40px;"></a>
+      <nav style="flex:1;">
+        <a href="dashboard.html" style="margin-right:24px;color:#0027BD;text-decoration:none;font-weight:500;">Dashboard</a>
+        <a href="simulacoes.html" style="margin-right:24px;color:#0027BD;text-decoration:underline;font-weight:700;">Simulações</a>
+        <a href="relatorios.html" style="color:#0027BD;text-decoration:none;font-weight:500;">Relatórios</a>
+      </nav>
+    </div>
+  </header>
+  <div class="container-main">
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="dashboard.html">Dashboard</a>
+      <span class="breadcrumb-sep">&gt;</span>
+      <a href="simulacoes.html">Simulações</a>
+      <span class="breadcrumb-sep">&gt;</span>
+      Detalhes da Simulação #1
+    </nav>
+    <h1 style="font-size:2rem;font-weight:700;color:#0027BD;margin-bottom:24px;">Simulação #1 - Expansão RJ Norte</h1>
+    <div class="section-box">
+      <div class="section-title">Parâmetros Utilizados</div>
+      <table style="width:100%;font-size:15px;">
+        <tr><td><b>Unidade de Negócio</b></td><td>Águas do Rio</td></tr>
+        <tr><td><b>Bloco</b></td><td>Bloco Norte</td></tr>
+        <tr><td><b>Município</b></td><td>Rio de Janeiro</td></tr>
+        <tr><td><b>Sistema</b></td><td>Sistema 1</td></tr>
+        <tr><td><b>CapEx Máximo</b></td><td>R$ 1.000.000</td></tr>
+        <tr><td><b>Incremento de Cobertura</b></td><td>10%</td></tr>
+        <tr><td><b>Extensão de Rede</b></td><td>6 km</td></tr>
+        <tr><td><b>Calibração</b></td><td>Priorizar Bacia A</td></tr>
+        <tr><td><b>Objetivo</b></td><td>Maximizar VPL de Faturamento</td></tr>
+      </table>
+    </div>
+    <div class="section-title">Resultados Detalhados</div>
+    <div class="metrics-cards">
+      <div class="metric-card">
+        <div class="metrics-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#00d084" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L11 15v4.93zm6.9-2.54A7.978 7.978 0 0 0 20 12c0-.62-.08-1.21-.21-1.79L13 9v6l4.9 2.39z"></path></svg></div>
+        <div class="metric-title">VPL Faturamento</div>
+        <div class="metric-value">R$ 8.200.000</div>
+      </div>
+      <div class="metric-card">
+        <div class="metrics-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#0027BD" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg></div>
+        <div class="metric-title">VPL Arrecadação</div>
+        <div class="metric-value">R$ 7.600.000</div>
+      </div>
+      <div class="metric-card">
+        <div class="metrics-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#fcb900" d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zm2.92-2.92l9.19-9.19 3.75 3.75-9.19 9.19-3.75-3.75z"></path></svg></div>
+        <div class="metric-title">Cobertura Final</div>
+        <div class="metric-value">14,2%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metrics-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#0693e3" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path></svg></div>
+        <div class="metric-title">CapEx Total</div>
+        <div class="metric-value">R$ 980.000</div>
+      </div>
+      <div class="metric-card">
+        <div class="metrics-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path fill="#9b51e0" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L11 15v4.93zm6.9-2.54A7.978 7.978 0 0 0 20 12c0-.62-.08-1.21-.21-1.79L13 9v6l4.9 2.39z"></path></svg></div>
+        <div class="metric-title">OPex Estimado</div>
+        <div class="metric-value">R$ 110.000</div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="simul-table">
+        <thead>
+          <tr>
+            <th>Bacia</th>
+            <th>Componente</th>
+            <th>Quantidade</th>
+            <th>Custo Unitário</th>
+            <th>Custo Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Bacia A</td><td>Rede coletora</td><td>4 km</td><td>R$ 120.000</td><td>R$ 480.000</td></tr>
+          <tr><td>Bacia A</td><td>Elevatória</td><td>1</td><td>R$ 180.000</td><td>R$ 180.000</td></tr>
+          <tr><td>Bacia C</td><td>Coletor tronco</td><td>2 km</td><td>R$ 150.000</td><td>R$ 300.000</td></tr>
+          <tr><td>Bacia B</td><td>Rede coletora</td><td>1.5 km</td><td>R$ 130.000</td><td>R$ 195.000</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="4">Total</td><td>R$ 1.155.000</td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="chart-container">
+      <canvas id="chart-fluxo" height="180"></canvas>
+    </div>
+    <div class="chart-container">
+      <div class="section-title" style="font-size:1.1rem;margin-bottom:10px;">Unifilar - Bacias Priorizadas</div>
+      <svg class="unifilar-svg" viewBox="0 0 600 180">
+        <line x1="100" y1="90" x2="250" y2="90" stroke="#999" stroke-width="3" />
+        <line x1="250" y1="90" x2="400" y2="60" stroke="#999" stroke-width="3" />
+        <line x1="250" y1="90" x2="400" y2="120" stroke="#999" stroke-width="3" />
+        <circle cx="100" cy="90" r="38" fill="#00d084" stroke="#0027BD" stroke-width="3" />
+        <text x="100" y="95" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">A</text>
+        <circle cx="400" cy="60" r="32" fill="#0693e3" stroke="#0027BD" stroke-width="2" />
+        <text x="400" y="65" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">C</text>
+        <circle cx="400" cy="120" r="28" fill="#e0e0e0" stroke="#999" stroke-width="2" />
+        <text x="400" y="125" text-anchor="middle" fill="#666" font-size="15" font-weight="bold">B</text>
+      </svg>
+    </div>
+    <div class="btn-group">
+      <a href="#" class="elementor-button" id="btn-exportar-pdf">
+        <svg viewBox="0 0 24 24"><path d="M19 2H8c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H8V4h8v16zm-4-7h2v2h-2zm0-4h2v2h-2zm-4 4h2v2H9zm0-4h2v2H9z"></path></svg>
+        Exportar Relatório Completo (PDF)
+      </a>
+      <a href="simulacoes.html" class="elementor-button" style="background:#00d084;">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>
+        Voltar para Simulações
+      </a>
+    </div>
+  </div>
+  <footer style="margin-top:48px;padding:24px 0;text-align:center;color:#666;font-size:15px;background:#f5f5f5;">
+    &copy; 2026 Aegea. Plataforma de Priorização de Investimentos.
+  </footer>
+  <script>
+    // Gráfico de fluxo de caixa
+    var ctx = document.getElementById('chart-fluxo').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['2026', '2027', '2028', '2029', '2030', '2031'],
+        datasets: [
+          { label: 'CapEx', data: [980000, 0, 0, 0, 0, 0], borderColor: '#fcb900', backgroundColor: 'rgba(252,185,0,0.10)', fill: true, tension:0.3 },
+          { label: 'Receita', data: [0, 1600000, 1800000, 1700000, 1400000, 1200000], borderColor: '#00d084', backgroundColor: 'rgba(0,208,132,0.10)', fill: true, tension:0.3 },
+          { label: 'OPex', data: [0, 22000, 22000, 22000, 22000, 22000], borderColor: '#9b51e0', backgroundColor: 'rgba(155,81,224,0.10)', fill: true, tension:0.3 }
+        ]
+      },
+      options: {
+        plugins: { legend: { position: 'top' } },
+        scales: {
+          y: { beginAtZero: true, ticks: { callback: v => 'R$ ' + (v/1000)+'k' } }
+        }
+      }
+    });
+    document.getElementById('btn-exportar-pdf').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('Download iniciado: relatorio-simulacao.pdf');
+    });
+  </script>
+</body>
+</html>

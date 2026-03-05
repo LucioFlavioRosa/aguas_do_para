@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Configurações do Sistema - Algoritmo de Priorização de Investimentos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5">
+  <style>
+    body {
+      background: #f3f6fa;
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 40px 32px 32px 32px;
+      max-width: 900px;
+    }
+    .config-section {
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px 28px 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .config-section h2 {
+      font-size: 1.25rem;
+      margin: 0 0 10px 0;
+      color: var(--e-global-color-primary, #0027BD);
+      font-weight: 600;
+    }
+    .config-row {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .config-row label {
+      min-width: 120px;
+      font-size: 1rem;
+      color: #333;
+      font-weight: 500;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .config-row input[type="text"],
+    .config-row input[type="email"],
+    .config-row input[type="password"],
+    .config-row input[type="number"] {
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      padding: 10px 14px;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 320px;
+      background: #fff;
+      margin-bottom: 8px;
+      transition: border-color 0.2s;
+    }
+    .config-row input:focus {
+      border-color: var(--e-global-color-primary, #0027BD);
+      outline: none;
+    }
+    .elementor-button {
+      display: inline-block;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 10px 28px;
+      margin-top: 8px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .btn-primary {
+      background: var(--e-global-color-primary, #0027BD);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: #001b82;
+    }
+    .btn-accent {
+      background: var(--e-global-color-accent, #00d084);
+      color: #fff;
+    }
+    .btn-accent:hover {
+      background: #009e60;
+    }
+    .btn-neutral {
+      background: #ccc;
+      color: #222;
+    }
+    .btn-neutral:hover {
+      background: #b0b0b0;
+    }
+    .footer-aegea {
+      margin-left: 250px;
+      background: #f5f5f5;
+      padding: 18px 32px;
+      text-align: right;
+      color: #888;
+      font-size: 15px;
+      border-top: 1px solid #e0e0e0;
+      border-bottom-right-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+    @media (max-width: 900px) {
+      .main-content, .footer-aegea {
+        margin-left: 60px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+    @media (max-width: 600px) {
+      .main-content, .footer-aegea {
+        margin-left: 0;
+        padding: 10px;
+      }
+      .config-section {
+        padding: 14px 8px;
+      }
+    }
+    .success-message {
+      display: none;
+      background: #e6f9ed;
+      color: #117a3a;
+      border-left: 4px solid #00d084;
+      padding: 10px 18px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .success-message.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <iframe src="components/sidebar.html" title="Sidebar" style="position:fixed;top:0;left:0;width:250px;height:100vh;border:none;z-index:11;"></iframe>
+  <!-- Header -->
+  <iframe src="components/header.html" title="Header" style="position:fixed;top:0;left:250px;width:calc(100% - 250px);height:70px;border:none;z-index:12;"></iframe>
+  <main class="main-content" style="margin-top:80px;">
+    <h1 style="font-size:2rem;color:#222;font-weight:700;margin-bottom:24px;">Configurações do Sistema</h1>
+    <div id="successPerfil" class="success-message" role="status">Perfil salvo com sucesso!</div>
+    <div id="successParametros" class="success-message" role="status">Parâmetros globais salvos com sucesso!</div>
+    <div id="successGerenciamento" class="success-message" role="status"></div>
+    <!-- Perfil do Usuário -->
+    <section class="config-section" aria-labelledby="perfil-titulo">
+      <h2 id="perfil-titulo">Perfil do Usuário</h2>
+      <form id="formPerfil" autocomplete="off" onsubmit="return false;">
+        <div class="config-row">
+          <div style="flex:1;min-width:180px;">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" class="elementor-field" required placeholder="Seu nome" autocomplete="name">
+          </div>
+          <div style="flex:1;min-width:180px;">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" class="elementor-field" required placeholder="Seu e-mail" autocomplete="email">
+          </div>
+          <div style="flex:1;min-width:180px;">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" class="elementor-field" required placeholder="Nova senha" autocomplete="new-password">
+          </div>
+        </div>
+        <button type="submit" class="elementor-button btn-primary" id="btnSalvarPerfil">Salvar Perfil</button>
+      </form>
+    </section>
+    <!-- Parâmetros Globais -->
+    <section class="config-section" aria-labelledby="param-titulo">
+      <h2 id="param-titulo">Parâmetros Globais</h2>
+      <form id="formParametros" autocomplete="off" onsubmit="return false;">
+        <div class="config-row">
+          <div style="flex:1;min-width:180px;">
+            <label for="taxa">Taxa de Desconto para VPL (%)</label>
+            <input type="number" id="taxa" name="taxa" class="elementor-field" min="0" max="100" step="0.01" required placeholder="Ex: 8.5">
+          </div>
+          <div style="flex:1;min-width:180px;">
+            <label for="horizonte">Horizonte de Tempo Padrão (anos)</label>
+            <input type="number" id="horizonte" name="horizonte" class="elementor-field" min="1" max="50" required placeholder="Ex: 10">
+          </div>
+        </div>
+        <button type="submit" class="elementor-button btn-primary" id="btnSalvarParametros">Salvar Parâmetros</button>
+      </form>
+    </section>
+    <!-- Gerenciamento de Dados -->
+    <section class="config-section" aria-labelledby="ger-titulo">
+      <h2 id="ger-titulo">Gerenciamento de Dados</h2>
+      <div class="config-row" style="gap:12px;flex-wrap:wrap;">
+        <button class="elementor-button btn-accent" id="btnLimparCache" type="button">Limpar Cache</button>
+        <button class="elementor-button btn-neutral" id="btnExportarDados" type="button">Exportar Todos os Dados</button>
+        <button class="elementor-button btn-accent" id="btnImportarDados" type="button">Importar Dados</button>
+      </div>
+    </section>
+  </main>
+  <footer class="footer-aegea">
+    &copy; 2026 Aegea Saneamento. Plataforma de Priorização de Investimentos.
+  </footer>
+  <script>
+    // Simulação de salvamento de perfil
+    document.getElementById('formPerfil').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const msg = document.getElementById('successPerfil');
+      msg.classList.add('active');
+      setTimeout(() => msg.classList.remove('active'), 2500);
+    });
+    // Simulação de salvamento de parâmetros globais
+    document.getElementById('formParametros').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const msg = document.getElementById('successParametros');
+      msg.classList.add('active');
+      setTimeout(() => msg.classList.remove('active'), 2500);
+    });
+    // Simulação de gerenciamento de dados
+    function showGerenciamentoMsg(text) {
+      const msg = document.getElementById('successGerenciamento');
+      msg.textContent = text;
+      msg.classList.add('active');
+      setTimeout(() => msg.classList.remove('active'), 2200);
+    }
+    document.getElementById('btnLimparCache').onclick = function() {
+      showGerenciamentoMsg('Cache limpo com sucesso!');
+    };
+    document.getElementById('btnExportarDados').onclick = function() {
+      showGerenciamentoMsg('Exportação iniciada. Você receberá um arquivo em instantes.');
+    };
+    document.getElementById('btnImportarDados').onclick = function() {
+      showGerenciamentoMsg('Importação de dados iniciada.');
+    };
+  </script>
+</body>
+</html>

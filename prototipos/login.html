@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | Algoritmo de Priorização de Investimentos</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #f5faff 0%, #eaf0fb 100%);
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(0,39,189,0.08);
+      padding: 40px 32px 32px 32px;
+      max-width: 350px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .login-container img {
+      width: 110px;
+      margin-bottom: 18px;
+    }
+    .login-container h2 {
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: var(--e-global-color-primary, #0027BD);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .login-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .elementor-field {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #fafbfc;
+      transition: border 0.2s;
+    }
+    .elementor-field:focus {
+      border-color: var(--e-global-color-primary, #0027BD);
+      outline: none;
+      background: #fff;
+    }
+    .elementor-button {
+      width: 100%;
+      padding: 12px 0;
+      border-radius: 8px;
+      background: var(--e-global-color-primary, #0027BD);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(0,39,189,0.05);
+    }
+    .elementor-button:hover {
+      background: var(--e-global-color-accent, #00d084);
+      color: #fff;
+    }
+    .login-links {
+      margin-top: 12px;
+      text-align: right;
+      width: 100%;
+    }
+    .login-links a {
+      color: var(--e-global-color-primary, #0027BD);
+      text-decoration: underline;
+      font-size: 0.98rem;
+      transition: color 0.2s;
+    }
+    .login-links a:hover {
+      color: var(--e-global-color-accent, #00d084);
+    }
+    .footer-simples {
+      margin-top: 40px;
+      text-align: center;
+      color: #888;
+      font-size: 0.93rem;
+      opacity: 0.85;
+    }
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 24px 8px 16px 8px;
+        max-width: 98vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header style="width:100%;display:flex;justify-content:center;background:transparent;padding:24px 0 0 0;">
+    <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" style="width:110px;" />
+  </header>
+  <main style="flex:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+    <div class="login-container">
+      <h2>Bem-vindo(a)<br>Algoritmo de Priorização de Investimentos</h2>
+      <form class="login-form" id="loginForm" autocomplete="off">
+        <input type="email" class="elementor-field elementor-field-textual" name="email" placeholder="E-mail" required aria-label="E-mail">
+        <input type="password" class="elementor-field elementor-field-textual" name="senha" placeholder="Senha" required aria-label="Senha">
+        <button type="submit" class="elementor-button">Entrar</button>
+      </form>
+      <div class="login-links">
+        <a href="recuperar-senha.html">Esqueci minha senha</a>
+      </div>
+    </div>
+  </main>
+  <footer class="footer-simples">
+    &copy; 2026 Aegea Saneamento. Plataforma de Priorização de Investimentos.
+  </footer>
+  <script>
+    // Simulação de login (profissional):
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Simulação realista: Validação básica
+      var email = this.email.value.trim();
+      var senha = this.senha.value;
+      if(email && senha.length >= 4) {
+        window.location.href = 'dashboard.html';
+      } else {
+        alert('Preencha e-mail e senha válidos.');
+      }
+    });
+  </script>
+</body>
+</html>
