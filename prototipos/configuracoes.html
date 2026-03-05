@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Configurações - Algoritmo de Priorização SES</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor-pro/assets/css/widget-form.min.css?ver=3.32.3" media="all" />
+  <link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
+  <style>
+    body { background: #f6f8fa; }
+    .dashboard-wrapper { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-right: 1px solid #e5e5e5;
+      padding: 32px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .sidebar nav a {
+      display: block;
+      padding: 14px 32px;
+      color: #0027bd;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background: #f0f4ff;
+      color: #0027bd;
+      border-right: 4px solid #0027bd;
+    }
+    .main-content {
+      flex: 1;
+      padding: 0 0 48px 0;
+      background: #f6f8fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 0 32px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .user-menu span {
+      color: #0027bd;
+      font-weight: 500;
+    }
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid #e5e5e5;
+      margin-top: 32px;
+      margin-bottom: 32px;
+      gap: 0;
+    }
+    .tab {
+      padding: 16px 32px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      color: #0027bd;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+      transition: border 0.2s, color 0.2s;
+    }
+    .tab.active {
+      border-bottom: 2px solid #0027bd;
+      color: #0027bd;
+      background: #f0f4ff;
+    }
+    .tab-content {
+      display: none;
+      margin-top: 32px;
+    }
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .elementor-form {
+      max-width: 480px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .elementor-form label {
+      font-weight: 500;
+      color: #0027bd;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .elementor-field {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 1rem;
+      margin-bottom: 0;
+      background: #f9fafb;
+      color: #222;
+    }
+    .elementor-field[readonly] {
+      background: #f0f0f0;
+      color: #888;
+    }
+    .elementor-field-type-acceptance {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0;
+    }
+    .elementor-button {
+      background: #0027bd;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .elementor-button:hover {
+      background: #001a8c;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px 32px 24px 32px;
+      min-width: 340px;
+      max-width: 90vw;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    .modal-content .close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #888;
+    }
+    .success-message {
+      background: #e6f7ec;
+      color: #1a7f37;
+      border: 1px solid #b7eb8f;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      text-align: center;
+      font-weight: 500;
+      display: none;
+    }
+    .success-message.active {
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .dashboard-wrapper { flex-direction: column; }
+      .sidebar { width: 100%; flex-direction: row; border-right: none; border-bottom: 1px solid #e5e5e5; }
+      .sidebar nav { display: flex; gap: 0; width: 100%; }
+      .sidebar nav a { flex: 1; text-align: center; border-right: none; border-bottom: 4px solid transparent; }
+      .sidebar nav a.active { border-bottom: 4px solid #0027bd; }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="dashboard.html"><img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea" width="120" height="48"></a>
+      </div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="cadastro.html">Cadastro</a>
+        <a href="relatorios.html">Relatórios</a>
+        <a href="configuracoes.html" class="active">Configurações</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </aside>
+    <div class="main-content">
+      <header>
+        <div>
+          <span style="font-weight:700;color:#0027bd;">Algoritmo para Priorização de Investimentos SES</span>
+        </div>
+        <div class="user-menu">
+          <span>Usuário: <strong>Wagner Monteiro</strong></span>
+          <a href="configuracoes.html" title="Configurações"><svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.43-2.09c.07-.48.07-.97 0-1.45l2.11-1.65a.5.5 0 0 0 .12-.64l-2-3.46a.5.5 0 0 0-.6-.23l-2.49 1a7.03 7.03 0 0 0-1.25-.73l-.38-2.65A.5.5 0 0 0 14 2h-4a.5.5 0 0 0-.5.42l-.38 2.65c-.44.19-.86.43-1.25.73l-2.49-1a.5.5 0 0 0-.6.23l-2 3.46a.5.5 0 0 0 .12.64l2.11 1.65c-.07.48-.07.97 0 1.45l-2.11 1.65a.5.5 0 0 0-.12.64l2 3.46a.5.5 0 0 0 .6.23l2.49-1c.39.3.81.54 1.25.73l.38 2.65A.5.5 0 0 0 10 22h4a.5.5 0 0 0 .5-.42l.38-2.65c.44-.19.86-.43 1.25-.73l2.49 1a.5.5 0 0 0 .6-.23l2-3.46a.5.5 0 0 0-.12-.64l-2.11-1.65ZM12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10Z" fill="#0027bd"/></svg></a>
+        </div>
+      </header>
+      <main style="flex:1;max-width:900px;margin:0 auto;width:100%;">
+        <h1 class="elementor-heading-title elementor-size-default" style="margin-top:40px;">Configurações</h1>
+        <div class="tabs" role="tablist">
+          <button class="tab active" id="tab-dados" role="tab" aria-selected="true" aria-controls="tab-content-dados">Dados da Conta</button>
+          <button class="tab" id="tab-preferencias" role="tab" aria-selected="false" aria-controls="tab-content-preferencias">Preferências de Simulação</button>
+          <button class="tab" id="tab-notificacoes" role="tab" aria-selected="false" aria-controls="tab-content-notificacoes">Notificações</button>
+        </div>
+        <div id="tab-content-dados" class="tab-content active" role="tabpanel" aria-labelledby="tab-dados">
+          <form class="elementor-form" id="form-dados">
+            <div class="success-message" id="success-dados">Alterações salvas com sucesso!</div>
+            <div>
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" class="elementor-field elementor-size-sm elementor-field-textual" value="Wagner Monteiro" required>
+            </div>
+            <div>
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" class="elementor-field elementor-size-sm elementor-field-textual" value="wagner.monteiro@aegea.com.br" required readonly>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;">
+              <div style="flex:1;">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" class="elementor-field elementor-size-sm elementor-field-textual" value="********" readonly style="width:80%;background:#f0f0f0;">
+              </div>
+              <button type="button" class="elementor-button elementor-size-sm" id="btn-alterar-senha">Alterar Senha</button>
+            </div>
+            <button type="submit" class="elementor-button elementor-size-sm">Salvar Alterações</button>
+          </form>
+        </div>
+        <div id="tab-content-preferencias" class="tab-content" role="tabpanel" aria-labelledby="tab-preferencias">
+          <form class="elementor-form" id="form-preferencias">
+            <div class="success-message" id="success-preferencias">Preferências salvas com sucesso!</div>
+            <div>
+              <label for="unidade">Unidade de Negócio Padrão</label>
+              <select id="unidade" name="unidade" class="elementor-field elementor-size-sm elementor-field-textual">
+                <option value="aguasrio">Águas do Rio</option>
+                <option value="corsan">Corsan</option>
+                <option value="aguaspara">Águas do Pará</option>
+                <option value="santos">Santos</option>
+              </select>
+            </div>
+            <div class="elementor-field-type-acceptance">
+              <input type="checkbox" id="vpl" name="vpl" checked>
+              <label for="vpl">Sempre maximizar VPL de Faturamento</label>
+            </div>
+            <div>
+              <label for="taxa">Taxa de Desconto Padrão (%)</label>
+              <input type="number" id="taxa" name="taxa" class="elementor-field elementor-size-sm elementor-field-textual" value="8" min="0" max="100" step="0.01">
+            </div>
+            <button type="submit" class="elementor-button elementor-size-sm">Salvar Preferências</button>
+          </form>
+        </div>
+        <div id="tab-content-notificacoes" class="tab-content" role="tabpanel" aria-labelledby="tab-notificacoes">
+          <form class="elementor-form" id="form-notificacoes">
+            <div class="success-message" id="success-notificacoes">Notificações salvas com sucesso!</div>
+            <div class="elementor-field-type-acceptance">
+              <input type="checkbox" id="notif-simulacao" name="notif-simulacao" checked>
+              <label for="notif-simulacao">Receber e-mail ao concluir simulação</label>
+            </div>
+            <div class="elementor-field-type-acceptance">
+              <input type="checkbox" id="notif-novidades" name="notif-novidades">
+              <label for="notif-novidades">Receber alertas de novas funcionalidades</label>
+            </div>
+            <button type="submit" class="elementor-button elementor-size-sm">Salvar Notificações</button>
+          </form>
+        </div>
+      </main>
+      <footer style="background:#fff;border-top:1px solid #e5e5e5;padding:24px 0 0 0;margin-top:auto;">
+        <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:0 32px;">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea" width="90" height="36">
+            <span style="color:#888;">&copy; 2026 Aegea Saneamento. Todos os direitos reservados.</span>
+          </div>
+          <nav style="display:flex;gap:24px;">
+            <a href="https://www.aegea.com.br/quem-somos/" target="_blank" style="color:#0027bd;text-decoration:none;">Quem Somos</a>
+            <a href="https://www.aegea.com.br/politica-de-privacidade-e-protecao-de-dados-da-aegea/" target="_blank" style="color:#0027bd;text-decoration:none;">Política de Privacidade</a>
+            <a href="https://www.aegea.com.br/contato/" target="_blank" style="color:#0027bd;text-decoration:none;">Contato</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <div class="modal" id="modal-senha" aria-modal="true" role="dialog">
+    <div class="modal-content elementor-widget-container">
+      <button class="close" id="close-modal" aria-label="Fechar">&times;</button>
+      <h2 class="elementor-heading-title elementor-size-default" style="margin-bottom:24px;">Alterar Senha</h2>
+      <form id="form-alterar-senha" class="elementor-form">
+        <div class="success-message" id="success-senha">Senha alterada com sucesso!</div>
+        <div>
+          <label for="senha-atual">Senha Atual</label>
+          <input type="password" id="senha-atual" name="senha-atual" class="elementor-field elementor-size-sm elementor-field-textual" required>
+        </div>
+        <div>
+          <label for="nova-senha">Nova Senha</label>
+          <input type="password" id="nova-senha" name="nova-senha" class="elementor-field elementor-size-sm elementor-field-textual" required>
+        </div>
+        <div>
+          <label for="confirma-senha">Confirmar Nova Senha</label>
+          <input type="password" id="confirma-senha" name="confirma-senha" class="elementor-field elementor-size-sm elementor-field-textual" required>
+        </div>
+        <button type="submit" class="elementor-button elementor-size-sm">Salvar Nova Senha</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    // Tabs
+    document.querySelectorAll('.tab').forEach(function(tab, idx) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-content-' + tab.id.replace('tab-', '')).classList.add('active');
+      });
+    });
+    // Modal senha
+    document.getElementById('btn-alterar-senha').onclick = function() {
+      document.getElementById('modal-senha').classList.add('active');
+    };
+    document.getElementById('close-modal').onclick = function() {
+      document.getElementById('modal-senha').classList.remove('active');
+      document.getElementById('form-alterar-senha').reset();
+      document.getElementById('success-senha').classList.remove('active');
+    };
+    // Salvar dados da conta
+    document.getElementById('form-dados').onsubmit = function(e) {
+      e.preventDefault();
+      document.getElementById('success-dados').classList.add('active');
+      setTimeout(function(){ document.getElementById('success-dados').classList.remove('active'); }, 2000);
+    };
+    // Salvar preferências
+    document.getElementById('form-preferencias').onsubmit = function(e) {
+      e.preventDefault();
+      document.getElementById('success-preferencias').classList.add('active');
+      setTimeout(function(){ document.getElementById('success-preferencias').classList.remove('active'); }, 2000);
+    };
+    // Salvar notificações
+    document.getElementById('form-notificacoes').onsubmit = function(e) {
+      e.preventDefault();
+      document.getElementById('success-notificacoes').classList.add('active');
+      setTimeout(function(){ document.getElementById('success-notificacoes').classList.remove('active'); }, 2000);
+    };
+    // Modal alterar senha
+    document.getElementById('form-alterar-senha').onsubmit = function(e) {
+      e.preventDefault();
+      var nova = document.getElementById('nova-senha').value;
+      var confirma = document.getElementById('confirma-senha').value;
+      if(nova !== confirma) {
+        alert('A nova senha e a confirmação não conferem.');
+        return;
+      }
+      document.getElementById('success-senha').classList.add('active');
+      setTimeout(function(){
+        document.getElementById('modal-senha').classList.remove('active');
+        document.getElementById('form-alterar-senha').reset();
+        document.getElementById('success-senha').classList.remove('active');
+      }, 1500);
+    };
+  </script>
+</body>
+</html>
