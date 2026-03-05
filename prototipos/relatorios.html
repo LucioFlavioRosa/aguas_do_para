@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatórios e Análises</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor-pro/assets/css/widget-form.min.css?ver=3.32.3">
+  <style>
+    body { background: #fff; font-family: 'Inter', Arial, sans-serif; }
+    .container-main { max-width: 1200px; margin: 40px auto 0 auto; padding: 0 24px; }
+    .section-title { font-size: 2rem; font-weight: 700; color: #0027BD; margin-bottom: 28px; }
+    .section-box { background: #f9f9f9; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .form-row { display: flex; gap: 20px; }
+    .form-col { flex: 1; }
+    .elementor-field { border-radius: 6px; border: 1px solid #ccc; padding: 10px 12px; font-size: 16px; width: 100%; margin-bottom: 12px; }
+    .elementor-button { background: var(--e-global-color-primary, #0027BD); color: #fff; font-size: 18px; padding: 15px 40px; border-radius: 8px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; }
+    .elementor-button svg { width: 22px; height: 22px; fill: #fff; }
+    .elementor-button:active { background: #001a82; }
+    .relatorio-area { max-height: 0; overflow: hidden; transition: max-height 0.7s cubic-bezier(.4,0,.2,1); margin-top: 32px; }
+    .relatorio-area.visible { max-height: 2000px; }
+    .chart-container { background: #fff; border-radius: 8px; padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .table-responsive { overflow-x: auto; }
+    table.simul-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; background: #fff; border-radius: 8px; overflow: hidden; }
+    table.simul-table th, table.simul-table td { padding: 12px 16px; text-align: left; font-size: 15px; }
+    table.simul-table th { background: #f5f5f5; color: #0027BD; }
+    table.simul-table tr:nth-child(even) { background: #f9f9f9; }
+    @media (max-width: 900px) { .form-row { flex-direction: column; } }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body class="hello-elementor-default">
+  <!-- Header (reutilizado) -->
+  <header class="elementor elementor-26397 elementor-location-header">
+    <div style="display:flex;align-items:center;gap:32px;padding:18px 32px;background:#fff;border-bottom:1px solid #eaeaea;">
+      <a href="dashboard.html"><img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea" style="height:40px;"></a>
+      <nav style="flex:1;">
+        <a href="dashboard.html" style="margin-right:24px;color:#0027BD;text-decoration:none;font-weight:500;">Dashboard</a>
+        <a href="simulacoes.html" style="margin-right:24px;color:#0027BD;text-decoration:none;font-weight:500;">Simulações</a>
+        <a href="relatorios.html" style="color:#0027BD;text-decoration:underline;font-weight:700;">Relatórios</a>
+      </nav>
+    </div>
+  </header>
+  <div class="container-main">
+    <div class="section-title">Relatórios e Análises</div>
+    <form id="form-relatorio" autocomplete="off">
+      <div class="section-box">
+        <div class="form-row">
+          <div class="form-col">
+            <label for="data-inicio">Data Início</label>
+            <input class="elementor-field" type="date" id="data-inicio" name="data-inicio">
+          </div>
+          <div class="form-col">
+            <label for="data-fim">Data Fim</label>
+            <input class="elementor-field" type="date" id="data-fim" name="data-fim">
+          </div>
+          <div class="form-col">
+            <label for="tipo-relatorio">Tipo de Relatório</label>
+            <select class="elementor-field" id="tipo-relatorio" name="tipo-relatorio">
+              <option value="todas">Todas as Simulações</option>
+              <option value="unidade">Simulações por Unidade</option>
+              <option value="vpl">Comparativo de VPL</option>
+              <option value="cobertura">Evolução de Cobertura</option>
+            </select>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <button type="submit" class="elementor-button" id="btn-gerar-relatorio">
+            <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zm2.92-2.92l9.19-9.19 3.75 3.75-9.19 9.19-3.75-3.75z"></path></svg>
+            Gerar Relatório
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="relatorio-area" id="relatorio-area">
+      <div class="chart-container">
+        <canvas id="chart-comparativo" height="140"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="chart-cobertura" height="140"></canvas>
+      </div>
+      <div class="table-responsive">
+        <table class="simul-table">
+          <thead>
+            <tr>
+              <th>Simulação</th>
+              <th>Data</th>
+              <th>VPL</th>
+              <th>Cobertura</th>
+              <th>CapEx</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Expansão RJ Norte</td><td>2026-02-13</td><td>R$ 8.200.000</td><td>14,2%</td><td>R$ 980.000</td></tr>
+            <tr><td>Expansão PA Belém</td><td>2026-02-14</td><td>R$ 6.800.000</td><td>12,1%</td><td>R$ 870.000</td></tr>
+            <tr><td>Expansão RS Sul</td><td>2026-02-15</td><td>R$ 7.500.000</td><td>13,7%</td><td>R$ 920.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="text-align:right;">
+        <a href="#" class="elementor-button" id="btn-exportar-relatorio">
+          <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6H8l4-4 4 4h-3v6z"></path></svg>
+          Exportar Relatório (Excel/PDF)
+        </a>
+      </div>
+    </div>
+  </div>
+  <footer style="margin-top:48px;padding:24px 0;text-align:center;color:#666;font-size:15px;background:#f5f5f5;">
+    &copy; 2026 Aegea. Plataforma de Priorização de Investimentos.
+  </footer>
+  <script>
+    document.getElementById('form-relatorio').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var area = document.getElementById('relatorio-area');
+      area.classList.add('visible');
+      // Chart 1: Comparativo VPL
+      var ctx1 = document.getElementById('chart-comparativo').getContext('2d');
+      if(window.compChart) window.compChart.destroy();
+      window.compChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: ['Expansão RJ Norte', 'Expansão PA Belém', 'Expansão RS Sul'],
+          datasets: [{
+            label: 'VPL',
+            data: [8200000, 6800000, 7500000],
+            backgroundColor: ['#00d084', '#0693e3', '#0027BD']
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true, ticks: { callback: v => 'R$ ' + (v/1000000)+'M' } } }
+        }
+      });
+      // Chart 2: Evolução de Cobertura
+      var ctx2 = document.getElementById('chart-cobertura').getContext('2d');
+      if(window.cobChart) window.cobChart.destroy();
+      window.cobChart = new Chart(ctx2, {
+        type: 'line',
+        data: {
+          labels: ['2026', '2027', '2028', '2029', '2030'],
+          datasets: [
+            { label: 'RJ Norte', data: [10, 12, 13.5, 14, 14.2], borderColor: '#00d084', backgroundColor: 'rgba(0,208,132,0.10)', fill: true, tension:0.3 },
+            { label: 'PA Belém', data: [8, 9.5, 11, 11.5, 12.1], borderColor: '#0693e3', backgroundColor: 'rgba(6,147,227,0.10)', fill: true, tension:0.3 },
+            { label: 'RS Sul', data: [9, 11, 12.5, 13.2, 13.7], borderColor: '#0027BD', backgroundColor: 'rgba(0,39,189,0.10)', fill: true, tension:0.3 }
+          ]
+        },
+        options: {
+          plugins: { legend: { position: 'top' } },
+          scales: { y: { beginAtZero: true, max: 20, ticks: { callback: v => v+'%' } } }
+        }
+      });
+    });
+    document.getElementById('btn-exportar-relatorio').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('Download iniciado: relatorio-analise.xlsx');
+    });
+  </script>
+</body>
+</html>
