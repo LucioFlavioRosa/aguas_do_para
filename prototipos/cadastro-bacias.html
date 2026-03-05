@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro de Sub-Bacias | Algoritmo de Priorização de Investimentos</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --sidebar-width: 250px;
+    }
+    body {
+      margin: 0;
+      background: #f6f8fa;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      width: 100%;
+      background: var(--e-global-color-primary, #0027BD);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 64px;
+      box-shadow: 0 2px 8px rgba(0,39,189,0.08);
+      z-index: 10;
+    }
+    .header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .header .logo img {
+      height: 38px;
+    }
+    .header .menu {
+      display: flex;
+      gap: 32px;
+    }
+    .header .menu a {
+      color: #fff;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: border 0.2s;
+    }
+    .header .menu a.active, .header .menu a:hover {
+      border-bottom: 2px solid var(--e-global-color-accent, #00d084);
+    }
+    .header .profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header .profile a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sidebar {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: var(--sidebar-width);
+      height: calc(100vh - 64px);
+      background: #f5f5f5;
+      border-right: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 0 0 0;
+      z-index: 9;
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #222;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 12px 32px;
+      border-left: 4px solid transparent;
+      border-radius: 0 16px 16px 0;
+      transition: background 0.15s, border 0.15s;
+      font-size: 1.05rem;
+    }
+    .sidebar a.active, .sidebar a:hover {
+      background: #eaf0fb;
+      border-left: 4px solid var(--e-global-color-primary, #0027BD);
+      color: var(--e-global-color-primary, #0027BD);
+    }
+    .main-content {
+      margin-left: var(--sidebar-width);
+      padding: 40px 36px 32px 36px;
+      min-height: calc(100vh - 64px - 60px);
+      background: #f6f8fa;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .titulo-pagina {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--e-global-color-primary, #0027BD);
+      margin-bottom: 18px;
+    }
+    .upload-area {
+      border: 2px dashed var(--e-global-color-primary, #0027BD);
+      border-radius: 12px;
+      padding: 40px 24px;
+      text-align: center;
+      background: #fafafa;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      transition: border 0.2s;
+    }
+    .upload-area.dragover {
+      border-color: var(--e-global-color-accent, #00d084);
+      background: #f0f8f7;
+    }
+    .upload-area svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 6px;
+      color: var(--e-global-color-primary, #0027BD);
+    }
+    .upload-area input[type="file"] {
+      display: none;
+    }
+    .elementor-button {
+      padding: 12px 28px;
+      border-radius: 8px;
+      background: var(--e-global-color-primary, #0027BD);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(0,39,189,0.05);
+      margin-top: 8px;
+      display: inline-block;
+    }
+    .elementor-button.secondary {
+      background: #ccc;
+      color: #222;
+    }
+    .elementor-button:hover {
+      background: var(--e-global-color-accent, #00d084);
+      color: #fff;
+    }
+    .tabela-editavel {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,39,189,0.04);
+      margin-bottom: 24px;
+      border: 1px solid #e0e0e0;
+    }
+    .tabela-editavel th, .tabela-editavel td {
+      padding: 12px 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+      font-size: 0.98rem;
+    }
+    .tabela-editavel th {
+      background: var(--e-global-color-primary, #0027BD);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+    }
+    .tabela-editavel tr:nth-child(even) {
+      background: #f7fafd;
+    }
+    .tabela-editavel .acao {
+      text-align: center;
+      min-width: 40px;
+    }
+    .tabela-editavel .icon-btn {
+      background: none;
+      border: none;
+      color: var(--e-global-color-primary, #0027BD);
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin: 0 3px;
+      transition: color 0.2s;
+    }
+    .tabela-editavel .icon-btn:hover {
+      color: var(--e-global-color-accent, #00d084);
+    }
+    .acoes-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .unifilar-container {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 18px;
+      min-height: 180px;
+    }
+    .footer {
+      width: 100%;
+      background: #f5f5f5;
+      color: #888;
+      text-align: center;
+      padding: 18px 0 16px 0;
+      font-size: 0.97rem;
+      margin-top: 24px;
+      border-top: 1px solid #e0e0e0;
+    }
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px 32px 24px 32px;
+      min-width: 320px;
+      max-width: 96vw;
+      box-shadow: 0 8px 32px rgba(0,39,189,0.13);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+    }
+    .modal .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #888;
+      cursor: pointer;
+    }
+    .modal label {
+      font-weight: 500;
+      color: #222;
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+    .modal .elementor-field {
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      font-size: 1rem;
+      background: #fafbfc;
+    }
+    .modal .elementor-field:focus {
+      border-color: var(--e-global-color-primary, #0027BD);
+      background: #fff;
+    }
+    @media (max-width: 900px) {
+      .main-content {
+        padding: 24px 4vw 16px 4vw;
+      }
+    }
+    @media (max-width: 700px) {
+      .sidebar {
+        display: none;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+      .header {
+        padding: 0 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="dashboard.html" class="logo" aria-label="Página inicial">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" />
+      <span style="font-weight:700;font-size:1.18rem;letter-spacing:-1px;">Priorização de Investimentos</span>
+    </a>
+    <nav class="menu" aria-label="Menu principal">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="simulacoes.html">Simulações</a>
+      <a href="cadastro-bacias.html" class="active">Cadastro de Bacias</a>
+      <a href="relatorios.html">Relatórios</a>
+    </nav>
+    <div class="profile">
+      <a href="login.html" title="Sair" aria-label="Logout">
+        <svg width="22" height="22" fill="none" viewBox="0 0 22 22" aria-hidden="true"><path d="M13.5 15.25L17.25 11M17.25 11L13.5 6.75M17.25 11H7.333" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="9" stroke="#fff" stroke-width="2"/></svg>
+        Sair
+      </a>
+    </div>
+  </header>
+  <aside class="sidebar" aria-label="Navegação lateral">
+    <nav>
+      <a href="dashboard.html"> <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect x="3" y="3" width="6" height="6" rx="2" fill="#0027BD"/><rect x="11" y="3" width="6" height="6" rx="2" fill="#0027BD"/><rect x="3" y="11" width="6" height="6" rx="2" fill="#0027BD"/><rect x="11" y="11" width="6" height="6" rx="2" fill="#0027BD"/></svg> Dashboard</a>
+      <a href="simulacoes.html"><svg width="20" height="20" fill="none" viewBox="0 0 20 20"><path d="M3 17V7a2 2 0 012-2h10a2 2 0 012 2v10" stroke="#0027BD" stroke-width="2"/><path d="M7 13l3 3 3-3" stroke="#0027BD" stroke-width="2"/></svg> Simulações</a>
+      <a href="cadastro-bacias.html" class="active"><svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect x="3" y="7" width="14" height="10" rx="2" stroke="#0027BD" stroke-width="2"/><path d="M7 7V5a3 3 0 016 0v2" stroke="#0027BD" stroke-width="2"/></svg> Cadastro de Bacias</a>
+      <a href="relatorios.html"><svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#0027BD" stroke-width="2"/><path d="M7 13V7M10 13V10M13 13V9" stroke="#0027BD" stroke-width="2"/></svg> Relatórios</a>
+      <a href="#" style="opacity:.7;cursor:not-allowed;"><svg width="20" height="20" fill="none" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" stroke="#0027BD" stroke-width="2"/><path d="M10 14v-4M10 6h.01" stroke="#0027BD" stroke-width="2"/></svg> Configurações</a>
+    </nav>
+  </aside>
+  <main class="main-content">
+    <div class="titulo-pagina">Cadastro de Sub-Bacias e Setores Hidráulicos</div>
+    <div class="upload-area" id="uploadArea">
+      <svg fill="currentColor" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6a1.5 1.5 0 0 1 1.5 1.5V32a1.5 1.5 0 0 1-3 0V7.5A1.5 1.5 0 0 1 24 6zm0 0l7.5 7.5M24 6l-7.5 7.5" stroke="#0027BD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><rect x="8" y="34" width="32" height="8" rx="2" fill="#eaf0fb"/></svg>
+      <div>Arraste e solte um arquivo Excel aqui ou</div>
+      <label class="elementor-button" for="excelInput">Importar Excel</label>
+      <input type="file" id="excelInput" accept=".xlsx,.xls,.csv" />
+    </div>
+    <div class="acoes-bar">
+      <button class="elementor-button" id="btnAddBacia">Adicionar Bacia Manualmente</button>
+      <button class="elementor-button" id="btnSalvar">Salvar Alterações</button>
+      <a href="dashboard.html" class="elementor-button secondary">Cancelar</a>
+    </div>
+    <table class="tabela-editavel" id="tabelaBacias" aria-label="Tabela de Sub-Bacias">
+      <thead>
+        <tr>
+          <th>ID Bacia</th>
+          <th>Nome</th>
+          <th>Bacia Origem</th>
+          <th>Bacia Destino</th>
+          <th>Cobertura %</th>
+          <th>Componentes</th>
+          <th class="acao">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Bacia Central</td>
+          <td>-</td>
+          <td>Bacia Norte</td>
+          <td>55</td>
+          <td>Coletora, Elevatória</td>
+          <td class="acao">
+            <button class="icon-btn" title="Editar" onclick="abrirModalEdicao(1)"><svg width="18" height="18" fill="none" viewBox="0 0 20 20"><path d="M4 13.5V16h2.5l7.1-7.1-2.5-2.5L4 13.5zM17.7 6.3a1 1 0 0 0 0-1.4l-2.6-2.6a1 1 0 0 0-1.4 0l-1.8 1.8 4 4 1.8-1.8z" fill="#0027BD"/></svg></button>
+            <button class="icon-btn" title="Excluir" onclick="excluirLinha(this)"><svg width="18" height="18" fill="none" viewBox="0 0 20 20"><path d="M6 7v7a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V7" stroke="#0027BD" stroke-width="2"/><path d="M9 10v2M11 10v2M4 7h12" stroke="#0027BD" stroke-width="2"/></svg></button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Bacia Norte</td>
+          <td>Bacia Central</td>
+          <td>Bacia Sul</td>
+          <td>48</td>
+          <td>Coletora, Tronco</td>
+          <td class="acao">
+            <button class="icon-btn" title="Editar" onclick="abrirModalEdicao(2)"><svg width="18" height="18" fill="#0027BD" viewBox="0 0 20 20"><path d="M4 13.5V16h2.5l7.1-7.1-2.5-2.5L4 13.5zM17.7 6.3a1 1 0 0 0 0-1.4l-2.6-2.6a1 1 0 0 0-1.4 0l-1.8 1.8 4 4 1.8-1.8z"/></svg></button>
+            <button class="icon-btn" title="Excluir" onclick="excluirLinha(this)"><svg width="18" height="18" fill="#0027BD" viewBox="0 0 20 20"><path d="M6 7v7a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V7" stroke="#0027BD" stroke-width="2"/><path d="M9 10v2M11 10v2M4 7h12" stroke="#0027BD" stroke-width="2"/></svg></button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Bacia Sul</td>
+          <td>Bacia Norte</td>
+          <td>-</td>
+          <td>38</td>
+          <td>Coletora</td>
+          <td class="acao">
+            <button class="icon-btn" title="Editar" onclick="abrirModalEdicao(3)"><svg width="18" height="18" fill="#0027BD" viewBox="0 0 20 20"><path d="M4 13.5V16h2.5l7.1-7.1-2.5-2.5L4 13.5zM17.7 6.3a1 1 0 0 0 0-1.4l-2.6-2.6a1 1 0 0 0-1.4 0l-1.8 1.8 4 4 1.8-1.8z"/></svg></button>
+            <button class="icon-btn" title="Excluir" onclick="excluirLinha(this)"><svg width="18" height="18" fill="#0027BD" viewBox="0 0 20 20"><path d="M6 7v7a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V7" stroke="#0027BD" stroke-width="2"/><path d="M9 10v2M11 10v2M4 7h12" stroke="#0027BD" stroke-width="2"/></svg></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="unifilar-container">
+      <div id="unifilar" class="mermaid">
+        graph TD;
+          B1["Bacia Central"] --> B2["Bacia Norte"];
+          B2 --> B3["Bacia Sul"];
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    &copy; 2026 Aegea Saneamento. Plataforma de Priorização de Investimentos.
+  </footer>
+  <!-- Modal de Adição/Edição -->
+  <div id="modalBacia" class="modal-overlay" style="display:none;">
+    <form class="modal" id="formBacia">
+      <button type="button" class="close-btn" onclick="fecharModal()" aria-label="Fechar">&times;</button>
+      <h3 id="modalTitulo">Adicionar Bacia</h3>
+      <label for="baciaId">ID Bacia</label>
+      <input type="number" class="elementor-field" id="baciaId" name="baciaId" required min="1">
+      <label for="baciaNome">Nome</label>
+      <input type="text" class="elementor-field" id="baciaNome" name="baciaNome" required>
+      <label for="baciaOrigem">Bacia Origem</label>
+      <input type="text" class="elementor-field" id="baciaOrigem" name="baciaOrigem">
+      <label for="baciaDestino">Bacia Destino</label>
+      <input type="text" class="elementor-field" id="baciaDestino" name="baciaDestino">
+      <label for="baciaCobertura">Cobertura %</label>
+      <input type="number" class="elementor-field" id="baciaCobertura" name="baciaCobertura" min="0" max="100" required>
+      <label for="baciaComponentes">Componentes</label>
+      <input type="text" class="elementor-field" id="baciaComponentes" name="baciaComponentes" placeholder="Ex: Coletora, Elevatória">
+      <div style="display:flex;gap:12px;margin-top:10px;">
+        <button type="submit" class="elementor-button">Salvar</button>
+        <button type="button" class="elementor-button secondary" onclick="fecharModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    // Modal lógica
+    let editandoId = null;
+    function abrirModalEdicao(id) {
+      editandoId = id;
+      document.getElementById('modalTitulo').textContent = 'Editar Bacia';
+      const tr = Array.from(document.querySelectorAll('#tabelaBacias tbody tr')).find(row => row.children[0].textContent == id);
+      if(tr) {
+        document.getElementById('baciaId').value = tr.children[0].textContent;
+        document.getElementById('baciaNome').value = tr.children[1].textContent;
+        document.getElementById('baciaOrigem').value = tr.children[2].textContent;
+        document.getElementById('baciaDestino').value = tr.children[3].textContent;
+        document.getElementById('baciaCobertura').value = tr.children[4].textContent;
+        document.getElementById('baciaComponentes').value = tr.children[5].textContent;
+      }
+      document.getElementById('modalBacia').style.display = 'flex';
+    }
+    function fecharModal() {
+      editandoId = null;
+      document.getElementById('formBacia').reset();
+      document.getElementById('modalBacia').style.display = 'none';
+      document.getElementById('modalTitulo').textContent = 'Adicionar Bacia';
+    }
+    document.getElementById('btnAddBacia').onclick = function() {
+      editandoId = null;
+      document.getElementById('formBacia').reset();
+      document.getElementById('modalTitulo').textContent = 'Adicionar Bacia';
+      document.getElementById('modalBacia').style.display = 'flex';
+    };
+    document.getElementById('formBacia').onsubmit = function(e) {
+      e.preventDefault();
+      const id = document.getElementById('baciaId').value;
+      const nome = document.getElementById('baciaNome').value;
+      const origem = document.getElementById('baciaOrigem').value;
+      const destino = document.getElementById('baciaDestino').value;
+      const cobertura = document.getElementById('baciaCobertura').value;
+      const componentes = document.getElementById('baciaComponentes').value;
+      if(editandoId) {
+        // Editar linha
+        const tr = Array.from(document.querySelectorAll('#tabelaBacias tbody tr')).find(row => row.children[0].textContent == editandoId);
+        if(tr) {
+          tr.children[0].textContent = id;
+          tr.children[1].textContent = nome;
+          tr.children[2].textContent = origem;
+          tr.children[3].textContent = destino;
+          tr.children[4].textContent = cobertura;
+          tr.children[5].textContent = componentes;
+        }
+      } else {
+        // Adicionar nova linha
+        const tbody = document.querySelector('#tabelaBacias tbody');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${id}</td><td>${nome}</td><td>${origem}</td><td>${destino}</td><td>${cobertura}</td><td>${componentes}</td><td class='acao'>
+          <button class='icon-btn' title='Editar' onclick='abrirModalEdicao(${id})'><svg width='18' height='18' fill='#0027BD' viewBox='0 0 20 20'><path d='M4 13.5V16h2.5l7.1-7.1-2.5-2.5L4 13.5zM17.7 6.3a1 1 0 0 0 0-1.4l-2.6-2.6a1 1 0 0 0-1.4 0l-1.8 1.8 4 4 1.8-1.8z'/></svg></button>
+          <button class='icon-btn' title='Excluir' onclick='excluirLinha(this)'><svg width='18' height='18' fill='#0027BD' viewBox='0 0 20 20'><path d='M6 7v7a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V7' stroke='#0027BD' stroke-width='2'/><path d='M9 10v2M11 10v2M4 7h12' stroke='#0027BD' stroke-width='2'/></svg></button>
+        </td>`;
+        tbody.appendChild(tr);
+      }
+      fecharModal();
+      atualizarUnifilar();
+    };
+    function excluirLinha(btn) {
+      if(confirm('Deseja realmente excluir esta bacia?')) {
+        btn.closest('tr').remove();
+        atualizarUnifilar();
+      }
+    }
+    // Simulação de upload Excel (apenas mensagem)
+    document.getElementById('excelInput').addEventListener('change', function(e) {
+      alert('Arquivo importado! (Simulação - integração real via backend)');
+    });
+    // Drag and drop upload
+    const uploadArea = document.getElementById('uploadArea');
+    uploadArea.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      uploadArea.classList.add('dragover');
+    });
+    uploadArea.addEventListener('dragleave', function(e) {
+      uploadArea.classList.remove('dragover');
+    });
+    uploadArea.addEventListener('drop', function(e) {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      alert('Arquivo importado! (Simulação - integração real via backend)');
+    });
+    // Botão salvar alterações
+    document.getElementById('btnSalvar').onclick = function(e) {
+      e.preventDefault();
+      alert('Alterações salvas com sucesso! (Simulação)');
+    };
+    // Unifilar - renderização dinâmica
+    function atualizarUnifilar() {
+      // Gera código mermaid dinâmico a partir da tabela
+      const linhas = Array.from(document.querySelectorAll('#tabelaBacias tbody tr'));
+      let nodes = new Set();
+      let edges = [];
+      linhas.forEach(tr => {
+        const id = tr.children[0].textContent;
+        const nome = tr.children[1].textContent;
+        const origem = tr.children[2].textContent;
+        const destino = tr.children[3].textContent;
+        nodes.add(nome);
+        if(destino && destino !== '-') {
+          edges.push(`${nome} --> ${destino}`);
+          nodes.add(destino);
+        }
+      });
+      let mermaidCode = 'graph TD;\n';
+      edges.forEach(edge => {
+        mermaidCode += '  ' + edge + ';\n';
+      });
+      document.getElementById('unifilar').textContent = mermaidCode;
+      if(window.mermaid) mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    }
+    // Inicialização mermaid
+    mermaid.initialize({ startOnLoad: true, theme: 'default' });
+  </script>
+</body>
+</html>
