@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detalhes da Simulação - Aegea</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008" media="all" />
+  <style>
+    .dashboard-main { display: flex; min-height: 100vh; background: #f7f8fa; }
+    .sidebar { width: 260px; background: #fff; border-right: 1px solid #e5e5e5; min-height: 100vh; padding: 0; box-shadow: 0 0 8px rgba(0,0,0,0.03); }
+    .main-content { flex: 1; padding: 40px 5vw 32px 5vw; background: #f7f8fa; min-width: 0; }
+    nav.breadcrumb { margin-bottom: 24px; }
+    nav.breadcrumb ol { list-style: none; display: flex; gap: 8px; padding: 0; margin: 0; }
+    nav.breadcrumb li { color: #0027BD; font-weight: 500; }
+    nav.breadcrumb li:not(:last-child)::after { content: '>'; color: #888; margin: 0 8px; }
+    .section { background: #fff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); padding: 24px 24px 16px 24px; margin-bottom: 28px; }
+    dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 32px; margin: 0 0 8px 0; }
+    dt { font-weight: bold; color: #0027BD; }
+    dd { margin: 0 0 8px 0; color: #222; }
+    .sim-cards { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; }
+    .card { background: #fff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); padding: 24px 32px; min-width: 200px; flex: 1 1 180px; display: flex; align-items: center; gap: 16px; border: 2px solid #f3f4f7; transition: border-color 0.2s; }
+    .card svg { width: 36px; height: 36px; flex-shrink: 0; }
+    .card-title { font-size: 1rem; color: #555; margin-bottom: 2px; }
+    .card-value { font-size: 1.4rem; font-weight: bold; color: #0027BD; }
+    .sim-table-section table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .sim-table-section th, .sim-table-section td { padding: 10px 12px; border-bottom: 1px solid #e5e5e5; text-align: left; font-size: 1rem; }
+    .sim-table-section tr:hover { border-left: 4px solid var(--e-global-color-primary, #0027BD); background: #f7faff; }
+    .unifilar-diagram { display: flex; align-items: center; justify-content: center; min-height: 180px; background: #f5f7fa; border-radius: 8px; border: 1px dashed #c3d2f7; color: #0027BD; font-size: 1.1rem; }
+    .sim-actions { display: flex; gap: 16px; margin-top: 24px; }
+    @media (max-width: 900px) { .sim-cards { flex-direction: column; } }
+  </style>
+</head>
+<body class="dashboard-page">
+  <!-- Header -->
+  <header class="elementor elementor-26397 elementor-location-header">
+    <div class="elementor-element e-con-full e-flex e-con e-parent" id="header" style="background:#fff;box-shadow:0 1px 8px rgba(0,0,0,0.03);">
+      <div class="elementor-element e-con-full e-flex e-con e-child" style="align-items:center;gap:24px;padding:0 32px;">
+        <a href="dashboard.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+          <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" style="height:40px;">
+        </a>
+        <nav style="margin-left:32px;">
+          <a href="simulacao.html" class="elementor-item" style="margin-right:24px;">Simulação</a>
+          <a href="historico-simulacoes.html" class="elementor-item elementor-item-active" style="margin-right:24px;">Histórico</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <div class="dashboard-main">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav style="padding:32px 0 0 0;">
+        <ul style="list-style:none;padding:0;margin:0;">
+          <li><a href="dashboard.html" class="elementor-item" style="display:block;padding:16px 32px;color:#222;text-decoration:none;">Dashboard</a></li>
+          <li><a href="simulacao.html" class="elementor-item" style="display:block;padding:16px 32px;color:#222;text-decoration:none;">Simulação</a></li>
+          <li><a href="historico-simulacoes.html" class="elementor-item elementor-item-active" style="display:block;padding:16px 32px;color:#0027BD;font-weight:bold;text-decoration:none;">Histórico</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <!-- Main Content -->
+    <main class="main-content">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <ol>
+          <li><a href="dashboard.html" style="color:#0027BD;">Dashboard</a></li>
+          <li><a href="historico-simulacoes.html" style="color:#0027BD;">Histórico de Simulações</a></li>
+          <li>Detalhes da Simulação #<span id="sim-id-bc">101</span></li>
+        </ol>
+      </nav>
+      <h1 class="elementor-heading-title elementor-size-default" style="margin-bottom:24px;">Detalhes da Simulação #<span id="sim-id">101</span></h1>
+      <section class="section">
+        <h2 class="elementor-heading-title elementor-size-default" style="font-size:1.2rem;margin-bottom:8px;">Parâmetros Utilizados</h2>
+        <dl>
+          <dt>Unidade</dt><dd id="p-unidade">Águas do Rio</dd>
+          <dt>Sistema</dt><dd id="p-sistema">Sistema Centro</dd>
+          <dt>Município</dt><dd id="p-municipio">Rio de Janeiro</dd>
+          <dt>Restrição de CapEx</dt><dd id="p-capex">R$ 1.000.000</dd>
+          <dt>Meta de Cobertura</dt><dd id="p-cobertura">10%</dd>
+          <dt>Limite de Extensão de Rede</dt><dd id="p-extensao">5.000 m</dd>
+          <dt>Objetivo</dt><dd id="p-objetivo">Maximizar VPL de Faturamento</dd>
+        </dl>
+      </section>
+      <section class="section">
+        <h2 class="elementor-heading-title elementor-size-default" style="font-size:1.2rem;margin-bottom:8px;">Resultados Consolidados</h2>
+        <div class="sim-cards">
+          <div class="card">
+            <svg fill="none" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" stroke="#0027BD" stroke-width="2"/><path d="M10 18l4 4 8-8" stroke="#00d084" stroke-width="2" fill="none"/></svg>
+            <div>
+              <div class="card-title">VPL de Faturamento</div>
+              <div class="card-value" id="vpl-faturamento">R$ 2.350.000,00</div>
+            </div>
+          </div>
+          <div class="card">
+            <svg fill="none" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" stroke="#0027BD" stroke-width="2"/><path d="M10 18l4 4 8-8" stroke="#00d084" stroke-width="2" fill="none"/></svg>
+            <div>
+              <div class="card-title">VPL de Arrecadação</div>
+              <div class="card-value" id="vpl-arrecadacao">R$ 1.980.000,00</div>
+            </div>
+          </div>
+          <div class="card">
+            <svg fill="none" viewBox="0 0 32 32"><rect x="6" y="14" width="20" height="8" rx="4" fill="#0027BD" opacity="0.1"/><rect x="10" y="10" width="12" height="12" rx="6" fill="#0027BD" opacity="0.2"/></svg>
+            <div>
+              <div class="card-title">CapEx Total Utilizado</div>
+              <div class="card-value" id="capex-utilizado">R$ 950.000,00</div>
+            </div>
+          </div>
+          <div class="card">
+            <svg fill="none" viewBox="0 0 32 32"><rect x="8" y="8" width="16" height="16" rx="8" fill="#00d084" opacity="0.2"/><path d="M16 12v8M12 16h8" stroke="#00d084" stroke-width="2"/></svg>
+            <div>
+              <div class="card-title">Cobertura Atingida</div>
+              <div class="card-value" id="cobertura-atingida">12%</div>
+            </div>
+          </div>
+          <div class="card">
+            <svg fill="none" viewBox="0 0 32 32"><rect x="6" y="14" width="20" height="4" rx="2" fill="#0027BD" opacity="0.2"/><rect x="10" y="10" width="12" height="12" rx="6" fill="#0027BD" opacity="0.1"/></svg>
+            <div>
+              <div class="card-title">Extensão de Rede Utilizada</div>
+              <div class="card-value" id="extensao-utilizada">4.800 m</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section sim-table-section">
+        <h2 class="elementor-heading-title elementor-size-default" style="font-size:1.2rem;margin-bottom:8px;">Sub-bacias Priorizadas</h2>
+        <table id="tabela-subbacias-detalhe">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Componentes</th>
+              <th>CapEx por Componente</th>
+              <th>Cobertura Incremental</th>
+              <th>Faturamento Estimado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sub-bacia A</td>
+              <td>Rede, Ligações</td>
+              <td>R$ 300.000 (Rede), R$ 100.000 (Ligações)</td>
+              <td>5%</td>
+              <td>R$ 900.000</td>
+            </tr>
+            <tr>
+              <td>Sub-bacia B</td>
+              <td>Rede, Elevatória</td>
+              <td>R$ 200.000 (Rede), R$ 150.000 (Elevatória)</td>
+              <td>4%</td>
+              <td>R$ 700.000</td>
+            </tr>
+            <tr>
+              <td>Sub-bacia C</td>
+              <td>Rede, Ligações, Tronco</td>
+              <td>R$ 120.000 (Rede), R$ 50.000 (Ligações), R$ 30.000 (Tronco)</td>
+              <td>3%</td>
+              <td>R$ 450.000</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="section">
+        <h2 class="elementor-heading-title elementor-size-default" style="font-size:1.2rem;margin-bottom:8px;">Visualização do Unifilar</h2>
+        <div class="unifilar-diagram">
+          <span>Diagrama de cascata/unifilar (renderização dinâmica em JS)</span>
+        </div>
+      </section>
+      <div class="sim-actions">
+        <button type="button" class="elementor-button elementor-size-sm" id="btn-exportar-pdf">
+          <span class="elementor-button-content-wrapper">
+            <span class="elementor-button-text">Exportar Relatório Completo (PDF)</span>
+          </span>
+        </button>
+        <a href="historico-simulacoes.html" class="elementor-button elementor-size-sm">
+          <span class="elementor-button-content-wrapper">
+            <span class="elementor-button-text">Voltar ao Histórico</span>
+          </span>
+        </a>
+      </div>
+    </main>
+  </div>
+  <!-- Footer -->
+  <footer class="elementor elementor-26421 elementor-location-footer" style="background:#fff;border-top:1px solid #e5e5e5;padding:24px 0 0 0;margin-top:32px;">
+    <div class="elementor-element e-flex e-con-boxed e-con e-parent">
+      <div class="e-con-inner" style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/ae-verde.svg" alt="Aegea Verde" style="height:32px;">
+          <span style="color:#0027BD;font-weight:600;">Aegea</span>
+        </div>
+        <div style="color:#888;font-size:0.95rem;">&copy; 2026 Aegea Saneamento. Todos os direitos reservados.</div>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Preenche ID da simulação pela query string
+    function getQueryParam(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+    const simId = getQueryParam('id') || '101';
+    document.getElementById('sim-id').textContent = simId;
+    document.getElementById('sim-id-bc').textContent = simId;
+    // Exportar PDF
+    document.getElementById('btn-exportar-pdf').addEventListener('click', function() {
+      alert('Download de relatório completo simulado (PDF).');
+    });
+  </script>
+</body>
+</html>
