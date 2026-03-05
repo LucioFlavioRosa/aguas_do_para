@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relatórios - Algoritmo de Priorização SES</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor-pro/assets/css/widget-form.min.css?ver=3.32.3" media="all" />
+  <link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
+  <style>
+    body { background: #f6f8fa; }
+    .dashboard-wrapper { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-right: 1px solid #e5e5e5;
+      padding: 32px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .sidebar nav a {
+      display: block;
+      padding: 14px 32px;
+      color: #0027bd;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background: #f0f4ff;
+      color: #0027bd;
+      border-right: 4px solid #0027bd;
+    }
+    .main-content {
+      flex: 1;
+      padding: 0 0 48px 0;
+      background: #f6f8fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 0 32px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .user-menu span {
+      color: #0027bd;
+      font-weight: 500;
+    }
+    .relatorios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+      margin-bottom: 32px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      padding: 32px 24px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      border: 1px solid #e5e5e5;
+      position: relative;
+    }
+    .card h2 {
+      font-size: 1.25rem;
+      color: #0027bd;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+    }
+    .elementor-widget-text-editor {
+      color: #444;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .elementor-form {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .elementor-form .elementor-field {
+      min-width: 90px;
+      max-width: 120px;
+      padding: 6px 10px;
+      font-size: 0.95rem;
+    }
+    .elementor-button {
+      background: #0027bd;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .elementor-button:hover {
+      background: #001a8c;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px 32px 24px 32px;
+      min-width: 320px;
+      max-width: 90vw;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+      position: relative;
+      text-align: center;
+    }
+    .modal-content .close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #888;
+    }
+    @media (max-width: 900px) {
+      .dashboard-wrapper { flex-direction: column; }
+      .sidebar { width: 100%; flex-direction: row; border-right: none; border-bottom: 1px solid #e5e5e5; }
+      .sidebar nav { display: flex; gap: 0; width: 100%; }
+      .sidebar nav a { flex: 1; text-align: center; border-right: none; border-bottom: 4px solid transparent; }
+      .sidebar nav a.active { border-bottom: 4px solid #0027bd; }
+      .relatorios-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="dashboard.html"><img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea" width="120" height="48"></a>
+      </div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="cadastro.html">Cadastro</a>
+        <a href="relatorios.html" class="active">Relatórios</a>
+        <a href="configuracoes.html">Configurações</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </aside>
+    <div class="main-content">
+      <header>
+        <div>
+          <span style="font-weight:700;color:#0027bd;">Algoritmo para Priorização de Investimentos SES</span>
+        </div>
+        <div class="user-menu">
+          <span>Usuário: <strong>Wagner Monteiro</strong></span>
+          <a href="configuracoes.html" title="Configurações"><svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Zm7.43-2.09c.07-.48.07-.97 0-1.45l2.11-1.65a.5.5 0 0 0 .12-.64l-2-3.46a.5.5 0 0 0-.6-.23l-2.49 1a7.03 7.03 0 0 0-1.25-.73l-.38-2.65A.5.5 0 0 0 14 2h-4a.5.5 0 0 0-.5.42l-.38 2.65c-.44.19-.86.43-1.25.73l-2.49-1a.5.5 0 0 0-.6.23l-2 3.46a.5.5 0 0 0 .12.64l2.11 1.65c-.07.48-.07.97 0 1.45l-2.11 1.65a.5.5 0 0 0-.12.64l2 3.46a.5.5 0 0 0 .6.23l2.49-1c.39.3.81.54 1.25.73l.38 2.65A.5.5 0 0 0 10 22h4a.5.5 0 0 0 .5-.42l.38-2.65c.44-.19.86-.43 1.25-.73l2.49 1a.5.5 0 0 0 .6-.23l2-3.46a.5.5 0 0 0-.12-.64l-2.11-1.65ZM12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10Z" fill="#0027bd"/></svg></a>
+        </div>
+      </header>
+      <main style="flex:1;max-width:1100px;margin:0 auto;width:100%;">
+        <h1 class="elementor-heading-title elementor-size-default" style="margin-top:40px;">Relatórios</h1>
+        <div class="relatorios-grid">
+          <div class="card">
+            <h2>Relatório de Simulações por Unidade</h2>
+            <div class="elementor-widget-text-editor">Visualize todas as simulações realizadas por unidade de negócio, com filtros por período e status.</div>
+            <form class="elementor-form" onsubmit="return false;">
+              <label for="periodo1" style="display:none;">Período</label>
+              <input type="month" id="periodo1" class="elementor-field elementor-size-sm elementor-field-textual" value="2026-02">
+              <label for="unidade1" style="display:none;">Unidade</label>
+              <select id="unidade1" class="elementor-field elementor-size-sm elementor-field-textual">
+                <option value="aguasrio">Águas do Rio</option>
+                <option value="corsan">Corsan</option>
+                <option value="aguaspara">Águas do Pará</option>
+              </select>
+            </form>
+            <button class="elementor-button elementor-size-sm" onclick="abrirModalRelatorio('Simulações por Unidade')">Gerar Relatório</button>
+          </div>
+          <div class="card">
+            <h2>Relatório de CapEx Consolidado</h2>
+            <div class="elementor-widget-text-editor">Consolide os investimentos realizados e planejados em CapEx, por componente e sub-bacia.</div>
+            <form class="elementor-form" onsubmit="return false;">
+              <label for="periodo2" style="display:none;">Período</label>
+              <input type="month" id="periodo2" class="elementor-field elementor-size-sm elementor-field-textual" value="2026-02">
+            </form>
+            <button class="elementor-button elementor-size-sm" onclick="abrirModalRelatorio('CapEx Consolidado')">Gerar Relatório</button>
+          </div>
+          <div class="card">
+            <h2>Relatório de Cobertura Atingida</h2>
+            <div class="elementor-widget-text-editor">Acompanhe a evolução da cobertura de esgotamento sanitário atingida por sistema, sub-bacia ou município.</div>
+            <form class="elementor-form" onsubmit="return false;">
+              <label for="unidade3" style="display:none;">Unidade</label>
+              <select id="unidade3" class="elementor-field elementor-size-sm elementor-field-textual">
+                <option value="aguasrio">Águas do Rio</option>
+                <option value="corsan">Corsan</option>
+                <option value="aguaspara">Águas do Pará</option>
+              </select>
+            </form>
+            <button class="elementor-button elementor-size-sm" onclick="abrirModalRelatorio('Cobertura Atingida')">Gerar Relatório</button>
+          </div>
+          <div class="card">
+            <h2>Relatório de Sub-bacias Priorizadas</h2>
+            <div class="elementor-widget-text-editor">Veja a lista das sub-bacias priorizadas pelo algoritmo, com indicadores de VPL, CapEx e cobertura.</div>
+            <form class="elementor-form" onsubmit="return false;">
+              <label for="periodo4" style="display:none;">Período</label>
+              <input type="month" id="periodo4" class="elementor-field elementor-size-sm elementor-field-textual" value="2026-02">
+            </form>
+            <button class="elementor-button elementor-size-sm" onclick="abrirModalRelatorio('Sub-bacias Priorizadas')">Gerar Relatório</button>
+          </div>
+        </div>
+      </main>
+      <footer style="background:#fff;border-top:1px solid #e5e5e5;padding:24px 0 0 0;margin-top:auto;">
+        <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:0 32px;">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea" width="90" height="36">
+            <span style="color:#888;">&copy; 2026 Aegea Saneamento. Todos os direitos reservados.</span>
+          </div>
+          <nav style="display:flex;gap:24px;">
+            <a href="https://www.aegea.com.br/quem-somos/" target="_blank" style="color:#0027bd;text-decoration:none;">Quem Somos</a>
+            <a href="https://www.aegea.com.br/politica-de-privacidade-e-protecao-de-dados-da-aegea/" target="_blank" style="color:#0027bd;text-decoration:none;">Política de Privacidade</a>
+            <a href="https://www.aegea.com.br/contato/" target="_blank" style="color:#0027bd;text-decoration:none;">Contato</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <div class="modal" id="modal-relatorio" aria-modal="true" role="dialog">
+    <div class="modal-content">
+      <button class="close" id="close-modal-relatorio" aria-label="Fechar">&times;</button>
+      <h2 class="elementor-heading-title elementor-size-default" id="modal-relatorio-titulo">Relatório em processamento...</h2>
+      <div id="modal-relatorio-msg" style="margin-top:16px;">
+        <svg width="40" height="40" viewBox="0 0 50 50" style="margin-bottom:8px;"><circle cx="25" cy="25" r="20" fill="none" stroke="#0027bd" stroke-width="4" stroke-linecap="round" stroke-dasharray="31.415, 31.415" transform="rotate(0 25 25)"><animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/></circle></svg>
+        <div>Gerando relatório, por favor aguarde...</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function abrirModalRelatorio(relatorio) {
+      document.getElementById('modal-relatorio-titulo').innerText = 'Relatório de ' + relatorio;
+      document.getElementById('modal-relatorio-msg').innerHTML = '<svg width="40" height="40" viewBox="0 0 50 50" style="margin-bottom:8px;"><circle cx="25" cy="25" r="20" fill="none" stroke="#0027bd" stroke-width="4" stroke-linecap="round" stroke-dasharray="31.415, 31.415" transform="rotate(0 25 25)"><animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/></circle></svg><div>Gerando relatório, por favor aguarde...</div>';
+      document.getElementById('modal-relatorio').classList.add('active');
+      setTimeout(function(){
+        document.getElementById('modal-relatorio-msg').innerHTML = '<div style="color:#1a7f37;font-weight:600;margin-bottom:12px;">Relatório gerado com sucesso!</div><a href="#" onclick="fecharModalRelatorio();return false;" class="elementor-button elementor-size-sm" style="margin-top:8px;">Baixar PDF</a> <a href="#" onclick="fecharModalRelatorio();return false;" class="elementor-button elementor-size-sm" style="background:#e6f7ec;color:#1a7f37;margin-top:8px;">Baixar Excel</a>';
+      }, 1800);
+    }
+    function fecharModalRelatorio() {
+      document.getElementById('modal-relatorio').classList.remove('active');
+    }
+    document.getElementById('close-modal-relatorio').onclick = fecharModalRelatorio;
+  </script>
+</body>
+</html>
