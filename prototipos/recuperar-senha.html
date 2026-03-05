@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recuperar Senha - Algoritmo de Priorização SES</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor-pro/assets/css/widget-form.min.css?ver=3.32.3" media="all" />
+  <link rel="icon" href="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea-150x150.png" sizes="32x32" />
+  <style>
+    body { background: #f6f8fa; }
+    .container-center {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .elementor-form {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      padding: 32px 32px 24px 32px;
+      min-width: 320px;
+      max-width: 90vw;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .elementor-field {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 1rem;
+      background: #f9fafb;
+      color: #222;
+    }
+    .elementor-button {
+      background: #0027bd;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+    .elementor-button:hover {
+      background: #001a8c;
+    }
+    .success-message {
+      background: #e6f7ec;
+      color: #1a7f37;
+      border: 1px solid #b7eb8f;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      text-align: center;
+      font-weight: 500;
+      display: none;
+    }
+    .success-message.active {
+      display: block;
+    }
+    .footer-simples {
+      background: #fff;
+      border-top: 1px solid #e5e5e5;
+      padding: 24px 0 0 0;
+      margin-top: 48px;
+      text-align: center;
+      color: #888;
+    }
+    .footer-simples a {
+      color: #0027bd;
+      text-decoration: none;
+      margin: 0 12px;
+    }
+    @media (max-width: 600px) {
+      .elementor-form { min-width: 0; padding: 18px 8px 12px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container-center">
+    <a href="login.html" style="display:block;margin-bottom:18px;">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea" width="120" height="48">
+    </a>
+    <form class="elementor-form" id="form-recuperar">
+      <h1 class="elementor-heading-title elementor-size-default" style="margin:0 0 8px 0;text-align:center;">Recuperar Senha</h1>
+      <div style="color:#444;text-align:center;margin-bottom:8px;">Informe seu e-mail cadastrado para receber instruções de recuperação de senha.</div>
+      <div class="success-message" id="success-recuperar">E-mail enviado com sucesso!</div>
+      <input type="email" id="email-recuperar" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Seu e-mail" required>
+      <button type="submit" class="elementor-button elementor-size-sm">Enviar Instruções</button>
+      <a href="login.html" style="margin-top:8px;color:#0027bd;text-align:center;display:block;text-decoration:underline;">Voltar ao Login</a>
+    </form>
+  </div>
+  <footer class="footer-simples">
+    <div>
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Aegea" width="70" height="28" style="vertical-align:middle;">
+    </div>
+    <div style="margin-top:8px;">
+      <a href="https://www.aegea.com.br/quem-somos/" target="_blank">Quem Somos</a> |
+      <a href="https://www.aegea.com.br/politica-de-privacidade-e-protecao-de-dados-da-aegea/" target="_blank">Política de Privacidade</a> |
+      <a href="https://www.aegea.com.br/contato/" target="_blank">Contato</a>
+    </div>
+    <div style="margin-top:8px;">&copy; 2026 Aegea Saneamento</div>
+  </footer>
+  <script>
+    document.getElementById('form-recuperar').onsubmit = function(e) {
+      e.preventDefault();
+      document.getElementById('success-recuperar').classList.add('active');
+      setTimeout(function(){
+        document.getElementById('success-recuperar').classList.remove('active');
+        document.getElementById('form-recuperar').reset();
+      }, 2200);
+    };
+  </script>
+</body>
+</html>
