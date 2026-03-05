@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | Algoritmo de Priorização de Investimentos SES</title>
+  <!-- CSS do template Aegea -->
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008" media="all" />
+  <style>
+    body {
+      min-height: 100vh;
+      background: var(--wp--preset--color--white, #fff);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-family: inherit;
+    }
+    .login-main {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+    }
+    .login-card {
+      background: #fff;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+      border-radius: 16px;
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 370px;
+      width: 100%;
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .login-card .elementor-form {
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+    .login-card .elementor-field-group {
+      margin-bottom: 1.2rem;
+    }
+    .login-card .login-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+    .login-card .login-links {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 1.2rem;
+      font-size: 0.97rem;
+    }
+    .login-card .login-links a {
+      color: var(--e-global-color-primary, #0027BD);
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .login-card .login-links a:hover {
+      color: var(--e-global-color-accent, #00d084);
+    }
+    .login-card .elementor-button {
+      width: 100%;
+      margin-top: 0.5rem;
+      background: var(--e-global-color-primary, #0027BD);
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .login-card .elementor-button:hover {
+      background: var(--e-global-color-accent, #00d084);
+      color: #fff;
+    }
+    .login-card .elementor-heading-title {
+      margin-bottom: 0.7rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 1.5rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header simplificado -->
+  <header class="e-con-full e-flex" style="justify-content:center;align-items:center;padding:2rem 0 1.5rem 0;">
+    <a href="login.html" aria-label="Ir para página inicial">
+      <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" width="120" height="48" style="max-width:120px;height:auto;display:block;" />
+    </a>
+  </header>
+  <main class="login-main">
+    <div class="login-card elementor-widget-container">
+      <h1 class="elementor-heading-title elementor-size-default">Acessar Plataforma</h1>
+      <form class="elementor-form" autocomplete="on" method="post" action="dashboard.html" aria-label="Formulário de Login">
+        <div class="elementor-field-group elementor-field-type-email">
+          <input id="login-email" type="email" name="email" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="E-mail" required aria-label="E-mail">
+        </div>
+        <div class="elementor-field-group elementor-field-type-password">
+          <input id="login-senha" type="password" name="senha" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Senha" required aria-label="Senha">
+        </div>
+        <div class="login-actions">
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.97rem;">
+            <input type="checkbox" name="lembrar" style="accent-color:var(--e-global-color-primary,#0027BD);margin-right:5px;">
+            Lembrar-me
+          </label>
+        </div>
+        <button type="submit" class="elementor-button elementor-size-sm">
+          <span class="elementor-button-content-wrapper">
+            <span class="elementor-button-text">Entrar</span>
+          </span>
+        </button>
+        <div class="login-links">
+          <a href="recuperar-senha.html">Esqueci minha senha</a>
+          <a href="cadastro.html">Primeiro acesso? Cadastre-se</a>
+        </div>
+      </form>
+    </div>
+  </main>
+  <!-- Footer institucional -->
+  <footer class="elementor-element elementor-element-799e3be5 e-con-full e-flex e-con e-parent" style="background: #f7f7f7; padding: 2rem 0 1.5rem 0; margin-top:2rem;">
+    <div class="elementor-element elementor-element-11d5b23c e-flex e-con-boxed e-con e-child" style="width:100%;max-width:1200px;margin:0 auto;">
+      <div class="e-con-inner" style="width:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;">
+        <div class="elementor-element elementor-element-3092490c elementor-widget elementor-widget-image" style="min-width:120px;">
+          <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/ae-verde.svg" alt="Aegea Verde" width="90" height="36" style="max-width:90px;height:auto;">
+        </div>
+        <div class="elementor-element elementor-element-cfe8217 e-con-full e-flex e-con e-child" style="flex:1;justify-content:center;">
+          <nav class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-underline e--animation-fade" aria-label="Menu institucional">
+            <ul class="elementor-nav-menu sm-vertical" style="display:flex;gap:2.5rem;list-style:none;padding:0;margin:0;">
+              <li><a href="https://www.aegea.com.br/quem-somos/" class="elementor-item">Quem Somos</a></li>
+              <li><a href="https://www.aegea.com.br/unidades/" class="elementor-item">Unidades</a></li>
+              <li><a href="https://www.aegea.com.br/contato/" class="elementor-item">Contato</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div style="min-width:180px;text-align:right;">
+          <span style="color:#888;font-size:0.95rem;">&copy; 2026 Aegea Saneamento</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
