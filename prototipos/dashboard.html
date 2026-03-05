@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | Algoritmo de Priorização de Investimentos SES</title>
+  <!-- CSS do template Aegea -->
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008" media="all" />
+  <style>
+    body {
+      min-height: 100vh;
+      background: var(--wp--preset--color--white, #fff);
+      font-family: inherit;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .dashboard-wrapper {
+      display: flex;
+      flex: 1 0 auto;
+      min-height: 100vh;
+      background: #f8fafd;
+    }
+    .sidebar {
+      min-width: 240px;
+      max-width: 260px;
+      background: var(--e-global-color-d51423f, #e6eaf5);
+      padding: 2.5rem 1.2rem 2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      box-shadow: 2px 0 16px rgba(0,0,0,0.04);
+    }
+    .sidebar .sidebar-title {
+      font-size: 1.1rem;
+      color: var(--e-global-color-primary, #0027BD);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .sidebar nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .sidebar nav ul li a {
+      display: block;
+      padding: 0.7rem 1rem;
+      border-radius: 7px;
+      color: #222;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.18s, color 0.18s;
+    }
+    .sidebar nav ul li a.active, .sidebar nav ul li a:hover {
+      background: var(--e-global-color-primary, #0027BD);
+      color: #fff;
+    }
+    .main-content {
+      flex: 1 1 0%;
+      padding: 2.5rem 2.5rem 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      min-width: 0;
+    }
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .card {
+      background: #fff;
+      border: 1.5px solid #e5e9f2;
+      border-radius: 12px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.04);
+      padding: 1.7rem 1.3rem 1.3rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      border-color: var(--e-global-color-primary, #0027BD) !important;
+      box-shadow: 0 4px 24px rgba(0,39,189,0.07);
+    }
+    .card-title {
+      font-size: 1.07rem;
+      font-weight: 600;
+      color: var(--e-global-color-primary, #0027BD);
+      margin-bottom: 0.3rem;
+    }
+    .card-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 0.2rem;
+    }
+    .card-link {
+      font-size: 0.98rem;
+      color: var(--e-global-color-accent, #00d084);
+      text-decoration: underline;
+      font-weight: 500;
+      margin-top: 0.3rem;
+      transition: color 0.18s;
+    }
+    .card-link:hover {
+      color: var(--e-global-color-primary, #0027BD);
+    }
+    .dashboard-graph {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.04);
+      padding: 2rem 1.5rem;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .dashboard-graph h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--e-global-color-primary, #0027BD);
+      margin-bottom: 1.2rem;
+    }
+    .user-menu {
+      position: relative;
+      display: inline-block;
+    }
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--e-global-color-primary, #0027BD);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid #e5e9f2;
+      transition: border 0.2s;
+    }
+    .user-avatar:hover {
+      border: 2px solid var(--e-global-color-accent, #00d084);
+    }
+    .user-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 48px;
+      background: #fff;
+      border: 1px solid #e5e9f2;
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+      min-width: 160px;
+      z-index: 10;
+    }
+    .user-menu.open .user-dropdown {
+      display: block;
+    }
+    .user-dropdown a {
+      display: block;
+      padding: 0.8rem 1.1rem;
+      color: #222;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.17s;
+    }
+    .user-dropdown a:hover {
+      background: var(--e-global-color-d51423f, #e6eaf5);
+      color: var(--e-global-color-primary, #0027BD);
+    }
+    @media (max-width: 900px) {
+      .dashboard-wrapper {
+        flex-direction: column;
+      }
+      .sidebar {
+        flex-direction: row;
+        min-width: 100%;
+        max-width: 100%;
+        padding: 1.2rem 0.5rem;
+        gap: 1rem;
+        box-shadow: none;
+        border-bottom: 1.5px solid #e5e9f2;
+      }
+      .sidebar nav ul {
+        flex-direction: row;
+        gap: 1.2rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .main-content {
+        padding: 1.2rem 0.5rem;
+      }
+      .dashboard-cards {
+        gap: 1rem;
+      }
+      .dashboard-graph {
+        padding: 1.2rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="elementor-element-278b15dd e-con-full e-flex e-con e-child" style="background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.03); padding: 0.7rem 0; align-items: center;">
+    <div style="display:flex;align-items:center;gap:2.5rem;width:100%;max-width:1400px;margin:0 auto;">
+      <a href="dashboard.html" class="elementor-widget-theme-site-logo" style="display:flex;align-items:center;">
+        <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" width="120" height="48" style="max-width:120px;height:auto;">
+      </a>
+      <nav class="elementor-nav-menu--main elementor-nav-menu__container" aria-label="Menu principal" style="flex:1;">
+        <ul style="display:flex;gap:2.2rem;list-style:none;padding:0;margin:0;align-items:center;">
+          <li><a href="dashboard.html" class="elementor-item active">Dashboard</a></li>
+          <li><a href="cadastro-subbacias.html" class="elementor-item">Cadastros</a></li>
+          <li><a href="simulacao.html" class="elementor-item">Simulações</a></li>
+          <li><a href="relatorios.html" class="elementor-item">Relatórios</a></li>
+        </ul>
+      </nav>
+      <div class="user-menu" id="userMenu">
+        <div class="user-avatar" tabindex="0" aria-label="Menu do usuário" aria-haspopup="true" aria-expanded="false">JD</div>
+        <div class="user-dropdown" role="menu">
+          <a href="perfil.html" role="menuitem">Meu Perfil</a>
+          <a href="login.html" role="menuitem">Sair</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Menu lateral">
+      <div class="sidebar-title">Menu</div>
+      <nav>
+        <ul>
+          <li><a href="cadastro-subbacias.html">Cadastro de Sub-bacias</a></li>
+          <li><a href="simulacao.html">Simulação de Investimentos</a></li>
+          <li><a href="historico-simulacoes.html">Histórico de Simulações</a></li>
+          <li><a href="configuracoes.html">Configurações</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+      <h1 class="elementor-heading-title elementor-size-default" style="margin-bottom:1.5rem;">Dashboard Principal</h1>
+      <section class="dashboard-cards">
+        <div class="card">
+          <div class="card-title">Total de Sub-bacias Cadastradas</div>
+          <div class="card-value" id="card-total-subbacias">--</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Simulações Realizadas (Mês)</div>
+          <div class="card-value" id="card-simulacoes-mes">--</div>
+        </div>
+        <div class="card">
+          <div class="card-title">VPL Médio das Simulações</div>
+          <div class="card-value" id="card-vpl-medio">R$ --</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Última Simulação</div>
+          <div class="card-value" id="card-ultima-simulacao">--</div>
+          <a href="detalhes-simulacao.html?id=ultima" class="card-link">Ver Detalhes</a>
+        </div>
+      </section>
+      <section class="dashboard-graph">
+        <h2>Evolução de Simulações (Últimos 6 meses)</h2>
+        <canvas id="grafico-simulacoes" height="140" aria-label="Gráfico de evolução de simulações"></canvas>
+      </section>
+    </main>
+  </div>
+  <!-- Footer institucional -->
+  <footer class="elementor-element elementor-element-799e3be5 e-con-full e-flex e-con e-parent" style="background: #f7f7f7; padding: 2rem 0 1.5rem 0; margin-top:2rem;">
+    <div class="elementor-element elementor-element-11d5b23c e-flex e-con-boxed e-con e-child" style="width:100%;max-width:1200px;margin:0 auto;">
+      <div class="e-con-inner" style="width:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;">
+        <div class="elementor-element elementor-element-3092490c elementor-widget elementor-widget-image" style="min-width:120px;">
+          <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/ae-verde.svg" alt="Aegea Verde" width="90" height="36" style="max-width:90px;height:auto;">
+        </div>
+        <div class="elementor-element elementor-element-cfe8217 e-con-full e-flex e-con e-child" style="flex:1;justify-content:center;">
+          <nav class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-underline e--animation-fade" aria-label="Menu institucional">
+            <ul class="elementor-nav-menu sm-vertical" style="display:flex;gap:2.5rem;list-style:none;padding:0;margin:0;">
+              <li><a href="https://www.aegea.com.br/quem-somos/" class="elementor-item">Quem Somos</a></li>
+              <li><a href="https://www.aegea.com.br/unidades/" class="elementor-item">Unidades</a></li>
+              <li><a href="https://www.aegea.com.br/contato/" class="elementor-item">Contato</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div style="min-width:180px;text-align:right;">
+          <span style="color:#888;font-size:0.95rem;">&copy; 2026 Aegea Saneamento</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Chart.js para gráfico simulado -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Simulação de dados dinâmicos para cards
+    document.getElementById('card-total-subbacias').textContent = '37';
+    document.getElementById('card-simulacoes-mes').textContent = '12';
+    document.getElementById('card-vpl-medio').textContent = 'R$ 1.820.000';
+    document.getElementById('card-ultima-simulacao').textContent = '13/02/2026';
+    // Gráfico Chart.js
+    const ctx = document.getElementById('grafico-simulacoes').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Set', 'Out', 'Nov', 'Dez', 'Jan', 'Fev'],
+        datasets: [{
+          label: 'Simulações',
+          data: [7, 9, 6, 11, 8, 12],
+          borderColor: '#0027BD',
+          backgroundColor: 'rgba(0,39,189,0.08)',
+          fill: true,
+          tension: 0.35,
+          pointRadius: 5,
+          pointBackgroundColor: '#00d084',
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, ticks: { stepSize: 2 } }
+        }
+      }
+    });
+    // Dropdown usuário
+    const userMenu = document.getElementById('userMenu');
+    userMenu.querySelector('.user-avatar').addEventListener('click', function() {
+      userMenu.classList.toggle('open');
+      this.setAttribute('aria-expanded', userMenu.classList.contains('open'));
+    });
+    document.addEventListener('click', function(e) {
+      if (!userMenu.contains(e.target)) userMenu.classList.remove('open');
+    });
+  </script>
+</body>
+</html>
