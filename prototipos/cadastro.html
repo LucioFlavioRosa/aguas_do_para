@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro de Novo Usuário - Aegea</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/widget-form.min.css?ver=3.32.5">
+  <style>
+    body { background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; }
+    .cadastro-container { max-width: 420px; margin: 48px auto 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); padding: 40px 32px 32px 32px; }
+    .cadastro-logo { display: flex; justify-content: center; margin-bottom: 24px; }
+    .cadastro-logo img { height: 56px; }
+    .cadastro-title { text-align: center; margin-bottom: 32px; font-size: 2rem; font-weight: 600; color: #0027BD; }
+    .cadastro-footer { margin-top: 32px; text-align: center; font-size: 0.95rem; color: #555; }
+    .cadastro-footer a { color: #0027BD; text-decoration: underline; }
+    .elementor-form .elementor-field-group { margin-bottom: 18px; }
+    .elementor-form .elementor-field-type-acceptance label { font-size: 0.97rem; color: #222; }
+    .elementor-form .elementor-button { width: 100%; margin-top: 12px; }
+    .form-error { color: #cf2e2e; font-size: 0.98rem; margin-bottom: 12px; text-align: center; }
+    .form-success { color: #00a859; font-size: 1.05rem; margin-bottom: 12px; text-align: center; }
+  </style>
+</head>
+<body>
+  <header style="padding: 24px 0 0 0; background: none;">
+    <div class="cadastro-logo">
+      <a href="login.html" aria-label="Voltar para Login">
+        <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea">
+      </a>
+    </div>
+  </header>
+  <main>
+    <div class="cadastro-container e-con-full e-flex">
+      <h1 class="cadastro-title elementor-heading-title elementor-size-default">Cadastro de Novo Usuário</h1>
+      <form class="elementor-form" id="formCadastro" autocomplete="off" novalidate>
+        <div id="form-message"></div>
+        <div class="elementor-field-group">
+          <input type="text" name="nome" id="nome" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Nome Completo" required aria-label="Nome Completo">
+        </div>
+        <div class="elementor-field-group">
+          <input type="email" name="email" id="email" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="E-mail" required aria-label="E-mail">
+        </div>
+        <div class="elementor-field-group">
+          <input type="password" name="senha" id="senha" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Senha" required aria-label="Senha" minlength="6">
+        </div>
+        <div class="elementor-field-group">
+          <input type="password" name="confirmar_senha" id="confirmar_senha" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Confirmar Senha" required aria-label="Confirmar Senha" minlength="6">
+        </div>
+        <div class="elementor-field-group elementor-field-type-select">
+          <select name="unidade" id="unidade" class="elementor-field elementor-size-sm elementor-field-textual" aria-label="Unidade de Negócio">
+            <option value="">Unidade de Negócio (opcional)</option>
+            <option value="aguas-do-rio">Águas do Rio</option>
+            <option value="aguas-do-para">Águas do Pará</option>
+            <option value="corsan">Corsan</option>
+            <option value="outra">Outra</option>
+          </select>
+        </div>
+        <div class="elementor-field-group elementor-field-type-acceptance">
+          <span class="elementor-field-option">
+            <input type="checkbox" id="aceite" name="aceite" required>
+            <label for="aceite">Aceito os <a href="https://www.aegea.com.br/termos-gerais-de-uso-de-sites-e-aplicativos-da-aegea/" target="_blank" rel="noopener">Termos de Uso e Política de Privacidade</a></label>
+          </span>
+        </div>
+        <div class="elementor-field-group">
+          <button type="submit" class="elementor-button elementor-size-sm">
+            <span class="elementor-button-content-wrapper">
+              <span class="elementor-button-text">Cadastrar</span>
+            </span>
+          </button>
+        </div>
+      </form>
+      <div class="cadastro-footer">
+        Já possui conta? <a href="login.html">Faça login</a>
+      </div>
+    </div>
+  </main>
+  <footer style="margin-top: auto; background: #f5f5f5; padding: 24px 0 16px 0; text-align: center; font-size: 0.95rem;">
+    <span>&copy; 2026 Aegea Saneamento. Todos os direitos reservados.</span>
+  </footer>
+  <script>
+    // Simulação de cadastro realista
+    document.getElementById('formCadastro').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var nome = document.getElementById('nome').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var senha = document.getElementById('senha').value;
+      var confirmar = document.getElementById('confirmar_senha').value;
+      var aceite = document.getElementById('aceite').checked;
+      var msg = document.getElementById('form-message');
+      msg.innerHTML = '';
+      // Validação básica
+      if (!nome || !email || !senha || !confirmar) {
+        msg.innerHTML = '<div class="form-error">Preencha todos os campos obrigatórios.</div>';
+        return;
+      }
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        msg.innerHTML = '<div class="form-error">E-mail inválido.</div>';
+        return;
+      }
+      if (senha.length < 6) {
+        msg.innerHTML = '<div class="form-error">A senha deve ter ao menos 6 caracteres.</div>';
+        return;
+      }
+      if (senha !== confirmar) {
+        msg.innerHTML = '<div class="form-error">As senhas não conferem.</div>';
+        return;
+      }
+      if (!aceite) {
+        msg.innerHTML = '<div class="form-error">Você deve aceitar os Termos de Uso.</div>';
+        return;
+      }
+      // Simula cadastro (armazenando no localStorage para simular backend)
+      var usuarios = JSON.parse(localStorage.getItem('usuarios_aegea') || '[]');
+      if (usuarios.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+        msg.innerHTML = '<div class="form-error">E-mail já cadastrado.</div>';
+        return;
+      }
+      usuarios.push({ nome: nome, email: email, senha: senha, unidade: document.getElementById('unidade').value });
+      localStorage.setItem('usuarios_aegea', JSON.stringify(usuarios));
+      msg.innerHTML = '<div class="form-success">Cadastro realizado com sucesso! Redirecionando...</div>';
+      setTimeout(function() {
+        window.location.href = 'login.html?cadastro=ok';
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
