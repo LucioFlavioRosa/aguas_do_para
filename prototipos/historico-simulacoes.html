@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Histórico de Simulações - Aegea</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26397.css?ver=1766510004" media="all" />
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/uploads/elementor/css/post-26997.css?ver=1766510008" media="all" />
+  <style>
+    .dashboard-main { display: flex; min-height: 100vh; background: #f7f8fa; }
+    .sidebar { width: 260px; background: #fff; border-right: 1px solid #e5e5e5; min-height: 100vh; padding: 0; box-shadow: 0 0 8px rgba(0,0,0,0.03); }
+    .main-content { flex: 1; padding: 40px 5vw 32px 5vw; background: #f7f8fa; min-width: 0; }
+    .elementor-form { display: flex; align-items: flex-end; gap: 24px; margin-bottom: 24px; flex-wrap: wrap; }
+    .elementor-form .elementor-field-group { min-width: 160px; }
+    .historico-table-section { background: #fff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); padding: 24px 16px 16px 16px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #e5e5e5; text-align: left; font-size: 1rem; }
+    tr:nth-child(even) { background: #f7faff; }
+    tr:hover { border-left: 4px solid var(--e-global-color-primary, #0027BD); background: #f0f5ff; }
+    .table-actions { display: flex; gap: 8px; }
+    .elementor-button-icon { display: inline-flex; align-items: center; justify-content: center; }
+    .pagination { display: flex; gap: 8px; margin-top: 18px; }
+    .pagination .elementor-button { min-width: 36px; padding: 6px 0; text-align: center; }
+    @media (max-width: 900px) {
+      .elementor-form { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body class="dashboard-page">
+  <!-- Header -->
+  <header class="elementor elementor-26397 elementor-location-header">
+    <div class="elementor-element e-con-full e-flex e-con e-parent" id="header" style="background:#fff;box-shadow:0 1px 8px rgba(0,0,0,0.03);">
+      <div class="elementor-element e-con-full e-flex e-con e-child" style="align-items:center;gap:24px;padding:0 32px;">
+        <a href="dashboard.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+          <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea" style="height:40px;">
+        </a>
+        <nav style="margin-left:32px;">
+          <a href="simulacao.html" class="elementor-item" style="margin-right:24px;">Simulação</a>
+          <a href="historico-simulacoes.html" class="elementor-item elementor-item-active" style="margin-right:24px;">Histórico</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <div class="dashboard-main">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav style="padding:32px 0 0 0;">
+        <ul style="list-style:none;padding:0;margin:0;">
+          <li><a href="dashboard.html" class="elementor-item" style="display:block;padding:16px 32px;color:#222;text-decoration:none;">Dashboard</a></li>
+          <li><a href="simulacao.html" class="elementor-item" style="display:block;padding:16px 32px;color:#222;text-decoration:none;">Simulação</a></li>
+          <li><a href="historico-simulacoes.html" class="elementor-item elementor-item-active" style="display:block;padding:16px 32px;color:#0027BD;font-weight:bold;text-decoration:none;">Histórico</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1 class="elementor-heading-title elementor-size-default" style="margin-bottom:32px;">Histórico de Simulações</h1>
+      <form class="elementor-form" id="form-filtro-historico" autocomplete="off" onsubmit="return false;">
+        <div class="elementor-field-group">
+          <label for="f-unidade" class="elementor-field-label">Unidade de Negócio</label>
+          <select id="f-unidade" name="f-unidade" class="elementor-field elementor-size-sm elementor-field-textual elementor-field-type-select">
+            <option value="">Todas</option>
+            <option value="aguas-rio">Águas do Rio</option>
+            <option value="corsan">Corsan</option>
+            <option value="aguas-para">Águas do Pará</option>
+          </select>
+        </div>
+        <div class="elementor-field-group">
+          <label for="f-data-de" class="elementor-field-label">De</label>
+          <input type="date" id="f-data-de" name="f-data-de" class="elementor-field elementor-size-sm elementor-field-textual">
+        </div>
+        <div class="elementor-field-group">
+          <label for="f-data-ate" class="elementor-field-label">Até</label>
+          <input type="date" id="f-data-ate" name="f-data-ate" class="elementor-field elementor-size-sm elementor-field-textual">
+        </div>
+        <button type="button" class="elementor-button elementor-size-sm" id="btn-filtrar">
+          <span class="elementor-button-content-wrapper">
+            <span class="elementor-button-text">Filtrar</span>
+          </span>
+        </button>
+      </form>
+      <section class="historico-table-section">
+        <table id="tabela-historico">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Data</th>
+              <th>Unidade</th>
+              <th>Sistema</th>
+              <th>Objetivo</th>
+              <th>VPL Faturamento</th>
+              <th>VPL Arrecadação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Linhas preenchidas via JS -->
+          </tbody>
+        </table>
+        <div class="pagination" id="paginacao"></div>
+      </section>
+    </main>
+  </div>
+  <!-- Footer -->
+  <footer class="elementor elementor-26421 elementor-location-footer" style="background:#fff;border-top:1px solid #e5e5e5;padding:24px 0 0 0;margin-top:32px;">
+    <div class="elementor-element e-flex e-con-boxed e-con e-parent">
+      <div class="e-con-inner" style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <img src="https://www.aegea.com.br/wp-content/uploads/2025/06/ae-verde.svg" alt="Aegea Verde" style="height:32px;">
+          <span style="color:#0027BD;font-weight:600;">Aegea</span>
+        </div>
+        <div style="color:#888;font-size:0.95rem;">&copy; 2026 Aegea Saneamento. Todos os direitos reservados.</div>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Dados simulados
+    let historico = [
+      {id: 101, data: '2026-02-13', unidade: 'Águas do Rio', sistema: 'Sistema Centro', objetivo: 'VPL Faturamento', vplF: 'R$ 2.350.000', vplA: 'R$ 1.980.000'},
+      {id: 102, data: '2026-02-14', unidade: 'Corsan', sistema: 'Porto Alegre', objetivo: 'VPL Arrecadação', vplF: 'R$ 1.800.000', vplA: 'R$ 1.750.000'},
+      {id: 103, data: '2026-02-15', unidade: 'Águas do Pará', sistema: 'Belém', objetivo: 'VPL Faturamento', vplF: 'R$ 2.100.000', vplA: 'R$ 1.950.000'}
+    ];
+    function renderTabela() {
+      const tbody = document.querySelector('#tabela-historico tbody');
+      tbody.innerHTML = '';
+      historico.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row.id}</td>
+          <td>${row.data}</td>
+          <td>${row.unidade}</td>
+          <td>${row.sistema}</td>
+          <td>${row.objetivo}</td>
+          <td>${row.vplF}</td>
+          <td>${row.vplA}</td>
+          <td class="table-actions">
+            <a href="detalhes-simulacao.html?id=${row.id}" class="elementor-button elementor-size-sm" title="Ver Detalhes" aria-label="Ver Detalhes">
+              <span class="elementor-button-icon">
+                <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" stroke="#0027BD" stroke-width="2"/><circle cx="10" cy="10" r="3" fill="#0027BD"/></svg>
+              </span>
+            </a>
+            <button type="button" class="elementor-button elementor-size-sm" title="Exportar" aria-label="Exportar" onclick="alert('Download simulado (Excel/CSV).')">
+              <span class="elementor-button-icon">
+                <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M9 2v10M5 10l4 4 4-4" stroke="#00d084" stroke-width="2"/></svg>
+              </span>
+            </button>
+            <button type="button" class="elementor-button elementor-size-sm" title="Excluir" aria-label="Excluir" onclick="excluirSimulacao(${row.id})">
+              <span class="elementor-button-icon">
+                <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><rect x="4" y="7" width="10" height="7" rx="2" stroke="#cf2e2e" stroke-width="2"/><path d="M7 7V5a2 2 0 0 1 4 0v2" stroke="#cf2e2e" stroke-width="2"/></svg>
+              </span>
+            </button>
+          </td>`;
+        tbody.appendChild(tr);
+      });
+    }
+    renderTabela();
+    function excluirSimulacao(id) {
+      if (confirm('Deseja realmente excluir esta simulação?')) {
+        historico = historico.filter(r => r.id !== id);
+        renderTabela();
+      }
+    }
+    document.getElementById('btn-filtrar').addEventListener('click', function() {
+      // Simula filtro
+      alert('Filtro simulado. (Ajuste para integração real)');
+    });
+  </script>
+</body>
+</html>
