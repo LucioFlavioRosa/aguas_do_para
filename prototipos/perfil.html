@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meu Perfil - Aegea</title>
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.32.5">
+  <link rel="stylesheet" href="https://www.aegea.com.br/wp-content/plugins/elementor/assets/css/widget-form.min.css?ver=3.32.5">
+  <style>
+    body { background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; }
+    .perfil-wrapper { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 220px;
+      background: #0027BD;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 0 0 0;
+      min-height: 100vh;
+    }
+    .sidebar .sidebar-logo {
+      margin-bottom: 32px;
+    }
+    .sidebar .sidebar-logo img {
+      height: 44px;
+    }
+    .sidebar nav {
+      width: 100%;
+      margin-top: 16px;
+    }
+    .sidebar nav a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 32px;
+      font-size: 1.08rem;
+      border-left: 4px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background: #eaf0fa;
+      color: #0027BD;
+      border-left: 4px solid #00a859;
+    }
+    .main-content {
+      flex: 1;
+      padding: 0 0 32px 0;
+      background: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      height: 72px;
+      z-index: 10;
+    }
+    header .header-logo {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    header .header-logo img {
+      height: 38px;
+    }
+    header nav {
+      margin-left: 40px;
+      flex: 1;
+    }
+    header nav a {
+      color: #0027BD;
+      text-decoration: none;
+      margin-right: 28px;
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: color 0.15s;
+    }
+    header nav a.active, header nav a:hover {
+      color: #00a859;
+    }
+    .perfil-container {
+      max-width: 600px;
+      margin: 32px auto 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      padding: 40px 32px 32px 32px;
+    }
+    .elementor-form .elementor-field-group { margin-bottom: 18px; }
+    .elementor-form .elementor-button { min-width: 160px; margin-top: 12px; }
+    .perfil-section { margin-bottom: 36px; }
+    .perfil-section h2, .perfil-section h3 {
+      font-size: 1.2rem;
+      color: #0027BD;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .perfil-label { display: block; margin-bottom: 4px; color: #444; font-size: 0.97rem; }
+    .perfil-unidade { font-size: 1.05rem; color: #222; background: #f5f7fa; padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; }
+    .perfil-btns { display: flex; gap: 16px; margin-top: 24px; }
+    .form-success { color: #00a859; font-size: 1.05rem; margin-bottom: 12px; text-align: center; }
+    .form-error { color: #cf2e2e; font-size: 0.98rem; margin-bottom: 12px; text-align: center; }
+    /* Modal */
+    .modal-bg { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.32); align-items: center; justify-content: center; }
+    .modal { background: #fff; border-radius: 10px; max-width: 360px; width: 96%; box-shadow: 0 2px 16px rgba(0,0,0,0.12); padding: 32px 24px 24px 24px; position: relative; }
+    .modal h2 { font-size: 1.15rem; color: #0027BD; margin-bottom: 18px; }
+    .modal .elementor-field-group { margin-bottom: 16px; }
+    .modal .close-modal { position: absolute; right: 16px; top: 12px; background: none; border: none; font-size: 1.3rem; color: #888; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="perfil-wrapper">
+    <aside class="sidebar" aria-label="Menu lateral">
+      <div class="sidebar-logo">
+        <a href="dashboard.html" aria-label="Ir para Dashboard">
+          <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea">
+        </a>
+      </div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="perfil.html" class="active">Meu Perfil</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </aside>
+    <div class="main-content">
+      <header>
+        <div class="header-logo">
+          <a href="dashboard.html" aria-label="Ir para Dashboard">
+            <img src="https://www.aegea.com.br/wp-content/uploads/2024/02/aegea.svg" alt="Logo Aegea">
+          </a>
+        </div>
+        <nav>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="perfil.html" class="active">Meu Perfil</a>
+        </nav>
+      </header>
+      <main>
+        <div class="perfil-container e-con-full e-flex e-con e-child">
+          <h1 class="elementor-heading-title elementor-size-default" style="margin-bottom: 24px;">Meu Perfil</h1>
+          <form class="elementor-form" id="formPerfil" autocomplete="off" novalidate>
+            <div id="perfil-message"></div>
+            <div class="perfil-section">
+              <h2 class="elementor-heading-title elementor-size-default">Informações Pessoais</h2>
+              <div class="elementor-field-group">
+                <label class="perfil-label" for="perfil-nome">Nome</label>
+                <input type="text" id="perfil-nome" name="nome" class="elementor-field elementor-size-sm elementor-field-textual" required>
+              </div>
+              <div class="elementor-field-group">
+                <label class="perfil-label" for="perfil-email">E-mail</label>
+                <input type="email" id="perfil-email" name="email" class="elementor-field elementor-size-sm elementor-field-textual" readonly tabindex="-1">
+              </div>
+              <div class="elementor-field-group">
+                <label class="perfil-label" for="perfil-cargo">Cargo/Função</label>
+                <input type="text" id="perfil-cargo" name="cargo" class="elementor-field elementor-size-sm elementor-field-textual">
+              </div>
+              <div class="elementor-field-group">
+                <label class="perfil-label" for="perfil-telefone">Telefone</label>
+                <input type="text" id="perfil-telefone" name="telefone" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="(99) 99999-9999">
+              </div>
+            </div>
+            <div class="perfil-section">
+              <h3 class="elementor-heading-title elementor-size-default">Unidade de Negócio Associada</h3>
+              <div class="perfil-unidade" id="perfil-unidade">-</div>
+            </div>
+            <div class="perfil-section">
+              <h3 class="elementor-heading-title elementor-size-default">Segurança</h3>
+              <button type="button" class="elementor-button elementor-size-sm" id="btnAlterarSenha">
+                <span class="elementor-button-content-wrapper">
+                  <span class="elementor-button-text">Alterar Senha</span>
+                </span>
+              </button>
+            </div>
+            <div class="perfil-btns">
+              <button type="submit" class="elementor-button elementor-size-sm">
+                <span class="elementor-button-content-wrapper">
+                  <span class="elementor-button-text">Salvar Alterações</span>
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer style="margin-top: 40px; background: #f5f5f5; padding: 24px 0 16px 0; text-align: center; font-size: 0.95rem;">
+        <span>&copy; 2026 Aegea Saneamento. Todos os direitos reservados.</span>
+      </footer>
+    </div>
+  </div>
+  <!-- Modal de Alterar Senha -->
+  <div class="modal-bg" id="modalSenha" role="dialog" aria-modal="true" aria-labelledby="modalSenhaTitulo">
+    <div class="modal">
+      <button class="close-modal" aria-label="Fechar" type="button" onclick="fecharModalSenha()">&times;</button>
+      <h2 id="modalSenhaTitulo">Alterar Senha</h2>
+      <form id="formSenha">
+        <div id="senha-message"></div>
+        <div class="elementor-field-group">
+          <input type="password" id="senha-atual" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Senha Atual" required aria-label="Senha Atual">
+        </div>
+        <div class="elementor-field-group">
+          <input type="password" id="nova-senha" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Nova Senha" required aria-label="Nova Senha" minlength="6">
+        </div>
+        <div class="elementor-field-group">
+          <input type="password" id="confirma-nova-senha" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Confirmar Nova Senha" required aria-label="Confirmar Nova Senha" minlength="6">
+        </div>
+        <div class="elementor-field-group">
+          <button type="submit" class="elementor-button elementor-size-sm">
+            <span class="elementor-button-content-wrapper">
+              <span class="elementor-button-text">Salvar Nova Senha</span>
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    // Carregar dados do usuário simulado (do localStorage, conforme cadastro.html)
+    function getUsuarioLogado() {
+      // Simula login pelo primeiro usuário cadastrado
+      var usuarios = JSON.parse(localStorage.getItem('usuarios_aegea') || '[]');
+      var email = sessionStorage.getItem('usuario_logado_email');
+      if (!email && usuarios.length > 0) email = usuarios[0].email;
+      return usuarios.find(u => u.email === email) || usuarios[0] || null;
+    }
+    function setUsuarioLogado(usuario) {
+      var usuarios = JSON.parse(localStorage.getItem('usuarios_aegea') || '[]');
+      var idx = usuarios.findIndex(u => u.email === usuario.email);
+      if (idx >= 0) {
+        usuarios[idx] = usuario;
+        localStorage.setItem('usuarios_aegea', JSON.stringify(usuarios));
+      }
+    }
+    // Preenche o formulário com dados do usuário
+    document.addEventListener('DOMContentLoaded', function() {
+      var usuario = getUsuarioLogado();
+      if (!usuario) {
+        window.location.href = 'login.html';
+        return;
+      }
+      document.getElementById('perfil-nome').value = usuario.nome || '';
+      document.getElementById('perfil-email').value = usuario.email || '';
+      document.getElementById('perfil-cargo').value = usuario.cargo || '';
+      document.getElementById('perfil-telefone').value = usuario.telefone || '';
+      document.getElementById('perfil-unidade').textContent = usuario.unidade ? unidadeLabel(usuario.unidade) : '-';
+    });
+    function unidadeLabel(unidade) {
+      switch(unidade) {
+        case 'aguas-do-rio': return 'Águas do Rio';
+        case 'aguas-do-para': return 'Águas do Pará';
+        case 'corsan': return 'Corsan';
+        case 'outra': return 'Outra';
+        default: return '-';
+      }
+    }
+    // Salvar alterações do perfil
+    document.getElementById('formPerfil').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var usuario = getUsuarioLogado();
+      var nome = document.getElementById('perfil-nome').value.trim();
+      var cargo = document.getElementById('perfil-cargo').value.trim();
+      var telefone = document.getElementById('perfil-telefone').value.trim();
+      var msg = document.getElementById('perfil-message');
+      msg.innerHTML = '';
+      if (!nome) {
+        msg.innerHTML = '<div class="form-error">O nome não pode ficar em branco.</div>';
+        return;
+      }
+      usuario.nome = nome;
+      usuario.cargo = cargo;
+      usuario.telefone = telefone;
+      setUsuarioLogado(usuario);
+      msg.innerHTML = '<div class="form-success">Alterações salvas com sucesso!</div>';
+      setTimeout(function(){ msg.innerHTML = ''; }, 2000);
+    });
+    // Modal de alterar senha
+    document.getElementById('btnAlterarSenha').addEventListener('click', function() {
+      document.getElementById('modalSenha').style.display = 'flex';
+      document.getElementById('senha-message').innerHTML = '';
+      document.getElementById('formSenha').reset();
+    });
+    function fecharModalSenha() {
+      document.getElementById('modalSenha').style.display = 'none';
+    }
+    document.getElementById('formSenha').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var usuario = getUsuarioLogado();
+      var atual = document.getElementById('senha-atual').value;
+      var nova = document.getElementById('nova-senha').value;
+      var confirma = document.getElementById('confirma-nova-senha').value;
+      var msg = document.getElementById('senha-message');
+      msg.innerHTML = '';
+      if (!atual || !nova || !confirma) {
+        msg.innerHTML = '<div class="form-error">Preencha todos os campos.</div>';
+        return;
+      }
+      if (atual !== usuario.senha) {
+        msg.innerHTML = '<div class="form-error">Senha atual incorreta.</div>';
+        return;
+      }
+      if (nova.length < 6) {
+        msg.innerHTML = '<div class="form-error">A nova senha deve ter ao menos 6 caracteres.</div>';
+        return;
+      }
+      if (nova !== confirma) {
+        msg.innerHTML = '<div class="form-error">As novas senhas não conferem.</div>';
+        return;
+      }
+      usuario.senha = nova;
+      setUsuarioLogado(usuario);
+      msg.innerHTML = '<div class="form-success">Senha alterada com sucesso!</div>';
+      setTimeout(function(){ fecharModalSenha(); }, 1200);
+    });
+    // Fecha modal ao clicar fora
+    document.getElementById('modalSenha').addEventListener('click', function(e) {
+      if (e.target === this) fecharModalSenha();
+    });
+  </script>
+</body>
+</html>
